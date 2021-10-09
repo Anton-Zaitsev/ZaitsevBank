@@ -7,25 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0779892711ED7C0026BCAD /* ClientObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0779882711ED7C0026BCAD /* ClientObjects.swift */; };
 		3A0FC950270A52B600B6B2F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC94F270A52B600B6B2F6 /* AppDelegate.swift */; };
 		3A0FC952270A52B700B6B2F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC951270A52B700B6B2F6 /* SceneDelegate.swift */; };
-		3A0FC954270A52B700B6B2F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC953270A52B700B6B2F6 /* ViewController.swift */; };
-		3A0FC957270A52B700B6B2F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A0FC955270A52B700B6B2F6 /* Main.storyboard */; };
 		3A0FC95A270A52B700B6B2F6 /* ZaitsevBank.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC958270A52B700B6B2F6 /* ZaitsevBank.xcdatamodeld */; };
 		3A0FC95C270A52BA00B6B2F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A0FC95B270A52BA00B6B2F6 /* Assets.xcassets */; };
 		3A0FC95F270A52BA00B6B2F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A0FC95D270A52BA00B6B2F6 /* LaunchScreen.storyboard */; };
+		3A0FC971270A546600B6B2F6 /* LoginForm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A0FC970270A546600B6B2F6 /* LoginForm.storyboard */; };
+		3A0FC973270A547E00B6B2F6 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC972270A547E00B6B2F6 /* LoginController.swift */; };
+		3A0FC975270A54A000B6B2F6 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC974270A54A000B6B2F6 /* LoginModel.swift */; };
+		3A2CDE6C2710B022005F0CF4 /* LastRegController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2CDE6B2710B022005F0CF4 /* LastRegController.swift */; };
+		3A9A3DA0270B632B003A6A21 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9A3D9F270B632B003A6A21 /* Realm */; };
+		3A9A3DA2270B632B003A6A21 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9A3DA1270B632B003A6A21 /* RealmSwift */; };
+		3A9A3DA6270B6AE1003A6A21 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A3DA5270B6AE1003A6A21 /* SHA256.swift */; };
+		3AAB4CD2270A7F7000697F8B /* AuthClien.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAB4CD1270A7F7000697F8B /* AuthClien.swift */; };
+		3AB86B86270BAA62008D0823 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB86B85270BAA62008D0823 /* RegistrationController.swift */; };
+		3AB86B89270CADC7008D0823 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB86B88270CADC6008D0823 /* Extension.swift */; };
+		3AB86B8B270CB6B3008D0823 /* CheckCorrectAuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB86B8A270CB6B3008D0823 /* CheckCorrectAuthData.swift */; };
+		3AB86B8D270D0A84008D0823 /* FirstRegController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB86B8C270D0A84008D0823 /* FirstRegController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A0779882711ED7C0026BCAD /* ClientObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientObjects.swift; sourceTree = "<group>"; };
 		3A0FC94C270A52B600B6B2F6 /* ZaitsevBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZaitsevBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A0FC94F270A52B600B6B2F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A0FC951270A52B700B6B2F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3A0FC953270A52B700B6B2F6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3A0FC956270A52B700B6B2F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A0FC959270A52B700B6B2F6 /* ZaitsevBank.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ZaitsevBank.xcdatamodel; sourceTree = "<group>"; };
 		3A0FC95B270A52BA00B6B2F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A0FC95E270A52BA00B6B2F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A0FC960270A52BA00B6B2F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A0FC970270A546600B6B2F6 /* LoginForm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginForm.storyboard; sourceTree = "<group>"; };
+		3A0FC972270A547E00B6B2F6 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		3A0FC974270A54A000B6B2F6 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		3A2CDE6B2710B022005F0CF4 /* LastRegController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastRegController.swift; sourceTree = "<group>"; };
+		3A9A3DA5270B6AE1003A6A21 /* SHA256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
+		3AAB4CD1270A7F7000697F8B /* AuthClien.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClien.swift; sourceTree = "<group>"; };
+		3AB86B85270BAA62008D0823 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		3AB86B88270CADC6008D0823 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		3AB86B8A270CB6B3008D0823 /* CheckCorrectAuthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCorrectAuthData.swift; sourceTree = "<group>"; };
+		3AB86B8C270D0A84008D0823 /* FirstRegController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRegController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A9A3DA2270B632B003A6A21 /* RealmSwift in Frameworks */,
+				3A9A3DA0270B632B003A6A21 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,16 +80,105 @@
 		3A0FC94E270A52B600B6B2F6 /* ZaitsevBank */ = {
 			isa = PBXGroup;
 			children = (
+				3AB86B87270CAD8A008D0823 /* ViewsHelp */,
+				3AAB4CCD270A7EF100697F8B /* ClienMongoDB */,
+				3A0FC96D270A543700B6B2F6 /* View */,
+				3A0FC967270A530200B6B2F6 /* ViewModels */,
+				3A0FC966270A52F400B6B2F6 /* Models */,
 				3A0FC94F270A52B600B6B2F6 /* AppDelegate.swift */,
 				3A0FC951270A52B700B6B2F6 /* SceneDelegate.swift */,
-				3A0FC953270A52B700B6B2F6 /* ViewController.swift */,
-				3A0FC955270A52B700B6B2F6 /* Main.storyboard */,
 				3A0FC95B270A52BA00B6B2F6 /* Assets.xcassets */,
 				3A0FC95D270A52BA00B6B2F6 /* LaunchScreen.storyboard */,
 				3A0FC960270A52BA00B6B2F6 /* Info.plist */,
 				3A0FC958270A52B700B6B2F6 /* ZaitsevBank.xcdatamodeld */,
 			);
 			path = ZaitsevBank;
+			sourceTree = "<group>";
+		};
+		3A0FC966270A52F400B6B2F6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3A0FC96F270A544D00B6B2F6 /* LoginForm */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3A0FC967270A530200B6B2F6 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3A0FC968270A531100B6B2F6 /* LoginForm */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3A0FC968270A531100B6B2F6 /* LoginForm */ = {
+			isa = PBXGroup;
+			children = (
+				3A0FC972270A547E00B6B2F6 /* LoginController.swift */,
+				3AB86B85270BAA62008D0823 /* RegistrationController.swift */,
+				3AB86B8C270D0A84008D0823 /* FirstRegController.swift */,
+				3A2CDE6B2710B022005F0CF4 /* LastRegController.swift */,
+			);
+			path = LoginForm;
+			sourceTree = "<group>";
+		};
+		3A0FC96D270A543700B6B2F6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3A0FC96E270A544700B6B2F6 /* LoginForm */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3A0FC96E270A544700B6B2F6 /* LoginForm */ = {
+			isa = PBXGroup;
+			children = (
+				3A0FC970270A546600B6B2F6 /* LoginForm.storyboard */,
+			);
+			path = LoginForm;
+			sourceTree = "<group>";
+		};
+		3A0FC96F270A544D00B6B2F6 /* LoginForm */ = {
+			isa = PBXGroup;
+			children = (
+				3A0FC974270A54A000B6B2F6 /* LoginModel.swift */,
+			);
+			path = LoginForm;
+			sourceTree = "<group>";
+		};
+		3AAB4CCD270A7EF100697F8B /* ClienMongoDB */ = {
+			isa = PBXGroup;
+			children = (
+				3AAB4CCF270A7F4500697F8B /* ModelRealm */,
+				3AAB4CCE270A7F3C00697F8B /* Function */,
+			);
+			path = ClienMongoDB;
+			sourceTree = "<group>";
+		};
+		3AAB4CCE270A7F3C00697F8B /* Function */ = {
+			isa = PBXGroup;
+			children = (
+				3AAB4CD1270A7F7000697F8B /* AuthClien.swift */,
+				3A9A3DA5270B6AE1003A6A21 /* SHA256.swift */,
+				3AB86B8A270CB6B3008D0823 /* CheckCorrectAuthData.swift */,
+			);
+			path = Function;
+			sourceTree = "<group>";
+		};
+		3AAB4CCF270A7F4500697F8B /* ModelRealm */ = {
+			isa = PBXGroup;
+			children = (
+				3A0779882711ED7C0026BCAD /* ClientObjects.swift */,
+			);
+			path = ModelRealm;
+			sourceTree = "<group>";
+		};
+		3AB86B87270CAD8A008D0823 /* ViewsHelp */ = {
+			isa = PBXGroup;
+			children = (
+				3AB86B88270CADC6008D0823 /* Extension.swift */,
+			);
+			path = ViewsHelp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,6 +197,10 @@
 			dependencies = (
 			);
 			name = ZaitsevBank;
+			packageProductDependencies = (
+				3A9A3D9F270B632B003A6A21 /* Realm */,
+				3A9A3DA1270B632B003A6A21 /* RealmSwift */,
+			);
 			productName = ZaitsevBank;
 			productReference = 3A0FC94C270A52B600B6B2F6 /* ZaitsevBank.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +229,9 @@
 				Base,
 			);
 			mainGroup = 3A0FC943270A52B600B6B2F6;
+			packageReferences = (
+				3A9A3D9E270B632B003A6A21 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+			);
 			productRefGroup = 3A0FC94D270A52B600B6B2F6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -128,9 +246,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A0FC971270A546600B6B2F6 /* LoginForm.storyboard in Resources */,
 				3A0FC95F270A52BA00B6B2F6 /* LaunchScreen.storyboard in Resources */,
 				3A0FC95C270A52BA00B6B2F6 /* Assets.xcassets in Resources */,
-				3A0FC957270A52B700B6B2F6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,24 +259,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A0FC954270A52B700B6B2F6 /* ViewController.swift in Sources */,
+				3A2CDE6C2710B022005F0CF4 /* LastRegController.swift in Sources */,
+				3AB86B89270CADC7008D0823 /* Extension.swift in Sources */,
 				3A0FC950270A52B600B6B2F6 /* AppDelegate.swift in Sources */,
+				3A9A3DA6270B6AE1003A6A21 /* SHA256.swift in Sources */,
+				3AAB4CD2270A7F7000697F8B /* AuthClien.swift in Sources */,
+				3A0FC975270A54A000B6B2F6 /* LoginModel.swift in Sources */,
+				3AB86B8D270D0A84008D0823 /* FirstRegController.swift in Sources */,
 				3A0FC95A270A52B700B6B2F6 /* ZaitsevBank.xcdatamodeld in Sources */,
+				3A0779892711ED7C0026BCAD /* ClientObjects.swift in Sources */,
 				3A0FC952270A52B700B6B2F6 /* SceneDelegate.swift in Sources */,
+				3AB86B8B270CB6B3008D0823 /* CheckCorrectAuthData.swift in Sources */,
+				3AB86B86270BAA62008D0823 /* RegistrationController.swift in Sources */,
+				3A0FC973270A547E00B6B2F6 /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3A0FC955270A52B700B6B2F6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A0FC956270A52B700B6B2F6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3A0FC95D270A52BA00B6B2F6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -298,7 +417,7 @@
 				INFOPLIST_FILE = ZaitsevBank/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = LoginForm;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -310,7 +429,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -326,7 +445,7 @@
 				INFOPLIST_FILE = ZaitsevBank/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = LoginForm;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -338,7 +457,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -352,7 +471,7 @@
 				3A0FC962270A52BA00B6B2F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		3A0FC963270A52BA00B6B2F6 /* Build configuration list for PBXNativeTarget "ZaitsevBank" */ = {
 			isa = XCConfigurationList;
@@ -361,9 +480,33 @@
 				3A0FC965270A52BA00B6B2F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3A9A3D9E270B632B003A6A21 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3A9A3D9F270B632B003A6A21 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A9A3D9E270B632B003A6A21 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		3A9A3DA1270B632B003A6A21 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A9A3D9E270B632B003A6A21 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		3A0FC958270A52B700B6B2F6 /* ZaitsevBank.xcdatamodeld */ = {
