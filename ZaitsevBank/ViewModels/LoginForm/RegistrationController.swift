@@ -8,7 +8,7 @@
 import UIKit
 
 class RegistrationController: UIViewController {
-
+    
     public var ModelRegistration = LoginModel()
     @IBOutlet weak var LoginTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
@@ -21,16 +21,16 @@ class RegistrationController: UIViewController {
         super.viewDidLoad()
         GetView()
     }
-   
+    
     private func GetView() {
         StartNavigationItem.titleView?.tintColor = .white
         
         LoginTextField.attributedPlaceholder = NSAttributedString(string: "Ваша почта",
-                                                                                 attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+                                                                  attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Придумайте пароль",
-                                                                                 attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
     }
-  
+    
     
     @IBAction func ClickGoCheck(_ sender: Any) {
         if (CheckCorrectAuthData.checkLogin(login: ModelRegistration.Login)){
@@ -41,11 +41,11 @@ class RegistrationController: UIViewController {
                 navigationController?.pushViewController(FirstRegView, animated: true)
             }
             else {
-            showAlert(withTitle: "Произошла ошибка", withMessage: "Длинна пароля должна быть больше 6")
+                showAlert(withTitle: "Произошла ошибка", withMessage: "Длинна пароля должна быть больше 6")
             }
         }
         else {
-        showAlert(withTitle: "Произошла ошибка", withMessage: "Не правильный логин")
+            showAlert(withTitle: "Произошла ошибка", withMessage: "Не правильный логин")
         }
     }
     
@@ -56,14 +56,14 @@ class RegistrationController: UIViewController {
         BorderFrameLogin.backgroundColor = CheckCorrectAuthData.checkLogin(login: ModelRegistration.Login) ? .green : .red
     }
     
-
+    
     @IBAction func PasswordChanged(_ sender: Any) {
         ModelRegistration.Password = PasswordTextField.text ?? ""
         BorderFramePassword.backgroundColor = CheckCorrectAuthData.checkPassword(pass: ModelRegistration.Password) ? .green : .red
     }
     
     @IBAction func TapClearKeyboard(_ sender: Any) {
-       LoginTextField.resignFirstResponder()
+        LoginTextField.resignFirstResponder()
         PasswordTextField.resignFirstResponder()
     }
 }

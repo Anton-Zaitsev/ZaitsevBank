@@ -20,23 +20,317 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="lHj-ed-UQg"/>
+                        <segue destination="XKi-T9-3Fg" kind="relationship" relationship="rootViewController" id="5Mn-Zx-RQy"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="llA-rT-Ojh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-983" y="521"/>
+            <point key="canvasLocation" x="-2022" y="88"/>
         </scene>
-        <!--Главная-->
+        <!--Navigation Controller-->
+        <scene sceneID="uSt-Kf-Vbz">
+            <objects>
+                <viewController id="XKi-T9-3Fg" customClass="NavigationController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RYw-cl-wSn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoZaitsevBank" translatesAutoresizingMaskIntoConstraints="NO" id="Xrp-qC-6fp">
+                                <rect key="frame" x="177" y="88" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="Aap-7u-dp2"/>
+                                    <constraint firstAttribute="width" secondItem="Xrp-qC-6fp" secondAttribute="height" multiplier="1:1" id="hTG-KG-ZaZ"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите пароль" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="h8L-rG-A4n">
+                                <rect key="frame" x="140" y="178" width="134" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="hNy-rJ-HEv">
+                                <rect key="frame" x="153" y="207.5" width="108" height="12"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fkt-yU-eNw">
+                                        <rect key="frame" x="0.0" y="0.0" width="12" height="12"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="fkt-yU-eNw" secondAttribute="height" multiplier="1:1" id="Gp5-yG-fIE"/>
+                                            <constraint firstAttribute="height" constant="12" id="P0w-Bz-BCI"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kLO-SY-9hv">
+                                        <rect key="frame" x="24" y="0.0" width="12" height="12"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="kLO-SY-9hv" secondAttribute="height" multiplier="1:1" id="nhO-mY-bbf"/>
+                                            <constraint firstAttribute="height" constant="12" id="xIu-fk-tPC"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ke7-19-DwV">
+                                        <rect key="frame" x="48" y="0.0" width="12" height="12"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="RtC-Vc-htQ"/>
+                                            <constraint firstAttribute="width" secondItem="Ke7-19-DwV" secondAttribute="height" multiplier="1:1" id="fae-I6-ZMT"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RuO-Rc-4XG">
+                                        <rect key="frame" x="72" y="0.0" width="12" height="12"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="RuO-Rc-4XG" secondAttribute="height" multiplier="1:1" id="6yT-Lx-Slb"/>
+                                            <constraint firstAttribute="height" constant="12" id="a2K-UP-1tq"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ul-n0-mRr">
+                                        <rect key="frame" x="96" y="0.0" width="12" height="12"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="0Ul-n0-mRr" secondAttribute="height" multiplier="1:1" id="3gx-mJ-8Dl"/>
+                                            <constraint firstAttribute="height" constant="12" id="xiC-8Z-2NL"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="6rk-Vz-aHN">
+                                <rect key="frame" x="76.5" y="259.5" width="261.5" height="272"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="Edb-Yh-h0x">
+                                        <rect key="frame" x="0.0" y="0.0" width="261.5" height="63"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ld-Qg-pIv">
+                                                <rect key="frame" x="0.0" y="0.0" width="60.5" height="63"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="1" subtitle=" " titleAlignment="center">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                                    <fontDescription key="subtitleFontDescription" type="system" pointSize="10"/>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="ClickButton1:" destination="XKi-T9-3Fg" eventType="touchUpInside" id="IJg-VL-dqe"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAp-Ma-7qI">
+                                                <rect key="frame" x="100.5" y="0.0" width="60.5" height="63"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="2" subtitle="АБВГ" titleAlignment="center">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                                    <fontDescription key="subtitleFontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="10"/>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="ClickButton2:" destination="XKi-T9-3Fg" eventType="touchUpInside" id="Epg-Qj-AV1"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r6w-4I-nM7">
+                                                <rect key="frame" x="201" y="0.0" width="60.5" height="63"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="3" subtitle="ДЕЖЗ" titleAlignment="center">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                                    <fontDescription key="subtitleFontDescription" type="system" pointSize="10"/>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="ClickButton3:" destination="XKi-T9-3Fg" eventType="touchUpInside" id="fLD-RW-yVa"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="NBY-8E-v7g">
+                                        <rect key="frame" x="0.0" y="74" width="261.5" height="63"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ws8-53-764">
+                                                <rect key="frame" x="0.0" y="0.0" width="60.5" height="63"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="4" subtitle=" ИЙКЛ" titleAlignment="center">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                                    <fontDescription key="subtitleFontDescription" type="system" pointSize="10"/>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="ClickButton4:" destination="XKi-T9-3Fg" eventType="touchUpInside" id="ToM-A0-RI1"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Lf-na-NGV">
+                                                <rect key="frame" x="100.5" y="0.0" width="60.5" height="63"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="5" subtitle="МНОП" titleAlignment="center">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                                    <fontDescription key="subtitleFontDescription" type="system" pointSize="10"/>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="ClickButton5:" destination="XKi-T9-3Fg" eventType="touchUpInside" id="BiU-aV-08d"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n2l-4X-5Bc">
+                                                <rect key="frame" x="201" y="0.0" width="60.5" height="63"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="6" subtitle="РСТУ" titleAlignment="center">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                                    <fontDescription key="subtitleFontDescription" type="system" pointSize="10"/>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="ClickButton6:" destination="XKi-T9-3Fg" eventType="touchUpInside" id="DYH-Et-bqB"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="VbG-5R-aHO">
+                                        <rect key="frame" x="0.0" y="148" width="261.5" height="63"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HL5-5C-dke">
+                                                <rect key="frame" x="0.0" y="0.0" width="60.5" height="63"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="7" subtitle="ФХЦЧ" titleAlignment="center">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                                    <fontDescription key="subtitleFontDescription" type="system" pointSize="10"/>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="ClickButton7:" destination="XKi-T9-3Fg" eventType="touchUpInside" id="ywC-FQ-gzY"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zwj-zN-iPl">
+                                                <rect key="frame" x="100.5" y="0.0" width="60.5" height="63"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8" subtitle="ШЩЪЫ" titleAlignment="center">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                                    <fontDescription key="subtitleFontDescription" type="system" pointSize="10"/>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="ClickButton8:" destination="XKi-T9-3Fg" eventType="touchUpInside" id="bpV-aS-el2"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Co3-k1-YkJ">
+                                                <rect key="frame" x="201" y="0.0" width="60.5" height="63"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="9" subtitle="ЬЭЮЯ" titleAlignment="center">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                                    <fontDescription key="subtitleFontDescription" type="system" pointSize="10"/>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="ClickButton9:" destination="XKi-T9-3Fg" eventType="touchUpInside" id="soZ-Lr-yqu"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="SQp-Gu-fyM">
+                                        <rect key="frame" x="0.0" y="222" width="261.5" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6f-y7-Pea">
+                                                <rect key="frame" x="0.0" y="3" width="60.5" height="44"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain">
+                                                    <imageReference key="image" image="faceid" catalog="system" symbolScale="large"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="font" scale="large">
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                    </preferredSymbolConfiguration>
+                                                    <color key="baseForegroundColor" systemColor="tintColor"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="FaceID:" destination="XKi-T9-3Fg" eventType="touchUpInside" id="1Ng-YY-vlt"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v5m-g4-w2c">
+                                                <rect key="frame" x="100.5" y="0.0" width="60.5" height="50"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="0" titleAlignment="center">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="ClickButton0:" destination="XKi-T9-3Fg" eventType="touchUpInside" id="gpQ-Nu-IQ7"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F8H-jb-fYv">
+                                                <rect key="frame" x="201" y="7" width="60.5" height="36.5"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing">
+                                                    <imageReference key="image" image="delete.left.fill" catalog="system" symbolScale="large"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="font">
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                    </preferredSymbolConfiguration>
+                                                    <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="DeleteButton:" destination="XKi-T9-3Fg" eventType="touchUpInside" id="ikt-8D-Iz2"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BcD-Ip-MeG">
+                                <rect key="frame" x="133.5" y="581.5" width="147.5" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Не можете войти?" titleAlignment="center">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                    <color key="baseForegroundColor" red="0.001092183928" green="0.62712389729999996" blue="0.023422600469999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Версия" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hge-HM-ahY">
+                                <rect key="frame" x="185.5" y="827.5" width="43" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Grf-Ia-GQq"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Xrp-qC-6fp" firstAttribute="top" secondItem="Grf-Ia-GQq" secondAttribute="top" id="52U-jS-06M"/>
+                            <constraint firstItem="h8L-rG-A4n" firstAttribute="top" secondItem="Xrp-qC-6fp" secondAttribute="bottom" constant="30" id="5d0-gm-BGG"/>
+                            <constraint firstItem="hge-HM-ahY" firstAttribute="centerX" secondItem="RYw-cl-wSn" secondAttribute="centerX" id="5ga-CW-dth"/>
+                            <constraint firstItem="6rk-Vz-aHN" firstAttribute="top" secondItem="hNy-rJ-HEv" secondAttribute="bottom" constant="40" id="BpB-6s-PZX"/>
+                            <constraint firstItem="6rk-Vz-aHN" firstAttribute="centerX" secondItem="RYw-cl-wSn" secondAttribute="centerX" id="Bqg-Mv-b1r"/>
+                            <constraint firstItem="hNy-rJ-HEv" firstAttribute="top" secondItem="h8L-rG-A4n" secondAttribute="bottom" constant="8" id="GxT-T5-z5c"/>
+                            <constraint firstItem="BcD-Ip-MeG" firstAttribute="top" secondItem="6rk-Vz-aHN" secondAttribute="bottom" constant="50" id="NGb-zP-Kop"/>
+                            <constraint firstItem="hNy-rJ-HEv" firstAttribute="centerX" secondItem="RYw-cl-wSn" secondAttribute="centerX" id="OJZ-QI-Vh7"/>
+                            <constraint firstItem="h8L-rG-A4n" firstAttribute="centerX" secondItem="RYw-cl-wSn" secondAttribute="centerX" id="YSm-rf-b2U"/>
+                            <constraint firstItem="BcD-Ip-MeG" firstAttribute="centerX" secondItem="RYw-cl-wSn" secondAttribute="centerX" id="f19-Fc-bUO"/>
+                            <constraint firstItem="Grf-Ia-GQq" firstAttribute="bottom" secondItem="hge-HM-ahY" secondAttribute="bottom" constant="20" id="f9f-OL-dUC"/>
+                            <constraint firstItem="Xrp-qC-6fp" firstAttribute="centerX" secondItem="RYw-cl-wSn" secondAttribute="centerX" id="lPE-PF-JDA"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="CBt-Xd-xah"/>
+                    <connections>
+                        <outlet property="Button0" destination="v5m-g4-w2c" id="yZr-Ts-Pfs"/>
+                        <outlet property="Button1" destination="8ld-Qg-pIv" id="Y0j-4k-vsO"/>
+                        <outlet property="Button2" destination="yAp-Ma-7qI" id="PnC-Dh-yem"/>
+                        <outlet property="Button3" destination="r6w-4I-nM7" id="kZB-kn-y9v"/>
+                        <outlet property="Button4" destination="Ws8-53-764" id="vKH-HH-PwP"/>
+                        <outlet property="Button5" destination="4Lf-na-NGV" id="g6Z-O0-eVH"/>
+                        <outlet property="Button6" destination="n2l-4X-5Bc" id="UkY-4H-WAZ"/>
+                        <outlet property="Button7" destination="HL5-5C-dke" id="Dvz-KV-6nF"/>
+                        <outlet property="Button8" destination="zwj-zN-iPl" id="AVO-vf-kjm"/>
+                        <outlet property="Button9" destination="Co3-k1-YkJ" id="5Nx-tn-NQk"/>
+                        <outlet property="ButtonFaceTouchID" destination="e6f-y7-Pea" id="6N1-Dh-L8D"/>
+                        <outlet property="LabelVersion" destination="hge-HM-ahY" id="fgs-fK-Vac"/>
+                        <outlet property="Pass1" destination="fkt-yU-eNw" id="eCD-ud-5Ib"/>
+                        <outlet property="Pass2" destination="kLO-SY-9hv" id="QQc-lN-f3U"/>
+                        <outlet property="Pass3" destination="Ke7-19-DwV" id="XSx-4f-VjT"/>
+                        <outlet property="Pass4" destination="RuO-Rc-4XG" id="m3E-ti-fb6"/>
+                        <outlet property="Pass5" destination="0Ul-n0-mRr" id="XdY-ok-8cF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UMv-G3-xKt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1091.304347826087" y="87.723214285714278"/>
+        </scene>
+        <!--Login Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="LoginController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthStorybold" id="Y6W-OH-hqX" customClass="LoginController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KHK-un-zgh">
-                                <rect key="frame" x="7" y="143" width="400" height="460"/>
+                                <rect key="frame" x="7" y="99" width="400" height="460"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Czm-GK-ZZK">
                                         <rect key="frame" x="29" y="0.0" width="350" height="142"/>
@@ -240,7 +534,7 @@
                             <outletCollection property="gestureRecognizers" destination="NcL-o2-ky4" appends="YES" id="Yn8-rL-a0b"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="Главная" id="KHE-SQ-Unk"/>
+                    <navigationItem key="navigationItem" id="KHE-SQ-Unk"/>
                     <connections>
                         <outlet property="BorderFrameLogin" destination="dta-YY-0Mj" id="oFo-tR-lzG"/>
                         <outlet property="BorderFramePassword" destination="9W0-zq-q40" id="1h8-ya-KdU"/>
@@ -264,23 +558,23 @@
             <objects>
                 <viewController id="g4e-Os-QBm" customClass="RegistrationController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cb2-lW-4h7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Регистрация" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="2Wb-cg-n3P">
-                                <rect key="frame" x="97" y="176" width="220.5" height="42"/>
+                                <rect key="frame" x="97" y="88" width="220.5" height="42"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZaitsevBank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="489-SM-YSn">
-                                <rect key="frame" x="143.5" y="219.5" width="127.5" height="26.5"/>
+                                <rect key="frame" x="143.5" y="131.5" width="127.5" height="26.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nwr-UW-Bxc">
-                                <rect key="frame" x="38" y="308" width="338" height="80"/>
+                                <rect key="frame" x="38" y="220" width="338" height="80"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ваша почта" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="83M-dP-6qy">
                                         <rect key="frame" x="56" y="20" width="274" height="40"/>
@@ -326,7 +620,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAJ-VU-XQL">
-                                <rect key="frame" x="38" y="388" width="338" height="80"/>
+                                <rect key="frame" x="38" y="300" width="338" height="80"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Придумайте пароль" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fl4-zW-FLR">
                                         <rect key="frame" x="56" y="20" width="274" height="40"/>
@@ -373,7 +667,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZEr-zX-3vY">
-                                <rect key="frame" x="80" y="514" width="254" height="50"/>
+                                <rect key="frame" x="80" y="426" width="254" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="tDB-0X-caC"/>
                                 </constraints>
@@ -888,6 +1182,9 @@
     </scenes>
     <color key="tintColor" systemColor="tintColor"/>
     <resources>
+        <image name="LogoZaitsevBank" width="624" height="614"/>
+        <image name="delete.left.fill" catalog="system" width="128" height="104"/>
+        <image name="faceid" catalog="system" width="128" height="115"/>
         <image name="lock.square.fill" catalog="system" width="128" height="114"/>
         <image name="mail.fill" catalog="system" width="128" height="93"/>
         <image name="person.2.fill" catalog="system" width="128" height="80"/>

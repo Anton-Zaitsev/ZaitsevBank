@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3A0779892711ED7C0026BCAD /* ClientObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0779882711ED7C0026BCAD /* ClientObjects.swift */; };
+		3A07798B271228D60026BCAD /* GetDataUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07798A271228D60026BCAD /* GetDataUser.swift */; };
+		3A07798D271229C20026BCAD /* RealmSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07798C271229C20026BCAD /* RealmSettings.swift */; };
+		3A07798F27122CF30026BCAD /* MainMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A07798E27122CF20026BCAD /* MainMenu.storyboard */; };
 		3A0FC950270A52B600B6B2F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC94F270A52B600B6B2F6 /* AppDelegate.swift */; };
 		3A0FC952270A52B700B6B2F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC951270A52B700B6B2F6 /* SceneDelegate.swift */; };
 		3A0FC95A270A52B700B6B2F6 /* ZaitsevBank.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC958270A52B700B6B2F6 /* ZaitsevBank.xcdatamodeld */; };
@@ -17,18 +20,33 @@
 		3A0FC973270A547E00B6B2F6 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC972270A547E00B6B2F6 /* LoginController.swift */; };
 		3A0FC975270A54A000B6B2F6 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC974270A54A000B6B2F6 /* LoginModel.swift */; };
 		3A2CDE6C2710B022005F0CF4 /* LastRegController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2CDE6B2710B022005F0CF4 /* LastRegController.swift */; };
-		3A9A3DA0270B632B003A6A21 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9A3D9F270B632B003A6A21 /* Realm */; };
-		3A9A3DA2270B632B003A6A21 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9A3DA1270B632B003A6A21 /* RealmSwift */; };
+		3A30489727139A010010A739 /* StartMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30489627139A010010A739 /* StartMenu.swift */; };
+		3A30489A27139BAD0010A739 /* SafeLocalPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30489927139BAD0010A739 /* SafeLocalPassword.swift */; };
+		3A3AE93F2712559B001FF068 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3A3AE93E2712559B001FF068 /* Realm */; };
+		3A3AE9412712559B001FF068 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A3AE9402712559B001FF068 /* RealmSwift */; };
+		3A3AE94B271276FA001FF068 /* Loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A3AE94A271276FA001FF068 /* Loading.gif */; };
+		3A3AE94E271278A3001FF068 /* StartMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3AE94D271278A3001FF068 /* StartMainController.swift */; };
+		3A85DED52713DF010059B5CB /* SettingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85DED42713DF010059B5CB /* SettingApp.swift */; };
 		3A9A3DA6270B6AE1003A6A21 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A3DA5270B6AE1003A6A21 /* SHA256.swift */; };
 		3AAB4CD2270A7F7000697F8B /* AuthClien.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAB4CD1270A7F7000697F8B /* AuthClien.swift */; };
 		3AB86B86270BAA62008D0823 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB86B85270BAA62008D0823 /* RegistrationController.swift */; };
 		3AB86B89270CADC7008D0823 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB86B88270CADC6008D0823 /* Extension.swift */; };
 		3AB86B8B270CB6B3008D0823 /* CheckCorrectAuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB86B8A270CB6B3008D0823 /* CheckCorrectAuthData.swift */; };
 		3AB86B8D270D0A84008D0823 /* FirstRegController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB86B8C270D0A84008D0823 /* FirstRegController.swift */; };
+		3ACEFA9D2720AC6D004BD739 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACEFA9C2720AC6D004BD739 /* NavigationController.swift */; };
+		3ACEFAA32721EBB7004BD739 /* AuthFromFaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */; };
+		3AD95367271DC7AB0081D50A /* LocalPassword.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AD95366271DC7AB0081D50A /* LocalPassword.xib */; };
+		3AD95369271DC7DA0081D50A /* LocalPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD95368271DC7DA0081D50A /* LocalPassword.swift */; };
+		3AF977A32714E595006C1B87 /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF977A22714E595006C1B87 /* CoreDataModel.swift */; };
+		3AF977A92714EBD3006C1B87 /* Ecryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF977A82714EBD3006C1B87 /* Ecryption.swift */; };
+		3AF977B22714F080006C1B87 /* RNCryptor in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF977B12714F080006C1B87 /* RNCryptor */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3A0779882711ED7C0026BCAD /* ClientObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientObjects.swift; sourceTree = "<group>"; };
+		3A07798A271228D60026BCAD /* GetDataUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataUser.swift; sourceTree = "<group>"; };
+		3A07798C271229C20026BCAD /* RealmSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSettings.swift; sourceTree = "<group>"; };
+		3A07798E27122CF20026BCAD /* MainMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainMenu.storyboard; sourceTree = "<group>"; };
 		3A0FC94C270A52B600B6B2F6 /* ZaitsevBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZaitsevBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A0FC94F270A52B600B6B2F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A0FC951270A52B700B6B2F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,12 +58,23 @@
 		3A0FC972270A547E00B6B2F6 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		3A0FC974270A54A000B6B2F6 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		3A2CDE6B2710B022005F0CF4 /* LastRegController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastRegController.swift; sourceTree = "<group>"; };
+		3A30489627139A010010A739 /* StartMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenu.swift; sourceTree = "<group>"; };
+		3A30489927139BAD0010A739 /* SafeLocalPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeLocalPassword.swift; sourceTree = "<group>"; };
+		3A3AE94A271276FA001FF068 /* Loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Loading.gif; sourceTree = "<group>"; };
+		3A3AE94D271278A3001FF068 /* StartMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMainController.swift; sourceTree = "<group>"; };
+		3A85DED42713DF010059B5CB /* SettingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingApp.swift; sourceTree = "<group>"; };
 		3A9A3DA5270B6AE1003A6A21 /* SHA256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
 		3AAB4CD1270A7F7000697F8B /* AuthClien.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClien.swift; sourceTree = "<group>"; };
 		3AB86B85270BAA62008D0823 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		3AB86B88270CADC6008D0823 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		3AB86B8A270CB6B3008D0823 /* CheckCorrectAuthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCorrectAuthData.swift; sourceTree = "<group>"; };
 		3AB86B8C270D0A84008D0823 /* FirstRegController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRegController.swift; sourceTree = "<group>"; };
+		3ACEFA9C2720AC6D004BD739 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFromFaceID.swift; sourceTree = "<group>"; };
+		3AD95366271DC7AB0081D50A /* LocalPassword.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocalPassword.xib; sourceTree = "<group>"; };
+		3AD95368271DC7DA0081D50A /* LocalPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPassword.swift; sourceTree = "<group>"; };
+		3AF977A22714E595006C1B87 /* CoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
+		3AF977A82714EBD3006C1B87 /* Ecryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ecryption.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,8 +82,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A9A3DA2270B632B003A6A21 /* RealmSwift in Frameworks */,
-				3A9A3DA0270B632B003A6A21 /* Realm in Frameworks */,
+				3A3AE9412712559B001FF068 /* RealmSwift in Frameworks */,
+				3A3AE93F2712559B001FF068 /* Realm in Frameworks */,
+				3AF977B22714F080006C1B87 /* RNCryptor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +110,7 @@
 		3A0FC94E270A52B600B6B2F6 /* ZaitsevBank */ = {
 			isa = PBXGroup;
 			children = (
+				3A30489827139B7D0010A739 /* FunctionFromBank */,
 				3AB86B87270CAD8A008D0823 /* ViewsHelp */,
 				3AAB4CCD270A7EF100697F8B /* ClienMongoDB */,
 				3A0FC96D270A543700B6B2F6 /* View */,
@@ -98,6 +129,7 @@
 		3A0FC966270A52F400B6B2F6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3A304894271399D60010A739 /* MainMenu */,
 				3A0FC96F270A544D00B6B2F6 /* LoginForm */,
 			);
 			path = Models;
@@ -106,6 +138,7 @@
 		3A0FC967270A530200B6B2F6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3A3AE94C27127883001FF068 /* MainMenu */,
 				3A0FC968270A531100B6B2F6 /* LoginForm */,
 			);
 			path = ViewModels;
@@ -114,6 +147,7 @@
 		3A0FC968270A531100B6B2F6 /* LoginForm */ = {
 			isa = PBXGroup;
 			children = (
+				3ACEFA9C2720AC6D004BD739 /* NavigationController.swift */,
 				3A0FC972270A547E00B6B2F6 /* LoginController.swift */,
 				3AB86B85270BAA62008D0823 /* RegistrationController.swift */,
 				3AB86B8C270D0A84008D0823 /* FirstRegController.swift */,
@@ -125,17 +159,10 @@
 		3A0FC96D270A543700B6B2F6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3A0FC96E270A544700B6B2F6 /* LoginForm */,
+				3A0FC970270A546600B6B2F6 /* LoginForm.storyboard */,
+				3A07798E27122CF20026BCAD /* MainMenu.storyboard */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		3A0FC96E270A544700B6B2F6 /* LoginForm */ = {
-			isa = PBXGroup;
-			children = (
-				3A0FC970270A546600B6B2F6 /* LoginForm.storyboard */,
-			);
-			path = LoginForm;
 			sourceTree = "<group>";
 		};
 		3A0FC96F270A544D00B6B2F6 /* LoginForm */ = {
@@ -144,6 +171,34 @@
 				3A0FC974270A54A000B6B2F6 /* LoginModel.swift */,
 			);
 			path = LoginForm;
+			sourceTree = "<group>";
+		};
+		3A304894271399D60010A739 /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				3A30489627139A010010A739 /* StartMenu.swift */,
+			);
+			path = MainMenu;
+			sourceTree = "<group>";
+		};
+		3A30489827139B7D0010A739 /* FunctionFromBank */ = {
+			isa = PBXGroup;
+			children = (
+				3AF977A22714E595006C1B87 /* CoreDataModel.swift */,
+				3A30489927139BAD0010A739 /* SafeLocalPassword.swift */,
+				3A85DED42713DF010059B5CB /* SettingApp.swift */,
+				3AF977A82714EBD3006C1B87 /* Ecryption.swift */,
+				3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */,
+			);
+			path = FunctionFromBank;
+			sourceTree = "<group>";
+		};
+		3A3AE94C27127883001FF068 /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				3A3AE94D271278A3001FF068 /* StartMainController.swift */,
+			);
+			path = MainMenu;
 			sourceTree = "<group>";
 		};
 		3AAB4CCD270A7EF100697F8B /* ClienMongoDB */ = {
@@ -161,6 +216,8 @@
 				3AAB4CD1270A7F7000697F8B /* AuthClien.swift */,
 				3A9A3DA5270B6AE1003A6A21 /* SHA256.swift */,
 				3AB86B8A270CB6B3008D0823 /* CheckCorrectAuthData.swift */,
+				3A07798A271228D60026BCAD /* GetDataUser.swift */,
+				3A07798C271229C20026BCAD /* RealmSettings.swift */,
 			);
 			path = Function;
 			sourceTree = "<group>";
@@ -176,7 +233,10 @@
 		3AB86B87270CAD8A008D0823 /* ViewsHelp */ = {
 			isa = PBXGroup;
 			children = (
+				3A3AE94A271276FA001FF068 /* Loading.gif */,
 				3AB86B88270CADC6008D0823 /* Extension.swift */,
+				3AD95366271DC7AB0081D50A /* LocalPassword.xib */,
+				3AD95368271DC7DA0081D50A /* LocalPassword.swift */,
 			);
 			path = ViewsHelp;
 			sourceTree = "<group>";
@@ -198,8 +258,9 @@
 			);
 			name = ZaitsevBank;
 			packageProductDependencies = (
-				3A9A3D9F270B632B003A6A21 /* Realm */,
-				3A9A3DA1270B632B003A6A21 /* RealmSwift */,
+				3A3AE93E2712559B001FF068 /* Realm */,
+				3A3AE9402712559B001FF068 /* RealmSwift */,
+				3AF977B12714F080006C1B87 /* RNCryptor */,
 			);
 			productName = ZaitsevBank;
 			productReference = 3A0FC94C270A52B600B6B2F6 /* ZaitsevBank.app */;
@@ -212,6 +273,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					Loading,
+				);
 				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
@@ -230,7 +294,8 @@
 			);
 			mainGroup = 3A0FC943270A52B600B6B2F6;
 			packageReferences = (
-				3A9A3D9E270B632B003A6A21 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				3A3AE93D2712559B001FF068 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				3AF977B02714F080006C1B87 /* XCRemoteSwiftPackageReference "RNCryptor" */,
 			);
 			productRefGroup = 3A0FC94D270A52B600B6B2F6 /* Products */;
 			projectDirPath = "";
@@ -246,7 +311,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A07798F27122CF30026BCAD /* MainMenu.storyboard in Resources */,
+				3AD95367271DC7AB0081D50A /* LocalPassword.xib in Resources */,
 				3A0FC971270A546600B6B2F6 /* LoginForm.storyboard in Resources */,
+				3A3AE94B271276FA001FF068 /* Loading.gif in Resources */,
 				3A0FC95F270A52BA00B6B2F6 /* LaunchScreen.storyboard in Resources */,
 				3A0FC95C270A52BA00B6B2F6 /* Assets.xcassets in Resources */,
 			);
@@ -259,18 +327,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A85DED52713DF010059B5CB /* SettingApp.swift in Sources */,
+				3A30489727139A010010A739 /* StartMenu.swift in Sources */,
 				3A2CDE6C2710B022005F0CF4 /* LastRegController.swift in Sources */,
+				3A07798B271228D60026BCAD /* GetDataUser.swift in Sources */,
 				3AB86B89270CADC7008D0823 /* Extension.swift in Sources */,
 				3A0FC950270A52B600B6B2F6 /* AppDelegate.swift in Sources */,
 				3A9A3DA6270B6AE1003A6A21 /* SHA256.swift in Sources */,
 				3AAB4CD2270A7F7000697F8B /* AuthClien.swift in Sources */,
 				3A0FC975270A54A000B6B2F6 /* LoginModel.swift in Sources */,
+				3AD95369271DC7DA0081D50A /* LocalPassword.swift in Sources */,
+				3A07798D271229C20026BCAD /* RealmSettings.swift in Sources */,
+				3A30489A27139BAD0010A739 /* SafeLocalPassword.swift in Sources */,
+				3AF977A92714EBD3006C1B87 /* Ecryption.swift in Sources */,
 				3AB86B8D270D0A84008D0823 /* FirstRegController.swift in Sources */,
 				3A0FC95A270A52B700B6B2F6 /* ZaitsevBank.xcdatamodeld in Sources */,
+				3ACEFA9D2720AC6D004BD739 /* NavigationController.swift in Sources */,
 				3A0779892711ED7C0026BCAD /* ClientObjects.swift in Sources */,
+				3ACEFAA32721EBB7004BD739 /* AuthFromFaceID.swift in Sources */,
+				3A3AE94E271278A3001FF068 /* StartMainController.swift in Sources */,
 				3A0FC952270A52B700B6B2F6 /* SceneDelegate.swift in Sources */,
 				3AB86B8B270CB6B3008D0823 /* CheckCorrectAuthData.swift in Sources */,
 				3AB86B86270BAA62008D0823 /* RegistrationController.swift in Sources */,
+				3AF977A32714E595006C1B87 /* CoreDataModel.swift in Sources */,
 				3A0FC973270A547E00B6B2F6 /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +426,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -401,6 +481,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -485,26 +566,39 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3A9A3D9E270B632B003A6A21 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+		3A3AE93D2712559B001FF068 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 10.12.0;
+				minimumVersion = 10.17.0;
+			};
+		};
+		3AF977B02714F080006C1B87 /* XCRemoteSwiftPackageReference "RNCryptor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RNCryptor/RNCryptor";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3A9A3D9F270B632B003A6A21 /* Realm */ = {
+		3A3AE93E2712559B001FF068 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A9A3D9E270B632B003A6A21 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = 3A3AE93D2712559B001FF068 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = Realm;
 		};
-		3A9A3DA1270B632B003A6A21 /* RealmSwift */ = {
+		3A3AE9402712559B001FF068 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A9A3D9E270B632B003A6A21 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = 3A3AE93D2712559B001FF068 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
+		};
+		3AF977B12714F080006C1B87 /* RNCryptor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3AF977B02714F080006C1B87 /* XCRemoteSwiftPackageReference "RNCryptor" */;
+			productName = RNCryptor;
 		};
 /* End XCSwiftPackageProductDependency section */
 

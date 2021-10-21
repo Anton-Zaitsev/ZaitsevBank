@@ -8,7 +8,7 @@
 import UIKit
 
 class FirstRegController: UIViewController {
-
+    
     public var ModelRegistration = LoginModel()
     
     @IBOutlet weak var MainLabel: UILabel!
@@ -32,11 +32,11 @@ class FirstRegController: UIViewController {
         MainLabel.numberOfLines = 0
         
         NameTextField.attributedPlaceholder = NSAttributedString(string: "Ваше Имя",
-                                                                                 attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+                                                                 attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         FamilyTextField.attributedPlaceholder = NSAttributedString(string: "Ваша фамилия",
-                                                                                 attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         FamilyNameTextField.attributedPlaceholder = NSAttributedString(string: "Ваше отчество",
-                                                                                 attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
     }
     
     
@@ -64,7 +64,7 @@ class FirstRegController: UIViewController {
         }
     }
     
-  
+    
     @IBAction func TapClearKeyboard(_ sender: Any) {
         NameTextField.resignFirstResponder()
         FamilyTextField.resignFirstResponder()

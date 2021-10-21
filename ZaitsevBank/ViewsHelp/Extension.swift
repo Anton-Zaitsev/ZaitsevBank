@@ -10,28 +10,28 @@ import UIKit
 
 extension UIViewController {
     func showAlert(withTitle title: String, withMessage message:String) {
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            let ok = UIAlertAction(title: "OK", style: .default, handler: { action in
-            })
-            let cancel = UIAlertAction(title: "Cancel", style: .default, handler: { action in
-            })
-            alert.addAction(ok)
-            alert.addAction(cancel)
-            DispatchQueue.main.async(execute: {
-                self.present(alert, animated: true)
-            })
-        }
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "ОК", style: .default, handler: { action in
+        })
+        let cancel = UIAlertAction(title: "Отмена", style: .default, handler: { action in
+        })
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        DispatchQueue.main.async(execute: {
+            self.present(alert, animated: true)
+        })
+    }
 }
 
 
 extension UIViewController {
-    func EnableLoader() -> UIView {
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    
+    func EnableMainLoader(NameUser: String){
         let screen = UIScreen.main.bounds
         let viewLoader = UIView(frame: screen)
         let LoaderView : UIImageView = UIImageView(frame: screen)
         let labelName = UILabel(frame: CGRect(x: 0, y: CGFloat(100), width: screen.width, height: 100))
-        labelName.text = "Добро пожаловать,\n Антон"
+        labelName.text = "Добро пожаловать,\n \(NameUser)"
         labelName.textAlignment = .center
         labelName.font = UIFont(name:"HelveticaNeue-Bold", size: 31.0)
         labelName.textColor = .white
@@ -42,14 +42,61 @@ extension UIViewController {
         viewLoader.addSubview(LoaderView)
         viewLoader.addSubview(labelName)
         self.view.addSubview(viewLoader)
-        return viewLoader
     }
+    
     func DisableLoader(loader: UIView) {
         DispatchQueue.main.async {
             loader.removeFromSuperview()
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
+    }
+    
+    func EnableLoader() -> UIView{
+        let screen = UIScreen.main.bounds
+        let view = UIView(frame: screen)
+        let viewLoader = UIView(frame: screen)
+        viewLoader.backgroundColor = .black
+        viewLoader.layer.opacity = 0.5
+        guard let LoaderView = UIImageView.loadGifLoading() else { return viewLoader }
+        view.addSubview(viewLoader)
+        view.addSubview(LoaderView)
+        self.view.addSubview(view)
+        LoaderView.startAnimating()
+        return view
+    }
+    
+}
+
+extension UIImageView {
+    static func loadGifLoading() -> UIImageView? {
+        guard let path = Bundle.main.path(forResource: "Loading", ofType: "gif") else {
+            print("Gif does not exist at that path")
+            return nil
+        }
+        let url = URL(fileURLWithPath: path)
+        guard let gifData = try? Data(contentsOf: url),
+              let source =  CGImageSourceCreateWithData(gifData as CFData, nil) else { return nil }
+        var images = [UIImage]()
+        let imageCount = CGImageSourceGetCount(source)
+        for i in 0 ..< imageCount {
+            if let image = CGImageSourceCreateImageAtIndex(source, i, nil) {
+                images.append(UIImage(cgImage: image))
+            }
+        }
+        let screen = UIScreen.main.bounds
+        let imageWidth:CGFloat = 150
+        let gifImageView = UIImageView()
+        gifImageView.contentMode = .scaleAspectFill
+        gifImageView.frame = CGRect.init(x: (screen.width/2)-imageWidth/2, y: (screen.height/2)-imageWidth/2, width: imageWidth, height: imageWidth)
+        gifImageView.clipsToBounds = true
+        gifImageView.animationImages = images
+        return gifImageView
     }
 }
 
-
+extension UIView {
+    
+    class func loadFromNib<T: UIView>() -> T {
+        return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
+    }
+    
+}

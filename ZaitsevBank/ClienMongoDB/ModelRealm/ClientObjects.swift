@@ -9,9 +9,10 @@ import Foundation
 import RealmSwift
 
 
-class clientZaitsevBank: Object {
+public class clientZaitsevBank: Object {
     @objc dynamic var _id: ObjectId = ObjectId.generate()
     @objc dynamic var authID: String = ""
+    @objc dynamic var avatar: String? = nil
     @objc dynamic var birthday: String? = nil
     @objc dynamic var cards: clientZaitsevBank_cards?
     @objc dynamic var family: String? = nil
@@ -20,12 +21,12 @@ class clientZaitsevBank: Object {
     @objc dynamic var phone: String? = nil
     @objc dynamic var pol: String? = nil
     @objc dynamic var userID: String? = nil
-    override static func primaryKey() -> String? {
+    public override static func primaryKey() -> String? {
         return "_id"
     }
 }
 
-class clientZaitsevBank_cards: EmbeddedObject {
+public class clientZaitsevBank_cards: EmbeddedObject {
     @objc dynamic var CCV: String? = nil
     @objc dynamic var cardId: String? = nil
     @objc dynamic var idChip: String? = nil

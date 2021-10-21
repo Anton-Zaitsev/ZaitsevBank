@@ -9,15 +9,13 @@ import Foundation
 import RealmSwift
 
 public class AuthClient {
-    
-    private let app = App(id: "zaitsevbank-xhnim")
-    private let authIDClient: String = "ClientZaitsevBankRequared".sha256()
-    
+        
     public var ErrorAuthClient: String = ""
     
+    
     private func AuthUser (login: String, pass : String) async throws -> User{
-        
-        let loggedInUser = try await app.login(credentials: Credentials.emailPassword(email: login, password: pass.sha256()))
+        let client = RealmSettings.getApp()
+        let loggedInUser = try await client.login(credentials: Credentials.emailPassword(email: login, password: pass.sha256()))
         return loggedInUser
         
     }
@@ -40,13 +38,13 @@ public class AuthClient {
     
     public func Registration(dataUser: LoginModel) async -> User?{
         if (CheckCorrectAuthData.checkAuth(login: dataUser.Login, pass: dataUser.Password)) {
-            let client = app.emailPasswordAuth
+            let client = RealmSettings.getApp().emailPasswordAuth
             do {
                 try await client.registerUser(email: dataUser.Login, password: dataUser.Password.sha256())
                 var user =  await SignIn(login: dataUser.Login, pass: dataUser.Password)
                 //Получение пользователя
              
-                let configuration = user!.configuration(partitionValue: authIDClient)
+                let configuration = user!.configuration(partitionValue: RealmSettings.getAuthIDClient())
                 
                 Realm.asyncOpen(configuration: configuration) { [self] (result) in
                         switch result {
@@ -60,7 +58,6 @@ public class AuthClient {
                             let notificationToken = tasks.observe { (changes) in
                                     switch changes {
                                     case .initial: break
-                                        // Results are now populated and can be accessed without blocking the UI
                                     case .update(_, _, _, _):
                                         break
                                     case .error(let error):
@@ -72,14 +69,15 @@ public class AuthClient {
                             
                             try! realm.write() {
                                 let clientModel = clientZaitsevBank()
-                                clientModel.authID = authIDClient
+                                clientModel.authID = RealmSettings.getAuthIDClient()
                                 clientModel.name = dataUser.Name
                                 clientModel.family = dataUser.Family
                                 clientModel.familyName = dataUser.FamilyName
                                 clientModel.phone =  "+7 \(dataUser.Phone)"
                                 clientModel.birthday = dataUser.Year
                                 clientModel.pol = dataUser.Pol
-                                clientModel.userID = user?.id
+                                clientModel.userID = user?.id.sha256()
+                                clientModel.avatar = ""
                                 realm.add(clientModel)
                             }
                             
