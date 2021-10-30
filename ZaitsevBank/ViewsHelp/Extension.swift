@@ -100,3 +100,23 @@ extension UIView {
     }
     
 }
+
+extension UIView {
+
+        func fadeTransition(_ duration:CFTimeInterval) {
+            let animation = CATransition()
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            animation.type = CATransitionType.fade
+            animation.duration = duration
+            layer.add(animation, forKey: CATransitionType.fade.rawValue)
+        }
+}
+
+extension NSMutableAttributedString {
+
+    func setColor(color: UIColor, forText stringValue: String) {
+       let range: NSRange = self.mutableString.range(of: stringValue, options: .caseInsensitive)
+       self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+    }
+
+}

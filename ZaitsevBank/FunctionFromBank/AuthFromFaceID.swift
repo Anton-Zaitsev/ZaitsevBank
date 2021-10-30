@@ -45,7 +45,7 @@ public class AuthFromFaceID {
                                             viewController.EnableMainLoader(NameUser: data.name!)
                                             
                                             let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
-                                            let StartMain = storyboardMainMenu.instantiateViewController(withIdentifier: "StartMainMenu") as! StartMainController
+                                            let StartMain = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
                                             StartMain.dataUser = data
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
                                                 viewController.navigationController?.pushViewController(StartMain, animated: true)
@@ -104,7 +104,7 @@ public class AuthFromFaceID {
                                     viewController.EnableMainLoader(NameUser: data.name!)
                                     
                                     let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
-                                    let StartMain = storyboardMainMenu.instantiateViewController(withIdentifier: "StartMainMenu") as! StartMainController
+                                    let StartMain = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
                                     StartMain.dataUser = data
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
                                         viewController.navigationController?.pushViewController(StartMain, animated: true)

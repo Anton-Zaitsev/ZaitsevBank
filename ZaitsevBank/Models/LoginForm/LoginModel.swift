@@ -21,8 +21,4 @@ public class LoginModel {
     public var Year : String = ""
     public var Pol : String = ""
     
-    public func SafePasswordFromAutoLogin(Password: String) {
-      //  let shaPass = Password.sha256()
-        
-    }
 }

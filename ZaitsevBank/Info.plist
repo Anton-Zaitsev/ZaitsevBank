@@ -4,6 +4,11 @@
 <dict>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Разрешите Zaitsev Bank использовать биометрические данные для входа.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -18,7 +23,7 @@
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
 					<key>UISceneStoryboardFile</key>
-					<string>LoginForm</string>
+					<string>MainMenu</string>
 				</dict>
 			</array>
 		</dict>
