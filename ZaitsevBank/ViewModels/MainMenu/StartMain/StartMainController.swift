@@ -31,7 +31,7 @@ class StartMainController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated) 
+        super.viewWillAppear(animated)
         var count = 0
         Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [self] (_) in
             LabelValute.fadeTransition(0.4)
