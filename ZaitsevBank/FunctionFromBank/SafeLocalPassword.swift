@@ -10,6 +10,24 @@ import CoreData
 
 public class SafeLocalPassword {
     
+    
+    public static func FeatchCountData(database: NSPersistentContainer) -> Bool {
+        
+        let context: NSManagedObjectContext = {
+            return database.viewContext
+        }()
+        let fetchRequest: NSFetchRequest<AutoLoginSet> = AutoLoginSet.fetchRequest()
+        do {
+            let objects = try context.fetch(fetchRequest)
+            return objects.count > 0
+            
+        }
+        catch {
+            return false
+        }
+        
+    }
+    
     public static func CheckDataLocal(database: NSPersistentContainer) -> (String, String) {
         
         let context: NSManagedObjectContext = {
@@ -36,9 +54,11 @@ public class SafeLocalPassword {
         let context: NSManagedObjectContext = {
             return database.viewContext
         }()
+        
         let fetchRequest: NSFetchRequest<AutoLoginSet> = AutoLoginSet.fetchRequest()
         do {
             let objects = try context.fetch(fetchRequest)
+            
             let dataModel = objects.first
                        
             let pincode = try! dataModel?.localPass?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
@@ -67,7 +87,17 @@ public class SafeLocalPassword {
             return database.viewContext
         }()
         
+        let fetchRequest: NSFetchRequest<AutoLoginSet> = AutoLoginSet.fetchRequest()
+        do {
+            var objects = try context.fetch(fetchRequest)
+            objects.removeAll()
+        }
+        catch{
+            print("Не найдено объекты для выбранной базы")
+        }
+        
         let dataApp = AutoLoginSet(context: context)
+        
         let newAPPID = UUID()
         
         do {

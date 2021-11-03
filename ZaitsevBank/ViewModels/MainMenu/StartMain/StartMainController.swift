@@ -11,27 +11,84 @@ import UIKit
 
 class StartMainController: UIViewController {
     
-    public var data = StartMenu()
+    private let modelStartMain : StartMenu = StartMenu()
+    
+    public var dataUser = clientZaitsevBank()
+    public var cardUser = [Cards]()
+    
     fileprivate let dataValute = API.getDataValute()
+    
     @IBOutlet weak var LabelName: UILabel!
     @IBOutlet weak var LabelValute: UILabel!
     @IBOutlet weak var CollectionOffers: UICollectionView!
     
-    public var dataUser : clientZaitsevBank!
+    @IBOutlet weak var MonthlyExpenses: UILabel!
+    @IBOutlet weak var IndicatorMonthlyExpenses: UIView!
+    @IBOutlet weak var ViewMonthlyExpenses: UIView!
+    
+    @IBOutlet weak var WalletView: UIView!
+    @IBOutlet weak var WalletTable: UITableView!
+    
+    @IBOutlet weak var ScrollViewStartMainController: UIScrollView!
+    
+    @IBOutlet weak var ButtonValute: UIButton!
+    @IBOutlet weak var ButtonCriptoValute: UIButton!
+    
+    @IBOutlet weak var ExchangeView: UIView!
+    @IBOutlet weak var ExchangeTable: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true;
         GetView()
     }
     private func GetView() {
-        //LabelName.text = dataUser.name
+        LabelName.text = dataUser.name
         CollectionOffers.delegate = self
         CollectionOffers.dataSource = self
+        IndicatorMonthlyExpenses.layer.cornerRadius = IndicatorMonthlyExpenses.frame.height / 2
+        
+        ViewMonthlyExpenses.layer.cornerRadius = 6
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        dateFormatter.dateFormat = "LLLL"
+        MonthlyExpenses.text! += dateFormatter.string(from: Date())
+        
+        WalletView.layer.cornerRadius = 12
+        ExchangeView.layer.cornerRadius = 12
+        
+        ButtonValute.layer.cornerRadius = ButtonValute.frame.height / 2
+        ButtonCriptoValute.layer.cornerRadius = ButtonCriptoValute.frame.height / 2
+        ButtonValute.backgroundColor = .white
+        ButtonValute.setTitleColor(.black, for: .normal)
+        ButtonCriptoValute.backgroundColor = #colorLiteral(red: 0.2114904225, green: 0.2115325928, blue: 0.2114848793, alpha: 1)
+        ButtonCriptoValute.setTitleColor(.white, for: .normal)
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshAllData), for: .valueChanged)
+        ScrollViewStartMainController.refreshControl = refreshControl
+        
+        WalletTable.delegate = self
+        WalletTable.dataSource = self
+        
+        ExchangeTable.delegate = self
+        ExchangeTable.dataSource = self
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // -- GET CARD USER
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            Task{
+                self.cardUser = await GetCardUser().getCards()
+                DispatchQueue.main.async {
+                    self.WalletTable.reloadData()
+                }
+            }
+        }
+        //
         var count = 0
         Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [self] (_) in
             LabelValute.fadeTransition(0.4)
@@ -45,31 +102,78 @@ class StartMainController: UIViewController {
                 LabelValute.attributedText = attributedString
             }
             count = count == dataValute.count ? 0 : count + 1
-
+            
         }
-
+        
     }
     
-
-    
+    @objc fileprivate func refreshAllData(refreshControl: UIRefreshControl) {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            Task{
+                self.cardUser = await GetCardUser().getCards()
+                DispatchQueue.main.async {
+                    self.WalletTable.reloadData()
+                }
+            }
+        }
+        refreshControl.endRefreshing()
+    }
     
 }
 
 extension StartMainController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.dataOffers.count
+        return modelStartMain.dataOffers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell = UICollectionViewCell()
         
         if let OffersCell = collectionView.dequeueReusableCell(withReuseIdentifier: "offers", for: indexPath) as? OffersViewCell {
-            OffersCell.configurated(with: self.data.dataOffers[indexPath.row].title , with: self.data.dataOffers[indexPath.row].backgroundImage)
+            OffersCell.configurated(with: self.modelStartMain.dataOffers[indexPath.row].title , with: self.modelStartMain.dataOffers[indexPath.row].backgroundImage)
             cell = OffersCell
         }
         return cell
     }
+}
+
+extension StartMainController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        switch tableView{
+        case WalletTable :
+            return cardUser.count
+        case ExchangeTable :
+            return modelStartMain.dataExchange.count
+        default:
+            return cardUser.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        var cell = UITableViewCell()
+        
+        switch tableView {
+        case WalletTable:
+            if let WalletCell = tableView.dequeueReusableCell(withIdentifier: "cellWalet", for: indexPath) as? WalletViewCell {
+                WalletCell.configurated(with: (self.cardUser[indexPath.row]))
+                cell = WalletCell
+            }
+            return cell
+        case ExchangeTable:
+            if let ExchangeCell = tableView.dequeueReusableCell(withIdentifier: "cellExchange", for: indexPath) as? ExchangeViewCell {
+                ExchangeCell.configurated(with: (self.modelStartMain.dataExchange[indexPath.row]))
+                cell = ExchangeCell
+            }
+            return cell
+        default:
+            return cell
+        }
+    }
+    
 }
 
 

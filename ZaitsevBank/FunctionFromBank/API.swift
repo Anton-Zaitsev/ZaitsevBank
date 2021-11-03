@@ -40,6 +40,7 @@ public class API {
         }
        return arrayValute
     }
+    
 }
 
 public struct Valute {

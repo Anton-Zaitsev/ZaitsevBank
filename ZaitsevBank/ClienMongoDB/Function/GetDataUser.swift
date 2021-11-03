@@ -22,11 +22,19 @@ public class GetDataUser {
         
         let userId: String = user.id.sha256()
         
-        let realm = try! await Realm(configuration: configuration)
-        
-        guard let data = realm.objects(clientZaitsevBank.self).filter("userID == '\(userId)' ").first else { return nil}
-        
-        return data
+        do {
+            let realm = try await Realm(configuration: configuration)
+            
+            if let data = realm.objects(clientZaitsevBank.self).filter("userID == '\(userId)' ").first {
+                return data
+            }
+            else {
+                return nil
+            }
+        }
+        catch {
+            return nil
+        }
                
     }
     

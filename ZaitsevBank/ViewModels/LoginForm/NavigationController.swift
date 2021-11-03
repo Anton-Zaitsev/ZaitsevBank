@@ -82,8 +82,9 @@ class NavigationController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        if(UserDefaults.standard.isUsesFaceTouchID()) {
         signFromFaceID()
+        }
     }
     
     

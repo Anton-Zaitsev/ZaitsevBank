@@ -7,7 +7,6 @@
 
 import Foundation
 import RealmSwift
-
 public class RealmSettings {
         
     public static func getApp() -> App {

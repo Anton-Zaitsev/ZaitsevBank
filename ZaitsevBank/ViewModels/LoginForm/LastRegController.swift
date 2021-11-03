@@ -86,6 +86,7 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
                 
                 if (Pol.contains(ModelRegistration.Pol)) {
                     //Регистрация нового аккаунта
+                    self.navigationController?.setNavigationBarHidden(true, animated: true) //disable navigationBar
                     
                     DispatchQueue.main.async {
                         let loader = self.EnableLoader()
@@ -96,22 +97,24 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
                                 
                                 DispatchQueue.main.async {
                                     if (boolRegistration){
-                                        SetAlertLocalPassword()
                                         Task(priority: .medium) {
                                             
                                             if let data = await GetDataUser().get(NoneUser: user) {
                                                 DataUser = data
                                                 self.DisableLoader(loader: loader)
+                                                SetAlertLocalPassword()
                                             }
                                             else {
                                                 self.DisableLoader(loader: loader)
-                                                showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера")
+                                                showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные пользователя с сервера")
+                                                self.navigationController?.setNavigationBarHidden(false, animated: true) //Enable navigationBar
                                             }
                                         }
                                     }
                                     else {
                                         self.DisableLoader(loader: loader)
                                         showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.ErrorAuthClient)
+                                        self.navigationController?.setNavigationBarHidden(false, animated: true) //Enable navigationBar
                                     }
                                 }
                                 
@@ -171,10 +174,12 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
             self.EnableMainLoader(NameUser: ModelRegistration.Name)
             //SafeLocalPassword.ReadDataLocal(database: ContainerLocalData)
             let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
-            let StartMain = storyboardMainMenu.instantiateViewController(withIdentifier: "StartMainMenu") as! StartMainController
-            StartMain.dataUser = DataUser
+            
+            let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
+            NavigationTabBar.dataUser = DataUser
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-                self.navigationController?.pushViewController(StartMain, animated: true)
+                self.navigationController?.pushViewController(NavigationTabBar, animated: true)
             }
             
         }

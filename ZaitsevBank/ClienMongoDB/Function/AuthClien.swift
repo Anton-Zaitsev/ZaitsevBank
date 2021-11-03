@@ -76,7 +76,7 @@ public class AuthClient {
                                 clientModel.phone =  "+7 \(dataUser.Phone)"
                                 clientModel.birthday = dataUser.Year
                                 clientModel.pol = dataUser.Pol
-                                clientModel.userID = user?.id.sha256()
+                                clientModel.userID = (user?.id.sha256())!
                                 clientModel.avatar = ""
                                 realm.add(clientModel)
                             }

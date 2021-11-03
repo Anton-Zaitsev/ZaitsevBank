@@ -9,6 +9,7 @@ import Foundation
 
 struct SettingApp {
     static let nameKeyFirstSettings = "isLogin"
+    static let nameKeyUseFaceTouchID = "isFaceID"
 }
 
 extension UserDefaults{
@@ -21,6 +22,14 @@ extension UserDefaults{
     func isLogin() -> Bool {
         return bool(forKey: SettingApp.nameKeyFirstSettings)
     }
+    //MARK: Check Uses Fase or TouchID
     
+    func SetisFaceTouchId(_ settings: Bool) {
+        self.set(settings, forKey: SettingApp.nameKeyUseFaceTouchID)
+    }
+    
+    func isUsesFaceTouchID() -> Bool {
+        return bool(forKey: SettingApp.nameKeyUseFaceTouchID)
+    }
     
 }

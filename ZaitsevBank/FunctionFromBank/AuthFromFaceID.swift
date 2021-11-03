@@ -26,6 +26,7 @@ public class AuthFromFaceID {
             
             localAuthenticationContext.evaluatePolicy(LAPolicy.deviceOwnerAuthentication, localizedReason: reason) { (success, evaluationError) in
                 if success {
+                    UserDefaults.standard.SetisFaceTouchId(true) //Начать использование FaceID
                     
                     DispatchQueue.global(qos: .utility).async{ [self] in
                         Task(priority: .high) {
@@ -41,14 +42,16 @@ public class AuthFromFaceID {
                                     Task(priority: .high) {
                                         
                                         if let data = await GetDataUser().get(NoneUser: user) {
-                                            
                                             viewController.EnableMainLoader(NameUser: data.name!)
-                                            
+                                                                                        
                                             let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
-                                            let StartMain = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
-                                            StartMain.dataUser = data
+                                            
+                                            let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
+                                            
+                                            NavigationTabBar.dataUser = data
+                                            
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-                                                viewController.navigationController?.pushViewController(StartMain, animated: true)
+                                                viewController.navigationController?.pushViewController(NavigationTabBar, animated: true)
                                             }
                                             
                                         }
@@ -66,10 +69,11 @@ public class AuthFromFaceID {
                     }
                     
                 } else {
-                    if let errorObj = evaluationError {
+                   /* if let errorObj = evaluationError {
                         let messageToDisplay = self.getErrorDescription(errorCode: errorObj._code)
                         viewController.showAlert(withTitle: "Произошла ошибка", withMessage: messageToDisplay)
                     }
+                    */
                 }
             }
         }
@@ -103,11 +107,16 @@ public class AuthFromFaceID {
                                     
                                     viewController.EnableMainLoader(NameUser: data.name!)
                                     
+                    
                                     let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
-                                    let StartMain = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
-                                    StartMain.dataUser = data
+                                    
+                                    let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
+                                    
+                                    NavigationTabBar.dataUser = data
+
+                                    
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-                                        viewController.navigationController?.pushViewController(StartMain, animated: true)
+                                        viewController.navigationController?.pushViewController(NavigationTabBar, animated: true)
                                     }
                                     
                                 }
