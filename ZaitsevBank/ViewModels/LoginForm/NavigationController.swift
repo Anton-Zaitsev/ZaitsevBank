@@ -88,7 +88,7 @@ class NavigationController: UIViewController {
     }
     
     
-    private func GetView() {
+    fileprivate func GetView() {
         LabelVersion.text = "Версия: \(getVersionApp())"
         Pass1.layer.cornerRadius = 6
         Pass2.layer.cornerRadius = 6
@@ -251,7 +251,8 @@ class NavigationController: UIViewController {
                 button.backgroundColor = .clear
                 button.layer.cornerRadius = 0
             }
-            authFaceID.signUserByPINCODE(self, DatabaseLinkAutoLogin: ContainerLocalData, PIN_CODE: pinCode)
+            let loader = self.EnableLoader()
+            authFaceID.signUserByPINCODE(self, DatabaseLinkAutoLogin: ContainerLocalData, PIN_CODE: pinCode,loader: loader)
             break
         default:
             break

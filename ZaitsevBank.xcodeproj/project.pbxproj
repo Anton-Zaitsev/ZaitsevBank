@@ -11,6 +11,7 @@
 		3A07798B271228D60026BCAD /* GetDataUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07798A271228D60026BCAD /* GetDataUser.swift */; };
 		3A07798D271229C20026BCAD /* RealmSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07798C271229C20026BCAD /* RealmSettings.swift */; };
 		3A07798F27122CF30026BCAD /* MainMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A07798E27122CF20026BCAD /* MainMenu.storyboard */; };
+		3A0862E027382776000C5407 /* ValuteStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0862DF27382776000C5407 /* ValuteStructures.swift */; };
 		3A0FC950270A52B600B6B2F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC94F270A52B600B6B2F6 /* AppDelegate.swift */; };
 		3A0FC952270A52B700B6B2F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC951270A52B700B6B2F6 /* SceneDelegate.swift */; };
 		3A0FC95A270A52B700B6B2F6 /* ZaitsevBank.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC958270A52B700B6B2F6 /* ZaitsevBank.xcdatamodeld */; };
@@ -35,7 +36,11 @@
 		3A835FCF27309B55000310EC /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A835FCE27309B55000310EC /* RealmSwift */; };
 		3A835FD327320CD9000310EC /* ExchangeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A835FD227320CD9000310EC /* ExchangeViewCell.swift */; };
 		3A85DED52713DF010059B5CB /* SettingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85DED42713DF010059B5CB /* SettingApp.swift */; };
+		3A99391B2738B074009B1B06 /* CarAddViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A99391A2738B074009B1B06 /* CarAddViewCell.swift */; };
+		3A99391D2738B15B009B1B06 /* NewCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A99391C2738B15B009B1B06 /* NewCardController.swift */; };
 		3A9A3DA6270B6AE1003A6A21 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A3DA5270B6AE1003A6A21 /* SHA256.swift */; };
+		3A9C9B772739C82B009A2D4C /* CardAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9C9B762739C82B009A2D4C /* CardAdd.swift */; };
+		3A9C9B792739DB0C009A2D4C /* PreferenceCardAddViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9C9B782739DB0C009A2D4C /* PreferenceCardAddViewCell.swift */; };
 		3AAB4CD2270A7F7000697F8B /* AuthClien.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAB4CD1270A7F7000697F8B /* AuthClien.swift */; };
 		3AB687EA272218B2002BD6EB /* NavigationTabBarMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB687E9272218B2002BD6EB /* NavigationTabBarMain.swift */; };
 		3AB687EC272220B6002BD6EB /* PaymentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB687EB272220B6002BD6EB /* PaymentsController.swift */; };
@@ -48,6 +53,7 @@
 		3ACEFAA32721EBB7004BD739 /* AuthFromFaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */; };
 		3AD95367271DC7AB0081D50A /* LocalPassword.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AD95366271DC7AB0081D50A /* LocalPassword.xib */; };
 		3AD95369271DC7DA0081D50A /* LocalPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD95368271DC7DA0081D50A /* LocalPassword.swift */; };
+		3AEE2A562733587B005CB6A8 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 3AEE2A552733587B005CB6A8 /* SWXMLHash */; };
 		3AF977A32714E595006C1B87 /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF977A22714E595006C1B87 /* CoreDataModel.swift */; };
 		3AF977A92714EBD3006C1B87 /* Ecryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF977A82714EBD3006C1B87 /* Ecryption.swift */; };
 		3AF977B22714F080006C1B87 /* RNCryptor in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF977B12714F080006C1B87 /* RNCryptor */; };
@@ -58,6 +64,7 @@
 		3A07798A271228D60026BCAD /* GetDataUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataUser.swift; sourceTree = "<group>"; };
 		3A07798C271229C20026BCAD /* RealmSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSettings.swift; sourceTree = "<group>"; };
 		3A07798E27122CF20026BCAD /* MainMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainMenu.storyboard; sourceTree = "<group>"; };
+		3A0862DF27382776000C5407 /* ValuteStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuteStructures.swift; sourceTree = "<group>"; };
 		3A0FC94C270A52B600B6B2F6 /* ZaitsevBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZaitsevBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A0FC94F270A52B600B6B2F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A0FC951270A52B700B6B2F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +88,11 @@
 		3A82E634272CD7C50054F36C /* DelayThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayThread.swift; sourceTree = "<group>"; };
 		3A835FD227320CD9000310EC /* ExchangeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewCell.swift; sourceTree = "<group>"; };
 		3A85DED42713DF010059B5CB /* SettingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingApp.swift; sourceTree = "<group>"; };
+		3A99391A2738B074009B1B06 /* CarAddViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarAddViewCell.swift; sourceTree = "<group>"; };
+		3A99391C2738B15B009B1B06 /* NewCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardController.swift; sourceTree = "<group>"; };
 		3A9A3DA5270B6AE1003A6A21 /* SHA256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
+		3A9C9B762739C82B009A2D4C /* CardAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAdd.swift; sourceTree = "<group>"; };
+		3A9C9B782739DB0C009A2D4C /* PreferenceCardAddViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceCardAddViewCell.swift; sourceTree = "<group>"; };
 		3AAB4CD1270A7F7000697F8B /* AuthClien.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClien.swift; sourceTree = "<group>"; };
 		3AB687E9272218B2002BD6EB /* NavigationTabBarMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabBarMain.swift; sourceTree = "<group>"; };
 		3AB687EB272220B6002BD6EB /* PaymentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsController.swift; sourceTree = "<group>"; };
@@ -105,6 +116,7 @@
 			files = (
 				3A835FCF27309B55000310EC /* RealmSwift in Frameworks */,
 				3A835FCD27309B55000310EC /* Realm in Frameworks */,
+				3AEE2A562733587B005CB6A8 /* SWXMLHash in Frameworks */,
 				3A82E633272CC3150054F36C /* SwiftSoup in Frameworks */,
 				3AF977B22714F080006C1B87 /* RNCryptor in Frameworks */,
 			);
@@ -160,6 +172,7 @@
 		3A0FC967270A530200B6B2F6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3A9939192738B04A009B1B06 /* AddNewCard */,
 				3A3AE94C27127883001FF068 /* MainMenu */,
 				3A0FC968270A531100B6B2F6 /* LoginForm */,
 			);
@@ -199,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				3A30489627139A010010A739 /* StartMenu.swift */,
+				3A9C9B762739C82B009A2D4C /* CardAdd.swift */,
 			);
 			path = MainMenu;
 			sourceTree = "<group>";
@@ -213,6 +227,7 @@
 				3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */,
 				3A82E62F272C43E20054F36C /* API.swift */,
 				3A82E634272CD7C50054F36C /* DelayThread.swift */,
+				3A0862DF27382776000C5407 /* ValuteStructures.swift */,
 			);
 			path = FunctionFromBank;
 			sourceTree = "<group>";
@@ -237,6 +252,16 @@
 				3A835FD227320CD9000310EC /* ExchangeViewCell.swift */,
 			);
 			path = StartMain;
+			sourceTree = "<group>";
+		};
+		3A9939192738B04A009B1B06 /* AddNewCard */ = {
+			isa = PBXGroup;
+			children = (
+				3A99391C2738B15B009B1B06 /* NewCardController.swift */,
+				3A99391A2738B074009B1B06 /* CarAddViewCell.swift */,
+				3A9C9B782739DB0C009A2D4C /* PreferenceCardAddViewCell.swift */,
+			);
+			path = AddNewCard;
 			sourceTree = "<group>";
 		};
 		3AAB4CCD270A7EF100697F8B /* ClienMongoDB */ = {
@@ -302,6 +327,7 @@
 				3A82E632272CC3150054F36C /* SwiftSoup */,
 				3A835FCC27309B55000310EC /* Realm */,
 				3A835FCE27309B55000310EC /* RealmSwift */,
+				3AEE2A552733587B005CB6A8 /* SWXMLHash */,
 			);
 			productName = ZaitsevBank;
 			productReference = 3A0FC94C270A52B600B6B2F6 /* ZaitsevBank.app */;
@@ -338,6 +364,7 @@
 				3AF977B02714F080006C1B87 /* XCRemoteSwiftPackageReference "RNCryptor" */,
 				3A82E631272CC3150054F36C /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				3A835FCB27309B55000310EC /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				3AEE2A542733587B005CB6A8 /* XCRemoteSwiftPackageReference "SWXMLHash" */,
 			);
 			productRefGroup = 3A0FC94D270A52B600B6B2F6 /* Products */;
 			projectDirPath = "";
@@ -373,6 +400,7 @@
 				3A30489727139A010010A739 /* StartMenu.swift in Sources */,
 				3A2CDE6C2710B022005F0CF4 /* LastRegController.swift in Sources */,
 				3A82E62E272B645C0054F36C /* OffersViewCell.swift in Sources */,
+				3A0862E027382776000C5407 /* ValuteStructures.swift in Sources */,
 				3A5EB0D8272D8C130037D006 /* CardsObjects.swift in Sources */,
 				3A07798B271228D60026BCAD /* GetDataUser.swift in Sources */,
 				3AB86B89270CADC7008D0823 /* Extension.swift in Sources */,
@@ -382,6 +410,7 @@
 				3A0FC975270A54A000B6B2F6 /* LoginModel.swift in Sources */,
 				3A5EB0DA272D8C7E0037D006 /* GetCardUser.swift in Sources */,
 				3AD95369271DC7DA0081D50A /* LocalPassword.swift in Sources */,
+				3A9C9B792739DB0C009A2D4C /* PreferenceCardAddViewCell.swift in Sources */,
 				3A07798D271229C20026BCAD /* RealmSettings.swift in Sources */,
 				3A30489A27139BAD0010A739 /* SafeLocalPassword.swift in Sources */,
 				3AF977A92714EBD3006C1B87 /* Ecryption.swift in Sources */,
@@ -389,6 +418,7 @@
 				3AB687EA272218B2002BD6EB /* NavigationTabBarMain.swift in Sources */,
 				3AB687EC272220B6002BD6EB /* PaymentsController.swift in Sources */,
 				3AB86B8D270D0A84008D0823 /* FirstRegController.swift in Sources */,
+				3A9C9B772739C82B009A2D4C /* CardAdd.swift in Sources */,
 				3A0FC95A270A52B700B6B2F6 /* ZaitsevBank.xcdatamodeld in Sources */,
 				3ACEFA9D2720AC6D004BD739 /* NavigationController.swift in Sources */,
 				3A0779892711ED7C0026BCAD /* ClientObjects.swift in Sources */,
@@ -397,10 +427,12 @@
 				3A82E635272CD7C50054F36C /* DelayThread.swift in Sources */,
 				3A0FC952270A52B700B6B2F6 /* SceneDelegate.swift in Sources */,
 				3AB687EE272221BC002BD6EB /* HistoryController.swift in Sources */,
+				3A99391D2738B15B009B1B06 /* NewCardController.swift in Sources */,
 				3AB86B8B270CB6B3008D0823 /* CheckCorrectAuthData.swift in Sources */,
 				3A835FD327320CD9000310EC /* ExchangeViewCell.swift in Sources */,
 				3AB86B86270BAA62008D0823 /* RegistrationController.swift in Sources */,
 				3A5EB0D6272D69ED0037D006 /* WalletViewCell.swift in Sources */,
+				3A99391B2738B074009B1B06 /* CarAddViewCell.swift in Sources */,
 				3AF977A32714E595006C1B87 /* CoreDataModel.swift in Sources */,
 				3A0FC973270A547E00B6B2F6 /* LoginController.swift in Sources */,
 			);
@@ -634,6 +666,14 @@
 				minimumVersion = 10.18.0;
 			};
 		};
+		3AEE2A542733587B005CB6A8 /* XCRemoteSwiftPackageReference "SWXMLHash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/drmohundro/SWXMLHash";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		3AF977B02714F080006C1B87 /* XCRemoteSwiftPackageReference "RNCryptor" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RNCryptor/RNCryptor";
@@ -659,6 +699,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3A835FCB27309B55000310EC /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
+		};
+		3AEE2A552733587B005CB6A8 /* SWXMLHash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3AEE2A542733587B005CB6A8 /* XCRemoteSwiftPackageReference "SWXMLHash" */;
+			productName = SWXMLHash;
 		};
 		3AF977B12714F080006C1B87 /* RNCryptor */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -68,12 +68,6 @@ public class AuthFromFaceID {
                         }
                     }
                     
-                } else {
-                   /* if let errorObj = evaluationError {
-                        let messageToDisplay = self.getErrorDescription(errorCode: errorObj._code)
-                        viewController.showAlert(withTitle: "Произошла ошибка", withMessage: messageToDisplay)
-                    }
-                    */
                 }
             }
         }
@@ -82,7 +76,7 @@ public class AuthFromFaceID {
         }
     }
     
-    public func signUserByPINCODE(_ viewController: UIViewController, DatabaseLinkAutoLogin: NSPersistentContainer, PIN_CODE: String) {
+    public func signUserByPINCODE(_ viewController: UIViewController, DatabaseLinkAutoLogin: NSPersistentContainer, PIN_CODE: String, loader: UIView) {
 
         DispatchQueue.global(qos: .utility).async{ [self] in
             Task(priority: .high) {
@@ -91,6 +85,7 @@ public class AuthFromFaceID {
                 
                 if (login == "" || password == ""){
                     DispatchQueue.main.async {
+                        viewController.DisableLoader(loader: loader)
                         viewController.showAlert(withTitle: "Произошла ошибка", withMessage: "Не правильный PIN CODE")
                     }
                 }
@@ -105,6 +100,7 @@ public class AuthFromFaceID {
                                 
                                 if let data = await GetDataUser().get(NoneUser: user) {
                                     
+                                    viewController.DisableLoader(loader: loader)
                                     viewController.EnableMainLoader(NameUser: data.name!)
                                     
                     
@@ -121,11 +117,13 @@ public class AuthFromFaceID {
                                     
                                 }
                                 else {
+                                    viewController.DisableLoader(loader: loader)
                                     viewController.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера")
                                 }
                             }
                         }
                         else {
+                            viewController.DisableLoader(loader: loader)
                             viewController.showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.ErrorAuthClient)
                         }
                     }

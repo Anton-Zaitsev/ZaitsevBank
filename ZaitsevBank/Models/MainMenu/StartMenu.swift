@@ -15,11 +15,20 @@ public class StartMenu {
         OffersData(title: "Все сервисы", backgroundImage: "chart.bar.doc.horizontal"),
         OffersData(title: "Перевод денег",backgroundImage: "person.crop.circle.fill.badge.checkmark")
     ]
-    public let dataExchange : [Exchange] = [
-        Exchange(typeValute: ValuteType.Dollar.rawValue, nameValute: "Доллар США", typeValuteExtended: "USD", buyValute: "73,55", chartBuy: true, saleValute: "69,88", chartSale: false),
-        Exchange(typeValute: ValuteType.Evro.rawValue, nameValute: "Евро", typeValuteExtended: "EUR", buyValute: "84,33", chartBuy: false, saleValute: "81,35", chartSale: true)
-    ]
+    public var dataExchange : [Exchange] = []
+    
+    public var dataTableExchange : [Exchange] = []
+    
+    public var dataBitExchange : [Exchange] = []
 }
+
+public struct ValuteMainLabel {
+    var nameValute : String
+    var countValute : String
+    var changes : String
+    var ValuePlus : Bool
+}
+
 public struct OffersData {
     var title: String
     var backgroundImage: String
@@ -44,20 +53,4 @@ public struct Exchange {
 }
 
 
-public  enum ValuteType : String {
-    case Dollar = "$", Evro = "€", Rub = "₽", BitCoin = "₿"
-}
 
-public enum TypeCardImage: String {
-    case defaultCard
-    case mirCard
-    case sberCard
-    
-    var Value: String {
-        switch self {
-        case .defaultCard: return "SberCard"
-        case .mirCard: return "MirCard"
-        case .sberCard: return "SberCard"
-        }
-    }
-}

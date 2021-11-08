@@ -75,13 +75,15 @@ class LoginController: UIViewController, LocalPasswordDelegate {
                         if (boolRegistration){
                             Task(priority: .medium) {
                                 
-                                guard let data = await GetDataUser().get(NoneUser: user) else { self.DisableLoader(loader: loader)
-                                    showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о пользователе")
-                                    return }
-                                
+                                if let data = await GetDataUser().get(NoneUser: user){
                                     SetAlertLocalPassword()
                                     dataUser = data
                                     self.DisableLoader(loader: loader)
+                                }
+                                else {
+                                    self.DisableLoader(loader: loader)
+                                    showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о пользователе")
+                                }
 
                             }
                         }

@@ -1,18 +1,16 @@
 {
   "images" : [
     {
-      "filename" : "bg.png",
-      "idiom" : "universal",
+      "filename" : "icons8-чип-сим-карты-96.png",
+      "idiom" : "iphone",
       "scale" : "1x"
     },
     {
-      "filename" : "bg@2x.png",
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "2x"
     },
     {
-      "filename" : "bg@3x.png",
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "3x"
     }
   ],
