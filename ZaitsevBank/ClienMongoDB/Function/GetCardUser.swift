@@ -12,12 +12,12 @@ public class GetCardUser {
     
     private var user: User = RealmSettings.getUser()
     
-    private func get (NoneUser: User? = nil) async -> clientCardsCredits? {
+    public func get (NoneUser: User? = nil) async -> clientCardsCredits? {
         
         if let noneUser = NoneUser {
             user = noneUser
         }
-        let partitionKey = RealmSettings.getAuthIDClient()
+        let partitionKey = RealmSettings.getCardPartition()
         let configuration = user.configuration(partitionValue: partitionKey)
         
         let userId: String = user.id.sha256()
@@ -47,16 +47,23 @@ public class GetCardUser {
         for client in data.card {
             var moneyCount: String = ""
             
-            if (floor(client.moneyCount.value!) == client.moneyCount.value!) { // Если число можно преобразовать в int
-                if let converted = Int(exactly: (client.moneyCount.value?.rounded())!) {
-                    moneyCount = String(converted)
-                    
-                } else {
+            if (!electonValute(valute: client.typeMoney!)){
+                
+                if (floor(client.moneyCount.value!) == client.moneyCount.value!) { // Если число можно преобразовать в int
+                    if let converted = Int(exactly: (client.moneyCount.value?.rounded())!) {
+                        moneyCount = String(converted)
+                        
+                    } else {
+                        moneyCount = String(format: "%.2f", client.moneyCount.value!)
+                    }
+                }
+                else {
                     moneyCount = String(format: "%.2f", client.moneyCount.value!)
                 }
+                
             }
-            else {
-                moneyCount = String(format: "%.2f", client.moneyCount.value!)
+            else{
+                moneyCount = String(client.moneyCount.value!)
             }
             
             var numberCard = client.numberCard!
@@ -70,5 +77,17 @@ public class GetCardUser {
         
     }
     
+    
+    fileprivate func electonValute(valute: String) -> Bool {
+        switch valute{
+        case "₽" : return false
+        case "$" : return false
+        case "€" : return false
+        case "Ƀ" : return true
+        case "◊" : return true
+        default:
+            return false
+        }
+    }
 }
 

@@ -20,9 +20,12 @@
 		3A0FC971270A546600B6B2F6 /* LoginForm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A0FC970270A546600B6B2F6 /* LoginForm.storyboard */; };
 		3A0FC973270A547E00B6B2F6 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC972270A547E00B6B2F6 /* LoginController.swift */; };
 		3A0FC975270A54A000B6B2F6 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC974270A54A000B6B2F6 /* LoginModel.swift */; };
+		3A21F5F62743AD7500D7E0CD /* RegistrationNewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A21F5F52743AD7500D7E0CD /* RegistrationNewCard.swift */; };
+		3A21F5F82743CF9200D7E0CD /* ValuteMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A21F5F72743CF9200D7E0CD /* ValuteMenu.storyboard */; };
 		3A2CDE6C2710B022005F0CF4 /* LastRegController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2CDE6B2710B022005F0CF4 /* LastRegController.swift */; };
 		3A30489727139A010010A739 /* StartMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30489627139A010010A739 /* StartMenu.swift */; };
 		3A30489A27139BAD0010A739 /* SafeLocalPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30489927139BAD0010A739 /* SafeLocalPassword.swift */; };
+		3A36DAF427417F5000F9CE9C /* CardGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A36DAF327417F5000F9CE9C /* CardGenerator.swift */; };
 		3A3AE94B271276FA001FF068 /* Loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A3AE94A271276FA001FF068 /* Loading.gif */; };
 		3A3AE94E271278A3001FF068 /* StartMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3AE94D271278A3001FF068 /* StartMainController.swift */; };
 		3A5EB0D6272D69ED0037D006 /* WalletViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EB0D5272D69ED0037D006 /* WalletViewCell.swift */; };
@@ -36,6 +39,7 @@
 		3A835FCF27309B55000310EC /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A835FCE27309B55000310EC /* RealmSwift */; };
 		3A835FD327320CD9000310EC /* ExchangeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A835FD227320CD9000310EC /* ExchangeViewCell.swift */; };
 		3A85DED52713DF010059B5CB /* SettingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85DED42713DF010059B5CB /* SettingApp.swift */; };
+		3A8D79A2273B1CB500B6EA98 /* ParametrsAddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D79A1273B1CB500B6EA98 /* ParametrsAddCardViewController.swift */; };
 		3A99391B2738B074009B1B06 /* CarAddViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A99391A2738B074009B1B06 /* CarAddViewCell.swift */; };
 		3A99391D2738B15B009B1B06 /* NewCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A99391C2738B15B009B1B06 /* NewCardController.swift */; };
 		3A9A3DA6270B6AE1003A6A21 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A3DA5270B6AE1003A6A21 /* SHA256.swift */; };
@@ -75,9 +79,12 @@
 		3A0FC970270A546600B6B2F6 /* LoginForm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginForm.storyboard; sourceTree = "<group>"; };
 		3A0FC972270A547E00B6B2F6 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		3A0FC974270A54A000B6B2F6 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		3A21F5F52743AD7500D7E0CD /* RegistrationNewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationNewCard.swift; sourceTree = "<group>"; };
+		3A21F5F72743CF9200D7E0CD /* ValuteMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ValuteMenu.storyboard; sourceTree = "<group>"; };
 		3A2CDE6B2710B022005F0CF4 /* LastRegController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastRegController.swift; sourceTree = "<group>"; };
 		3A30489627139A010010A739 /* StartMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenu.swift; sourceTree = "<group>"; };
 		3A30489927139BAD0010A739 /* SafeLocalPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeLocalPassword.swift; sourceTree = "<group>"; };
+		3A36DAF327417F5000F9CE9C /* CardGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGenerator.swift; sourceTree = "<group>"; };
 		3A3AE94A271276FA001FF068 /* Loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Loading.gif; sourceTree = "<group>"; };
 		3A3AE94D271278A3001FF068 /* StartMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMainController.swift; sourceTree = "<group>"; };
 		3A5EB0D5272D69ED0037D006 /* WalletViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewCell.swift; sourceTree = "<group>"; };
@@ -88,6 +95,7 @@
 		3A82E634272CD7C50054F36C /* DelayThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayThread.swift; sourceTree = "<group>"; };
 		3A835FD227320CD9000310EC /* ExchangeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewCell.swift; sourceTree = "<group>"; };
 		3A85DED42713DF010059B5CB /* SettingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingApp.swift; sourceTree = "<group>"; };
+		3A8D79A1273B1CB500B6EA98 /* ParametrsAddCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametrsAddCardViewController.swift; sourceTree = "<group>"; };
 		3A99391A2738B074009B1B06 /* CarAddViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarAddViewCell.swift; sourceTree = "<group>"; };
 		3A99391C2738B15B009B1B06 /* NewCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardController.swift; sourceTree = "<group>"; };
 		3A9A3DA5270B6AE1003A6A21 /* SHA256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
@@ -196,6 +204,7 @@
 			children = (
 				3A0FC970270A546600B6B2F6 /* LoginForm.storyboard */,
 				3A07798E27122CF20026BCAD /* MainMenu.storyboard */,
+				3A21F5F72743CF9200D7E0CD /* ValuteMenu.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -228,6 +237,7 @@
 				3A82E62F272C43E20054F36C /* API.swift */,
 				3A82E634272CD7C50054F36C /* DelayThread.swift */,
 				3A0862DF27382776000C5407 /* ValuteStructures.swift */,
+				3A36DAF327417F5000F9CE9C /* CardGenerator.swift */,
 			);
 			path = FunctionFromBank;
 			sourceTree = "<group>";
@@ -260,6 +270,7 @@
 				3A99391C2738B15B009B1B06 /* NewCardController.swift */,
 				3A99391A2738B074009B1B06 /* CarAddViewCell.swift */,
 				3A9C9B782739DB0C009A2D4C /* PreferenceCardAddViewCell.swift */,
+				3A8D79A1273B1CB500B6EA98 /* ParametrsAddCardViewController.swift */,
 			);
 			path = AddNewCard;
 			sourceTree = "<group>";
@@ -282,6 +293,7 @@
 				3AB86B8A270CB6B3008D0823 /* CheckCorrectAuthData.swift */,
 				3A07798A271228D60026BCAD /* GetDataUser.swift */,
 				3A5EB0D9272D8C7E0037D006 /* GetCardUser.swift */,
+				3A21F5F52743AD7500D7E0CD /* RegistrationNewCard.swift */,
 			);
 			path = Function;
 			sourceTree = "<group>";
@@ -383,6 +395,7 @@
 				3A07798F27122CF30026BCAD /* MainMenu.storyboard in Resources */,
 				3AD95367271DC7AB0081D50A /* LocalPassword.xib in Resources */,
 				3A0FC971270A546600B6B2F6 /* LoginForm.storyboard in Resources */,
+				3A21F5F82743CF9200D7E0CD /* ValuteMenu.storyboard in Resources */,
 				3A3AE94B271276FA001FF068 /* Loading.gif in Resources */,
 				3A0FC95F270A52BA00B6B2F6 /* LaunchScreen.storyboard in Resources */,
 				3A0FC95C270A52BA00B6B2F6 /* Assets.xcassets in Resources */,
@@ -403,10 +416,13 @@
 				3A0862E027382776000C5407 /* ValuteStructures.swift in Sources */,
 				3A5EB0D8272D8C130037D006 /* CardsObjects.swift in Sources */,
 				3A07798B271228D60026BCAD /* GetDataUser.swift in Sources */,
+				3A36DAF427417F5000F9CE9C /* CardGenerator.swift in Sources */,
 				3AB86B89270CADC7008D0823 /* Extension.swift in Sources */,
+				3A8D79A2273B1CB500B6EA98 /* ParametrsAddCardViewController.swift in Sources */,
 				3A0FC950270A52B600B6B2F6 /* AppDelegate.swift in Sources */,
 				3A9A3DA6270B6AE1003A6A21 /* SHA256.swift in Sources */,
 				3AAB4CD2270A7F7000697F8B /* AuthClien.swift in Sources */,
+				3A21F5F62743AD7500D7E0CD /* RegistrationNewCard.swift in Sources */,
 				3A0FC975270A54A000B6B2F6 /* LoginModel.swift in Sources */,
 				3A5EB0DA272D8C7E0037D006 /* GetCardUser.swift in Sources */,
 				3AD95369271DC7DA0081D50A /* LocalPassword.swift in Sources */,

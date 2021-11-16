@@ -11,7 +11,7 @@ import RealmSwift
 public class clientCardsCredits: Object {
     @objc dynamic var _id: ObjectId = ObjectId.generate()
     @objc dynamic var authID: String = ""
-    let card = RealmSwift.List<clientCardsCredits_card>()
+    let card = List<clientCardsCredits_card>()
     @objc dynamic var userID: String = ""
     public override static func primaryKey() -> String? {
         return "_id"

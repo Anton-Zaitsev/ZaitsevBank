@@ -22,7 +22,7 @@ public class CardAddModel {
         data1.append(CardAddPerformance(image: "cart.circle", mainLabel: "Обслуживание 0 ₽", label: "От любых покупок"))
         data1.append(CardAddPerformance(image: "creditcard.and.123", mainLabel: "Бонусные программы", label: "Дополнительные проценты при покупки крипты"))
         
-        dataCard.append(CardAddStructData(nameFamily: OwnerNameFamily, typeSIM: "goldCardSIM", newDesign: false, typeBank: "ZAITSEV BANK", typeCard: "VISA", typeLabelCard: "Молодежная ZaitsevКарта", typeBuyCard: "Бесплатно в течении 3 месяцев", dataCard: data1))
+        dataCard.append(CardAddStructData(nameFamily: OwnerNameFamily, typeSIM: "goldCardSIM", newDesign: false, typeCard: CardType.VISA.description, typeLabelCard: "Молодежная ZaitsevКарта", typeBuyCard: "Бесплатно в течении 3 месяцев", dataCard: data1))
         
         var data2 : [CardAddPerformance] = []
         
@@ -30,7 +30,7 @@ public class CardAddModel {
         data2.append(CardAddPerformance(image: "cart.circle", mainLabel: "Обслуживание 0 ₽", label: "При 100 удачных продаж биткойна"))
         data2.append(CardAddPerformance(image: "creditcard.and.123", mainLabel: "Снятие наличных без комиссии", label: "Можете посмотреть как это сделать в главном меню"))
         
-        dataCard.append(CardAddStructData(nameFamily: OwnerNameFamily, typeSIM: "defaultCardSIM", newDesign: false, typeBank: "ZAITSEV BANK", typeCard: "МИР", typeLabelCard: "CryptoZaitsevКарта", typeBuyCard: "Бесплатно при получении", dataCard: data2))
+        dataCard.append(CardAddStructData(nameFamily: OwnerNameFamily, typeSIM: "defaultCardSIM", newDesign: false, typeCard: CardType.MIR.description, typeLabelCard: "CryptoZaitsevКарта", typeBuyCard: "Бесплатно при получении", dataCard: data2))
         
         var data3 : [CardAddPerformance] = []
         
@@ -38,7 +38,7 @@ public class CardAddModel {
         data3.append(CardAddPerformance(image: "cart.circle", mainLabel: "Обслуживание 0 ₽", label: "При покупке от 5000 ₽ в месяц"))
         data3.append(CardAddPerformance(image: "creditcard.and.123", mainLabel: "До следующего месяца", label: "Обслуживание 0 ₽ и 5 % бонусов"))
         
-        dataCard.append(CardAddStructData(nameFamily: "", typeSIM: "", newDesign: true, typeBank: "СБЕР БАНК", typeCard: "MASTERCARD", typeLabelCard: "Цифровая СберКарта", typeBuyCard: "Бесплатно при покупках от 5000 ₽", dataCard: data3))
+        dataCard.append(CardAddStructData(nameFamily: "", typeSIM: "", newDesign: true, typeCard: CardType.MASTERCARD.description, typeLabelCard: "Цифровая ZaitsevКарта", typeBuyCard: "Бесплатно при покупках от 5000 ₽", dataCard: data3))
     }
     
     fileprivate func transliterate(nonLatin: String) -> String {
@@ -53,7 +53,6 @@ public struct CardAddStructData {
     var nameFamily : String
     var typeSIM : String
     var newDesign : Bool
-    var typeBank : String
     var typeCard : String
     
     var typeLabelCard : String

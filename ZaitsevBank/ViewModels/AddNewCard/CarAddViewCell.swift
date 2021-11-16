@@ -11,7 +11,6 @@ class CarAddViewCell: UICollectionViewCell {
     
     @IBOutlet weak var ViewCard: UIView!
     
-    @IBOutlet weak var NameBank: UILabel!
     
     @IBOutlet weak var TypeSIM: UIImageView!
     
@@ -32,8 +31,7 @@ class CarAddViewCell: UICollectionViewCell {
     func configurated(with data: CardAddStructData) {
         ViewCard.layer.cornerRadius = 15
         dataPreference = data.dataCard
-        
-        NameBank.text = data.typeBank.uppercased()
+
         
         if (data.newDesign){
             ViewDataCard.isHidden = true

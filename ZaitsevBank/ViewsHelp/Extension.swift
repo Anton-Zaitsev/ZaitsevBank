@@ -120,3 +120,21 @@ extension NSMutableAttributedString {
     }
 
 }
+
+extension UIView{
+
+    func showFlip(){
+        if self.isHidden{
+            
+            UIView.transition(with: self, duration: 0.3, options: [.transitionFlipFromRight,.allowUserInteraction], animations: nil, completion: nil)
+            self.isHidden = false
+        }
+        
+    }
+    func hideFlip(){
+        if !self.isHidden{
+            UIView.transition(with: self, duration: 0.3, options: [.transitionFlipFromLeft,.allowUserInteraction], animations: nil,  completion: nil)
+            self.isHidden = true
+        }
+    }
+}
