@@ -43,6 +43,42 @@ public class API {
         return arrayValute
     }
     
+    public static func getValuteTableFull() async -> [ExchangeFull] {
+        
+        var dataCB : [ExchangeFull] = []
+        let valute = URL(string: "https://www.cbr-xml-daily.ru/daily_json.js")
+        
+        guard let dataValue = await getData(url: valute!) else {
+            print("Не скачалась дата")
+            return dataCB }
+        
+        do {
+            
+            let json = try newJSONDecoder().decode(ValuteCb.self, from: dataValue)
+            for data in json.valute {
+                let value = data.value
+                
+                let valuteBuy = value.value / Double(value.nominal)
+                let valuteSale = valuteBuy + Double.random(in: -3..<3)
+                
+                let valuteBuy300 = valuteBuy + Double.random(in: -0.5..<(-0.1))
+                let valuteBuy1000 = valuteBuy300 + Double.random(in: -0.5..<(-0.1))
+                let valuteBuy5000 = valuteBuy1000 + Double.random(in: -1..<(-0.3))
+                
+                let valuteSale300 = valuteSale + Double.random(in: -0.5..<(-0.1))
+                let valuteSale1000 = valuteSale300 + Double.random(in: -0.5..<(-0.1))
+                let valuteSale5000 = valuteSale1000 + Double.random(in: -1..<(-0.3))
+                
+                dataCB.append(ExchangeFull(IDValute: value.id, charCode: value.charCode, nameValute: value.name, changesBuy: value.value > value.previous, buy: valuteBuy.valuteToTableFormat(), buy300: valuteBuy300.valuteToTableFormat(), buy1000: valuteBuy1000.valuteToTableFormat(), buy5000: valuteBuy5000.valuteToTableFormat(), changesSale: Bool.random(), sale: valuteSale.valuteToTableFormat(), sale300: valuteSale300.valuteToTableFormat(), sale1000: valuteSale1000.valuteToTableFormat(), sale5000: valuteSale5000.valuteToTableFormat()))
+            }
+            return dataCB
+        }
+        catch {
+            print("Ошибка при декодинге")
+            return dataCB
+        }
+    }
+    
     public static func getValuteTable() async -> [Exchange] {
         
         var dataCB : [Exchange] = []
@@ -63,7 +99,7 @@ public class API {
                 
                 let valuteSale = valuteBuy + Double.random(in: -3..<3)
                 
-                dataCB.append(Exchange(typeValute: ValuteType(rawValue: value.charCode)?.description ?? "N", nameValute: value.name, typeValuteExtended: value.charCode, buyValute: String(format: "%.2f", valuteBuy), chartBuy: value.value > value.previous, saleValute: String(format: "%.2f", valuteSale), chartSale: Bool.random()))
+                dataCB.append(Exchange(typeValute: ValuteType(rawValue: value.charCode)?.description ?? "N", nameValute: value.name, typeValuteExtended: value.charCode, buyValute: valuteBuy.valuteToTableFormat(), chartBuy: value.value > value.previous, saleValute: valuteSale.valuteToTableFormat(), chartSale: Bool.random()))
             }
             return dataCB
         }
@@ -80,7 +116,6 @@ public class API {
         
         // FULL API https://api.cryptonator.com/api/full/DOGE-usd
         
-        //let bitcoin = URL(string: "http://api.bitcoincharts.com/v1/markets.json")
         
         for value in BitcoinValutyType.allValuesFromTable {
             
@@ -96,22 +131,157 @@ public class API {
                 let data = json.ticker
                 
                 if let ExchangeBuy = Double(data.price) {
-                   
+                    
                     if let ExchengeChange = Double(data.change){
                         
                         let valuteSale = ExchangeBuy + Double.random(in: -3..<3)
                         
-                        dataBit.append(Exchange(typeValute: data.base, nameValute: BitcoinValutyType(rawValue: data.base)?.description ?? "USD", typeValuteExtended: data.base, buyValute: String(format: "%.2f",ExchangeBuy), chartBuy: ExchengeChange > 0, saleValute: String(format: "%.2f",valuteSale), chartSale: Bool.random()))
+                        dataBit.append(Exchange(typeValute: data.base, nameValute: BitcoinValutyType(rawValue: data.base)?.description ?? "USD", typeValuteExtended: data.base, buyValute: ExchangeBuy.valuteToTableFormat(), chartBuy: ExchengeChange > 0, saleValute: valuteSale.valuteToTableFormat(), chartSale: Bool.random()))
                     }
                 }
             }
             catch {
-               continue
+                continue
             }
         }
         return dataBit
     }
     
+    public static func getBitcoinTableFull() async -> [ExchangeFull] {
+        
+        var dataCB : [ExchangeFull] = []
+        let getBit = URL(string: "https://api.coincap.io/v2/assets")
+        
+        guard let dataValue = await getData(url: getBit!) else {
+            print("Не скачалась дата")
+            return dataCB }
+        do {
+            
+            let json = try newJSONDecoder().decode(BitcoinTableFullData.self, from: dataValue)
+            
+            for bit in json.data {
+                if let valuteBuy = Double(bit.priceUsd!){
+                    if let changes = Double(bit.changePercent24Hr!){
+                        
+                        let valuteSale = valuteBuy + Double.random(in: -3..<3)
+                        
+                        let valuteBuy300 = valuteBuy + Double.random(in: -0.5..<(-0.1))
+                        let valuteBuy1000 = valuteBuy300 + Double.random(in: -0.5..<(-0.1))
+                        let valuteBuy5000 = valuteBuy1000 + Double.random(in: -1..<(-0.3))
+                        
+                        let valuteSale300 = valuteSale + Double.random(in: -0.5..<(-0.1))
+                        let valuteSale1000 = valuteSale300 + Double.random(in: -0.5..<(-0.1))
+                        let valuteSale5000 = valuteSale1000 + Double.random(in: -1..<(-0.3))
+                        
+                        dataCB.append(ExchangeFull(IDValute: bit.id!, charCode: bit.symbol!, nameValute: bit.name!, changesBuy: changes > 0, buy: valuteBuy.valuteToTableFormat(), buy300: valuteBuy300.valuteToTableFormat(), buy1000: valuteBuy1000.valuteToTableFormat(), buy5000: valuteBuy5000.valuteToTableFormat(), changesSale: Bool.random(), sale: valuteSale.valuteToTableFormat(), sale300: valuteSale300.valuteToTableFormat(), sale1000: valuteSale1000.valuteToTableFormat(), sale5000: valuteSale5000.valuteToTableFormat()))
+                    }
+                }
+            }
+            
+            
+            return dataCB
+        }
+        catch {
+            print("Ошибка при декодинге")
+            return dataCB
+        }
+    }
+    
+    public static func GetDinamicValute(idValute: String) async -> DinamicValute? {
+        
+        
+        let currentDate = Date()
+        var dateComponent = DateComponents()
+        dateComponent.month = -6
+        let lastDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)
+        
+        let formatDate = DateFormatter()
+        formatDate.dateFormat = "dd/MM/yyyy"
+        
+        let date6MothBack = formatDate.string(from: lastDate!)
+        let dateNow = formatDate.string(from: currentDate)
+        
+        
+        let getDinamic = URL(string: "https://cbr.ru/scripts/XML_dynamic.asp?date_req1=\(date6MothBack)&date_req2=\(dateNow)&VAL_NM_RQ=\(idValute)")
+        
+        guard let xmlDinamic = await getData(url: getDinamic!) else {
+            print("Не скачалась дата")
+            return nil }
+        var dinamic : DinamicValute = DinamicValute(value: [], data: [], min: 0, max: 0, start: 0, now: 0)
+        
+        let xml = XMLHash.config {
+            config in
+            config.shouldProcessLazily = true
+        }.parse(xmlDinamic)
+        
+        
+        for elem in  xml["ValCurs"]["Record"].all {
+            if let costValue = Double(elem["Value"].element!.text.replacingOccurrences(of: ",", with: ".")) {
+                if let data = elem.element?.attribute(by: "Date")?.text {
+                    dinamic.value.append(costValue)
+                    dinamic.data.append(data)
+                }
+            }
+        }
+        if (dinamic.value.count > 0) {
+            dinamic.start = dinamic.value.first ?? 0
+            dinamic.min = dinamic.value.minOrZero()
+            dinamic.max = dinamic.value.maxOrZero()
+            dinamic.now = dinamic.value.last ?? 0
+        }
+        return dinamic
+        
+    }
+    
+    public static func GetDinamicCriptoValute(nameValute: String) async -> DinamicValute? {
+        
+        let key = nameValute.lowercased().replacingOccurrences(of: " ", with: "-")
+        let getDinamic = URL(string:"https://api.coincap.io/v2/assets/\(key)/history?interval=h6")
+        
+        
+        guard let dataDinamicCripto = await getData(url: getDinamic!) else {
+            print("Не скачалась дата")
+            return nil }
+        do{
+            let json = try newJSONDecoder().decode(BitcoinChartTable.self, from: dataDinamicCripto)
+            
+            if (!json.data.isEmpty) {
+                var dinamic : DinamicValute = DinamicValute(value: [], data: [], min: 0, max: 0, start: 0, now: 0)
+                
+                for data in json.data {
+                    if let valuteBuy = Double(data.priceUsd){
+                        dinamic.value.append(valuteBuy)
+                        
+                        let strategy = Date.ParseStrategy(format: "\(year: .defaultDigits)-\(month: .twoDigits)-\(day: .twoDigits)T\(hour: .twoDigits(clock: .twentyFourHour, hourCycle: .zeroBased)):\(minute: .twoDigits):\(second: .twoDigits)", timeZone: .current)
+                        var CurrentData = data.date
+                        for _ in 0..<5 {
+                            CurrentData.removeLast()
+                        }
+                        let date = try Date(CurrentData, strategy: strategy)
+                        let formatDate = DateFormatter()
+                        formatDate.dateFormat = "dd/MM/yyyy"
+                        let Date = formatDate.string(from: date)
+                        dinamic.data.append(Date)
+                    }
+                }
+                
+                if (dinamic.value.count > 0) {
+                    dinamic.start = dinamic.value.first ?? 0
+                    dinamic.min = dinamic.value.minOrZero()
+                    dinamic.max = dinamic.value.maxOrZero()
+                    dinamic.now = dinamic.value.last ?? 0
+                }
+                return dinamic
+            }
+            else {
+                return nil
+            }
+        }
+        catch{
+            return nil
+        }
+        
+    }
     
     fileprivate static func getData(url : URL) async -> Data? {
         do {
@@ -142,5 +312,11 @@ public class API {
     
 }
 
+fileprivate extension Double {
+    func valuteToTableFormat() -> String {
+        let valute = String(format: "%.2f", self)
+        return valute.replacingOccurrences(of: ".", with: ",")
+    }
+}
 
 

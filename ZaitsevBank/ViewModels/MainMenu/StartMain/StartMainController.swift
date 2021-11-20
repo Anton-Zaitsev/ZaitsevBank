@@ -26,6 +26,8 @@ class StartMainController: UIViewController {
     
     @IBOutlet weak var LabelAddNewCard: UILabel!
     
+    @IBOutlet weak var AllExchange: UILabel!
+    
     @IBOutlet weak var MonthlyExpenses: UILabel!
     @IBOutlet weak var IndicatorMonthlyExpenses: UIView!
     @IBOutlet weak var ViewMonthlyExpenses: UIView!
@@ -53,6 +55,10 @@ class StartMainController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(AddNewCard))
         LabelAddNewCard.isUserInteractionEnabled = true
         LabelAddNewCard.addGestureRecognizer(tap)
+        
+        let tapAllCurse = UITapGestureRecognizer(target: self, action: #selector(SeeAllExchange))
+        AllExchange.isUserInteractionEnabled = true
+        AllExchange.addGestureRecognizer(tapAllCurse)
         
         LabelName.text = dataUser.name
         CollectionOffers.delegate = self
@@ -86,6 +92,14 @@ class StartMainController: UIViewController {
         ExchangeTable.dataSource = self
         
     }
+    
+    @objc fileprivate func SeeAllExchange(sender: UITapGestureRecognizer) {
+        AllExchange.textColor = .white
+        let storyboardValuteMenuMenu : UIStoryboard = UIStoryboard(name: "ValuteMenu", bundle: nil)
+        let ExhangeRate = storyboardValuteMenuMenu.instantiateViewController(withIdentifier: "ExhangeAllValute") as! ExchangeRateController
+        self.navigationController?.pushViewController(ExhangeRate, animated: true)
+    }
+    
     @objc fileprivate func AddNewCard(sender: UITapGestureRecognizer) {
         LabelAddNewCard.textColor = .white
         AddNewCardFunction(OwnerNameFamily: "\(dataUser.name!) \(dataUser.family!)")
@@ -147,6 +161,7 @@ class StartMainController: UIViewController {
         super.viewWillDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false;
         LabelAddNewCard.textColor = #colorLiteral(red: 0, green: 0.6389579177, blue: 0, alpha: 1)
+        AllExchange.textColor = #colorLiteral(red: 0, green: 0.6389579177, blue: 0, alpha: 1)
     }
     
     @objc fileprivate func refreshAllData(refreshControl: UIRefreshControl) {

@@ -41,6 +41,27 @@ struct Valute: Codable {
     }
 }
 
+struct BitcoinTableFullData: Codable  {
+    let data: [BitcoinTableData]
+    let timestamp: Int
+    
+
+}
+struct BitcoinTableData: Codable  {
+    let id, rank, symbol, name ,supply, maxSupply, marketCapUsd, volumeUsd24Hr,priceUsd, changePercent24Hr, vwap24Hr,explorer : String?
+}
+
+struct BitcoinChartTable: Codable {
+    let data: [BitcoinChartTableData]
+    let timestamp: Int
+}
+
+struct BitcoinChartTableData: Codable {
+    let priceUsd: String
+    let time: Int
+    let circulatingSupply, date: String
+}
+
 struct BitcoinValutes: Codable {
     let ticker: Ticker
     let timestamp: Int
