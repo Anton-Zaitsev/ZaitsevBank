@@ -12,6 +12,7 @@ class NewCardController: UIViewController {
     @IBOutlet weak var AddCardCollectionView: UICollectionView!
     
     public var nameFamilyOwner = "Андрей Гасанов"
+    public var ValutePick : String?
     private var modelDataCard : CardAddModel!
     
     override func viewDidLoad() {
@@ -29,6 +30,7 @@ class NewCardController: UIViewController {
     @IBAction private func AcceptCard(_ sender: Any) {
         let ParametrsAddCardController = storyboard?.instantiateViewController(withIdentifier: "ParametrsCardMenu") as! ParametrsAddCardViewController
         ParametrsAddCardController.CARDDATA = modelDataCard.dataCard[getScrollIndexItem()]
+        ParametrsAddCardController.ValutePick = ValutePick
         self.navigationController?.pushViewController(ParametrsAddCardController, animated: true)
 
     }

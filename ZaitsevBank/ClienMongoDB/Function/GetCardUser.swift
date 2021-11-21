@@ -28,7 +28,6 @@ public class GetCardUser {
             
             guard let data = realm.objects(clientCardsCredits.self).filter("userID == '\(userId)' ").first else {
                 return nil}
-            
             return data
             
         }
@@ -74,6 +73,32 @@ public class GetCardUser {
             cardsClient.append(Cards(typeImageCard: client.typeCard!, nameCard: client.nameCard!, numberCard: numberCard, moneyCount: moneyCount, typeMoney: client.typeMoney!))
         }
         return cardsClient
+        
+    }
+    
+    
+    public func getCardsFromBuySale (valute: String, buySale: Bool) async ->  [Cards] {
+        
+        let valuteBank = ValuteZaitsevBank(rawValue: valute)?.description
+        
+        let data = await getCards()
+        
+        var sortData = [Cards]()
+        
+        for card in data {
+            
+            if (buySale){ // BUY
+                if (card.typeMoney != valuteBank) {
+                    sortData.append(card)
+                }
+            }
+            else { // SALE
+                if (card.typeMoney == valuteBank) {
+                    sortData.append(card)
+                }
+            }
+        }
+        return sortData
         
     }
     

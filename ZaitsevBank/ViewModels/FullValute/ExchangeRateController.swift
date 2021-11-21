@@ -30,6 +30,7 @@ class ExchangeRateController: UIViewController {
         }
     }
     
+    
     @IBAction func ControllerExhangeTable(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
               case 0:
@@ -85,6 +86,8 @@ extension ExchangeRateController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let idValute = dataExchange.exchangeValute[indexPath.row].IDValute
         let nameValute = dataExchange.exchangeValute[indexPath.row].nameValute
+        let symbolValute = dataExchange.exchangeValute[indexPath.row].charCode
+
         
         let loader = self.EnableLoader()
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
@@ -104,6 +107,7 @@ extension ExchangeRateController: UITableViewDelegate, UITableViewDataSource {
                     tableView.deselectRow(at: indexPath, animated: true)
                     self.DisableLoader(loader: loader)
                     let ChartValute = self.storyboard?.instantiateViewController(withIdentifier: "ChartValute") as! ChartValuteController
+                    ChartValute.valuteSymbol = symbolValute
                     ChartValute.dinamicValute = data
                     ChartValute.valuteName = nameValute
                     ChartValute.valuteToogle = self.valuteToogle

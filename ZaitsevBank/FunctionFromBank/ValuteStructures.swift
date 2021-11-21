@@ -109,6 +109,24 @@ public enum BitcoinValutyType: String {
     }
 }
 
+public enum ValuteZaitsevBank : String {
+    case EUR
+    case USD
+    case RUB
+    case BTC
+    case ETH
+        
+    var description: String {
+        switch self {
+        case .EUR : return "€"
+        case .USD : return "$"
+        case .RUB : return "₽"
+        case .BTC : return "Ƀ"
+        case .ETH : return "◊"
+        }
+    }
+}
+
 public enum ValuteType : String {
     case AUD
     case AZN

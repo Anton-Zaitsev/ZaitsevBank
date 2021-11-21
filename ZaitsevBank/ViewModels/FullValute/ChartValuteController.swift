@@ -9,8 +9,13 @@ import UIKit
 
 class ChartValuteController: UIViewController, ChartDelegate {
     
+    
     public var dinamicValute : DinamicValute!
     public var valuteName : String!
+    public var valuteSymbol: String!
+    
+    
+    @IBOutlet weak var BuySaleStack: UIStackView!
     
     public var valuteToogle : Bool!
     
@@ -36,7 +41,41 @@ class ChartValuteController: UIViewController, ChartDelegate {
         getView()
     }
     
+    @IBAction func ClickedBuy(_ sender: Any) {
+        let CardPick = storyboard?.instantiateViewController(withIdentifier: "CardPick") as! CardPickController
+        CardPick.textMainLable = "покупки валюты."
+        CardPick.buySaleToogle = true
+        CardPick.valuteSymbol = valuteSymbol
+        CardPick.sheetPresentationController?.detents = [.medium()]
+        present(CardPick, animated: true)
+    }
+    
+    @IBAction func ClickedSale(_ sender: Any) {
+        let CardPick = storyboard?.instantiateViewController(withIdentifier: "CardPick") as! CardPickController
+        CardPick.textMainLable = "продажи валюты."
+        CardPick.valuteSymbol = valuteSymbol
+        CardPick.buySaleToogle = false
+        CardPick.sheetPresentationController?.detents = [.medium()]
+        present(CardPick, animated: true)
+    }
+    
     private func getView() {
+        
+        switch ValuteZaitsevBank(rawValue: valuteSymbol){
+        case .USD :
+            BuySaleStack.isHidden = false
+        case .EUR :
+            BuySaleStack.isHidden = false
+        case .BTC :
+            BuySaleStack.isHidden = false
+        case .ETH :
+            BuySaleStack.isHidden = false
+        case .none:
+            BuySaleStack.isHidden = true
+        case .some(_):
+            BuySaleStack.isHidden = true
+        }
+        
         MainLabel.text = "Динамика \(valuteName ?? "none") за 6 месяцев."
         
         let valute = valuteToogle ? " ₽" : " $"
@@ -134,3 +173,4 @@ class ChartValuteController: UIViewController, ChartDelegate {
     }
     
 }
+

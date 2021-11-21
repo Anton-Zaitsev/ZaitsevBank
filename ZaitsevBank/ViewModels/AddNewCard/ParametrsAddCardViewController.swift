@@ -23,6 +23,7 @@ class ParametrsAddCardViewController: UIViewController {
     
     public var CARDDATA : CardAddStructData!
     
+    public var ValutePick : String?
     
     private var CVVNUMBER : String = ""
     
@@ -65,6 +66,16 @@ class ParametrsAddCardViewController: UIViewController {
     }
     
     fileprivate func GetView() {
+        
+        if let valutePick = ValutePick{
+            let indexes = ValuteLabel.enumerated().filter {
+                $0.element.contains(valutePick)
+            }.map{$0.offset}
+            if (!indexes.isEmpty){
+                LabelTypeValute.text = ValuteLabel[indexes.first!]
+            }
+        }
+        
         LabelOwnerCard.text = CARDDATA.nameFamily
         //SETTINGS FRONT CARD
         TypeCard.text = CARDDATA.typeCard.uppercased()

@@ -36,8 +36,6 @@
 		3A82E630272C43E20054F36C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A82E62F272C43E20054F36C /* API.swift */; };
 		3A82E633272CC3150054F36C /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 3A82E632272CC3150054F36C /* SwiftSoup */; };
 		3A82E635272CD7C50054F36C /* DelayThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A82E634272CD7C50054F36C /* DelayThread.swift */; };
-		3A835FCD27309B55000310EC /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3A835FCC27309B55000310EC /* Realm */; };
-		3A835FCF27309B55000310EC /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A835FCE27309B55000310EC /* RealmSwift */; };
 		3A835FD327320CD9000310EC /* ExchangeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A835FD227320CD9000310EC /* ExchangeViewCell.swift */; };
 		3A85DED52713DF010059B5CB /* SettingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85DED42713DF010059B5CB /* SettingApp.swift */; };
 		3A8D79A2273B1CB500B6EA98 /* ParametrsAddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D79A1273B1CB500B6EA98 /* ParametrsAddCardViewController.swift */; };
@@ -49,6 +47,9 @@
 		3A9A3DA6270B6AE1003A6A21 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A3DA5270B6AE1003A6A21 /* SHA256.swift */; };
 		3A9C9B772739C82B009A2D4C /* CardAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9C9B762739C82B009A2D4C /* CardAdd.swift */; };
 		3A9C9B792739DB0C009A2D4C /* PreferenceCardAddViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9C9B782739DB0C009A2D4C /* PreferenceCardAddViewCell.swift */; };
+		3AA907722749990100C7581D /* CardPickController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA907712749990100C7581D /* CardPickController.swift */; };
+		3AA907752749B86A00C7581D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3AA907742749B86A00C7581D /* Realm */; };
+		3AA907772749B86A00C7581D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3AA907762749B86A00C7581D /* RealmSwift */; };
 		3AAB4CD2270A7F7000697F8B /* AuthClien.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAB4CD1270A7F7000697F8B /* AuthClien.swift */; };
 		3AB687EA272218B2002BD6EB /* NavigationTabBarMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB687E9272218B2002BD6EB /* NavigationTabBarMain.swift */; };
 		3AB687EC272220B6002BD6EB /* PaymentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB687EB272220B6002BD6EB /* PaymentsController.swift */; };
@@ -112,6 +113,7 @@
 		3A9A3DA5270B6AE1003A6A21 /* SHA256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
 		3A9C9B762739C82B009A2D4C /* CardAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAdd.swift; sourceTree = "<group>"; };
 		3A9C9B782739DB0C009A2D4C /* PreferenceCardAddViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceCardAddViewCell.swift; sourceTree = "<group>"; };
+		3AA907712749990100C7581D /* CardPickController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPickController.swift; sourceTree = "<group>"; };
 		3AAB4CD1270A7F7000697F8B /* AuthClien.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClien.swift; sourceTree = "<group>"; };
 		3AB687E9272218B2002BD6EB /* NavigationTabBarMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabBarMain.swift; sourceTree = "<group>"; };
 		3AB687EB272220B6002BD6EB /* PaymentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsController.swift; sourceTree = "<group>"; };
@@ -136,10 +138,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A835FCF27309B55000310EC /* RealmSwift in Frameworks */,
-				3A835FCD27309B55000310EC /* Realm in Frameworks */,
 				3AEE2A562733587B005CB6A8 /* SWXMLHash in Frameworks */,
 				3A82E633272CC3150054F36C /* SwiftSoup in Frameworks */,
+				3AA907752749B86A00C7581D /* Realm in Frameworks */,
+				3AA907772749B86A00C7581D /* RealmSwift in Frameworks */,
 				3AF977B22714F080006C1B87 /* RNCryptor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,7 +168,6 @@
 		3A0FC94E270A52B600B6B2F6 /* ZaitsevBank */ = {
 			isa = PBXGroup;
 			children = (
-				3AB8F1072743E8D000469C94 /* Charts */,
 				3A30489827139B7D0010A739 /* FunctionFromBank */,
 				3AB86B87270CAD8A008D0823 /* ViewsHelp */,
 				3AAB4CCD270A7EF100697F8B /* ClienMongoDB */,
@@ -239,6 +240,7 @@
 				3A2BCAF52743E34000189086 /* ExchangeRateController.swift */,
 				3A97F27F274441AD00A40224 /* ExchangeRateCell.swift */,
 				3A97F27D2744148500A40224 /* ChartValuteController.swift */,
+				3AA907712749990100C7581D /* CardPickController.swift */,
 			);
 			path = FullValute;
 			sourceTree = "<group>";
@@ -337,6 +339,7 @@
 		3AB86B87270CAD8A008D0823 /* ViewsHelp */ = {
 			isa = PBXGroup;
 			children = (
+				3AB8F1072743E8D000469C94 /* Charts */,
 				3A3AE94A271276FA001FF068 /* Loading.gif */,
 				3AB86B88270CADC6008D0823 /* Extension.swift */,
 				3AD95366271DC7AB0081D50A /* LocalPassword.xib */,
@@ -374,9 +377,9 @@
 			packageProductDependencies = (
 				3AF977B12714F080006C1B87 /* RNCryptor */,
 				3A82E632272CC3150054F36C /* SwiftSoup */,
-				3A835FCC27309B55000310EC /* Realm */,
-				3A835FCE27309B55000310EC /* RealmSwift */,
 				3AEE2A552733587B005CB6A8 /* SWXMLHash */,
+				3AA907742749B86A00C7581D /* Realm */,
+				3AA907762749B86A00C7581D /* RealmSwift */,
 			);
 			productName = ZaitsevBank;
 			productReference = 3A0FC94C270A52B600B6B2F6 /* ZaitsevBank.app */;
@@ -412,8 +415,8 @@
 			packageReferences = (
 				3AF977B02714F080006C1B87 /* XCRemoteSwiftPackageReference "RNCryptor" */,
 				3A82E631272CC3150054F36C /* XCRemoteSwiftPackageReference "SwiftSoup" */,
-				3A835FCB27309B55000310EC /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				3AEE2A542733587B005CB6A8 /* XCRemoteSwiftPackageReference "SWXMLHash" */,
+				3AA907732749B86A00C7581D /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 3A0FC94D270A52B600B6B2F6 /* Products */;
 			projectDirPath = "";
@@ -464,6 +467,7 @@
 				3A9A3DA6270B6AE1003A6A21 /* SHA256.swift in Sources */,
 				3AAB4CD2270A7F7000697F8B /* AuthClien.swift in Sources */,
 				3A21F5F62743AD7500D7E0CD /* RegistrationNewCard.swift in Sources */,
+				3AA907722749990100C7581D /* CardPickController.swift in Sources */,
 				3A0FC975270A54A000B6B2F6 /* LoginModel.swift in Sources */,
 				3A5EB0DA272D8C7E0037D006 /* GetCardUser.swift in Sources */,
 				3AD95369271DC7DA0081D50A /* LocalPassword.swift in Sources */,
@@ -718,12 +722,12 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		3A835FCB27309B55000310EC /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+		3AA907732749B86A00C7581D /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 10.18.0;
+				minimumVersion = 10.20.0;
 			};
 		};
 		3AEE2A542733587B005CB6A8 /* XCRemoteSwiftPackageReference "SWXMLHash" */ = {
@@ -750,14 +754,14 @@
 			package = 3A82E631272CC3150054F36C /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
 		};
-		3A835FCC27309B55000310EC /* Realm */ = {
+		3AA907742749B86A00C7581D /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A835FCB27309B55000310EC /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = 3AA907732749B86A00C7581D /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = Realm;
 		};
-		3A835FCE27309B55000310EC /* RealmSwift */ = {
+		3AA907762749B86A00C7581D /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A835FCB27309B55000310EC /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = 3AA907732749B86A00C7581D /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
 		};
 		3AEE2A552733587B005CB6A8 /* SWXMLHash */ = {
