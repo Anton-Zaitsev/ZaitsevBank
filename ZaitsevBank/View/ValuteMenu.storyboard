@@ -502,7 +502,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvj-4J-guL">
-                                <rect key="frame" x="0.0" y="119" width="414" height="358.5"/>
+                                <rect key="frame" x="0.0" y="119" width="414" height="743"/>
                                 <subviews>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="EzI-4u-Rur">
                                         <rect key="frame" x="20" y="20" width="233" height="30"/>
@@ -524,7 +524,7 @@
                                         </subviews>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EvX-wW-iD2">
-                                        <rect key="frame" x="10" y="0.0" width="394" height="358.5"/>
+                                        <rect key="frame" x="10" y="0.0" width="394" height="743"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellCard" rowHeight="85" id="P0m-eO-sT2" customClass="WalletViewCell" customModule="ZaitsevBank" customModuleProvider="target">
@@ -616,10 +616,10 @@
                             <constraint firstItem="mvj-4J-guL" firstAttribute="trailing" secondItem="Qvj-SB-rmt" secondAttribute="trailing" id="HeW-be-oW1"/>
                             <constraint firstItem="d4d-oS-sbI" firstAttribute="top" secondItem="Fav-zJ-9e1" secondAttribute="bottom" constant="2" id="PN9-NQ-JIX"/>
                             <constraint firstItem="XbZ-eJ-49F" firstAttribute="top" secondItem="Qvj-SB-rmt" secondAttribute="top" constant="10" id="RkJ-lZ-fdt"/>
-                            <constraint firstItem="mvj-4J-guL" firstAttribute="height" secondItem="69m-4g-Gb1" secondAttribute="height" multiplier="0.4" id="YZM-tn-Ooi"/>
                             <constraint firstItem="XbZ-eJ-49F" firstAttribute="centerX" secondItem="69m-4g-Gb1" secondAttribute="centerX" id="dGK-hU-ONb"/>
                             <constraint firstItem="d4d-oS-sbI" firstAttribute="leading" secondItem="Qvj-SB-rmt" secondAttribute="leading" constant="20" id="dJa-9r-d18"/>
                             <constraint firstItem="mvj-4J-guL" firstAttribute="leading" secondItem="Qvj-SB-rmt" secondAttribute="leading" id="m6d-cc-hBU"/>
+                            <constraint firstItem="Qvj-SB-rmt" firstAttribute="bottom" secondItem="mvj-4J-guL" secondAttribute="bottom" id="w52-5x-VSP"/>
                             <constraint firstItem="Fav-zJ-9e1" firstAttribute="top" secondItem="XbZ-eJ-49F" secondAttribute="bottom" constant="15" id="zDi-hR-iih"/>
                         </constraints>
                     </view>
