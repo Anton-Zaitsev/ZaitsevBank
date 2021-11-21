@@ -14,4 +14,5 @@ ____
 
 * SwiftSoup - ParseHTML
 
+* SWXMLHash - ParseXML
 ____
