@@ -9,10 +9,12 @@ import UIKit
 
 class ChartValuteController: UIViewController, ChartDelegate {
 
+    @IBOutlet weak var ButtonMenuDate: UIButton!
+    
     public var dinamicValute : DinamicValute!
     public var valuteName : String!
     public var valuteSymbol: String!
-    
+    public var idValute : String!
     
     @IBOutlet weak var BuySaleStack: UIStackView!
     
@@ -43,6 +45,7 @@ class ChartValuteController: UIViewController, ChartDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         getView()
+        getMenuData()
     }
     
     @IBAction func ClickedBuy(_ sender: Any) {
@@ -63,7 +66,29 @@ class ChartValuteController: UIViewController, ChartDelegate {
         present(CardPick, animated: true)
     }
     
+    private func getMenuData() {
+        MainLabel.text = "Динамика \(valuteName ?? "none") за месяц."
+        
+        let menuDate = UIMenu(title: "", children: [
+            UIAction(title: "По месяцам", image: UIImage(systemName: "arrow.forward.circle.fill")) { action in
+                self.getDataFromMenu(datavalute: .month)
+                },
+            UIAction(title: "По кварталам", image: UIImage(systemName: "arrow.forward.circle.fill")) { action in
+                self.getDataFromMenu(datavalute: .quarter)
+                },
+            UIAction(title: "По полугодиям", image: UIImage(systemName: "arrow.forward.circle.fill")) { action in
+                self.getDataFromMenu(datavalute: .halfYear)
+                },
+            UIAction(title: "По годам", image: UIImage(systemName: "arrow.forward.circle.fill")) { action in
+                self.getDataFromMenu(datavalute: .year)
+                }
+            
+        ])
+        ButtonMenuDate.menu = menuDate
+    }
+    
     private func getView() {
+        
         SubLabelChart.text = ""
         ImageControlChart.image = nil
         
@@ -81,8 +106,6 @@ class ChartValuteController: UIViewController, ChartDelegate {
         case .some(_):
             BuySaleStack.isHidden = true
         }
-        
-        MainLabel.text = "Динамика \(valuteName ?? "none") за 6 месяцев."
         
         let valute = valuteToogle ? " ₽" : " $"
         
@@ -191,5 +214,25 @@ class ChartValuteController: UIViewController, ChartDelegate {
         
     }
     
+    private func getDataFromMenu(datavalute: DataDinamicValute) {
+        let loader = self.EnableLoader()
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
+            Task{
+                
+                guard let data = valuteToogle ?
+                        await API_DinamicValute.GetDinamicValute(idValute: idValute, datavalute) :
+                            await API_DinamicValute.GetDinamicCriptoValute(nameValute: valuteName,datavalute) else {
+                                return
+                            }
+                dinamicValute = data
+                DispatchQueue.main.async {
+                    ViewChart.removeAllSeries()
+                    getView()
+                    MainLabel.text = "Динамика \(valuteName ?? "none") \(datavalute.description)."
+                }
+            }
+        }
+        DisableLoader(loader: loader)
+    }
 }
 

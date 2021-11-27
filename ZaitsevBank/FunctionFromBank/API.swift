@@ -48,13 +48,15 @@ public class API {
         var dataCB : [ExchangeFull] = []
         let valute = URL(string: "https://www.cbr-xml-daily.ru/daily_json.js")
         
-        guard let dataValue = await getData(url: valute!) else {
-            print("Не скачалась дата")
-            return dataCB }
+        let request = URLRequest(url: valute!)
         
         do {
+            let (dataValue,responce)  = try await URLSession.shared.data(for: request)
+            guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
+                print("Не скачалась дата")
+                return dataCB }
             
-            let json = try newJSONDecoder().decode(ValuteCb.self, from: dataValue)
+            let json = try JSONEncoder.newJSONDecoder().decode(ValuteCb.self, from: dataValue)
             for data in json.valute {
                 let value = data.value
                 
@@ -85,13 +87,15 @@ public class API {
         
         let valute = URL(string: "https://www.cbr-xml-daily.ru/daily_json.js")
         
-        guard let dataValue = await getData(url: valute!) else {
-            print("Не скачалась дата")
-            return dataCB }
+        let request = URLRequest(url: valute!)
         
         do {
+            let (dataValue,responce)  = try await URLSession.shared.data(for: request)
+            guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
+                print("Не скачалась дата")
+                return dataCB }
             
-            let json = try newJSONDecoder().decode(ValuteCb.self, from: dataValue)
+            let json = try JSONEncoder.newJSONDecoder().decode(ValuteCb.self, from: dataValue)
             for data in json.valute {
                 let value = data.value
                 
@@ -113,20 +117,19 @@ public class API {
     public static func getBitcoinTable() async -> [Exchange]{
         var dataBit : [Exchange] = []
         
-        
-        // FULL API https://api.cryptonator.com/api/full/DOGE-usd
-        
-        
         for value in BitcoinValutyType.allValuesFromTable {
             
             let getBit = URL(string: "https://api.cryptonator.com/api/ticker/\(value.rawValue)-usd")
-            
-            guard let dataBitcoin = await getData(url: getBit!) else {
-                print("Не скачалась дата")
-                continue }
-            
+            let request = URLRequest(url: getBit!)
+                        
             do {
-                let json = try newJSONDecoder().decode(BitcoinValutes.self, from: dataBitcoin)
+                
+                let (dataBitcoin,responce)  = try await URLSession.shared.data(for: request)
+                guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
+                    print("Не скачалась дата")
+                    continue }
+                
+                let json = try JSONEncoder.newJSONDecoder().decode(BitcoinValutes.self, from: dataBitcoin)
                 
                 let data = json.ticker
                 
@@ -163,7 +166,7 @@ public class API {
                 print("Не скачалась дата")
                 return dataCB }
             
-            let json = try newJSONDecoder().decode(BitcoinTableFullData.self, from: dataValue)
+            let json = try JSONEncoder.newJSONDecoder().decode(BitcoinTableFullData.self, from: dataValue)
             
             for bit in json.data {
                 if let valuteBuy = Double(bit.priceUsd!){
@@ -192,119 +195,11 @@ public class API {
         }
     }
     
-    public static func GetDinamicValute(idValute: String) async -> DinamicValute? {
-        
-        
-        let currentDate = Date()
-        var dateComponent = DateComponents()
-        dateComponent.month = -6
-        let lastDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)
-        
-        let formatDate = DateFormatter()
-        formatDate.dateFormat = "dd/MM/yyyy"
-        
-        let date6MothBack = formatDate.string(from: lastDate!)
-        let dateNow = formatDate.string(from: currentDate)
-        
-        
-        let getDinamic = URL(string: "https://cbr.ru/scripts/XML_dynamic.asp?date_req1=\(date6MothBack)&date_req2=\(dateNow)&VAL_NM_RQ=\(idValute)")
-        
-        guard let xmlDinamic = await getData(url: getDinamic!) else {
-            print("Не скачалась дата")
-            return nil }
-        var dinamic : DinamicValute = DinamicValute(value: [], data: [], min: 0, max: 0, start: 0, now: 0)
-        
-        let xml = XMLHash.config {
-            config in
-            config.shouldProcessLazily = true
-        }.parse(xmlDinamic)
-        
-        
-        for elem in  xml["ValCurs"]["Record"].all {
-            if let costValue = Double(elem["Value"].element!.text.replacingOccurrences(of: ",", with: ".")) {
-                if let data = elem.element?.attribute(by: "Date")?.text {
-                    dinamic.value.append(costValue)
-                    dinamic.data.append(data)
-                }
-            }
-        }
-        if (dinamic.value.count > 0) {
-            dinamic.start = dinamic.value.first ?? 0
-            dinamic.min = dinamic.value.minOrZero()
-            dinamic.max = dinamic.value.maxOrZero()
-            dinamic.now = dinamic.value.last ?? 0
-        }
-        return dinamic
-        
-    }
-    
-    public static func GetDinamicCriptoValute(nameValute: String) async -> DinamicValute? {
-        
-        let key = nameValute.lowercased().replacingOccurrences(of: " ", with: "-")
-        let getDinamic = URL(string:"https://api.coincap.io/v2/assets/\(key)/history?interval=h6")
-        
-        var request = URLRequest(url: getDinamic!)
-        request.setValue("Bearer \(SettingApp.APICoinCap)", forHTTPHeaderField: "Authorization")
-        request.setValue("gzip,deflate,br", forHTTPHeaderField: "Accept-Encoding")
-        
+}
 
-        do{
-            let (dataDinamicCripto,responce)  = try await URLSession.shared.data(for: request)
-            guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
-                print("Не скачалась дата")
-                return nil }
-            let json = try newJSONDecoder().decode(BitcoinChartTable.self, from: dataDinamicCripto)
-            
-            if (!json.data.isEmpty) {
-                var dinamic : DinamicValute = DinamicValute(value: [], data: [], min: 0, max: 0, start: 0, now: 0)
-                
-                for data in json.data {
-                    if let valuteBuy = Double(data.priceUsd){
-                        dinamic.value.append(valuteBuy)
-                        
-                        let strategy = Date.ParseStrategy(format: "\(year: .defaultDigits)-\(month: .twoDigits)-\(day: .twoDigits)T\(hour: .twoDigits(clock: .twentyFourHour, hourCycle: .zeroBased)):\(minute: .twoDigits):\(second: .twoDigits)", timeZone: .current)
-                        var CurrentData = data.date
-                        for _ in 0..<5 {
-                            CurrentData.removeLast()
-                        }
-                        let date = try Date(CurrentData, strategy: strategy)
-                        let formatDate = DateFormatter()
-                        formatDate.dateFormat = "dd/MM/yyyy"
-                        let Date = formatDate.string(from: date)
-                        dinamic.data.append(Date)
-                    }
-                }
-                
-                if (dinamic.value.count > 0) {
-                    dinamic.start = dinamic.value.first ?? 0
-                    dinamic.min = dinamic.value.minOrZero()
-                    dinamic.max = dinamic.value.maxOrZero()
-                    dinamic.now = dinamic.value.last ?? 0
-                }
-                return dinamic
-            }
-            else {
-                return nil
-            }
-        }
-        catch{
-            return nil
-        }
-        
-    }
+public extension JSONEncoder {
     
-    fileprivate static func getData(url : URL) async -> Data? {
-        do {
-            let (data,responce) = try await URLSession.shared.data(for: URLRequest(url: url))
-            guard (responce as? HTTPURLResponse)?.statusCode == 200 else { return nil }
-            return data
-        }
-        catch{
-            return nil
-        }
-    }
-    
-    fileprivate static func newJSONDecoder() -> JSONDecoder {
+    static func newJSONDecoder() -> JSONDecoder {
         let decoder = JSONDecoder()
         if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
             decoder.dateDecodingStrategy = .iso8601
@@ -312,18 +207,18 @@ public class API {
         return decoder
     }
     
-    fileprivate static func newJSONEncoder() -> JSONEncoder {
+    static func newJSONEncoder() -> JSONEncoder {
         let encoder = JSONEncoder()
         if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
             encoder.dateEncodingStrategy = .iso8601
         }
         return encoder
     }
-    
 }
 
-fileprivate extension Double {
-    func valuteToTableFormat() -> String {
+
+public extension Double {
+     func valuteToTableFormat() -> String {
         let valute = String(format: "%.2f", self)
         return valute.replacingOccurrences(of: ".", with: ",")
     }

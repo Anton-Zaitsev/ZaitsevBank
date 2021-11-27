@@ -104,8 +104,8 @@ extension ExchangeRateController: UITableViewDelegate, UITableViewDataSource {
             Task{
                 
                 guard let data = self.valuteToogle ?
-                        await API.GetDinamicValute(idValute: idValute) :
-                            await API.GetDinamicCriptoValute(nameValute: nameValute)
+                        await API_DinamicValute.GetDinamicValute(idValute: idValute) :
+                            await API_DinamicValute.GetDinamicCriptoValute(nameValute: nameValute)
                 else {
                     DispatchQueue.main.async {
                         self.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о \(nameValute)")
@@ -121,6 +121,7 @@ extension ExchangeRateController: UITableViewDelegate, UITableViewDataSource {
                     ChartValute.valuteSymbol = symbolValute
                     ChartValute.dinamicValute = data
                     ChartValute.valuteName = nameValute
+                    ChartValute.idValute = idValute
                     ChartValute.valuteToogle = self.valuteToogle
                     self.navigationController?.pushViewController(ChartValute, animated: true)
                 }

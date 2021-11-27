@@ -117,7 +117,7 @@ open class Chart: UIControl {
     Font used for the labels.
     */
     open var labelFont: UIFont? = UIFont.systemFont(ofSize: 12)
-
+    
     /**
     Font used for the labels.
     */
@@ -581,6 +581,8 @@ open class Chart: UIControl {
             // Add label
             let label = UILabel(frame: CGRect(x: x, y: drawingHeight, width: 0, height: 0))
             label.font = labelFont
+            label.adjustsFontSizeToFitWidth = true
+            label.minimumScaleFactor = 0.5
             label.text = xLabelsFormatter(i, labels[i])
             label.textColor = labelColor
 

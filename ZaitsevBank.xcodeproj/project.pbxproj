@@ -32,6 +32,7 @@
 		3A5EB0D6272D69ED0037D006 /* WalletViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EB0D5272D69ED0037D006 /* WalletViewCell.swift */; };
 		3A5EB0D8272D8C130037D006 /* CardsObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EB0D7272D8C130037D006 /* CardsObjects.swift */; };
 		3A5EB0DA272D8C7E0037D006 /* GetCardUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EB0D9272D8C7E0037D006 /* GetCardUser.swift */; };
+		3A6D957C2751CAE90064B11F /* API_DinamicValute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */; };
 		3A82E62E272B645C0054F36C /* OffersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A82E62D272B645C0054F36C /* OffersViewCell.swift */; };
 		3A82E630272C43E20054F36C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A82E62F272C43E20054F36C /* API.swift */; };
 		3A82E633272CC3150054F36C /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 3A82E632272CC3150054F36C /* SwiftSoup */; };
@@ -99,6 +100,7 @@
 		3A5EB0D5272D69ED0037D006 /* WalletViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewCell.swift; sourceTree = "<group>"; };
 		3A5EB0D7272D8C130037D006 /* CardsObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsObjects.swift; sourceTree = "<group>"; };
 		3A5EB0D9272D8C7E0037D006 /* GetCardUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCardUser.swift; sourceTree = "<group>"; };
+		3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_DinamicValute.swift; sourceTree = "<group>"; };
 		3A82E62D272B645C0054F36C /* OffersViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersViewCell.swift; sourceTree = "<group>"; };
 		3A82E62F272C43E20054F36C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3A82E634272CD7C50054F36C /* DelayThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayThread.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				3AF977A82714EBD3006C1B87 /* Ecryption.swift */,
 				3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */,
 				3A82E62F272C43E20054F36C /* API.swift */,
+				3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */,
 				3A82E634272CD7C50054F36C /* DelayThread.swift */,
 				3A0862DF27382776000C5407 /* ValuteStructures.swift */,
 				3A36DAF327417F5000F9CE9C /* CardGenerator.swift */,
@@ -470,6 +473,7 @@
 				3AA907722749990100C7581D /* CardPickController.swift in Sources */,
 				3A0FC975270A54A000B6B2F6 /* LoginModel.swift in Sources */,
 				3A5EB0DA272D8C7E0037D006 /* GetCardUser.swift in Sources */,
+				3A6D957C2751CAE90064B11F /* API_DinamicValute.swift in Sources */,
 				3AD95369271DC7DA0081D50A /* LocalPassword.swift in Sources */,
 				3A9C9B792739DB0C009A2D4C /* PreferenceCardAddViewCell.swift in Sources */,
 				3A07798D271229C20026BCAD /* RealmSettings.swift in Sources */,
