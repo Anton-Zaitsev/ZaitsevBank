@@ -13,7 +13,7 @@ public class AuthFromFaceID {
     
     private let authFunc = AuthClient()
     
-    public func signUSER(_ viewController: UIViewController, DatabaseLinkAutoLogin: NSPersistentContainer) {
+    public func signUSER(_ viewController: UIViewController, DatabaseLinkAutoLogin: NSPersistentContainer, loader: UIView) {
         
         let localAuthenticationContext = LAContext()
         localAuthenticationContext.localizedFallbackTitle = "Пожалуйста введите ваш пароль"
@@ -34,10 +34,9 @@ public class AuthFromFaceID {
                             let(login, password) = userData
                             
                             let user = await authFunc.SignIn(login: login, pass: password)
-                            let boolRegistration = (user == nil ? false : true)
                             
                             DispatchQueue.main.async {
-                                if (boolRegistration){
+                                if (user != nil){
                                     
                                     Task(priority: .high) {
                                         
@@ -56,11 +55,13 @@ public class AuthFromFaceID {
                                             
                                         }
                                         else {
+                                            viewController.DisableLoader(loader: loader)
                                             viewController.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера")
                                         }
                                     }
                                 }
                                 else {
+                                    viewController.DisableLoader(loader: loader)
                                     viewController.showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.ErrorAuthClient)
                                 }
                             }
@@ -69,9 +70,13 @@ public class AuthFromFaceID {
                     }
                     
                 }
+                else {
+                    viewController.DisableLoader(loader: loader)
+                }
             }
         }
         else {
+            viewController.DisableLoader(loader: loader)
             viewController.showAlert(withTitle: "Произошла ошибка", withMessage: "Биометрические данные не поддерживаются")
         }
     }
@@ -81,6 +86,7 @@ public class AuthFromFaceID {
         DispatchQueue.global(qos: .utility).async{ [self] in
             Task(priority: .high) {
                 let userData: (String, String) =  SafeLocalPassword.CheckDataLocalFromPINCODE(PIN_CODE: PIN_CODE, database: DatabaseLinkAutoLogin)
+                
                 let(login, password) = userData
                 
                 if (login == "" || password == ""){
@@ -91,10 +97,9 @@ public class AuthFromFaceID {
                 }
                 else {
                 let user = await authFunc.SignIn(login: login, pass: password)
-                let boolRegistration = (user == nil ? false : true)
-                
+                    
                     DispatchQueue.main.async {
-                        if (boolRegistration){
+                        if (user != nil){
                             
                             Task(priority: .high) {
                                 

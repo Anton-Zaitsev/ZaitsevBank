@@ -19,7 +19,7 @@ public class clientZaitsevBank: Object {
     @objc dynamic var phone: String? = nil
     @objc dynamic var pol: String? = nil
     @objc dynamic var userID: String = ""
-    public override static func primaryKey() -> String? {
+    override public static func primaryKey() -> String? {
         return "_id"
     }
 }

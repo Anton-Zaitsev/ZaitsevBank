@@ -8,8 +8,7 @@
 import UIKit
 
 class ChartValuteController: UIViewController, ChartDelegate {
-    
-    
+
     public var dinamicValute : DinamicValute!
     public var valuteName : String!
     public var valuteSymbol: String!
@@ -21,9 +20,14 @@ class ChartValuteController: UIViewController, ChartDelegate {
     
     @IBOutlet weak var MainLabel: UILabel!
     
+    @IBOutlet weak var StackChart: UIStackView!
     @IBOutlet weak var LabelChart: UILabel!
+    @IBOutlet weak var ImageControlChart: UIImageView!
+    @IBOutlet weak var SubLabelChart: UILabel!
+    
+    @IBOutlet weak var ChartChartLeading: NSLayoutConstraint!
+    
     @IBOutlet weak var ViewChart: Chart!
-    @IBOutlet weak var LabelChartLeading: NSLayoutConstraint!
     
     
     @IBOutlet weak var NumberMinimum: UILabel!
@@ -60,6 +64,8 @@ class ChartValuteController: UIViewController, ChartDelegate {
     }
     
     private func getView() {
+        SubLabelChart.text = ""
+        ImageControlChart.image = nil
         
         switch ValuteZaitsevBank(rawValue: valuteSymbol){
         case .USD :
@@ -86,7 +92,7 @@ class ChartValuteController: UIViewController, ChartDelegate {
         NumberNow.text = "\(String(format: "%.2f",dinamicValute.now).replacingOccurrences(of: ".", with: ","))" + valute
         
         
-        marginLabelChart = LabelChartLeading.constant
+        marginLabelChart = ChartChartLeading.constant
         
         ViewChart.delegate = self
                 
@@ -134,7 +140,8 @@ class ChartValuteController: UIViewController, ChartDelegate {
     }
     
     
-    func didTouchChart(_ chart: Chart, indexes: [Int?], x: Double, left: CGFloat) {
+    func didTouchChart(_ chart: Chart, indexes: [Int?], indexesPrevious: [Int?], x: Double, left: CGFloat){
+        print()
         if let value = ViewChart.valueForSeries(0, atIndex: indexes[0]) {
             
             let valute = valuteToogle ? " ₽" : " $"
@@ -142,10 +149,20 @@ class ChartValuteController: UIViewController, ChartDelegate {
             let numberFormatter = NumberFormatter()
             numberFormatter.minimumFractionDigits = 2
             numberFormatter.maximumFractionDigits = 2
+            
             LabelChart.text = numberFormatter.string(from: NSNumber(value: value))! + valute
             
+            if let valuePrevious = ViewChart.valueForSeries(0, atIndex: indexesPrevious[0]) {
+                
+                let changes = (value - valuePrevious) >= 0
+                ImageControlChart.image = UIImage(systemName: changes ? "chevron.up" : "chevron.down")?.withRenderingMode(.alwaysOriginal).withTintColor(changes ? .green : .red)
+                let changesValue = (value - valuePrevious) / ((value + valuePrevious) / 2) * 100
+                SubLabelChart.text = " " + numberFormatter.string(from: NSNumber(value: fabs(changesValue) ))! + " %"
+                SubLabelChart.textColor = changesValue >= 0 ? UIColor.green : UIColor.red
+                
+            }
             // Align the label to the touch left position, centered
-            var constant = marginLabelChart + left - (LabelChart.frame.width / 2)
+            var constant = marginLabelChart + left - (StackChart.frame.width / 2)
             
             // Avoid placing the label on the left of the chart
             if constant < marginLabelChart {
@@ -153,19 +170,21 @@ class ChartValuteController: UIViewController, ChartDelegate {
             }
             
             // Avoid placing the label on the right of the chart
-            let rightMargin = chart.frame.width - LabelChart.frame.width
+            let rightMargin = chart.frame.width - StackChart.frame.width
             if constant > rightMargin {
                 constant = rightMargin
             }
             
-            LabelChartLeading.constant = constant
+            ChartChartLeading.constant = constant
             
         }
     }
     
     func didFinishTouchingChart(_ chart: Chart) {
         LabelChart.text = ""
-        LabelChartLeading.constant = marginLabelChart
+        SubLabelChart.text = ""
+        ImageControlChart.image = nil
+        ChartChartLeading.constant = marginLabelChart
     }
     
     func didEndTouchingChart(_ chart: Chart) {

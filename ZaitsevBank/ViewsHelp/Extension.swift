@@ -26,17 +26,27 @@ extension UIViewController {
 
 extension UIViewController {
     
-    func EnableMainLoader(NameUser: String){
+    func EnableMainLoader(NameUser: String = ""){
+        var nameUser = NameUser
         let screen = UIScreen.main.bounds
         let viewLoader = UIView(frame: screen)
         let LoaderView : UIImageView = UIImageView(frame: screen)
         let labelName = UILabel(frame: CGRect(x: 0, y: CGFloat(100), width: screen.width, height: 100))
-        labelName.text = "Добро пожаловать,\n \(NameUser)"
+        
+        if (UserDefaults.standard.checkNameScreensaver()) {
+            nameUser = UserDefaults.standard.isNameScreensaver()
+        }
+        else {
+            UserDefaults.standard.SetisNameScreensaver(NameUser)
+        }
+        
+        labelName.text = "Добро пожаловать,\n \(nameUser)"
         labelName.textAlignment = .center
         labelName.font = UIFont(name:"HelveticaNeue-Bold", size: 31.0)
         labelName.textColor = .white
         labelName.minimumScaleFactor = 16
         labelName.numberOfLines = 0
+        
         LoaderView.image = UIImage(named: "BackroundOpenClient")
         LoaderView.sizeToFit()
         viewLoader.addSubview(LoaderView)

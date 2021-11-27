@@ -19,6 +19,8 @@ class ParametrsAddCardViewController: UIViewController {
     
     fileprivate let ValuteLabel = ["в рублях ₽", "в долларах $", "в евро €","в биткойне Ƀ", "в эфириуме ◊"]
     
+    fileprivate let ValuteDB = ["RUB", "USD", "EUR","BTC", "ETH"]
+    
     private let generateCard = CardGenerator()
     
     public var CARDDATA : CardAddStructData!
@@ -146,10 +148,16 @@ class ParametrsAddCardViewController: UIViewController {
                     Task(priority: .medium) {
                         
                         let numberCar = CardNumber.text!.replacingOccurrences(of: "  ", with: " ")
-                        let typeMoney = String(LabelTypeValute.text!.last!)
+                        
+                        let indexesType = ValuteLabel.enumerated().filter {
+                            $0.element.contains(LabelTypeValute.text!.last!)
+                        }.map{$0.offset}
+                        
+                        let typeMoney = ValuteDB[indexesType.first!]
+                        
                         let typeCar = generateIcon(type: CARDDATA.typeCard)
                         
-                        let succAddNewCard = await NewCardAdd.newCard(typeCard: typeCar, nameCard: CARDDATA.typeLabelCard, data: generateCard.generateDataFromDB(), numberCard: numberCar, typeMoney: typeMoney, CVV: CVVNUMBER)
+                        let succAddNewCard = await NewCardAdd.newCard(cardOperator: CARDDATA.typeCard, typeCard: typeCar, nameCard: CARDDATA.typeLabelCard, data: generateCard.generateDataFromDB(), numberCard: numberCar, typeMoney: typeMoney, CVV: CVVNUMBER)
                         
                         let dataUser = await GetDataUser().get()
                         DispatchQueue.main.async {

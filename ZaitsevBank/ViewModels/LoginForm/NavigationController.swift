@@ -192,7 +192,18 @@ class NavigationController: UIViewController {
     
     fileprivate func signFromFaceID() {
         if (biometricsType.rawValue == 1 || biometricsType.rawValue == 2){
-            authFaceID.signUSER(self, DatabaseLinkAutoLogin: ContainerLocalData)
+            Pass1.backgroundColor = .green
+            Pass2.backgroundColor = .green
+            Pass3.backgroundColor = .green
+            Pass4.backgroundColor = .green
+            Pass5.backgroundColor = .green
+            let loader = self.EnableLoader()
+            authFaceID.signUSER(self, DatabaseLinkAutoLogin: ContainerLocalData, loader: loader)
+            Pass1.backgroundColor = .darkGray
+            Pass2.backgroundColor = .darkGray
+            Pass3.backgroundColor = .darkGray
+            Pass4.backgroundColor = .darkGray
+            Pass5.backgroundColor = .darkGray
         }
         else {
             authFaceID.getFaceIDorTouchID(self)

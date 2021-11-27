@@ -32,21 +32,31 @@ class ExchangeRateController: UIViewController {
     
     
     @IBAction func ControllerExhangeTable(_ sender: UISegmentedControl) {
+        
         switch sender.selectedSegmentIndex {
-              case 0:
-                dataExchange.exchangeValute.removeAll()
-                dataExchange.exchangeValute = dataExchange.exchangeValuteDefault
-                ExchangeTable.reloadData()
-                valuteToogle = true
-              case 1:
-                    dataExchange.exchangeValute.removeAll()
-                    dataExchange.exchangeValute = dataExchange.exchangeValuteCriptoValute
-                    ExchangeTable.reloadData()
-                    valuteToogle = false
-              default:
-                valuteToogle = true
-                return
-              }
+        case 0:
+            dataExchange.exchangeValute.removeAll()
+            dataExchange.exchangeValute = dataExchange.exchangeValuteDefault
+            ExchangeTable.reloadData()
+            if (!dataExchange.exchangeValuteDefault.isEmpty){
+                let indexPath = IndexPath(row: 0, section: 0)
+                ExchangeTable.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
+            valuteToogle = true
+        case 1:
+            dataExchange.exchangeValute.removeAll()
+            dataExchange.exchangeValute = dataExchange.exchangeValuteCriptoValute
+            ExchangeTable.reloadData()
+            if (!dataExchange.exchangeValuteCriptoValute.isEmpty){
+                let indexPath = IndexPath(row: 0, section: 0)
+                ExchangeTable.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
+            valuteToogle = false
+            
+        default:
+            valuteToogle = true
+            return
+        }
     }
     
     private func getValute() {
@@ -87,19 +97,20 @@ extension ExchangeRateController: UITableViewDelegate, UITableViewDataSource {
         let idValute = dataExchange.exchangeValute[indexPath.row].IDValute
         let nameValute = dataExchange.exchangeValute[indexPath.row].nameValute
         let symbolValute = dataExchange.exchangeValute[indexPath.row].charCode
-
+        
         
         let loader = self.EnableLoader()
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             Task{
-
+                
                 guard let data = self.valuteToogle ?
                         await API.GetDinamicValute(idValute: idValute) :
-                        await API.GetDinamicCriptoValute(nameValute: nameValute)
+                            await API.GetDinamicCriptoValute(nameValute: nameValute)
                 else {
                     DispatchQueue.main.async {
                         self.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о \(nameValute)")
                         self.DisableLoader(loader: loader)
+                        tableView.deselectRow(at: indexPath, animated: true)
                     }
                     return
                 }

@@ -152,10 +152,16 @@ public class API {
         var dataCB : [ExchangeFull] = []
         let getBit = URL(string: "https://api.coincap.io/v2/assets")
         
-        guard let dataValue = await getData(url: getBit!) else {
-            print("Не скачалась дата")
-            return dataCB }
+        var request = URLRequest(url: getBit!)
+        request.setValue("Bearer \(SettingApp.APICoinCap)", forHTTPHeaderField: "Authorization")
+        request.setValue("gzip,deflate,br", forHTTPHeaderField: "Accept-Encoding")
+        
+        
         do {
+            let (dataValue,responce)  = try await URLSession.shared.data(for: request)
+            guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
+                print("Не скачалась дата")
+                return dataCB }
             
             let json = try newJSONDecoder().decode(BitcoinTableFullData.self, from: dataValue)
             
@@ -177,7 +183,6 @@ public class API {
                     }
                 }
             }
-            
             
             return dataCB
         }
@@ -238,11 +243,16 @@ public class API {
         let key = nameValute.lowercased().replacingOccurrences(of: " ", with: "-")
         let getDinamic = URL(string:"https://api.coincap.io/v2/assets/\(key)/history?interval=h6")
         
+        var request = URLRequest(url: getDinamic!)
+        request.setValue("Bearer \(SettingApp.APICoinCap)", forHTTPHeaderField: "Authorization")
+        request.setValue("gzip,deflate,br", forHTTPHeaderField: "Accept-Encoding")
         
-        guard let dataDinamicCripto = await getData(url: getDinamic!) else {
-            print("Не скачалась дата")
-            return nil }
+
         do{
+            let (dataDinamicCripto,responce)  = try await URLSession.shared.data(for: request)
+            guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
+                print("Не скачалась дата")
+                return nil }
             let json = try newJSONDecoder().decode(BitcoinChartTable.self, from: dataDinamicCripto)
             
             if (!json.data.isEmpty) {

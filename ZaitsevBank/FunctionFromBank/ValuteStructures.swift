@@ -76,7 +76,6 @@ struct Ticker: Codable {
 }
 
 
-
 public enum BitcoinValutyType: String {
     case BTC
     case ETH

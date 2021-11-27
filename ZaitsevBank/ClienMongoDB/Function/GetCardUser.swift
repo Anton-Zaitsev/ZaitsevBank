@@ -12,7 +12,7 @@ public class GetCardUser {
     
     private var user: User = RealmSettings.getUser()
     
-    public func get (NoneUser: User? = nil) async -> clientCardsCredits? {
+    public func get (NoneUser: User? = nil) async -> clientCardsCredit? {
         
         if let noneUser = NoneUser {
             user = noneUser
@@ -26,7 +26,7 @@ public class GetCardUser {
             
             let realm = try await Realm(configuration: configuration)
             
-            guard let data = realm.objects(clientCardsCredits.self).filter("userID == '\(userId)' ").first else {
+            guard let data = realm.objects(clientCardsCredit.self).filter("userID == '\(userId)' ").first else {
                 return nil}
             return data
             

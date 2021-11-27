@@ -46,27 +46,27 @@ class CardGenerator {
         return CVV
     }
     
+    
     public func generateData() -> String {
-        let currentDate = Date()
-        var dateComponent = DateComponents()
-        dateComponent.year = 4
-        let futureDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)
 
         let formatDate = DateFormatter()
         formatDate.dateFormat = "MM/yy"
-        return formatDate.string(from: futureDate!)
+        return formatDate.string(from: generateDataFromDB())
     }
     
-    public func generateDataFromDB() -> String {
+    public func generateDataFromDB() -> Date {
         let currentDate = Date()
         var dateComponent = DateComponents()
         dateComponent.year = 4
         let futureDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)
-
-        let formatDate = DateFormatter()
-        formatDate.dateFormat = "dd.MM.yyyy"
-        return formatDate.string(from: futureDate!)
+        return futureDate!
     }
+    
+    public func generateTransactionID(NumberCard: String) -> String {
+        let replaced = NumberCard.trimmingCharacters(in: NSCharacterSet.whitespaces)
+        return replaced.sha256()
+    }
+    
     
     public func logoTypeCard (_ typeCard: String) -> String {
             switch typeCard {
@@ -100,3 +100,4 @@ public enum CardType: String {
     }
     
 }
+

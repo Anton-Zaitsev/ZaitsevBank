@@ -12,7 +12,7 @@ class RegistrationNewCard {
     
     private let user: User = RealmSettings.getUser()
     
-    public func newCard (typeCard : String, nameCard: String, data: String, numberCard: String, typeMoney: String, CVV: String) async -> Bool {
+    public func newCard (cardOperator: String, typeCard : String, nameCard: String, data: Date, numberCard: String, typeMoney: String, CVV: String) async -> Bool {
         
         let partitionKey = RealmSettings.getCardPartition()
         
@@ -25,18 +25,21 @@ class RegistrationNewCard {
             if let dataCard = await GetCardUser().get(NoneUser: user) {
                            
                 try realm.write {
-                    var dataCardNew : clientCardsCredits = clientCardsCredits()
+                    var dataCardNew : clientCardsCredit = clientCardsCredit()
                     dataCardNew = dataCard
                     
                     
-                    let cardRealm = clientCardsCredits_card()
+                    let cardRealm = clientCardsCredit_card()
                     cardRealm.nameCard = nameCard
                     cardRealm.typeCard = typeCard
                     cardRealm.data = data
                     cardRealm.numberCard = numberCard
-                    cardRealm.typeMoney = typeMoney
+                    cardRealm.typeMoney = ValuteZaitsevBank(rawValue: typeMoney)?.description
                     cardRealm.cvvv = CVV
                     cardRealm.moneyCount.value = 0.0
+                    cardRealm.typeMoneyExtended = typeMoney
+                    cardRealm.cardOperator = cardOperator
+                    cardRealm.transactionID = CardGenerator().generateTransactionID(NumberCard: numberCard)
                     
                     dataCardNew.card.append(cardRealm)
                     realm.add(dataCardNew, update: .modified)
@@ -47,18 +50,22 @@ class RegistrationNewCard {
                 let userId: String = user.id.sha256()
                 
                 try realm.write {
-                    let dataCardNew : clientCardsCredits = clientCardsCredits()
+                    let dataCardNew : clientCardsCredit = clientCardsCredit()
                     dataCardNew.authID = RealmSettings.getCardPartition()
                     dataCardNew.userID = userId
                     
-                    let cardRealm = clientCardsCredits_card()
+                    let cardRealm = clientCardsCredit_card()
                     cardRealm.nameCard = nameCard
                     cardRealm.typeCard = typeCard
                     cardRealm.data = data
                     cardRealm.numberCard = numberCard
-                    cardRealm.typeMoney = typeMoney
+                    cardRealm.typeMoney = ValuteZaitsevBank(rawValue: typeMoney)?.description
                     cardRealm.cvvv = CVV
                     cardRealm.moneyCount.value = 0.0
+                    cardRealm.typeMoneyExtended = typeMoney
+                    cardRealm.cardOperator = cardOperator
+                    cardRealm.transactionID = CardGenerator().generateTransactionID(NumberCard: numberCard)
+                    
                     
                     dataCardNew.card.append(cardRealm)
                     realm.add(dataCardNew)
