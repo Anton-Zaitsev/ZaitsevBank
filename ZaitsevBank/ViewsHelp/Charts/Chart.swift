@@ -19,7 +19,7 @@ public protocol ChartDelegate: AnyObject {
     - parameter left: The distance from the left side of the chart.
 
     */
-    func didTouchChart(_ chart: Chart, indexes: [Int?], indexesPrevious: [Int?], x: Double, left: CGFloat)
+    func didTouchChart(_ chart: Chart, indexes: [Int?], x: Double, left: CGFloat)
 
     /**
     Tells the delegate that the user finished touching the chart. The user will 
@@ -724,22 +724,18 @@ open class Chart: UIControl {
         }
 
         var indexes: [Int?] = []
-        var indexesPrevious : [Int?] = []
         for series in self.series {
             var index: Int? = nil
-            var indexPrevious : Int? = nil
             let xValues = series.data.map({ (point: ChartPoint) -> Double in
                 return point.x })
             let closest = Chart.findClosestInValues(xValues, forValue: x)
             if closest.lowestIndex != nil && closest.highestIndex != nil {
                 // Consider valid only values on the right
                 index = closest.lowestIndex
-                indexPrevious = index! > 0 ? index! - 1 : index
             }
             indexes.append(index)
-            indexesPrevious.append(indexPrevious)
         }
-        delegate!.didTouchChart(self, indexes: indexes, indexesPrevious: indexesPrevious, x: x, left: left)
+        delegate!.didTouchChart(self, indexes: indexes, x: x, left: left)
     }
 
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

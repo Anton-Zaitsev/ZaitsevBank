@@ -15,7 +15,7 @@ class ChartValuteController: UIViewController, ChartDelegate {
     public var valuteName : String!
     public var valuteSymbol: String!
     public var idValute : String!
-    
+        
     @IBOutlet weak var BuySaleStack: UIStackView!
     
     public var valuteToogle : Bool!
@@ -44,8 +44,8 @@ class ChartValuteController: UIViewController, ChartDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getView()
         getMenuData()
+        getView()
     }
     
     @IBAction func ClickedBuy(_ sender: Any) {
@@ -68,6 +68,7 @@ class ChartValuteController: UIViewController, ChartDelegate {
     
     private func getMenuData() {
         MainLabel.text = "Динамика \(valuteName ?? "none") за месяц."
+        marginLabelChart = ChartChartLeading.constant
         
         let menuDate = UIMenu(title: "", children: [
             UIAction(title: "По месяцам", image: UIImage(systemName: "arrow.forward.circle.fill")) { action in
@@ -88,7 +89,7 @@ class ChartValuteController: UIViewController, ChartDelegate {
     }
     
     private func getView() {
-        
+        LabelChart.text = " "
         SubLabelChart.text = ""
         ImageControlChart.image = nil
         
@@ -113,9 +114,6 @@ class ChartValuteController: UIViewController, ChartDelegate {
         NumberMax.text = "\(String(format: "%.2f",dinamicValute.max).replacingOccurrences(of: ".", with: ","))" + valute
         NumberStart.text = "\(String(format: "%.2f",dinamicValute.start).replacingOccurrences(of: ".", with: ","))" + valute
         NumberNow.text = "\(String(format: "%.2f",dinamicValute.now).replacingOccurrences(of: ".", with: ","))" + valute
-        
-        
-        marginLabelChart = ChartChartLeading.constant
         
         ViewChart.delegate = self
                 
@@ -163,7 +161,7 @@ class ChartValuteController: UIViewController, ChartDelegate {
     }
     
     
-    func didTouchChart(_ chart: Chart, indexes: [Int?], indexesPrevious: [Int?], x: Double, left: CGFloat){
+    func didTouchChart(_ chart: Chart, indexes: [Int?], x: Double, left: CGFloat){
         print()
         if let value = ViewChart.valueForSeries(0, atIndex: indexes[0]) {
             
@@ -174,16 +172,13 @@ class ChartValuteController: UIViewController, ChartDelegate {
             numberFormatter.maximumFractionDigits = 2
             
             LabelChart.text = numberFormatter.string(from: NSNumber(value: value))! + valute
-            
-            if let valuePrevious = ViewChart.valueForSeries(0, atIndex: indexesPrevious[0]) {
+                            
+            let changes = (value - dinamicValute.start) >= 0
+            ImageControlChart.image = UIImage(systemName: changes ? "chevron.up" : "chevron.down")?.withRenderingMode(.alwaysOriginal).withTintColor(changes ? .green : .red)
+            let changesValue = (value - dinamicValute.start) / ((value + dinamicValute.start) / 2) * 100
+            SubLabelChart.text = " " + numberFormatter.string(from: NSNumber(value: fabs(changesValue) ))! + " % "
+            SubLabelChart.textColor = changesValue >= 0 ? UIColor.green : UIColor.red
                 
-                let changes = (value - valuePrevious) >= 0
-                ImageControlChart.image = UIImage(systemName: changes ? "chevron.up" : "chevron.down")?.withRenderingMode(.alwaysOriginal).withTintColor(changes ? .green : .red)
-                let changesValue = (value - valuePrevious) / ((value + valuePrevious) / 2) * 100
-                SubLabelChart.text = " " + numberFormatter.string(from: NSNumber(value: fabs(changesValue) ))! + " %"
-                SubLabelChart.textColor = changesValue >= 0 ? UIColor.green : UIColor.red
-                
-            }
             // Align the label to the touch left position, centered
             var constant = marginLabelChart + left - (StackChart.frame.width / 2)
             

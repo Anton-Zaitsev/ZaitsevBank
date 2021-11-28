@@ -53,16 +53,16 @@ public class GetCardUser {
                         moneyCount = String(converted)
                         
                     } else {
-                        moneyCount = String(format: "%.2f", client.moneyCount.value!)
+                        moneyCount = String(format: "%.2f", client.moneyCount.value!).replacingOccurrences(of: ".", with: ",")
                     }
                 }
                 else {
-                    moneyCount = String(format: "%.2f", client.moneyCount.value!)
+                    moneyCount = String(format: "%.2f", client.moneyCount.value!).replacingOccurrences(of: ".", with: ",")
                 }
                 
             }
             else{
-                moneyCount = String(client.moneyCount.value!)
+                moneyCount = String(client.moneyCount.value!).replacingOccurrences(of: ".", with: ",")
             }
             
             var numberCard = client.numberCard!
