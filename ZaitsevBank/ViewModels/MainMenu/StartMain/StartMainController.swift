@@ -328,6 +328,7 @@ extension StartMainController: UITableViewDelegate, UITableViewDataSource {
             tableView.deselectRow(at: indexPath, animated: true)
             let storyboardCardViewer : UIStoryboard = UIStoryboard(name: "CardViewer", bundle: nil)
             let CardViewer = storyboardCardViewer.instantiateViewController(withIdentifier: "CardView") as! FullCardController
+
             CardViewer.cardFull = cardUser
             CardViewer.indexCard = indexPath
             self.navigationController?.pushViewController(CardViewer, animated: true)

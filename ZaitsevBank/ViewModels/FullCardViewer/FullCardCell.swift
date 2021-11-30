@@ -120,8 +120,10 @@ class FullCardCell: UICollectionViewCell {
             BackCardView.showFlip()
             FrontCardView.hideFlip()
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                if (!self.BackCardView.isHidden) {
                 self.BackCardView.hideFlip()
                 self.FrontCardView.showFlip()
+                }
             }
         case 1 :
             BackCardView.hideFlip()

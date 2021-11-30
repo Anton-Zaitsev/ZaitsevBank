@@ -48,16 +48,16 @@ public class GetCardUser {
             
             if (!electonValute(valute: client.typeMoney!)){
                 
-                if (floor(client.moneyCount.value!) == client.moneyCount.value!) { // Если число можно преобразовать в int
+                if (floor(client.moneyCount.value!) == client.moneyCount.value!) { // Если число можно преобразовать в double
                     if let converted = Int(exactly: (client.moneyCount.value?.rounded())!) {
                         moneyCount = String(converted)
                         
                     } else {
-                        moneyCount = String(format: "%.2f", client.moneyCount.value!).replacingOccurrences(of: ".", with: ",")
+                        moneyCount = client.moneyCount.value!.formatterToValute()
                     }
                 }
                 else {
-                    moneyCount = String(format: "%.2f", client.moneyCount.value!).replacingOccurrences(of: ".", with: ",")
+                    moneyCount = client.moneyCount.value!.formatterToValute()
                 }
                 
             }
@@ -114,6 +114,17 @@ public class GetCardUser {
         default:
             return false
         }
+    }
+}
+
+extension Double {
+    func formatterToValute() -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = " "
+        
+        let formattedString = formatter.string(for: self)
+        return formattedString!
     }
 }
 

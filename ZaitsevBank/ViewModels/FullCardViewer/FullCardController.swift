@@ -8,7 +8,8 @@
 import UIKit
 
 class FullCardController: UIViewController {
-
+    private var scrollCard: Int = 0
+    
     var cardFull : [Cards] = [Cards]()
     var indexCard: IndexPath!
     
@@ -16,13 +17,15 @@ class FullCardController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white ]
         CollectionCard.isPagingEnabled = true
         CollectionCard.delegate = self
         CollectionCard.dataSource = self
         _ = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: false)
 
     }
-    private var scrollCard: Int = 0
+    
     @objc func autoScroll() {
         let totalCount = cardFull.count-1
         if scrollCard == totalCount{
@@ -43,7 +46,11 @@ class FullCardController: UIViewController {
 }
 
 extension FullCardController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-        
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        self.title = cardFull[indexPath.item].nameCard
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return collectionView.visibleSize
