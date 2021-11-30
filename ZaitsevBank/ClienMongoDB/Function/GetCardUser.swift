@@ -70,7 +70,8 @@ public class GetCardUser {
             numberCard = String(numberCard.suffix(from: index))
             numberCard = "•• \(numberCard)"
             
-            cardsClient.append(Cards(typeImageCard: client.typeCard!, nameCard: client.nameCard!, numberCard: numberCard, moneyCount: moneyCount, typeMoney: client.typeMoney!))
+            cardsClient.append(Cards(typeImageCard: client.typeCard!, typeMoney: client.typeMoney!, nameCard: client.nameCard!, numberCard: numberCard, moneyCount: moneyCount, cvv: client.cvvv!, data: client.data!, cardOperator: client.cardOperator!, typeMoneyExtended: client.typeMoneyExtended!, fullNumberCard: client.numberCard!, transactionID: client.transactionID!))
+            
         }
         return cardsClient
         

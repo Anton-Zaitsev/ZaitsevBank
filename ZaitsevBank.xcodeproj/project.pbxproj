@@ -27,8 +27,11 @@
 		3A30489727139A010010A739 /* StartMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30489627139A010010A739 /* StartMenu.swift */; };
 		3A30489A27139BAD0010A739 /* SafeLocalPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30489927139BAD0010A739 /* SafeLocalPassword.swift */; };
 		3A36DAF427417F5000F9CE9C /* CardGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A36DAF327417F5000F9CE9C /* CardGenerator.swift */; };
+		3A3700D427530DC700387894 /* CardViewer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A3700D327530DC700387894 /* CardViewer.storyboard */; };
 		3A3AE94B271276FA001FF068 /* Loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A3AE94A271276FA001FF068 /* Loading.gif */; };
 		3A3AE94E271278A3001FF068 /* StartMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3AE94D271278A3001FF068 /* StartMainController.swift */; };
+		3A49B5102755591300ECC979 /* FullCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49B50F2755591300ECC979 /* FullCardController.swift */; };
+		3A49B5142755701F00ECC979 /* FullCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49B5132755701F00ECC979 /* FullCardCell.swift */; };
 		3A5EB0D6272D69ED0037D006 /* WalletViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EB0D5272D69ED0037D006 /* WalletViewCell.swift */; };
 		3A5EB0D8272D8C130037D006 /* CardsObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EB0D7272D8C130037D006 /* CardsObjects.swift */; };
 		3A5EB0DA272D8C7E0037D006 /* GetCardUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EB0D9272D8C7E0037D006 /* GetCardUser.swift */; };
@@ -95,8 +98,11 @@
 		3A30489627139A010010A739 /* StartMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenu.swift; sourceTree = "<group>"; };
 		3A30489927139BAD0010A739 /* SafeLocalPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeLocalPassword.swift; sourceTree = "<group>"; };
 		3A36DAF327417F5000F9CE9C /* CardGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGenerator.swift; sourceTree = "<group>"; };
+		3A3700D327530DC700387894 /* CardViewer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardViewer.storyboard; sourceTree = "<group>"; };
 		3A3AE94A271276FA001FF068 /* Loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Loading.gif; sourceTree = "<group>"; };
 		3A3AE94D271278A3001FF068 /* StartMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMainController.swift; sourceTree = "<group>"; };
+		3A49B50F2755591300ECC979 /* FullCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardController.swift; sourceTree = "<group>"; };
+		3A49B5132755701F00ECC979 /* FullCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardCell.swift; sourceTree = "<group>"; };
 		3A5EB0D5272D69ED0037D006 /* WalletViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewCell.swift; sourceTree = "<group>"; };
 		3A5EB0D7272D8C130037D006 /* CardsObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsObjects.swift; sourceTree = "<group>"; };
 		3A5EB0D9272D8C7E0037D006 /* GetCardUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCardUser.swift; sourceTree = "<group>"; };
@@ -198,6 +204,7 @@
 		3A0FC967270A530200B6B2F6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3A49B50E275558C100ECC979 /* FullCardViewer */,
 				3A2BCAF42743E30A00189086 /* FullValute */,
 				3A9939192738B04A009B1B06 /* AddNewCard */,
 				3A3AE94C27127883001FF068 /* MainMenu */,
@@ -224,6 +231,7 @@
 				3A0FC970270A546600B6B2F6 /* LoginForm.storyboard */,
 				3A07798E27122CF20026BCAD /* MainMenu.storyboard */,
 				3A21F5F72743CF9200D7E0CD /* ValuteMenu.storyboard */,
+				3A3700D327530DC700387894 /* CardViewer.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -283,6 +291,15 @@
 				3AB687ED272221BC002BD6EB /* HistoryController.swift */,
 			);
 			path = MainMenu;
+			sourceTree = "<group>";
+		};
+		3A49B50E275558C100ECC979 /* FullCardViewer */ = {
+			isa = PBXGroup;
+			children = (
+				3A49B50F2755591300ECC979 /* FullCardController.swift */,
+				3A49B5132755701F00ECC979 /* FullCardCell.swift */,
+			);
+			path = FullCardViewer;
 			sourceTree = "<group>";
 		};
 		3A82E62C272B63E80054F36C /* StartMain */ = {
@@ -435,6 +452,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A3700D427530DC700387894 /* CardViewer.storyboard in Resources */,
 				3A07798F27122CF30026BCAD /* MainMenu.storyboard in Resources */,
 				3AD95367271DC7AB0081D50A /* LocalPassword.xib in Resources */,
 				3A0FC971270A546600B6B2F6 /* LoginForm.storyboard in Resources */,
@@ -478,12 +496,14 @@
 				3A9C9B792739DB0C009A2D4C /* PreferenceCardAddViewCell.swift in Sources */,
 				3A07798D271229C20026BCAD /* RealmSettings.swift in Sources */,
 				3A30489A27139BAD0010A739 /* SafeLocalPassword.swift in Sources */,
+				3A49B5142755701F00ECC979 /* FullCardCell.swift in Sources */,
 				3AF977A92714EBD3006C1B87 /* Ecryption.swift in Sources */,
 				3A82E630272C43E20054F36C /* API.swift in Sources */,
 				3AB687EA272218B2002BD6EB /* NavigationTabBarMain.swift in Sources */,
 				3AB687EC272220B6002BD6EB /* PaymentsController.swift in Sources */,
 				3AB8F10B2743E8F600469C94 /* ChartSeries.swift in Sources */,
 				3AB86B8D270D0A84008D0823 /* FirstRegController.swift in Sources */,
+				3A49B5102755591300ECC979 /* FullCardController.swift in Sources */,
 				3A9C9B772739C82B009A2D4C /* CardAdd.swift in Sources */,
 				3A0FC95A270A52B700B6B2F6 /* ZaitsevBank.xcdatamodeld in Sources */,
 				3A97F27E2744148500A40224 /* ChartValuteController.swift in Sources */,

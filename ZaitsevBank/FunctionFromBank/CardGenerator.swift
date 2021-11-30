@@ -95,7 +95,15 @@ public enum CardType: String {
         switch self {
         case .VISA : return "VISA"
         case .MASTERCARD : return "MASTERCARD"
-        case .MIR : return "МИР"
+        case .MIR : return "MIR"
+        }
+    }
+    
+    var logoCardOperator: String {
+        switch self {
+        case .VISA : return "visaLogo"
+        case .MASTERCARD : return "masterCardLogo"
+        case .MIR : return "mirLogo"
         }
     }
     

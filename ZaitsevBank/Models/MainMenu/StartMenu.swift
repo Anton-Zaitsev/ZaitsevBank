@@ -36,10 +36,19 @@ public struct OffersData {
 
 public struct Cards {
     var typeImageCard: String
+    var typeMoney : String
     var nameCard : String
     var numberCard: String
     var moneyCount : String
-    var typeMoney : String
+    
+    var cvv : String
+    var data : Date
+    var cardOperator : String
+    var typeMoneyExtended : String
+    
+    var fullNumberCard: String
+    var transactionID: String
+    
 }
 
 public struct Exchange {

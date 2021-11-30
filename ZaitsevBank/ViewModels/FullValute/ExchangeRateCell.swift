@@ -7,9 +7,10 @@
 
 import UIKit
 
-protocol ExchangeRateCellDelegate: AnyObject {
+/*protocol ExchangeRateCellDelegate: AnyObject {
     func didTap(with IDExchange : String)
 }
+*/
 
 class ExchangeRateCell: UITableViewCell {
 

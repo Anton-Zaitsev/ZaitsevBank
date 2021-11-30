@@ -192,7 +192,7 @@ class ParametrsAddCardViewController: UIViewController {
         switch type {
         case "VISA" : return "SberCard"
         case "MASTERCARD" : return "SberCard"
-        case "МИР" : return "MirCard"
+        case "MIR" : return "MirCard"
         default:
             return "SberCard"
         }

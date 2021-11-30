@@ -131,7 +131,6 @@ class StartMainController: UIViewController {
                 
                 DispatchQueue.main.async {
                     WalletTable.reloadData()
-                    print("Итого в массиве \(modelStartMain.dataExchange.count)")
                     ExchangeTable.reloadData()
                 }
                 
@@ -321,6 +320,17 @@ extension StartMainController: UITableViewDelegate, UITableViewDataSource {
             return cell
         default:
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (tableView == WalletTable){
+            tableView.deselectRow(at: indexPath, animated: true)
+            let storyboardCardViewer : UIStoryboard = UIStoryboard(name: "CardViewer", bundle: nil)
+            let CardViewer = storyboardCardViewer.instantiateViewController(withIdentifier: "CardView") as! FullCardController
+            CardViewer.cardFull = cardUser
+            CardViewer.indexCard = indexPath
+            self.navigationController?.pushViewController(CardViewer, animated: true)
         }
     }
     

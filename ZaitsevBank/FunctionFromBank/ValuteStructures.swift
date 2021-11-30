@@ -124,6 +124,16 @@ public enum ValuteZaitsevBank : String {
         case .ETH : return "◊"
         }
     }
+    
+    var descriptionTypeValute: String {
+        switch self {
+        case .EUR : return "Карта в евро"
+        case .USD : return "Карта в долларах"
+        case .RUB : return "Карта в рублях"
+        case .BTC : return "Карта в биткойне"
+        case .ETH : return "Карта в эфириуме"
+        }
+    }
 }
 
 public enum ValuteType : String {
