@@ -55,23 +55,21 @@ public class API {
             guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
                 print("Не скачалась дата")
                 return dataCB }
-            
+                        
             let json = try JSONEncoder.newJSONDecoder().decode(ValuteCb.self, from: dataValue)
+            
             for data in json.valute {
+                                
                 let value = data.value
                 
+                guard let dataChart = await API_DinamicValute.GetDinamicValute(idValute: value.id) else {
+                    continue
+                }
                 let valuteBuy = value.value / Double(value.nominal)
                 let valuteSale = valuteBuy + Double.random(in: -3..<3)
                 
-                let valuteBuy300 = valuteBuy + Double.random(in: -0.5..<(-0.1))
-                let valuteBuy1000 = valuteBuy300 + Double.random(in: -0.5..<(-0.1))
-                let valuteBuy5000 = valuteBuy1000 + Double.random(in: -1..<(-0.3))
-                
-                let valuteSale300 = valuteSale + Double.random(in: -0.5..<(-0.1))
-                let valuteSale1000 = valuteSale300 + Double.random(in: -0.5..<(-0.1))
-                let valuteSale5000 = valuteSale1000 + Double.random(in: -1..<(-0.3))
-                
-                dataCB.append(ExchangeFull(IDValute: value.id, charCode: value.charCode, nameValute: value.name, changesBuy: value.value > value.previous, buy: valuteBuy.valuteToTableFormat(), buy300: valuteBuy300.valuteToTableFormat(), buy1000: valuteBuy1000.valuteToTableFormat(), buy5000: valuteBuy5000.valuteToTableFormat(), changesSale: Bool.random(), sale: valuteSale.valuteToTableFormat(), sale300: valuteSale300.valuteToTableFormat(), sale1000: valuteSale1000.valuteToTableFormat(), sale5000: valuteSale5000.valuteToTableFormat()))
+                dataCB.append(ExchangeFull(IDValute: value.id, charCode: value.charCode, nameValute: value.name, changesBuy: value.value > value.previous, buy: valuteBuy.valuteToTableFormat(), changesSale: Bool.random(), sale: valuteSale.valuteToTableFormat(), dataChar: dataChart))
+                    
             }
             return dataCB
         }
@@ -174,15 +172,11 @@ public class API {
                         
                         let valuteSale = valuteBuy + Double.random(in: -3..<3)
                         
-                        let valuteBuy300 = valuteBuy + Double.random(in: -0.5..<(-0.1))
-                        let valuteBuy1000 = valuteBuy300 + Double.random(in: -0.5..<(-0.1))
-                        let valuteBuy5000 = valuteBuy1000 + Double.random(in: -1..<(-0.3))
-                        
-                        let valuteSale300 = valuteSale + Double.random(in: -0.5..<(-0.1))
-                        let valuteSale1000 = valuteSale300 + Double.random(in: -0.5..<(-0.1))
-                        let valuteSale5000 = valuteSale1000 + Double.random(in: -1..<(-0.3))
-                        
-                        dataCB.append(ExchangeFull(IDValute: bit.id!, charCode: bit.symbol!, nameValute: bit.name!, changesBuy: changes > 0, buy: valuteBuy.valuteToTableFormat(), buy300: valuteBuy300.valuteToTableFormat(), buy1000: valuteBuy1000.valuteToTableFormat(), buy5000: valuteBuy5000.valuteToTableFormat(), changesSale: Bool.random(), sale: valuteSale.valuteToTableFormat(), sale300: valuteSale300.valuteToTableFormat(), sale1000: valuteSale1000.valuteToTableFormat(), sale5000: valuteSale5000.valuteToTableFormat()))
+                        guard let dataChart = await API_DinamicValute.GetDinamicCriptoValute(nameValute: bit.name!) else {
+                            continue
+                        }
+                        dataCB.append(ExchangeFull(IDValute: bit.id!, charCode: bit.symbol!, nameValute: bit.name!, changesBuy: changes > 0, buy: valuteBuy.valuteToTableFormat(), changesSale: Bool.random(), sale: valuteSale.valuteToTableFormat(), dataChar: dataChart))
+
                     }
                 }
             }

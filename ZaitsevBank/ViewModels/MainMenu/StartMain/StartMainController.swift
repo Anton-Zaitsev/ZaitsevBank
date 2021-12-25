@@ -51,7 +51,7 @@ class StartMainController: UIViewController {
     }
     
     
-    fileprivate func GetView() {
+    private func GetView() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(AddNewCard))
         LabelAddNewCard.isUserInteractionEnabled = true
         LabelAddNewCard.addGestureRecognizer(tap)
@@ -85,6 +85,8 @@ class StartMainController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refreshAllData), for: .valueChanged)
         ScrollViewStartMainController.refreshControl = refreshControl
         
+        _ = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(getDataStartMenu), userInfo: nil, repeats: false)
+        
         WalletTable.delegate = self
         WalletTable.dataSource = self
         
@@ -93,23 +95,7 @@ class StartMainController: UIViewController {
         
     }
     
-    @objc fileprivate func SeeAllExchange(sender: UITapGestureRecognizer) {
-        AllExchange.textColor = .white
-        let storyboardValuteMenuMenu : UIStoryboard = UIStoryboard(name: "ValuteMenu", bundle: nil)
-        let ExhangeRate = storyboardValuteMenuMenu.instantiateViewController(withIdentifier: "ExhangeAllValute") as! ExchangeRateController
-        self.navigationController?.pushViewController(ExhangeRate, animated: true)
-    }
-    
-    @objc fileprivate func AddNewCard(sender: UITapGestureRecognizer) {
-        LabelAddNewCard.textColor = .white
-        AddNewCardFunction(OwnerNameFamily: "\(dataUser.name!) \(dataUser.family!)")
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.isNavigationBarHidden = true;
-        // -- GET CARD USER
+    @objc private func getDataStartMenu() {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
             Task{
                 cardUser = await GetCardUser().getCards()
@@ -151,19 +137,34 @@ class StartMainController: UIViewController {
                 LabelValute.attributedText = attributedString
             }
             count = count == dataValute.count ? 0 : count + 1
-            
         }
-        
+    }
+    
+    @objc private func SeeAllExchange(sender: UITapGestureRecognizer) {
+        AllExchange.textColor = .white
+        let storyboardValuteMenuMenu : UIStoryboard = UIStoryboard(name: "ValuteMenu", bundle: nil)
+        let ExhangeRate = storyboardValuteMenuMenu.instantiateViewController(withIdentifier: "ExhangeAllValute") as! ExchangeRateController
+        self.navigationController?.pushViewController(ExhangeRate, animated: true)
+    }
+    
+    @objc private func AddNewCard(sender: UITapGestureRecognizer) {
+        LabelAddNewCard.textColor = .white
+        AddNewCardFunction(OwnerNameFamily: "\(dataUser.name!) \(dataUser.family!)")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true;
     }
   
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.isNavigationBarHidden = false;
+        navigationController?.isNavigationBarHidden = false;
         LabelAddNewCard.textColor = #colorLiteral(red: 0, green: 0.6389579177, blue: 0, alpha: 1)
         AllExchange.textColor = #colorLiteral(red: 0, green: 0.6389579177, blue: 0, alpha: 1)
     }
     
-    @objc fileprivate func refreshAllData(refreshControl: UIRefreshControl) {
+    @objc private func refreshAllData(refreshControl: UIRefreshControl) {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
             Task{
                 cardUser = await GetCardUser().getCards()

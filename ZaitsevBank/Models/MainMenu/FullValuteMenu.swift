@@ -22,15 +22,11 @@ public struct ExchangeFull {
     
     var changesBuy : Bool
     var buy : String
-    var buy300 : String
-    var buy1000 : String
-    var buy5000 : String
-    
+ 
     var changesSale : Bool
     var sale : String
-    var sale300 : String
-    var sale1000 : String
-    var sale5000 : String
+    
+    var dataChar : DinamicValute
 }
 
 public struct DinamicValute {

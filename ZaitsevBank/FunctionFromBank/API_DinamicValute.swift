@@ -69,7 +69,7 @@ public class API_DinamicValute {
         
         let key = nameValute.lowercased().replacingOccurrences(of: " ", with: "-")
         let getDinamic = URL(string:"https://api.coincap.io/v2/assets/\(key)/history?interval=\(data.dataCriptoValute)")
-        
+
         var request = URLRequest(url: getDinamic!)
         request.setValue("Bearer \(SettingApp.APICoinCap)", forHTTPHeaderField: "Authorization")
         request.setValue("gzip,deflate,br", forHTTPHeaderField: "Accept-Encoding")

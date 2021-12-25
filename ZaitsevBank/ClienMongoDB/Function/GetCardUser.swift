@@ -124,7 +124,7 @@ extension Double {
         formatter.groupingSeparator = " "
         
         let formattedString = formatter.string(for: self)
-        return formattedString!
+        return formattedString!.replacingOccurrences(of: ".", with: ",")
     }
 }
 

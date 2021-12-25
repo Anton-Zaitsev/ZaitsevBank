@@ -67,30 +67,31 @@ class LoginController: UIViewController, LocalPasswordDelegate {
         DispatchQueue.main.async {
             let loader = self.EnableLoader()
             DispatchQueue.global(qos: .utility).async{ [self] in
+                
                 Task(priority: .high) {
-                    if let user = await authFunc.SignIn(login: loginModel.Login, pass: loginModel.Password){
-                        
-                        if let data = await GetDataUser().get(NoneUser: user){
-                            DispatchQueue.main.async {
-                                SetAlertLocalPassword()
-                                dataUser = data
-                                self.DisableLoader(loader: loader)
-                            }
-                        }
-                        else {
-                            DispatchQueue.main.async {
-                                self.DisableLoader(loader: loader)
-                                showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о пользователе")
-                            }
-                        }
-                    }
+                    guard let user = await authFunc.SignIn(login: loginModel.Login, pass: loginModel.Password)
                     else {
                         DispatchQueue.main.async {
                         self.DisableLoader(loader: loader)
                         showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.ErrorAuthClient)
                         }
+                        return
                     }
-                    
+                        
+                    if let data = await GetDataUser().get(NoneUser: user){
+                        DispatchQueue.main.async {
+                            SetAlertLocalPassword()
+                            dataUser = data
+                            self.DisableLoader(loader: loader)
+                        }
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            self.DisableLoader(loader: loader)
+                            showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о пользователе")
+                        }
+                    }
+  
                 }
             }
         }

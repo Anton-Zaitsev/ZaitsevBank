@@ -140,12 +140,18 @@ class ChartValuteController: UIViewController, ChartDelegate {
         }
         
         let series = ChartSeries(serieData)
-        series.area = true
+        series.area = false
         
-        series.color = ChartColors.greenColor()
+        series.colors = (
+          above: ChartColors.greenColor(),
+          below: ChartColors.redColor(),
+          zeroLevel: dinamicValute.now
+        )
+        
+        ViewChart.showYLabelsAndGrid = false
+        
         // Configure chart layout
-        
-        ViewChart.lineWidth = 0.5
+    
         ViewChart.labelFont = UIFont.systemFont(ofSize: 12)
 
         ViewChart.xLabels = labels
@@ -155,7 +161,7 @@ class ChartValuteController: UIViewController, ChartDelegate {
         ViewChart.xLabelsTextAlignment = .center
         ViewChart.yLabelsOnRightSide = true
         // Add some padding above the x-axis
-        ViewChart.minY = serieData.min()! - 5
+        //ViewChart.minY = serieData.min()! - 5
         
         ViewChart.add(series)
     }
