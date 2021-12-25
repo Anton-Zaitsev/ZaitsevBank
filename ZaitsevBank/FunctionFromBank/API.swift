@@ -62,7 +62,7 @@ public class API {
                                 
                 let value = data.value
                 
-                guard let dataChart = await API_DinamicValute.GetDinamicValute(idValute: value.id) else {
+                guard let dataChart = await API_DinamicValute.GetDinamicValute(idValute: value.id,.month) else {
                     continue
                 }
                 let valuteBuy = value.value / Double(value.nominal)
@@ -172,7 +172,7 @@ public class API {
                         
                         let valuteSale = valuteBuy + Double.random(in: -3..<3)
                         
-                        guard let dataChart = await API_DinamicValute.GetDinamicCriptoValute(nameValute: bit.name!) else {
+                        guard let dataChart = await API_DinamicValute.GetDinamicCriptoValute(nameValute: bit.name!,.month) else {
                             continue
                         }
                         dataCB.append(ExchangeFull(IDValute: bit.id!, charCode: bit.symbol!, nameValute: bit.name!, changesBuy: changes > 0, buy: valuteBuy.valuteToTableFormat(), changesSale: Bool.random(), sale: valuteSale.valuteToTableFormat(), dataChar: dataChart))
