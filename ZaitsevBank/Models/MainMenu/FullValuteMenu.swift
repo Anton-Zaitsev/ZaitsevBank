@@ -26,7 +26,7 @@ public struct ExchangeFull {
     var changesSale : Bool
     var sale : String
     
-    var dataChar : DinamicValute
+    var dataChar : [Double]
 }
 
 public struct DinamicValute {

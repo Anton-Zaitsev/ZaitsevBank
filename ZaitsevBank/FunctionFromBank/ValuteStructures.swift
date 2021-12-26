@@ -50,6 +50,20 @@ struct BitcoinTableFullData: Codable  {
 struct BitcoinTableData: Codable  {
     let id, rank, symbol, name ,supply, maxSupply, marketCapUsd, volumeUsd24Hr,priceUsd, changePercent24Hr, vwap24Hr,explorer : String?
 }
+// FROM TODAY VALUTE
+
+struct BitcoinChartTableDay: Codable {
+    let data: [BitcoinChartTableDataDay]
+    let timestamp: Int
+}
+
+struct BitcoinChartTableDataDay: Codable {
+    let priceUsd: String
+    let time: Int
+    let date: String
+}
+
+// FROM TODAY VALUTE
 
 struct BitcoinChartTable: Codable {
     let data: [BitcoinChartTableData]

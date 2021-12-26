@@ -16,7 +16,7 @@ class StartMainController: UIViewController {
     public var dataUser = clientZaitsevBank()
     public var cardUser = [Cards]()
     
-    fileprivate let dataValute = API.getDataValute()
+    fileprivate let dataValute = API_VALUTE.getDataValute()
     
     fileprivate var ExhangeTableValute = true
     
@@ -99,7 +99,7 @@ class StartMainController: UIViewController {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
             Task{
                 cardUser = await GetCardUser().getCards()
-                modelStartMain.dataExchange = await API.getValuteTable()
+                modelStartMain.dataExchange = await API_VALUTE.getValuteTable()
                 
                 modelStartMain.dataTableExchange.removeAll()
                 
@@ -120,7 +120,7 @@ class StartMainController: UIViewController {
                     ExchangeTable.reloadData()
                 }
                 
-                modelStartMain.dataBitExchange = await API.getBitcoinTable()
+                modelStartMain.dataBitExchange = await API_VALUTE.getBitcoinTable()
             }
         }
         
@@ -168,7 +168,7 @@ class StartMainController: UIViewController {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
             Task{
                 cardUser = await GetCardUser().getCards()
-                modelStartMain.dataExchange = await API.getValuteTable()
+                modelStartMain.dataExchange = await API_VALUTE.getValuteTable()
             
             
                 if (modelStartMain.dataExchange.count > 0) {
@@ -199,7 +199,7 @@ class StartMainController: UIViewController {
                     ExchangeTable.reloadData()
                 }
                 
-                modelStartMain.dataBitExchange  = await API.getBitcoinTable()
+                modelStartMain.dataBitExchange  = await API_VALUTE.getBitcoinTable()
             }
         }
         refreshControl.endRefreshing()

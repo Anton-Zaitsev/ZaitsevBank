@@ -32,12 +32,12 @@ class ExchangeRateCell: UITableViewCell {
     func configurated(with valute: ExchangeFull) {
         
         if (CharView.series.isEmpty){
-            let series = ChartSeries(valute.dataChar.value)
+            let series = ChartSeries(valute.dataChar)
             
             series.colors = (
               above: ChartColors.greenColor(),
               below: ChartColors.redColor(),
-              zeroLevel: valute.dataChar.now
+              zeroLevel: valute.dataChar.last ?? 0
             )
             
             CharView.add(series)

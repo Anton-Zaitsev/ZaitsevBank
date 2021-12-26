@@ -120,6 +120,89 @@ public class API_DinamicValute {
         }
         
     }
+    
+    public static func GetDinamicValuteFromDay(idValute: String) async -> [Double]? {
+        
+        
+        let currentDate = Date()
+        var dateComponent = DateComponents()
+        dateComponent.day = -14
+        let lastDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)
+        
+        let formatDate = DateFormatter()
+        formatDate.dateFormat = "dd/MM/yyyy"
+        
+        let date7DayBack = formatDate.string(from: lastDate!)
+        let dateNow = formatDate.string(from: currentDate)
+        
+        
+        let getDinamic = URL(string: "https://cbr.ru/scripts/XML_dynamic.asp?date_req1=\(date7DayBack)&date_req2=\(dateNow)&VAL_NM_RQ=\(idValute)")
+        
+        let request = URLRequest(url: getDinamic!)
+        
+        do {
+            let (xmlDinamic,responce)  = try await URLSession.shared.data(for: request)
+            guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
+                print("Не скачалась дата")
+                return nil }
+            
+            var dinamic : [Double] = [Double] ()
+            
+            let xml = XMLHash.config {
+                config in
+                config.shouldProcessLazily = true
+            }.parse(xmlDinamic)
+            
+            
+            for elem in  xml["ValCurs"]["Record"].all {
+                if let costValue = Double(elem["Value"].element!.text.replacingOccurrences(of: ",", with: ".")) {
+                    dinamic.append(costValue)
+                }
+            }
+            return dinamic
+        }
+        catch{
+            return nil
+        }
+    }
+    
+    public static func GetDinamicCriptoValuteFromDay(nameValute: String) async -> [Double]? {
+        
+        let key = nameValute.lowercased().replacingOccurrences(of: " ", with: "-")
+        let getDinamic = URL(string:"https://api.coincap.io/v2/assets/\(key)/history?interval=d1")
+
+        var request = URLRequest(url: getDinamic!)
+        request.setValue("Bearer \(SettingApp.APICoinCap)", forHTTPHeaderField: "Authorization")
+        request.setValue("gzip,deflate,br", forHTTPHeaderField: "Accept-Encoding")
+        
+
+        do{
+            let (dataDinamicCripto,responce)  = try await URLSession.shared.data(for: request)
+            guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
+                print("Не скачалась дата")
+                return nil }
+            
+            let json = try JSONEncoder.newJSONDecoder().decode(BitcoinChartTableDay.self, from: dataDinamicCripto)
+            
+            if (!json.data.isEmpty) {
+                var dinamic : [Double] = [Double]()
+                
+                for data in json.data {
+                    if let valuteBuy = Double(data.priceUsd){
+                        dinamic.append(valuteBuy)
+                    }
+                }
+
+                return dinamic
+            }
+            else {
+                return nil
+            }
+        }
+        catch{
+            return nil
+        }
+    }
        
 }
 

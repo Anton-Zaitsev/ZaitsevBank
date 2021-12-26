@@ -16,6 +16,9 @@
 		3A0787F12777205600F678DD /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 3A0787F02777205600F678DD /* SwiftSoup */; };
 		3A0787F42777207100F678DD /* RNCryptor in Frameworks */ = {isa = PBXBuildFile; productRef = 3A0787F32777207100F678DD /* RNCryptor */; };
 		3A0787F72777208400F678DD /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 3A0787F62777208400F678DD /* SWXMLHash */; };
+		3A0787F92778851900F678DD /* API_VALUTE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0787F82778851900F678DD /* API_VALUTE.swift */; };
+		3A0787FB2778854500F678DD /* API_VALUTE_FULL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0787FA2778854500F678DD /* API_VALUTE_FULL.swift */; };
+		3A0788002778893F00F678DD /* ExtensionFuncBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0787FF2778893F00F678DD /* ExtensionFuncBank.swift */; };
 		3A0862E027382776000C5407 /* ValuteStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0862DF27382776000C5407 /* ValuteStructures.swift */; };
 		3A0FC950270A52B600B6B2F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC94F270A52B600B6B2F6 /* AppDelegate.swift */; };
 		3A0FC952270A52B700B6B2F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FC951270A52B700B6B2F6 /* SceneDelegate.swift */; };
@@ -42,7 +45,6 @@
 		3A5EB0DA272D8C7E0037D006 /* GetCardUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EB0D9272D8C7E0037D006 /* GetCardUser.swift */; };
 		3A6D957C2751CAE90064B11F /* API_DinamicValute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */; };
 		3A82E62E272B645C0054F36C /* OffersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A82E62D272B645C0054F36C /* OffersViewCell.swift */; };
-		3A82E630272C43E20054F36C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A82E62F272C43E20054F36C /* API.swift */; };
 		3A835FD327320CD9000310EC /* ExchangeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A835FD227320CD9000310EC /* ExchangeViewCell.swift */; };
 		3A85DED52713DF010059B5CB /* SettingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85DED42713DF010059B5CB /* SettingApp.swift */; };
 		3A8D79A2273B1CB500B6EA98 /* ParametrsAddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D79A1273B1CB500B6EA98 /* ParametrsAddCardViewController.swift */; };
@@ -79,6 +81,9 @@
 		3A07798A271228D60026BCAD /* GetDataUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataUser.swift; sourceTree = "<group>"; };
 		3A07798C271229C20026BCAD /* RealmSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSettings.swift; sourceTree = "<group>"; };
 		3A07798E27122CF20026BCAD /* MainMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainMenu.storyboard; sourceTree = "<group>"; };
+		3A0787F82778851900F678DD /* API_VALUTE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_VALUTE.swift; sourceTree = "<group>"; };
+		3A0787FA2778854500F678DD /* API_VALUTE_FULL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_VALUTE_FULL.swift; sourceTree = "<group>"; };
+		3A0787FF2778893F00F678DD /* ExtensionFuncBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionFuncBank.swift; sourceTree = "<group>"; };
 		3A0862DF27382776000C5407 /* ValuteStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuteStructures.swift; sourceTree = "<group>"; };
 		3A0FC94C270A52B600B6B2F6 /* ZaitsevBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZaitsevBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A0FC94F270A52B600B6B2F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,7 +112,6 @@
 		3A5EB0D9272D8C7E0037D006 /* GetCardUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCardUser.swift; sourceTree = "<group>"; };
 		3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_DinamicValute.swift; sourceTree = "<group>"; };
 		3A82E62D272B645C0054F36C /* OffersViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersViewCell.swift; sourceTree = "<group>"; };
-		3A82E62F272C43E20054F36C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3A835FD227320CD9000310EC /* ExchangeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewCell.swift; sourceTree = "<group>"; };
 		3A85DED42713DF010059B5CB /* SettingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingApp.swift; sourceTree = "<group>"; };
 		3A8D79A1273B1CB500B6EA98 /* ParametrsAddCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametrsAddCardViewController.swift; sourceTree = "<group>"; };
@@ -271,10 +275,12 @@
 				3A85DED42713DF010059B5CB /* SettingApp.swift */,
 				3AF977A82714EBD3006C1B87 /* Ecryption.swift */,
 				3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */,
-				3A82E62F272C43E20054F36C /* API.swift */,
+				3A0787F82778851900F678DD /* API_VALUTE.swift */,
+				3A0787FA2778854500F678DD /* API_VALUTE_FULL.swift */,
 				3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */,
 				3A0862DF27382776000C5407 /* ValuteStructures.swift */,
 				3A36DAF327417F5000F9CE9C /* CardGenerator.swift */,
+				3A0787FF2778893F00F678DD /* ExtensionFuncBank.swift */,
 			);
 			path = FunctionFromBank;
 			sourceTree = "<group>";
@@ -495,10 +501,10 @@
 				3A30489A27139BAD0010A739 /* SafeLocalPassword.swift in Sources */,
 				3A49B5142755701F00ECC979 /* FullCardCell.swift in Sources */,
 				3AF977A92714EBD3006C1B87 /* Ecryption.swift in Sources */,
-				3A82E630272C43E20054F36C /* API.swift in Sources */,
 				3AB687EA272218B2002BD6EB /* NavigationTabBarMain.swift in Sources */,
 				3AB687EC272220B6002BD6EB /* PaymentsController.swift in Sources */,
 				3AB8F10B2743E8F600469C94 /* ChartSeries.swift in Sources */,
+				3A0787FB2778854500F678DD /* API_VALUTE_FULL.swift in Sources */,
 				3AB86B8D270D0A84008D0823 /* FirstRegController.swift in Sources */,
 				3A49B5102755591300ECC979 /* FullCardController.swift in Sources */,
 				3A9C9B772739C82B009A2D4C /* CardAdd.swift in Sources */,
@@ -506,12 +512,14 @@
 				3A97F27E2744148500A40224 /* ChartValuteController.swift in Sources */,
 				3ACEFA9D2720AC6D004BD739 /* NavigationController.swift in Sources */,
 				3A0779892711ED7C0026BCAD /* ClientObjects.swift in Sources */,
+				3A0788002778893F00F678DD /* ExtensionFuncBank.swift in Sources */,
 				3ACEFAA32721EBB7004BD739 /* AuthFromFaceID.swift in Sources */,
 				3A3AE94E271278A3001FF068 /* StartMainController.swift in Sources */,
 				3A0FC952270A52B700B6B2F6 /* SceneDelegate.swift in Sources */,
 				3AB687EE272221BC002BD6EB /* HistoryController.swift in Sources */,
 				3A99391D2738B15B009B1B06 /* NewCardController.swift in Sources */,
 				3AB86B8B270CB6B3008D0823 /* CheckCorrectAuthData.swift in Sources */,
+				3A0787F92778851900F678DD /* API_VALUTE.swift in Sources */,
 				3A835FD327320CD9000310EC /* ExchangeViewCell.swift in Sources */,
 				3AB86B86270BAA62008D0823 /* RegistrationController.swift in Sources */,
 				3A5EB0D6272D69ED0037D006 /* WalletViewCell.swift in Sources */,

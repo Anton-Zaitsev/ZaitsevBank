@@ -13,7 +13,7 @@ class ExchangeRateController: UIViewController {
     
     @IBOutlet weak var MainLabel: UILabel!
     
-    public var valuteToogle = true
+    private var valuteToogle = true
     
     @IBOutlet weak var ExchangeTable: UITableView!
     
@@ -40,7 +40,7 @@ class ExchangeRateController: UIViewController {
                 let loader = self.EnableLoader()
                 DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                     Task{
-                        dataExchange.exchangeValute = await API.getValuteTableFull()
+                        dataExchange.exchangeValute = await API_VALUTE_FULL.getValuteTableFull()
                         dataExchange.exchangeValuteDefault = dataExchange.exchangeValute
                         DispatchQueue.main.async {
                             ExchangeTable.reloadData()
@@ -69,7 +69,7 @@ class ExchangeRateController: UIViewController {
                 let loader = self.EnableLoader()
                 DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                     Task{
-                        dataExchange.exchangeValuteCriptoValute = await API.getBitcoinTableFull()
+                        dataExchange.exchangeValuteCriptoValute = await API_VALUTE_FULL.getBitcoinTableFull()
                         dataExchange.exchangeValuteDefault = dataExchange.exchangeValuteCriptoValute
                         DispatchQueue.main.async {
                             ExchangeTable.reloadData()
@@ -102,7 +102,7 @@ class ExchangeRateController: UIViewController {
         let loader = self.EnableLoader()
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
             Task{
-                dataExchange.exchangeValute = await API.getValuteTableFull()
+                dataExchange.exchangeValute = await API_VALUTE_FULL.getValuteTableFull()
                 dataExchange.exchangeValuteDefault = dataExchange.exchangeValute
                 DispatchQueue.main.async {
                     ExchangeTable.reloadData()
@@ -140,16 +140,34 @@ extension ExchangeRateController: UITableViewDelegate, UITableViewDataSource {
         let loader = self.EnableLoader()
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let ChartValute = self.storyboard?.instantiateViewController(withIdentifier: "ChartValute") as! ChartValuteController
-        
-        ChartValute.valuteSymbol = symbolValute
-        ChartValute.valuteName = nameValute
-        ChartValute.dinamicValute = dataExchange.exchangeValuteDefault[indexPath.row].dataChar
-        ChartValute.idValute = idValute
-        ChartValute.valuteToogle = self.valuteToogle
-        self.DisableLoader(loader: loader)
-        self.navigationController?.pushViewController(ChartValute, animated: true)
-        
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                    Task{
+                        
+                        guard let data = self.valuteToogle ?
+                                await API_DinamicValute.GetDinamicValute(idValute: idValute) :
+                                    await API_DinamicValute.GetDinamicCriptoValute(nameValute: nameValute)
+                        else {
+                            DispatchQueue.main.async {
+                                self.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о \(nameValute)")
+                                self.DisableLoader(loader: loader)
+                                tableView.deselectRow(at: indexPath, animated: true)
+                            }
+                            return
+                        }
+                        DispatchQueue.main.async {
+                            tableView.deselectRow(at: indexPath, animated: true)
+                            self.DisableLoader(loader: loader)
+                            let ChartValute = self.storyboard?.instantiateViewController(withIdentifier: "ChartValute") as! ChartValuteController
+                            ChartValute.valuteSymbol = symbolValute
+                            ChartValute.dinamicValute = data
+                            ChartValute.valuteName = nameValute
+                            ChartValute.idValute = idValute
+                            ChartValute.valuteToogle = self.valuteToogle
+                            self.DisableLoader(loader: loader)
+                            self.navigationController?.pushViewController(ChartValute, animated: true)
+                        }
+                    }
+                }
     }
     
 }
