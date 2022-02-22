@@ -8,18 +8,17 @@
 import UIKit
 
 class ParametrsAddCardViewController: UIViewController {
-    
-    
+        
     @IBOutlet weak var LabelTypeValute: UITextField!
     private var pickerValute = UIPickerView()
     
     private let NewCardAdd = RegistrationNewCard()
     
-    fileprivate let ValutePicker = ["Рубли", "Доллары", "Евро","Биткоин", "Эфириум"]
+    private let ValutePicker = ["Рубли", "Доллары", "Евро","Биткоин", "Эфириум"]
     
-    fileprivate let ValuteLabel = ["в рублях ₽", "в долларах $", "в евро €","в биткойне Ƀ", "в эфириуме ◊"]
+    private let ValuteLabel = ["в рублях ₽", "в долларах $", "в евро €","в биткойне Ƀ", "в эфириуме ◊"]
     
-    fileprivate let ValuteDB = ["RUB", "USD", "EUR","BTC", "ETH"]
+    private let ValuteDB = ["RUB", "USD", "EUR","BTC", "ETH"]
     
     private let generateCard = CardGenerator()
     
@@ -188,7 +187,7 @@ class ParametrsAddCardViewController: UIViewController {
         }
     }
     
-    fileprivate func generateIcon(type: String) -> String {
+    private func generateIcon(type: String) -> String {
         switch type {
         case "VISA" : return "SberCard"
         case "MASTERCARD" : return "SberCard"

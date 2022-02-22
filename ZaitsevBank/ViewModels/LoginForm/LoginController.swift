@@ -13,6 +13,9 @@ class LoginController: UIViewController, LocalPasswordDelegate {
     
     private var loginModel = LoginModel() //Объявляем модель данных для Login
     private let authFunc = AuthClient()
+    public var dataUser : clientZaitsevBank!
+    // LOCALPASSWORD
+    public var LocalPasswordEncrypted: String = ""
     
     lazy var ContainerLocalData: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "ZaitsevBank")
@@ -23,7 +26,6 @@ class LoginController: UIViewController, LocalPasswordDelegate {
         })
         return container
     }()
-    
     
     @IBOutlet weak var MainLabel: UILabel!
     @IBOutlet weak var SubMainLabel: UILabel!
@@ -60,9 +62,7 @@ class LoginController: UIViewController, LocalPasswordDelegate {
                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         setupVisualEffectView()
     }
-    
-    public var dataUser : clientZaitsevBank!
-    
+        
     @IBAction func SignClick(_ sender: Any){
         DispatchQueue.main.async {
             let loader = self.EnableLoader()
@@ -113,8 +113,6 @@ class LoginController: UIViewController, LocalPasswordDelegate {
         PasswordTextField.resignFirstResponder()
     }
     
-    // LOCALPASSWORD
-    
     func SigninFromPassword() {
         animateOut()
         
@@ -139,10 +137,8 @@ class LoginController: UIViewController, LocalPasswordDelegate {
             showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось сохранить ваш локальный пароль")
         }
     }
-    
-    var LocalPasswordEncrypted: String = ""
-    
-    func SetAlertLocalPassword() {
+        
+    private func SetAlertLocalPassword() {
         view.addSubview(AlertLocalPassword)
         AlertLocalPassword.center = view.center
         animateIn()

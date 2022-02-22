@@ -44,7 +44,7 @@ public class API_DinamicValute {
             }.parse(xmlDinamic)
             
             
-            for elem in  xml["ValCurs"]["Record"].all {
+            for elem in xml["ValCurs"]["Record"].all {
                 if let costValue = Double(elem["Value"].element!.text.replacingOccurrences(of: ",", with: ".")) {
                     if let data = elem.element?.attribute(by: "Date")?.text {
                         dinamic.value.append(costValue)
@@ -174,7 +174,7 @@ public class API_DinamicValute {
         var request = URLRequest(url: getDinamic!)
         request.setValue("Bearer \(SettingApp.APICoinCap)", forHTTPHeaderField: "Authorization")
         request.setValue("gzip,deflate,br", forHTTPHeaderField: "Accept-Encoding")
-        
+
 
         do{
             let (dataDinamicCripto,responce)  = try await URLSession.shared.data(for: request)

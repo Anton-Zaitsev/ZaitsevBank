@@ -38,6 +38,8 @@ public extension String {
         if let stringData = self.data(using: String.Encoding.utf8) {
             return stringData.sha256()
         }
-        return ""
+        else {
+            return ""
+        }
     }
 }

@@ -80,11 +80,13 @@ public class API_VALUTE {
     
     public static func getBitcoinTable() async -> [Exchange]{
         var dataBit : [Exchange] = []
-        
-        for value in BitcoinValutyType.allValuesFromTable {
+        let ListBitcoin = ["bitcoin","ethereum","tether"]
+        for value in ListBitcoin {
             
-            let getBit = URL(string: "https://api.cryptonator.com/api/ticker/\(value.rawValue)-usd")
-            let request = URLRequest(url: getBit!)
+            let getBit = URL(string: "https://api.coincap.io/v2/assets/\(value)")
+            var request = URLRequest(url: getBit!)
+            request.setValue("Bearer \(SettingApp.APICoinCap)", forHTTPHeaderField: "Authorization")
+            request.setValue("gzip,deflate,br", forHTTPHeaderField: "Accept-Encoding")
                         
             do {
                 
@@ -95,15 +97,15 @@ public class API_VALUTE {
                 
                 let json = try JSONEncoder.newJSONDecoder().decode(BitcoinValutes.self, from: dataBitcoin)
                 
-                let data = json.ticker
+                let data = json.data
                 
-                if let ExchangeBuy = Double(data.price) {
+                if let ExchangeBuy = Double(data.priceUsd) {
                     
-                    if let ExchengeChange = Double(data.change){
+                    if let ExchengeChange = Double(data.changePercent24Hr){
                         
                         let valuteSale = ExchangeBuy + Double.random(in: -3..<3)
                         
-                        dataBit.append(Exchange(typeValute: data.base, nameValute: BitcoinValutyType(rawValue: data.base)?.description ?? "USD", typeValuteExtended: data.base, buyValute: ExchangeBuy.valuteToTableFormat(), chartBuy: ExchengeChange > 0, saleValute: valuteSale.valuteToTableFormat(), chartSale: Bool.random()))
+                        dataBit.append(Exchange(typeValute: data.symbol, nameValute: data.name, typeValuteExtended: data.symbol, buyValute: ExchangeBuy.valuteToTableFormat(), chartBuy: ExchengeChange > 0, saleValute: valuteSale.valuteToTableFormat(), chartSale: Bool.random()))
                     }
                 }
             }

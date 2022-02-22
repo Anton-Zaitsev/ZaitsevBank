@@ -175,15 +175,15 @@ class StartMainController: UIViewController {
                     modelStartMain.dataTableExchange.removeAll()
                     
                     if let dataUSD = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.USD.rawValue}) {
-                        modelStartMain.dataTableExchange.append(dataUSD)
+                        modelStartMain.dataTableExchange.append(dataUSD) // Доллар
                     }
                     
                     if let dataEvro = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.EUR.rawValue}) {
-                        modelStartMain.dataTableExchange.append(dataEvro)
+                        modelStartMain.dataTableExchange.append(dataEvro) // Евро
                     }
                     
                     if let dataUKR = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.UAH.rawValue}) {
-                        modelStartMain.dataTableExchange.append(dataUKR)
+                        modelStartMain.dataTableExchange.append(dataUKR) // Гривны
                     }
                 }
                 

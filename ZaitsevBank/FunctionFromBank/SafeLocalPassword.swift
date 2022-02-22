@@ -43,7 +43,7 @@ public class SafeLocalPassword {
             
         }
         catch {
-            return ("","")
+            return ("none","none")
         }
         
     }
@@ -70,12 +70,12 @@ public class SafeLocalPassword {
                 return  (login,password)
             }
             else {
-                return ("","")
+                return ("none","none")
             }
             
         }
         catch {
-            return ("","")
+            return ("none","none")
         }
         
     }

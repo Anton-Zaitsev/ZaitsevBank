@@ -77,16 +77,17 @@ struct BitcoinChartTableData: Codable {
 }
 
 struct BitcoinValutes: Codable {
-    let ticker: Ticker
+    let data: DataClass
     let timestamp: Int
-    let success: Bool
-    let error: String
 }
 
 // MARK: - Ticker
-struct Ticker: Codable {
-    let base, target, price, volume: String
-    let change: String
+struct DataClass: Codable {
+    let id, rank, symbol, name: String
+    let supply, marketCapUsd, volumeUsd24Hr: String
+    let maxSupply : String?
+    let priceUsd, changePercent24Hr, vwap24Hr: String
+    let explorer: String
 }
 
 
@@ -103,9 +104,7 @@ public enum BitcoinValutyType: String {
     case USDC
     
     static let allValues = [BTC, ETH, BNB, SOL, USDT, ADA, XRP, DOT, DOGE ,USDC]
-    
-    static let allValuesFromTable = [BTC, ETH, BNB]
-    
+        
     var description: String {
         switch self {
         case .BTC : return "Биткоин"

@@ -10,7 +10,7 @@ import UIKit
 class NewCardController: UIViewController {
     
     @IBOutlet weak var AddCardCollectionView: UICollectionView!
-    
+        
     public var nameFamilyOwner = "Андрей Гасанов"
     public var ValutePick : String?
     private var modelDataCard : CardAddModel!

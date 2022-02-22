@@ -9,11 +9,12 @@ import UIKit
 import LocalAuthentication
 import CoreData
 
-class NavigationController: UIViewController {
+public class NavigationController: UIViewController {
     
     private let authFaceID: AuthFromFaceID = AuthFromFaceID()
     
-    private var pinCode = ""
+    private var pinCode : String = ""
+    
     fileprivate let biometricsType: LABiometryType = {
         let laContext = LAContext()
         var error: NSError?
@@ -66,7 +67,7 @@ class NavigationController: UIViewController {
     
     @IBOutlet weak var ButtonFaceTouchID: UIButton!
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         
@@ -80,15 +81,15 @@ class NavigationController: UIViewController {
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if(UserDefaults.standard.isUsesFaceTouchID()) {
-        signFromFaceID()
+            signFromFaceID_TouchId()
         }
     }
     
     
-    fileprivate func GetView() {
+    private func GetView() {
         LabelVersion.text = "Версия: \(getVersionApp())"
         Pass1.layer.cornerRadius = 6
         Pass2.layer.cornerRadius = 6
@@ -160,7 +161,7 @@ class NavigationController: UIViewController {
     
     @IBAction func FaceID(_ sender: Any) {
         
-        signFromFaceID()
+        signFromFaceID_TouchId()
     }
     
     @IBAction func DeleteButton(_ sender: Any) {
@@ -190,24 +191,26 @@ class NavigationController: UIViewController {
         }
     }
     
-    fileprivate func signFromFaceID() {
+    private func signFromFaceID_TouchId() {
+        Pass1.backgroundColor = .green
+        Pass2.backgroundColor = .green
+        Pass3.backgroundColor = .green
+        Pass4.backgroundColor = .green
+        Pass5.backgroundColor = .green
+        
         if (biometricsType.rawValue == 1 || biometricsType.rawValue == 2){
-            Pass1.backgroundColor = .green
-            Pass2.backgroundColor = .green
-            Pass3.backgroundColor = .green
-            Pass4.backgroundColor = .green
-            Pass5.backgroundColor = .green
             let loader = self.EnableLoader()
             authFaceID.signUSER(self, DatabaseLinkAutoLogin: ContainerLocalData, loader: loader)
-            Pass1.backgroundColor = .darkGray
-            Pass2.backgroundColor = .darkGray
-            Pass3.backgroundColor = .darkGray
-            Pass4.backgroundColor = .darkGray
-            Pass5.backgroundColor = .darkGray
         }
         else {
             authFaceID.getFaceIDorTouchID(self)
         }
+        
+        Pass1.backgroundColor = .darkGray
+        Pass2.backgroundColor = .darkGray
+        Pass3.backgroundColor = .darkGray
+        Pass4.backgroundColor = .darkGray
+        Pass5.backgroundColor = .darkGray
     }
     
     private func GetNumber(number: String, _ button: UIButton){
@@ -258,7 +261,7 @@ class NavigationController: UIViewController {
             button.backgroundColor = .gray
             Pass5.backgroundColor = .green
             pinCode += number
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) {
                 button.backgroundColor = .clear
                 button.layer.cornerRadius = 0
             }
@@ -272,8 +275,6 @@ class NavigationController: UIViewController {
     
     private func getVersionApp() -> String {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-        guard let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-        else {return appVersion}
-        return "\(appVersion) (\(build))"
+        return appVersion
     }
 }

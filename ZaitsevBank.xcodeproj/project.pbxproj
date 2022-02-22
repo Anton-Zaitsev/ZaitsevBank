@@ -218,8 +218,8 @@
 		3A0FC968270A531100B6B2F6 /* LoginForm */ = {
 			isa = PBXGroup;
 			children = (
-				3ACEFA9C2720AC6D004BD739 /* NavigationController.swift */,
 				3A0FC972270A547E00B6B2F6 /* LoginController.swift */,
+				3ACEFA9C2720AC6D004BD739 /* NavigationController.swift */,
 				3AB86B85270BAA62008D0823 /* RegistrationController.swift */,
 				3AB86B8C270D0A84008D0823 /* FirstRegController.swift */,
 				3A2CDE6B2710B022005F0CF4 /* LastRegController.swift */,

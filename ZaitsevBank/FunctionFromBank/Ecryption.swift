@@ -16,7 +16,6 @@ extension String {
     }
     
     func decryptMessage(encryptionKey: String) throws -> String {
-        
         let encryptedData = Data.init(base64Encoded: self)!
         let decryptedData = try RNCryptor.decrypt(data: encryptedData, withPassword: encryptionKey)
         let decryptedString = String(data: decryptedData, encoding: .utf8)!
