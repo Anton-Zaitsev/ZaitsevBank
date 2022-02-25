@@ -37,7 +37,7 @@ class ExchangeRateCell: UITableViewCell {
             series.colors = (
               above: ChartColors.greenColor(),
               below: ChartColors.redColor(),
-              zeroLevel: valute.dataChar.last ?? 0
+              zeroLevel: valute.dataChar.first ?? 0 // От начало регулируется цвет графика
             )
             
             CharView.add(series)

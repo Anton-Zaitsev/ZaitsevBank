@@ -41,6 +41,11 @@ public class GetCardUser {
             user = noneUser
         }
         var cardsClient : [Cards] = [Cards] ()
+        
+        let fmt = NumberFormatter()
+        fmt.numberStyle = .decimal
+        fmt.locale = Locale(identifier: "fr_FR")
+        
         guard let data = await get(NoneUser: NoneUser) else { return cardsClient}
         
         for client in data.card {
@@ -50,19 +55,19 @@ public class GetCardUser {
                 
                 if (floor(client.moneyCount.value!) == client.moneyCount.value!) { // Если число можно преобразовать в double
                     if let converted = Int(exactly: (client.moneyCount.value?.rounded())!) {
-                        moneyCount = String(converted)
+                        moneyCount = fmt.string(for:converted)!
                         
                     } else {
-                        moneyCount = client.moneyCount.value!.formatterToValute()
+                        moneyCount = fmt.string(for: client.moneyCount.value)!
                     }
                 }
                 else {
-                    moneyCount = client.moneyCount.value!.formatterToValute()
+                    moneyCount = fmt.string(for: client.moneyCount.value)!
                 }
                 
             }
             else{
-                moneyCount = String(client.moneyCount.value!).replacingOccurrences(of: ".", with: ",")
+                moneyCount = fmt.string(for: client.moneyCount.value)!.replacingOccurrences(of: ".", with: ",")
             }
             
             var numberCard = client.numberCard!
@@ -117,14 +122,4 @@ public class GetCardUser {
     }
 }
 
-extension Double {
-    func formatterToValute() -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.groupingSeparator = " "
-        
-        let formattedString = formatter.string(for: self)
-        return formattedString!.replacingOccurrences(of: ".", with: ",")
-    }
-}
 

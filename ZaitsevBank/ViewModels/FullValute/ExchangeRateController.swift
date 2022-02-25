@@ -19,6 +19,7 @@ class ExchangeRateController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setNavigationBar("Курсы")
         ExchangeTable.delegate = self
         ExchangeTable.dataSource = self
     }

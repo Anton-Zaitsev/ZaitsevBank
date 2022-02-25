@@ -24,6 +24,7 @@ class WalletViewCell: UITableViewCell {
         NumberCard.text = Card.numberCard
         LabelMoney.text = "\(Card.moneyCount) \(Card.typeMoney)"
         WalletTypeImage.image = UIImage(named: Card.typeImageCard)
+        
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -31,3 +32,4 @@ class WalletViewCell: UITableViewCell {
     }
 
 }
+

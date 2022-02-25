@@ -17,14 +17,15 @@ class FullCardController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white ]
+
+        self.setNavigationBar("Курсы")
         CollectionCard.isPagingEnabled = true
         CollectionCard.delegate = self
         CollectionCard.dataSource = self
         _ = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: false)
 
     }
+    
     
     @objc func autoScroll() {
         let totalCount = cardFull.count-1

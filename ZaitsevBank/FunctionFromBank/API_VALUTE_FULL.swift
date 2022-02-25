@@ -41,7 +41,7 @@ public class API_VALUTE_FULL {
                 }
             }
             
-            return dataCB.sorted { $0.charCode < $1.charCode }
+            return API_VALUTE.sortedValute(dataInput: dataCB,false)
         }
         catch {
             print("Ошибка при декодинге")
@@ -86,7 +86,7 @@ public class API_VALUTE_FULL {
             }
                 
             
-            return dataCB
+            return API_VALUTE.sortedValute(dataInput: dataCB,true)
         }
         catch {
             print("Ошибка при декодинге")

@@ -33,3 +33,4 @@ public extension Double {
         return valute.replacingOccurrences(of: ".", with: ",")
     }
 }
+

@@ -148,3 +148,11 @@ extension UIView{
         }
     }
 }
+extension UIViewController {
+    func setNavigationBar(_ title: String,_ color: UIColor = UIColor.white) {
+        self.navigationItem.title = title
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: color]
+        self.navigationController?.navigationBar.tintColor = .green
+        
+    }
+}

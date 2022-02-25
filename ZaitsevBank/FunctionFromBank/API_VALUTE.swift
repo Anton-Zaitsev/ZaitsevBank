@@ -116,4 +116,22 @@ public class API_VALUTE {
         return dataBit
     }
     
+    public static func sortedValute (dataInput: [ExchangeFull],_ cripto: Bool) -> [ExchangeFull] {
+       
+        var mass_valute : [String] = []
+        if (cripto) {
+            mass_valute = ["BTC", "ETH", "USDT", "DOGE", "LTC", "BCH", "DASH", "ALGO"].reversed()
+        }
+        else {
+            mass_valute = ["USD", "EUR", "BYN" ,"UAH"].reversed()
+        }
+        
+        let order = Dictionary(uniqueKeysWithValues: mass_valute.enumerated().map { ($0.1, $0.0) })
+
+        let results = dataInput.sorted {
+            (order[$0.charCode] ?? 0) > (order[$1.charCode] ?? 0)
+        }
+        
+        return results
+    }
 }

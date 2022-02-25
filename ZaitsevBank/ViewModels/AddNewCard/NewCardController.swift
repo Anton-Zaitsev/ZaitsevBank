@@ -17,6 +17,7 @@ class NewCardController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setNavigationBar("Выбор новой карты")
         modelDataCard = CardAddModel(nameFamily: nameFamilyOwner)
         AddCardCollectionView.delegate = self
         AddCardCollectionView.dataSource = self

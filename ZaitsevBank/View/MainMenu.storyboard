@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="v48-wA-q4V">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4mZ-fl-wcx">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
@@ -13,7 +13,7 @@
         <!--Главная-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="StartMainMenu" id="Y6W-OH-hqX" customClass="StartMainController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StartMainMenu" title="Главная" id="Y6W-OH-hqX" customClass="StartMainController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1050"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -595,10 +595,10 @@
             </objects>
             <point key="canvasLocation" x="-875.36231884057975" y="-774.10714285714278"/>
         </scene>
-        <!--NewCard-->
+        <!--Выбор новой карты-->
         <scene sceneID="aZo-EB-Rcf">
             <objects>
-                <viewController storyboardIdentifier="NewCardMenu" autoresizesArchivedViewToFullSize="NO" title="NewCard" modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="lzb-ly-DSY" customClass="NewCardController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewCardMenu" autoresizesArchivedViewToFullSize="NO" title="Выбор новой карты" modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="lzb-ly-DSY" customClass="NewCardController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jcv-4P-7dL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -854,7 +854,6 @@
                             <constraint firstItem="HRn-kc-XYX" firstAttribute="leading" secondItem="jcv-4P-7dL" secondAttribute="leading" constant="10" id="wCE-DY-qzx"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Выбор новой карты" id="nvD-Ky-RQ4"/>
                     <splitViewDetailSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="AddCardCollectionView" destination="ysE-4a-0Hx" id="TPN-zv-iVG"/>
@@ -864,10 +863,10 @@
             </objects>
             <point key="canvasLocation" x="100.00000000000001" y="-875.89285714285711"/>
         </scene>
-        <!--Parametrs Add Card View Controller-->
+        <!--Параметры карты-->
         <scene sceneID="wOX-H2-cvE">
             <objects>
-                <viewController storyboardIdentifier="ParametrsCardMenu" hidesBottomBarWhenPushed="YES" id="v48-wA-q4V" customClass="ParametrsAddCardViewController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ParametrsCardMenu" title="Параметры карты" hidesBottomBarWhenPushed="YES" id="v48-wA-q4V" customClass="ParametrsAddCardViewController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Cs-WI-bQo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1131,7 +1130,6 @@
                         <outlet property="ViewDataCard" destination="eiI-vk-R3B" id="8vH-dL-3pd"/>
                     </connections>
                 </viewController>
-                <navigationItem title="Параметры карты" id="yPK-TS-5hR"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aaj-tX-zoS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="928.98550724637687" y="-876.5625"/>

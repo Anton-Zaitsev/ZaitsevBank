@@ -66,7 +66,8 @@ class ParametrsAddCardViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    fileprivate func GetView() {
+    private func GetView() {
+        self.setNavigationBar("Параметры карты")
         
         if let valutePick = ValutePick{
             let indexes = ValuteLabel.enumerated().filter {

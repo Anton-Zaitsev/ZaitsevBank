@@ -67,7 +67,8 @@ class ChartValuteController: UIViewController, ChartDelegate {
     }
     
     private func getMenuData() {
-        MainLabel.text = "Динамика \(valuteName ?? "none") за месяц."
+        self.setNavigationBar("Динамика \(valuteName ?? "none") за месяц.")
+        
         marginLabelChart = ChartChartLeading.constant
         
         let menuDate = UIMenu(title: "", children: [
@@ -145,7 +146,7 @@ class ChartValuteController: UIViewController, ChartDelegate {
         series.colors = (
           above: ChartColors.greenColor(),
           below: ChartColors.redColor(),
-          zeroLevel: dinamicValute.now
+          zeroLevel: dinamicValute.start
         )
         
         ViewChart.showYLabelsAndGrid = false
@@ -229,7 +230,7 @@ class ChartValuteController: UIViewController, ChartDelegate {
                 DispatchQueue.main.async {
                     ViewChart.removeAllSeries()
                     getView()
-                    MainLabel.text = "Динамика \(valuteName ?? "none") \(datavalute.description)."
+                    self.navigationItem.title = "Динамика \(valuteName ?? "none") \(datavalute.description)."
                 }
             }
         }

@@ -278,3 +278,23 @@ public class NavigationController: UIViewController {
         return appVersion
     }
 }
+/*
+import SwiftUI
+
+struct MainPreview : PreviewProvider {
+    static var previews: some View {
+        ContainerView().edgesIgnoringSafeArea(.all)
+    }
+    
+    struct ContainerView : UIViewControllerRepresentable {
+        
+        func makeUIViewController(context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) -> some NavigationController {
+            return NavigationController()
+        }
+        func updateUIViewController(_ uiViewController: MainPreview.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) {
+            
+        }
+    }
+}
+
+*/
