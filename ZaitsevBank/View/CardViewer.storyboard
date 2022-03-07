@@ -497,7 +497,7 @@
     <color key="tintColor" systemColor="tintColor"/>
     <resources>
         <image name="BacroundCardTypeDefault" width="893" height="552"/>
-        <image name="LogoZaitsevBank" width="624" height="614"/>
+        <image name="LogoZaitsevBank" width="819" height="701"/>
         <image name="arrow.left.arrow.right.circle" catalog="system" width="128" height="121"/>
         <image name="chart.bar.doc.horizontal" catalog="system" width="115" height="128"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>

@@ -64,21 +64,14 @@ class LoginController: UIViewController, LocalPasswordDelegate {
     }
         
     @IBAction func SignClick(_ sender: Any){
-        DispatchQueue.main.async {
-            let loader = self.EnableLoader()
-            DispatchQueue.global(qos: .utility).async{ [self] in
-                
-                Task(priority: .high) {
-                    guard let user = await authFunc.SignIn(login: loginModel.Login, pass: loginModel.Password)
-                    else {
-                        DispatchQueue.main.async {
-                        self.DisableLoader(loader: loader)
-                        showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.ErrorAuthClient)
-                        }
-                        return
-                    }
-                        
-                    if let data = await GetDataUser().get(NoneUser: user){
+        
+        let loader = self.EnableLoader()
+        DispatchQueue.global(qos: .utility).async{ [self] in
+            
+            Task(priority: .high) {
+                if let user = await authFunc.SignIn(login: loginModel.Login, pass: loginModel.Password){
+
+                    if let data = await GetDataUser().getFromUser(user){
                         DispatchQueue.main.async {
                             SetAlertLocalPassword()
                             dataUser = data
@@ -91,8 +84,15 @@ class LoginController: UIViewController, LocalPasswordDelegate {
                             showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о пользователе")
                         }
                     }
-  
                 }
+                else {
+                    DispatchQueue.main.async {
+                    self.DisableLoader(loader: loader)
+                    showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.ErrorAuthClient)
+                    }
+                    return
+                }
+
             }
         }
     }
@@ -120,15 +120,13 @@ class LoginController: UIViewController, LocalPasswordDelegate {
         
         if(succSafeLocalCode){
             
-            self.EnableMainLoader(NameUser: dataUser.name!)
+            self.EnableMainLoader(dataUser.name!)
             //MARK: Установка user на первоначальное вхождение и установка на true
             UserDefaults.standard.SetisLogin(true)
             //SafeLocalPassword.ReadDataLocal(database: ContainerLocalData)
             let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
             let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
-            
-            NavigationTabBar.dataUser = dataUser
-            
+                        
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
                 self.navigationController?.pushViewController(NavigationTabBar, animated: true)
             }

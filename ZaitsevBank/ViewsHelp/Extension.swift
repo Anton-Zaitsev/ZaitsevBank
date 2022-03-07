@@ -26,11 +26,15 @@ extension UIViewController {
 
 extension UIViewController {
     
-    func EnableMainLoader(NameUser: String = ""){
+    func EnableMainLoader(_ NameUser: String = ""){
         var nameUser = NameUser
+        
         let screen = UIScreen.main.bounds
         let viewLoader = UIView(frame: screen)
+        viewLoader.backgroundColor = .black
         let LoaderView : UIImageView = UIImageView(frame: screen)
+        LoaderView.contentMode = .scaleAspectFit
+        
         let labelName = UILabel(frame: CGRect(x: 0, y: CGFloat(100), width: screen.width, height: 100))
         
         if (UserDefaults.standard.checkNameScreensaver()) {
@@ -39,8 +43,25 @@ extension UIViewController {
         else {
             UserDefaults.standard.SetisNameScreensaver(NameUser)
         }
+        let date = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
         
-        labelName.text = "Добро пожаловать,\n \(nameUser)"
+        if hour >= 22 || hour <= 5   {
+            labelName.text = "Доброй ночи,\n\(nameUser)"
+        }
+        else if hour >= 6 && hour <= 11 {
+            labelName.text = "Доброго утра,\n\(nameUser)"
+        }
+        else if hour >= 12 && hour <= 17  {
+            labelName.text = "Добрый день,\n\(nameUser)"
+        }
+        else if hour >= 18 && hour <= 21  {
+            labelName.text = "Доброый вечер,\n\(nameUser)"
+        }
+        else {
+            labelName.text = "Добро пожаловать,\n\(nameUser)"
+        }
         labelName.textAlignment = .center
         labelName.font = UIFont(name:"HelveticaNeue-Bold", size: 31.0)
         labelName.textColor = .white
@@ -48,7 +69,6 @@ extension UIViewController {
         labelName.numberOfLines = 0
         
         LoaderView.image = UIImage(named: "BackroundOpenClient")
-        LoaderView.sizeToFit()
         viewLoader.addSubview(LoaderView)
         viewLoader.addSubview(labelName)
         self.view.addSubview(viewLoader)

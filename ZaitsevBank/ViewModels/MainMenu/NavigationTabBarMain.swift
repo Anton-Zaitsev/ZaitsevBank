@@ -9,15 +9,12 @@ import UIKit
 
 class NavigationTabBarMain: UITabBarController {
     
-    public var dataUser = clientZaitsevBank()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let Main = self.storyboard?.instantiateViewController(withIdentifier: "StartMainMenu") as! StartMainController
-        
-        Main.dataUser = self.dataUser
-             
+                     
         let Payments = self.storyboard?.instantiateViewController(withIdentifier: "Payments") as! PaymentsController
         
         let History = self.storyboard?.instantiateViewController(withIdentifier: "History") as! HistoryController

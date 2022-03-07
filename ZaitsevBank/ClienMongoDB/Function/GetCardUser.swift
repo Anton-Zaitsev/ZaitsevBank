@@ -51,7 +51,9 @@ public class GetCardUser {
         for client in data.card {
             var moneyCount: String = ""
             
-            if (!electonValute(valute: client.typeMoney!)){
+            let valuteTypeBank = ValuteZaitsevBank.init(rawValue: client.typeMoneyExtended!)!
+            
+            if (valuteTypeBank.electronValute){
                 
                 if (floor(client.moneyCount.value!) == client.moneyCount.value!) { // Если число можно преобразовать в double
                     if let converted = Int(exactly: (client.moneyCount.value?.rounded())!) {
@@ -74,8 +76,8 @@ public class GetCardUser {
             let index = numberCard.index(numberCard.endIndex, offsetBy: -4)
             numberCard = String(numberCard.suffix(from: index))
             numberCard = "•• \(numberCard)"
-            
-            cardsClient.append(Cards(typeImageCard: client.typeCard!, typeMoney: client.typeMoney!, nameCard: client.nameCard!, numberCard: numberCard, moneyCount: moneyCount, cvv: client.cvvv!, data: client.data!, cardOperator: client.cardOperator!, typeMoneyExtended: client.typeMoneyExtended!, fullNumberCard: client.numberCard!, transactionID: client.transactionID!))
+                        
+            cardsClient.append(Cards(typeImageCard: client.typeCard!, typeMoney: valuteTypeBank.description, nameCard: client.nameCard!, numberCard: numberCard, moneyCount: moneyCount, cvv: client.cvvv!, data: client.data!, cardOperator: client.cardOperator!, typeMoneyExtended: client.typeMoneyExtended!, fullNumberCard: client.numberCard!, transactionID: client.transactionID!))
             
         }
         return cardsClient
@@ -107,19 +109,7 @@ public class GetCardUser {
         return sortData
         
     }
-    
-    
-    fileprivate func electonValute(valute: String) -> Bool {
-        switch valute{
-        case "₽" : return false
-        case "$" : return false
-        case "€" : return false
-        case "Ƀ" : return true
-        case "◊" : return true
-        default:
-            return false
-        }
-    }
+          
 }
 
 

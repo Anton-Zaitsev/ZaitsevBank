@@ -67,7 +67,7 @@ class CardPickController: UIViewController {
                         let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
                         let AddNewCardController = storyboardMainMenu.instantiateViewController(withIdentifier: "NewCardMenu") as! NewCardController
                         AddNewCardController.nameFamilyOwner = "\(data.name!) \(data.family!)"
-                        AddNewCardController.ValutePick = ValuteZaitsevBank(rawValue: self.valuteSymbol)?.description
+                        AddNewCardController.ValutePick = self.valuteSymbol
                         
                         let navigationController = UINavigationController(rootViewController: AddNewCardController)
                         navigationController.modalPresentationStyle = UIModalPresentationStyle.overFullScreen

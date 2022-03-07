@@ -99,7 +99,7 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
                                     if (boolRegistration){
                                         Task(priority: .medium) {
                                             
-                                            if let data = await GetDataUser().get(NoneUser: user) {
+                                            if let data = await GetDataUser().get() {
                                                 DataUser = data
                                                 self.DisableLoader(loader: loader)
                                                 SetAlertLocalPassword()
@@ -171,14 +171,13 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
             //MARK: Установка user на первоначальное вхождение и установка на true
             UserDefaults.standard.SetisLogin(true)
             
-            self.EnableMainLoader(NameUser: ModelRegistration.Name)
+            self.EnableMainLoader(ModelRegistration.Name)
             //SafeLocalPassword.ReadDataLocal(database: ContainerLocalData)
             let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
             
             let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
-            NavigationTabBar.dataUser = DataUser
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 self.navigationController?.pushViewController(NavigationTabBar, animated: true)
             }
             

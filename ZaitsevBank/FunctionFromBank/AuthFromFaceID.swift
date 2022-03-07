@@ -48,32 +48,18 @@ public class AuthFromFaceID {
                                 viewController.Pass5.backgroundColor = .green
                             }
                             
-                            if let user = await authFunc.SignIn(login: login, pass: password) { // Если нашел такого пользователя
+                            if (await authFunc.SignIn(login: login, pass: password)) != nil { // Если нашел такого пользователя
                                                                                                     
-                                if let data = await GetDataUser().get(NoneUser: user) { // Если по нему есть какая-то информация
                                 DispatchQueue.main.async{
-                                    viewController.EnableMainLoader(NameUser: data.name!)
+                                    viewController.EnableMainLoader()
                                        
                                     let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
                                     
                                     let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
                                     
-                                    NavigationTabBar.dataUser = data
                                         
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                                         viewController.navigationController?.pushViewController(NavigationTabBar, animated: true)
-                                    }
-                                }
-                                }
-                                else {
-                                    DispatchQueue.main.async{
-                                        viewController.Pass1.backgroundColor = .darkGray
-                                        viewController.Pass2.backgroundColor = .darkGray
-                                        viewController.Pass3.backgroundColor = .darkGray
-                                        viewController.Pass4.backgroundColor = .darkGray
-                                        viewController.Pass5.backgroundColor = .darkGray
-                                        viewController.DisableLoader(loader: loader)
-                                        viewController.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера")
                                     }
                                 }
                             }
@@ -129,39 +115,20 @@ public class AuthFromFaceID {
                     viewController.Pass5.backgroundColor = .green
                 }
                 
-                if let user = await authFunc.SignIn(login: login, pass: password) {
+                if (await authFunc.SignIn(login: login, pass: password)) != nil {
                                  
-                    if let data = await GetDataUser().get(NoneUser: user) {
+                    DispatchQueue.main.async {
+                        viewController.DisableLoader(loader: loader)
+                        viewController.EnableMainLoader()
                         
-                        DispatchQueue.main.async {
-                            viewController.DisableLoader(loader: loader)
-                            viewController.EnableMainLoader(NameUser: data.name!)
-                            
-            
-                            let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
-                            
-                            let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
-                            
-                            NavigationTabBar.dataUser = data
-
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-                                viewController.navigationController?.pushViewController(NavigationTabBar, animated: true)
-                            }
+                        let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
+                        
+                        let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
+                    
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            viewController.navigationController?.pushViewController(NavigationTabBar, animated: true)
                         }
                     }
-                    else {
-                        DispatchQueue.main.async {
-                            viewController.Pass1.backgroundColor = .darkGray
-                            viewController.Pass2.backgroundColor = .darkGray
-                            viewController.Pass3.backgroundColor = .darkGray
-                            viewController.Pass4.backgroundColor = .darkGray
-                            viewController.Pass5.backgroundColor = .darkGray
-                            viewController.DisableLoader(loader: loader)
-                            viewController.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера")
-                        }
-                    }
-                                
                 }
                 else {
                     DispatchQueue.main.async {

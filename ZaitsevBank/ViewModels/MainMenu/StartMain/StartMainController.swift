@@ -13,18 +13,17 @@ class StartMainController: UIViewController {
     
     private let modelStartMain : StartMenu = StartMenu()
     
-    public var dataUser = clientZaitsevBank()
+    public var DataUser = clientZaitsevBank()
     public var cardUser = [Cards]()
     
-    fileprivate let dataValute = API_VALUTE.getDataValute()
+    private let dataValute = API_VALUTE.getDataValute()
     
-    fileprivate var ExhangeTableValute = true
+    private var ExhangeTableValute = true
     
     @IBOutlet weak var LabelName: UILabel!
     @IBOutlet weak var LabelValute: UILabel!
     @IBOutlet weak var CollectionOffers: UICollectionView!
     
-    @IBOutlet weak var LabelAddNewCard: UILabel!
     
     @IBOutlet weak var AllExchange: UILabel!
     
@@ -43,6 +42,9 @@ class StartMainController: UIViewController {
     @IBOutlet weak var ExchangeView: UIView!
     @IBOutlet weak var ExchangeTable: UITableView!
     
+    @IBOutlet weak var LabelFullAddCard: UILabel!
+    @IBOutlet weak var LabelAddCard: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,15 +54,9 @@ class StartMainController: UIViewController {
     
     
     private func GetView() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(AddNewCard))
-        LabelAddNewCard.isUserInteractionEnabled = true
-        LabelAddNewCard.addGestureRecognizer(tap)
-        
-        let tapAllCurse = UITapGestureRecognizer(target: self, action: #selector(SeeAllExchange))
-        AllExchange.isUserInteractionEnabled = true
-        AllExchange.addGestureRecognizer(tapAllCurse)
-        
-        LabelName.text = dataUser.name
+        LabelFullAddCard.isEnabled = false
+        LabelAddCard.isEnabled = false
+                
         CollectionOffers.delegate = self
         CollectionOffers.dataSource = self
         IndicatorMonthlyExpenses.layer.cornerRadius = IndicatorMonthlyExpenses.frame.height / 2
@@ -80,12 +76,20 @@ class StartMainController: UIViewController {
         ButtonValute.setTitleColor(.black, for: .normal)
         ButtonCriptoValute.backgroundColor = #colorLiteral(red: 0.2114904225, green: 0.2115325928, blue: 0.2114848793, alpha: 1)
         ButtonCriptoValute.setTitleColor(.white, for: .normal)
+                
+        _ = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(getDataStartMenu), userInfo: nil, repeats: false)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(AddNewCard))
+        LabelFullAddCard.isUserInteractionEnabled = true
+        LabelFullAddCard.addGestureRecognizer(tap)
+        
+        let tapAllCurse = UITapGestureRecognizer(target: self, action: #selector(SeeAllExchange))
+        AllExchange.isUserInteractionEnabled = true
+        AllExchange.addGestureRecognizer(tapAllCurse)
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshAllData), for: .valueChanged)
         ScrollViewStartMainController.refreshControl = refreshControl
-        
-        _ = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(getDataStartMenu), userInfo: nil, repeats: false)
         
         WalletTable.delegate = self
         WalletTable.dataSource = self
@@ -98,33 +102,25 @@ class StartMainController: UIViewController {
     @objc private func getDataStartMenu() {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
             Task{
-                cardUser = await GetCardUser().getCards()
-                modelStartMain.dataExchange = await API_VALUTE.getValuteTable()
-                
-                modelStartMain.dataTableExchange.removeAll()
-                
-                if let dataUSD = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.USD.rawValue}) {
-                    modelStartMain.dataTableExchange.append(dataUSD)
+                await withTaskGroup(of: Void.self) { group in
+                    group.addTask {
+                        await getDataUserTable()
+                    }
+                    group.addTask {
+                        await getTableExchange()
+                    }
+                    group.addTask {
+                       await getTableWallet()
+                    }
+                    group.addTask {
+                        modelStartMain.dataBitExchange = await API_VALUTE.getBitcoinTable()
+                    }
                 }
-                
-                if let dataEvro = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.EUR.rawValue}) {
-                    modelStartMain.dataTableExchange.append(dataEvro)
-                }
-                
-                if let dataUKR = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.UAH.rawValue}) {
-                    modelStartMain.dataTableExchange.append(dataUKR)
-                }
-                
-                DispatchQueue.main.async {
-                    WalletTable.reloadData()
-                    ExchangeTable.reloadData()
-                }
-                
-                modelStartMain.dataBitExchange = await API_VALUTE.getBitcoinTable()
             }
         }
         
         var count = 0
+        
         Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [self] (_) in
             LabelValute.fadeTransition(0.4)
             if (count == dataValute.count){
@@ -148,8 +144,8 @@ class StartMainController: UIViewController {
     }
     
     @objc private func AddNewCard(sender: UITapGestureRecognizer) {
-        LabelAddNewCard.textColor = .white
-        AddNewCardFunction(OwnerNameFamily: "\(dataUser.name!) \(dataUser.family!)")
+        LabelFullAddCard.textColor = .white
+        AddNewCardFunction(OwnerNameFamily: "\(DataUser.name!) \(DataUser.family!)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -160,53 +156,36 @@ class StartMainController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false;
-        LabelAddNewCard.textColor = #colorLiteral(red: 0, green: 0.6389579177, blue: 0, alpha: 1)
+        LabelFullAddCard.textColor = #colorLiteral(red: 0, green: 0.6389579177, blue: 0, alpha: 1)
         AllExchange.textColor = #colorLiteral(red: 0, green: 0.6389579177, blue: 0, alpha: 1)
     }
     
     @objc private func refreshAllData(refreshControl: UIRefreshControl) {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
             Task{
-                cardUser = await GetCardUser().getCards()
-                modelStartMain.dataExchange = await API_VALUTE.getValuteTable()
-            
-            
-                if (modelStartMain.dataExchange.count > 0) {
-                    modelStartMain.dataTableExchange.removeAll()
-                    
-                    if let dataUSD = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.USD.rawValue}) {
-                        modelStartMain.dataTableExchange.append(dataUSD) // Доллар
+                await withTaskGroup(of: Void.self) { group in
+                    group.addTask {
+                        await getDataUserTable()
                     }
-                    
-                    if let dataEvro = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.EUR.rawValue}) {
-                        modelStartMain.dataTableExchange.append(dataEvro) // Евро
+                    group.addTask {
+                        await getTableExchange()
                     }
-                    
-                    if let dataUKR = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.UAH.rawValue}) {
-                        modelStartMain.dataTableExchange.append(dataUKR) // Гривны
+                    group.addTask {
+                       await getTableWallet()
+                    }
+                    group.addTask {
+                        modelStartMain.dataBitExchange = await API_VALUTE.getBitcoinTable()
                     }
                 }
-                
-                ExhangeTableValute = true
-                
                 DispatchQueue.main.async {
-                    ButtonValute.backgroundColor = .white
-                    ButtonValute.setTitleColor(.black, for: .normal)
-                    ButtonCriptoValute.backgroundColor = #colorLiteral(red: 0.2114904225, green: 0.2115325928, blue: 0.2114848793, alpha: 1)
-                    ButtonCriptoValute.setTitleColor(.white, for: .normal)
-                    
-                    WalletTable.reloadData()
-                    ExchangeTable.reloadData()
+                    refreshControl.endRefreshing()
                 }
-                
-                modelStartMain.dataBitExchange  = await API_VALUTE.getBitcoinTable()
             }
         }
-        refreshControl.endRefreshing()
     }
     
     @IBAction func NewCardPlus(_ sender: Any) {
-        AddNewCardFunction(OwnerNameFamily: "\(dataUser.name!) \(dataUser.family!)")
+        AddNewCardFunction(OwnerNameFamily: "\(DataUser.name!) \(DataUser.family!)")
     }
     
     
@@ -264,10 +243,66 @@ class StartMainController: UIViewController {
         }
     }
     
-    fileprivate func AddNewCardFunction(OwnerNameFamily: String) {
+    private func AddNewCardFunction(OwnerNameFamily: String) {
         let AddNewCardController = storyboard?.instantiateViewController(withIdentifier: "NewCardMenu") as! NewCardController
         AddNewCardController.nameFamilyOwner = OwnerNameFamily
         self.navigationController?.pushViewController(AddNewCardController, animated: true)
+    }
+    
+    private func getTableExchange() async {
+        
+        modelStartMain.dataExchange = await API_VALUTE.getValuteTable()
+        modelStartMain.dataTableExchange.removeAll()
+        
+        if (modelStartMain.dataExchange.count > 0) {
+            modelStartMain.dataTableExchange.removeAll()
+        }
+        
+        if let dataUSD = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.USD.rawValue}) {
+            modelStartMain.dataTableExchange.append(dataUSD)
+        }
+        
+        if let dataEvro = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.EUR.rawValue}) {
+            modelStartMain.dataTableExchange.append(dataEvro)
+        }
+        
+        if let dataUKR = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.UAH.rawValue}) {
+            modelStartMain.dataTableExchange.append(dataUKR)
+        }
+        
+        ExhangeTableValute = true
+        
+        DispatchQueue.main.async {
+            self.ButtonValute.backgroundColor = .white
+            self.ButtonValute.setTitleColor(.black, for: .normal)
+            self.ButtonCriptoValute.backgroundColor = #colorLiteral(red: 0.2114904225, green: 0.2115325928, blue: 0.2114848793, alpha: 1)
+            self.ButtonCriptoValute.setTitleColor(.white, for: .normal)
+            
+            self.ExchangeTable.reloadData()
+        }
+    }
+    
+    private func getTableWallet() async{
+        cardUser = await GetCardUser().getCards()
+        DispatchQueue.main.async {
+            self.WalletTable.reloadData()
+        }
+    }
+    
+    private func getDataUserTable() async {
+        if let dataUser = await GetDataUser().get(){
+            DataUser = dataUser
+            DispatchQueue.main.async {
+                self.LabelFullAddCard.isEnabled = true
+                self.LabelAddCard.isEnabled = true
+                self.LabelName.text = dataUser.name
+            }
+        }
+        else {
+            DispatchQueue.main.async {
+                self.LabelName.text = "USER"
+            }
+        }
     }
 }
 

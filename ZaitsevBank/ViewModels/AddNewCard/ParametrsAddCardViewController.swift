@@ -10,15 +10,22 @@ import UIKit
 class ParametrsAddCardViewController: UIViewController {
         
     @IBOutlet weak var LabelTypeValute: UITextField!
+    @IBOutlet weak var ViewLabelTypeValute: UIView!
+    @IBOutlet weak var LabelPickValute: UILabel!
+    
+    
     private var pickerValute = UIPickerView()
     
     private let NewCardAdd = RegistrationNewCard()
     
     private let ValutePicker = ["Рубли", "Доллары", "Евро","Биткоин", "Эфириум"]
     
-    private let ValuteLabel = ["в рублях ₽", "в долларах $", "в евро €","в биткойне Ƀ", "в эфириуме ◊"]
+    private let ValuteLabel = ["В рублях ₽", "В долларах $", "В евро €","В биткойне Ƀ", "В эфириуме ◊"]
     
     private let ValuteDB = ["RUB", "USD", "EUR","BTC", "ETH"]
+    
+    private let ValutePickLabel = ["₽", "$", "€","Ƀ", "◊"]
+    
     
     private let generateCard = CardGenerator()
     
@@ -67,16 +74,22 @@ class ParametrsAddCardViewController: UIViewController {
     }
     
     private func GetView() {
-        self.setNavigationBar("Параметры карты")
+        
+        LabelPickValute.text = "Выберете валюту\nнажав на круг:"
         
         if let valutePick = ValutePick{
-            let indexes = ValuteLabel.enumerated().filter {
+            let indexes = ValuteDB.enumerated().filter {
                 $0.element.contains(valutePick)
             }.map{$0.offset}
             if (!indexes.isEmpty){
-                LabelTypeValute.text = ValuteLabel[indexes.first!]
+                LabelTypeValute.text = ValutePickLabel[indexes.first!]
+                LabelPickValute.text = "Валюта вашей карты:\n" + ValuteLabel[indexes.first!]
             }
         }
+        
+        self.setNavigationBar("Параметры карты")
+        
+        ViewLabelTypeValute.layer.cornerRadius = ViewLabelTypeValute.frame.height / 2
         
         LabelOwnerCard.text = CARDDATA.nameFamily
         //SETTINGS FRONT CARD
@@ -139,51 +152,47 @@ class ParametrsAddCardViewController: UIViewController {
     }
     
     @IBAction func RegistrNewCard(_ sender: Any) {
-        if ValuteLabel.contains(LabelTypeValute.text!) {
+        if ValutePickLabel.contains(LabelTypeValute.text!) {
             
-            DispatchQueue.main.async {
-                let loader = self.EnableLoader()
-                
-                DispatchQueue.global(qos: .utility).async{ [self] in
-                    Task(priority: .medium) {
+            let loader = self.EnableLoader()
+            
+            DispatchQueue.global(qos: .utility).async{ [self] in
+                Task(priority: .high) {
+                    
+                    let numberCar = CardNumber.text!.replacingOccurrences(of: "  ", with: " ")
+                    
+                    
+                    let typeMoney = ValutePick ?? ValuteDB.first
+                    
+                    let typeCar = generateIcon(type: CARDDATA.typeCard)
+                    
+                    let succAddNewCard = await NewCardAdd.newCard(cardOperator: CARDDATA.typeCard, typeCard: typeCar, nameCard: CARDDATA.typeLabelCard, data: generateCard.generateDataFromDB(), numberCard: numberCar, typeMoney: typeMoney!, CVV: CVVNUMBER)
+                    
+                    if (succAddNewCard) {
                         
-                        let numberCar = CardNumber.text!.replacingOccurrences(of: "  ", with: " ")
-                        
-                        let indexesType = ValuteLabel.enumerated().filter {
-                            $0.element.contains(LabelTypeValute.text!.last!)
-                        }.map{$0.offset}
-                        
-                        let typeMoney = ValuteDB[indexesType.first!]
-                        
-                        let typeCar = generateIcon(type: CARDDATA.typeCard)
-                        
-                        let succAddNewCard = await NewCardAdd.newCard(cardOperator: CARDDATA.typeCard, typeCard: typeCar, nameCard: CARDDATA.typeLabelCard, data: generateCard.generateDataFromDB(), numberCard: numberCar, typeMoney: typeMoney, CVV: CVVNUMBER)
-                        
-                        let dataUser = await GetDataUser().get()
                         DispatchQueue.main.async {
-                            if (succAddNewCard && dataUser != nil) {
-                                self.DisableLoader(loader: loader)
-                                
-                                let NavigationMain = storyboard?.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
-                                NavigationMain.dataUser = dataUser!
-                                self.navigationController?.pushViewController(NavigationMain, animated: true)
-                                
-                            }
-                            else {
-                                self.DisableLoader(loader: loader)
-                                showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось сохранить ваш локальный пароль")
-                            }
+                            self.DisableLoader(loader: loader)
+                            let NavigationMain = storyboard?.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
+                            self.navigationController?.pushViewController(NavigationMain, animated: true)
                             
                         }
+                    }
+                    else {
+                        self.DisableLoader(loader: loader)
+                        showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось зарегистрировать новую карту.")
                     }
                 }
             }
             
         }
         else {
-            LabelTypeValute.textColor = .red
+            LabelPickValute.textColor = .red
+            LabelTypeValute.textColor = .black
+            ViewLabelTypeValute.backgroundColor = .red
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                self.LabelTypeValute.textColor = .lightGray
+                self.ViewLabelTypeValute.backgroundColor = .orange
+                self.LabelTypeValute.textColor = .white
+                self.LabelPickValute.textColor = .white
             }
         }
     }
@@ -211,7 +220,9 @@ extension ParametrsAddCardViewController : UIPickerViewDelegate, UIPickerViewDat
         return ValutePicker[row]
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        LabelTypeValute.text = ValuteLabel[row]
+        ValutePick = ValuteDB[row]
+        LabelTypeValute.text = ValutePickLabel[row]
+        LabelPickValute.text = "Валюта вашей карты:\n" + ValuteLabel[row]
         LabelTypeValute.resignFirstResponder()
     }
     

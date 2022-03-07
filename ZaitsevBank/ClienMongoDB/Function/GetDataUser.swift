@@ -9,14 +9,10 @@ import Foundation
 import RealmSwift
 
 public class GetDataUser {
-    
-    private var user: User = RealmSettings.getUser()
-    
-    public func get (NoneUser: User? = nil) async -> clientZaitsevBank? {
-
-        if let noneUser = NoneUser {
-            user = noneUser
-        }
+        
+    public func get () async -> clientZaitsevBank? {
+        
+        let user: User = RealmSettings.getUser()
         let partitionKey = RealmSettings.getAuthIDClient()
         let configuration = user.configuration(partitionValue: partitionKey)
         
@@ -38,4 +34,26 @@ public class GetDataUser {
                
     }
     
+    public func getFromUser (_ userFromSign: User) async -> clientZaitsevBank? {
+        
+        let partitionKey = RealmSettings.getAuthIDClient()
+        let configuration = userFromSign.configuration(partitionValue: partitionKey)
+        
+        let userId: String = userFromSign.id.sha256()
+        
+        do {
+            let realm = try await Realm(configuration: configuration)
+            
+            if let data = realm.objects(clientZaitsevBank.self).filter("userID == '\(userId)' ").first {
+                return data
+            }
+            else {
+                return nil
+            }
+        }
+        catch {
+            return nil
+        }
+               
+    }
 }

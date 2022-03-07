@@ -27,14 +27,12 @@ class RegistrationNewCard {
                 try realm.write {
                     var dataCardNew : clientCardsCredit = clientCardsCredit()
                     dataCardNew = dataCard
-                    
-                    
+                     
                     let cardRealm = clientCardsCredit_card()
                     cardRealm.nameCard = nameCard
                     cardRealm.typeCard = typeCard
                     cardRealm.data = data
                     cardRealm.numberCard = numberCard
-                    cardRealm.typeMoney = ValuteZaitsevBank(rawValue: typeMoney)?.description
                     cardRealm.cvvv = CVV
                     cardRealm.moneyCount.value = 0.0
                     cardRealm.typeMoneyExtended = typeMoney
@@ -59,7 +57,6 @@ class RegistrationNewCard {
                     cardRealm.typeCard = typeCard
                     cardRealm.data = data
                     cardRealm.numberCard = numberCard
-                    cardRealm.typeMoney = ValuteZaitsevBank(rawValue: typeMoney)?.description
                     cardRealm.cvvv = CVV
                     cardRealm.moneyCount.value = 0.0
                     cardRealm.typeMoneyExtended = typeMoney
