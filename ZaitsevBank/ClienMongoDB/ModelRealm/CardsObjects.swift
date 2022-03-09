@@ -9,24 +9,22 @@ import Foundation
 import RealmSwift
 
 public class clientCardsCredit: Object {
-    @objc dynamic var _id: ObjectId = ObjectId.generate()
-    @objc dynamic var authID: String = ""
-    let card = List<clientCardsCredit_card>()
-    @objc dynamic var userID: String = ""
-    public override static func primaryKey() -> String? {
-        return "_id"
-    }
+    @Persisted(primaryKey: true) var _id: ObjectId = ObjectId.generate()
+    @Persisted var authID: String = ""
+    @Persisted var card: List<clientCardsCredit_card>
 }
 
 public class clientCardsCredit_card: EmbeddedObject {
-    @objc dynamic var cardOperator: String? = nil
-    @objc dynamic var cvvv: String? = nil
-    @objc dynamic var data: Date? = nil
-    let moneyCount = RealmProperty<Double?>()
-    @objc dynamic var nameCard: String? = nil
-    @objc dynamic var numberCard: String? = nil
-    @objc dynamic var transactionID: String? = nil
-    @objc dynamic var typeCard: String? = nil
-    @objc dynamic var typeMoneyExtended: String? = nil
+    @Persisted var cardOperator: String? = nil
+    @Persisted var closed: Bool? = nil
+    @Persisted var cvvv: String? = nil
+    @Persisted var data: Date? = nil
+    @Persisted var moneyCount: Double? = nil
+    @Persisted var nameCard: String? = nil
+    @Persisted var numberCard: String? = nil
+    @Persisted var transactionID: String? = nil
+    @Persisted var typeCard: String? = nil
+    @Persisted var typeMoneyExtended: String? = nil
 }
+
 

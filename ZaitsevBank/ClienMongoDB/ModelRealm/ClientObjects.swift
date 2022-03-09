@@ -8,18 +8,16 @@
 import Foundation
 import RealmSwift
 
+
 public class clientZaitsevBank: Object {
-    @objc dynamic var _id: ObjectId = ObjectId.generate()
-    @objc dynamic var authID: String = ""
-    @objc dynamic var avatar: String? = nil
-    @objc dynamic var birthday: String? = nil
-    @objc dynamic var family: String? = nil
-    @objc dynamic var familyName: String? = nil
-    @objc dynamic var name: String? = nil
-    @objc dynamic var phone: String? = nil
-    @objc dynamic var pol: String? = nil
-    @objc dynamic var userID: String = ""
-    override public static func primaryKey() -> String? {
-        return "_id"
-    }
+    @Persisted(primaryKey: true) var _id: ObjectId = ObjectId.generate()
+    @Persisted var authID: String = ""
+    @Persisted var avatar: String? = nil
+    @Persisted var birthday: String? = nil
+    @Persisted var family: String? = nil
+    @Persisted var familyName: String? = nil
+    @Persisted var name: String? = nil
+    @Persisted var phone: String? = nil
+    @Persisted var pol: String? = nil
+    @Persisted var userID: String = ""
 }

@@ -6,41 +6,55 @@
 //
 
 import Foundation
-import SwiftSoup
-import SWXMLHash
 
 public class API_VALUTE {
     
-    public static func getDataValute() -> [ValuteMainLabel]  {
+    public static func getDataValute() async -> [ValuteMainLabel] {
         var arrayValute : [ValuteMainLabel] = [ValuteMainLabel]()
         
-        guard let url = URL(string: "https://www.banki.ru/products/currency/cb/") else {return arrayValute}
-        do{
-            let html = try String(contentsOf: url, encoding: .utf8)
-            do {
-                let doc = try SwiftSoup.parse(html)
-                do {
-                    let elementValute = try doc.select("td").array()
-                    
-                    let valueDOLLAR = ValuteMainLabel(nameValute: try elementValute[2].text(), countValute: try "$ \(elementValute[3].text())", changes: try elementValute[4].text(), ValuePlus: try elementValute[4].text().first == "+" ? true : false)
-                    let valueEVRO = ValuteMainLabel(nameValute: try elementValute[7].text(), countValute:  try "€ \(elementValute[8].text())", changes: try elementValute[9].text(), ValuePlus: try elementValute[9].text().first == "+" ? true : false)
-                    let valueYkraina = ValuteMainLabel(nameValute: try elementValute[137].text(), countValute:  try "₴ \(elementValute[138].text())", changes: try elementValute[139].text(), ValuePlus: try elementValute[139].text().first == "+" ? true : false )
-                    arrayValute.append(valueDOLLAR)
-                    arrayValute.append(valueEVRO)
-                    arrayValute.append(valueYkraina)
-                }
-                catch let error {
-                    print(error)
-                }
+        let valute = URL(string: "https://www.cbr-xml-daily.ru/daily_json.js")
+        
+        let request = URLRequest(url: valute!)
+        
+        do {
+            let (dataValue,responce)  = try await URLSession.shared.data(for: request)
+            guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
+                print("Не скачалась дата")
+                return arrayValute }
+            
+            let json = try JSONEncoder.newJSONDecoder().decode(ValuteCb.self, from: dataValue)
+
+                            
+            if let dataUSD = json.valute.first(where:{$0.value.charCode == ValuteType.USD.rawValue}) {
+                let data = dataUSD.value
+                let changes = data.value - data.previous
+                let changesBool = changes >= 0
+                let valueDOLLAR = ValuteMainLabel(nameValute: data.name, countValute: data.value.valuteToTableFormat() + " рублей", changes: changesBool == true ? "+\(changes.valuteToTableFormat())" : changes.valuteToTableFormat(), ValuePlus: changesBool)
+                arrayValute.append(valueDOLLAR)
             }
-            catch let error {
-                print(error)
+            
+            if let dataEvro = json.valute.first(where:{$0.value.charCode == ValuteType.EUR.rawValue}) {
+                let data = dataEvro.value
+                let changes = data.value - data.previous
+                let changesBool = changes >= 0
+                let valueEVRO = ValuteMainLabel(nameValute: data.name, countValute: data.value.valuteToTableFormat() + " рублей", changes: changesBool == true ? "+\(changes.valuteToTableFormat())" : changes.valuteToTableFormat(), ValuePlus: changesBool)
+                arrayValute.append(valueEVRO)
             }
+            
+            if let dataUKR = json.valute.first(where:{$0.value.charCode == ValuteType.UAH.rawValue}) {
+                let data = dataUKR.value
+                let changes = data.value - data.previous
+                let changesBool = changes >= 0
+                let valueYkraina = ValuteMainLabel(nameValute: data.name, countValute: data.value.valuteToTableFormat() + " рублей", changes: changesBool == true ? "+\(changes.valuteToTableFormat())" : changes.valuteToTableFormat(), ValuePlus: changesBool)
+                arrayValute.append(valueYkraina)
+            }
+            return arrayValute
         }
-        catch let error {
-            print(error)
+        catch {
+            print("Ошибка при декодинге")
+            return arrayValute
         }
-        return arrayValute
+       
     }
  
     

@@ -20,6 +20,8 @@ public class StartMenu {
     public var dataTableExchange : [Exchange] = []
     
     public var dataBitExchange : [Exchange] = []
+    
+    public var dataValute : [ValuteMainLabel] = []
 }
 
 public struct ValuteMainLabel {

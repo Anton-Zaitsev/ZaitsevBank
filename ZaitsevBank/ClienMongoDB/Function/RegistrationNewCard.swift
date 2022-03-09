@@ -22,7 +22,7 @@ class RegistrationNewCard {
             let realm = try await Realm(configuration: configuration)
             
            
-            if let dataCard = await GetCardUser().get(NoneUser: user) {
+            if let dataCard = await GetCardUser().get() {
                            
                 try realm.write {
                     var dataCardNew : clientCardsCredit = clientCardsCredit()
@@ -34,10 +34,11 @@ class RegistrationNewCard {
                     cardRealm.data = data
                     cardRealm.numberCard = numberCard
                     cardRealm.cvvv = CVV
-                    cardRealm.moneyCount.value = 0.0
+                    cardRealm.moneyCount = 0.0
                     cardRealm.typeMoneyExtended = typeMoney
                     cardRealm.cardOperator = cardOperator
                     cardRealm.transactionID = CardGenerator().generateTransactionID(NumberCard: numberCard)
+                    cardRealm.closed = false
                     
                     dataCardNew.card.append(cardRealm)
                     realm.add(dataCardNew, update: .modified)
@@ -45,12 +46,10 @@ class RegistrationNewCard {
                 return true
             }
             else {
-                let userId: String = user.id.sha256()
                 
                 try realm.write {
                     let dataCardNew : clientCardsCredit = clientCardsCredit()
                     dataCardNew.authID = RealmSettings.getCardPartition()
-                    dataCardNew.userID = userId
                     
                     let cardRealm = clientCardsCredit_card()
                     cardRealm.nameCard = nameCard
@@ -58,11 +57,11 @@ class RegistrationNewCard {
                     cardRealm.data = data
                     cardRealm.numberCard = numberCard
                     cardRealm.cvvv = CVV
-                    cardRealm.moneyCount.value = 0.0
+                    cardRealm.moneyCount = 0.0
                     cardRealm.typeMoneyExtended = typeMoney
                     cardRealm.cardOperator = cardOperator
                     cardRealm.transactionID = CardGenerator().generateTransactionID(NumberCard: numberCard)
-                    
+                    cardRealm.closed = false
                     
                     dataCardNew.card.append(cardRealm)
                     realm.add(dataCardNew)

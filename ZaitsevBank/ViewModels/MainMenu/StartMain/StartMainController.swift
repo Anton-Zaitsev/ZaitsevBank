@@ -15,9 +15,7 @@ class StartMainController: UIViewController {
     
     public var DataUser = clientZaitsevBank()
     public var cardUser = [Cards]()
-    
-    private let dataValute = API_VALUTE.getDataValute()
-    
+        
     private var ExhangeTableValute = true
     
     @IBOutlet weak var LabelName: UILabel!
@@ -54,6 +52,7 @@ class StartMainController: UIViewController {
     
     
     private func GetView() {
+        print("ID CARD -------------------------    " + RealmSettings.getCardPartition())
         LabelFullAddCard.isEnabled = false
         LabelAddCard.isEnabled = false
                 
@@ -104,6 +103,9 @@ class StartMainController: UIViewController {
             Task{
                 await withTaskGroup(of: Void.self) { group in
                     group.addTask {
+                        modelStartMain.dataValute = await API_VALUTE.getDataValute()
+                    }
+                    group.addTask {
                         await getDataUserTable()
                     }
                     group.addTask {
@@ -122,17 +124,22 @@ class StartMainController: UIViewController {
         var count = 0
         
         Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [self] (_) in
-            LabelValute.fadeTransition(0.4)
-            if (count == dataValute.count){
-                LabelValute.text = "Добро пожаловать в Zaitsev Банк"
+            if (modelStartMain.dataValute.count > 0){
+                LabelValute.fadeTransition(0.4)
+                if (count == modelStartMain.dataValute.count){
+                    LabelValute.text = "Добро пожаловать в Zaitsev Банк"
+                }
+                else {
+                    let text = "\(modelStartMain.dataValute[count].nameValute): \(modelStartMain.dataValute[count].countValute) \(modelStartMain.dataValute[count].changes)"
+                    let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: text)
+                    attributedString.setColor(color: modelStartMain.dataValute[count].ValuePlus ? .green : .red, forText: "\(modelStartMain.dataValute[count].changes)")
+                    LabelValute.attributedText = attributedString
+                }
+                count = count == modelStartMain.dataValute.count ? 0 : count + 1
             }
             else {
-                let text = "\(dataValute[count].nameValute): \(dataValute[count].countValute) \(dataValute[count].changes)"
-                let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: text)
-                attributedString.setColor(color: dataValute[count].ValuePlus ? .green : .red, forText: "\(dataValute[count].changes)")
-                LabelValute.attributedText = attributedString
+                LabelValute.text = "Добро пожаловать в Zaitsev Банк"
             }
-            count = count == dataValute.count ? 0 : count + 1
         }
     }
     
@@ -164,6 +171,9 @@ class StartMainController: UIViewController {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
             Task{
                 await withTaskGroup(of: Void.self) { group in
+                    group.addTask {
+                        modelStartMain.dataValute = await API_VALUTE.getDataValute()
+                    }
                     group.addTask {
                         await getDataUserTable()
                     }

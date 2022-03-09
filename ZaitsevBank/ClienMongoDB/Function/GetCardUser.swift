@@ -12,21 +12,16 @@ public class GetCardUser {
     
     private var user: User = RealmSettings.getUser()
     
-    public func get (NoneUser: User? = nil) async -> clientCardsCredit? {
+    public func get () async -> clientCardsCredit? {
         
-        if let noneUser = NoneUser {
-            user = noneUser
-        }
         let partitionKey = RealmSettings.getCardPartition()
         let configuration = user.configuration(partitionValue: partitionKey)
-        
-        let userId: String = user.id.sha256()
-        
+                
         do {
             
             let realm = try await Realm(configuration: configuration)
             
-            guard let data = realm.objects(clientCardsCredit.self).filter("userID == '\(userId)' ").first else {
+            guard let data = realm.objects(clientCardsCredit.self).first else {
                 return nil}
             return data
             
@@ -36,17 +31,15 @@ public class GetCardUser {
         }
     }
     
-    public func getCards (NoneUser: User? = nil) async ->  [Cards] {
-        if let noneUser = NoneUser {
-            user = noneUser
-        }
+    public func getCards () async ->  [Cards] {
+
         var cardsClient : [Cards] = [Cards] ()
         
         let fmt = NumberFormatter()
         fmt.numberStyle = .decimal
         fmt.locale = Locale(identifier: "fr_FR")
         
-        guard let data = await get(NoneUser: NoneUser) else { return cardsClient}
+        guard let data = await get() else { return cardsClient}
         
         for client in data.card {
             var moneyCount: String = ""
@@ -55,21 +48,21 @@ public class GetCardUser {
             
             if (valuteTypeBank.electronValute){
                 
-                if (floor(client.moneyCount.value!) == client.moneyCount.value!) { // Если число можно преобразовать в double
-                    if let converted = Int(exactly: (client.moneyCount.value?.rounded())!) {
+                if (floor(client.moneyCount!) == client.moneyCount!) { // Если число можно преобразовать в double
+                    if let converted = Int(exactly: (client.moneyCount?.rounded())!) {
                         moneyCount = fmt.string(for:converted)!
                         
                     } else {
-                        moneyCount = fmt.string(for: client.moneyCount.value)!
+                        moneyCount = fmt.string(for: client.moneyCount)!
                     }
                 }
                 else {
-                    moneyCount = fmt.string(for: client.moneyCount.value)!
+                    moneyCount = fmt.string(for: client.moneyCount)!
                 }
                 
             }
             else{
-                moneyCount = fmt.string(for: client.moneyCount.value)!.replacingOccurrences(of: ".", with: ",")
+                moneyCount = fmt.string(for: client.moneyCount)!.replacingOccurrences(of: ".", with: ",")
             }
             
             var numberCard = client.numberCard!

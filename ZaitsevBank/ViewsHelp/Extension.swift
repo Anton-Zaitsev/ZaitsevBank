@@ -57,7 +57,7 @@ extension UIViewController {
             labelName.text = "Добрый день,\n\(nameUser)"
         }
         else if hour >= 18 && hour <= 21  {
-            labelName.text = "Доброый вечер,\n\(nameUser)"
+            labelName.text = "Добрый вечер,\n\(nameUser)"
         }
         else {
             labelName.text = "Добро пожаловать,\n\(nameUser)"

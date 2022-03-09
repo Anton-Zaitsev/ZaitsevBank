@@ -16,7 +16,7 @@ public class RealmSettings {
        return "ClientZaitsevBankRequared".sha256()
     }
     public static func getCardPartition() -> String {
-       return "ZaistevBankCard".sha256()
+       return ("ZaistevBankCard" + getUser().id).sha256()
     }
     public static func getUser() -> User {
         return getApp().currentUser!
