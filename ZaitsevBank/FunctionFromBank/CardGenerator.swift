@@ -8,7 +8,7 @@
 import Foundation
 
 class CardGenerator {
-    
+
     public func generateNumberCar(typeCard: String) -> String{
         var cardNumber = ""
         
@@ -48,20 +48,13 @@ class CardGenerator {
     
     
     public func generateData() -> String {
-
+        let currentDate = Date()
         let formatDate = DateFormatter()
         formatDate.dateFormat = "MM/yy"
-        return formatDate.string(from: generateDataFromDB())
+        return formatDate.string(from: currentDate.generateDataFromDB())
     }
     
-    public func generateDataFromDB() -> Date {
-        let currentDate = Date()
-        var dateComponent = DateComponents()
-        dateComponent.year = 4
-        let futureDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)
-        return futureDate!
-    }
-    
+
     public func generateTransactionID(NumberCard: String) -> String {
         let replaced = NumberCard.trimmingCharacters(in: NSCharacterSet.whitespaces)
         return replaced.sha256()

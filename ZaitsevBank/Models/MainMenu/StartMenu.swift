@@ -51,6 +51,8 @@ public struct Cards {
     var fullNumberCard: String
     var transactionID: String
     
+    var closed : Bool
+    
 }
 
 public struct Exchange {

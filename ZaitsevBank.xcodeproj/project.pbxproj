@@ -44,6 +44,8 @@
 		3A5EB0D8272D8C130037D006 /* CardsObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EB0D7272D8C130037D006 /* CardsObjects.swift */; };
 		3A5EB0DA272D8C7E0037D006 /* GetCardUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EB0D9272D8C7E0037D006 /* GetCardUser.swift */; };
 		3A6D957C2751CAE90064B11F /* API_DinamicValute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */; };
+		3A8263A827D93BB200F96258 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 3A8263A727D93BB200F96258 /* SwiftyJSON */; };
+		3A8263AA27D9415500F96258 /* MongoBankFunctionMore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8263A927D9415500F96258 /* MongoBankFunctionMore.swift */; };
 		3A82E62E272B645C0054F36C /* OffersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A82E62D272B645C0054F36C /* OffersViewCell.swift */; };
 		3A835FD327320CD9000310EC /* ExchangeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A835FD227320CD9000310EC /* ExchangeViewCell.swift */; };
 		3A85DED52713DF010059B5CB /* SettingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85DED42713DF010059B5CB /* SettingApp.swift */; };
@@ -111,6 +113,7 @@
 		3A5EB0D7272D8C130037D006 /* CardsObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsObjects.swift; sourceTree = "<group>"; };
 		3A5EB0D9272D8C7E0037D006 /* GetCardUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCardUser.swift; sourceTree = "<group>"; };
 		3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_DinamicValute.swift; sourceTree = "<group>"; };
+		3A8263A927D9415500F96258 /* MongoBankFunctionMore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MongoBankFunctionMore.swift; sourceTree = "<group>"; };
 		3A82E62D272B645C0054F36C /* OffersViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersViewCell.swift; sourceTree = "<group>"; };
 		3A835FD227320CD9000310EC /* ExchangeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewCell.swift; sourceTree = "<group>"; };
 		3A85DED42713DF010059B5CB /* SettingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingApp.swift; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A8263A827D93BB200F96258 /* SwiftyJSON in Frameworks */,
 				3A0787F42777207100F678DD /* RNCryptor in Frameworks */,
 				3A0787EE2777203E00F678DD /* RealmSwift in Frameworks */,
 				3A0787F72777208400F678DD /* SWXMLHash in Frameworks */,
@@ -346,6 +350,7 @@
 				3A07798A271228D60026BCAD /* GetDataUser.swift */,
 				3A5EB0D9272D8C7E0037D006 /* GetCardUser.swift */,
 				3A21F5F52743AD7500D7E0CD /* RegistrationNewCard.swift */,
+				3A8263A927D9415500F96258 /* MongoBankFunctionMore.swift */,
 			);
 			path = Function;
 			sourceTree = "<group>";
@@ -403,6 +408,7 @@
 				3A0787F02777205600F678DD /* SwiftSoup */,
 				3A0787F32777207100F678DD /* RNCryptor */,
 				3A0787F62777208400F678DD /* SWXMLHash */,
+				3A8263A727D93BB200F96258 /* SwiftyJSON */,
 			);
 			productName = ZaitsevBank;
 			productReference = 3A0FC94C270A52B600B6B2F6 /* ZaitsevBank.app */;
@@ -440,6 +446,7 @@
 				3A0787EF2777205600F678DD /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				3A0787F22777207100F678DD /* XCRemoteSwiftPackageReference "RNCryptor" */,
 				3A0787F52777208400F678DD /* XCRemoteSwiftPackageReference "SWXMLHash" */,
+				3A8263A627D93BB100F96258 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = 3A0FC94D270A52B600B6B2F6 /* Products */;
 			projectDirPath = "";
@@ -519,6 +526,7 @@
 				3AB687EE272221BC002BD6EB /* HistoryController.swift in Sources */,
 				3A99391D2738B15B009B1B06 /* NewCardController.swift in Sources */,
 				3AB86B8B270CB6B3008D0823 /* CheckCorrectAuthData.swift in Sources */,
+				3A8263AA27D9415500F96258 /* MongoBankFunctionMore.swift in Sources */,
 				3A0787F92778851900F678DD /* API_VALUTE.swift in Sources */,
 				3A835FD327320CD9000310EC /* ExchangeViewCell.swift in Sources */,
 				3AB86B86270BAA62008D0823 /* RegistrationController.swift in Sources */,
@@ -774,6 +782,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		3A8263A627D93BB100F96258 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -801,6 +817,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3A0787F52777208400F678DD /* XCRemoteSwiftPackageReference "SWXMLHash" */;
 			productName = SWXMLHash;
+		};
+		3A8263A727D93BB200F96258 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A8263A627D93BB100F96258 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
 		};
 /* End XCSwiftPackageProductDependency section */
 

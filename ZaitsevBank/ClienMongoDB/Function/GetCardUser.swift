@@ -14,19 +14,44 @@ public class GetCardUser {
     
     public func get () async -> clientCardsCredit? {
         
-        let partitionKey = RealmSettings.getCardPartition()
-        let configuration = user.configuration(partitionValue: partitionKey)
+        if let currentData = await MongoBankFunctionMore.getNowData() {
+            
+            let partitionKey = RealmSettings.getCardPartition()
+            let configuration = user.configuration(partitionValue: partitionKey)
+                    
+            do {
                 
-        do {
-            
-            let realm = try await Realm(configuration: configuration)
-            
-            guard let data = realm.objects(clientCardsCredit.self).first else {
-                return nil}
-            return data
+                let realm = try await Realm(configuration: configuration)
+                
+                guard let data = realm.objects(clientCardsCredit.self).first else {return nil}
+                
+                let emptyCard = data.card.where {
+                    $0.data < currentData && $0.closed == false
+                }.isEmpty // Находим, есть ли просроченные карты
+                
+                if(emptyCard == false) {
+                     
+                    try realm.write {
+                        
+                        for (index, card) in data.card.enumerated(){
+                            if card.data! < currentData && card.closed == false {
+                                data.card[index].closed = true
+                            }
+                        } // Если есть, сообщаем о просрочке карты
+                        
+                        realm.add(data, update: .modified)
+                    }
+                }
+                
+                return data
+                
+            }
+            catch{
+                return nil
+            }
             
         }
-        catch{
+        else {
             return nil
         }
     }
@@ -70,7 +95,7 @@ public class GetCardUser {
             numberCard = String(numberCard.suffix(from: index))
             numberCard = "•• \(numberCard)"
                         
-            cardsClient.append(Cards(typeImageCard: client.typeCard!, typeMoney: valuteTypeBank.description, nameCard: client.nameCard!, numberCard: numberCard, moneyCount: moneyCount, cvv: client.cvvv!, data: client.data!, cardOperator: client.cardOperator!, typeMoneyExtended: client.typeMoneyExtended!, fullNumberCard: client.numberCard!, transactionID: client.transactionID!))
+            cardsClient.append(Cards(typeImageCard: client.typeCard!, typeMoney: valuteTypeBank.description, nameCard: client.nameCard!, numberCard: numberCard, moneyCount: moneyCount, cvv: client.cvvv!, data: client.data!, cardOperator: client.cardOperator!, typeMoneyExtended: client.typeMoneyExtended!, fullNumberCard: client.numberCard!, transactionID: client.transactionID!, closed: client.closed!))
             
         }
         return cardsClient
@@ -102,7 +127,7 @@ public class GetCardUser {
         return sortData
         
     }
-          
+    
 }
 
 

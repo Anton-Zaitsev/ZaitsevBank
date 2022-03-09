@@ -166,7 +166,7 @@ class ParametrsAddCardViewController: UIViewController {
                     
                     let typeCar = generateIcon(type: CARDDATA.typeCard)
                     
-                    let succAddNewCard = await NewCardAdd.newCard(cardOperator: CARDDATA.typeCard, typeCard: typeCar, nameCard: CARDDATA.typeLabelCard, data: generateCard.generateDataFromDB(), numberCard: numberCar, typeMoney: typeMoney!, CVV: CVVNUMBER)
+                    let succAddNewCard = await NewCardAdd.newCard(cardOperator: CARDDATA.typeCard, typeCard: typeCar, nameCard: CARDDATA.typeLabelCard, numberCard: numberCar, typeMoney: typeMoney!, CVV: CVVNUMBER)
                     
                     if (succAddNewCard) {
                         

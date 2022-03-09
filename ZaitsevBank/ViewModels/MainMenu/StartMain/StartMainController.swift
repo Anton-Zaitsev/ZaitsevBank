@@ -52,7 +52,6 @@ class StartMainController: UIViewController {
     
     
     private func GetView() {
-        print("ID CARD -------------------------    " + RealmSettings.getCardPartition())
         LabelFullAddCard.isEnabled = false
         LabelAddCard.isEnabled = false
                 
