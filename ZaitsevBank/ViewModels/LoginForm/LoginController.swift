@@ -72,21 +72,21 @@ class LoginController: UIViewController, LocalPasswordDelegate {
                 if let user = await authFunc.SignIn(login: loginModel.Login, pass: loginModel.Password){
 
                     if let data = await GetDataUser().getFromUser(user){
-                        DispatchQueue.main.async {
+                        DispatchQueue.main.async { [self] in
                             SetAlertLocalPassword()
                             dataUser = data
-                            self.DisableLoader(loader: loader)
+                            DisableLoader(loader: loader)
                         }
                     }
                     else {
-                        DispatchQueue.main.async {
-                            self.DisableLoader(loader: loader)
+                        DispatchQueue.main.async { [self] in
+                            DisableLoader(loader: loader)
                             showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о пользователе")
                         }
                     }
                 }
                 else {
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [self] in
                     self.DisableLoader(loader: loader)
                     showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.ErrorAuthClient)
                     }

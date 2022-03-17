@@ -55,7 +55,7 @@ public class AuthClient {
                         case .success(let realm):
                             let tasks = realm.objects(clientZaitsevBank.self)
                             
-                            let notificationToken = tasks.observe { (changes) in
+                            let notificationToken = tasks.observe { [self] (changes) in
                                     switch changes {
                                     case .initial: break
                                     case .update(_, _, _, _):

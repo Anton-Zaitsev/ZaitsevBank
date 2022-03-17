@@ -31,17 +31,18 @@ class ExchangeRateCell: UITableViewCell {
     
     func configurated(with valute: ExchangeFull) {
         
-        if (CharView.series.isEmpty){
-            let series = ChartSeries(valute.dataChar)
-            
-            series.colors = (
-              above: ChartColors.greenColor(),
-              below: ChartColors.redColor(),
-              zeroLevel: valute.dataChar.first ?? 0 // От начало регулируется цвет графика
-            )
-            
-            CharView.add(series)
+        if (!CharView.series.isEmpty){
+            CharView.series.removeAll()
         }
+        let series = ChartSeries(valute.dataChar)
+        
+        series.colors = (
+          above: ChartColors.greenColor(),
+          below: ChartColors.redColor(),
+          zeroLevel: valute.dataChar.first ?? 0 // От начало регулируется цвет графика
+        )
+        CharView.add(series)
+        
         CharView.gridColor = .clear
         CharView.showXLabelsAndGrid = false
         CharView.showYLabelsAndGrid = false
@@ -52,7 +53,7 @@ class ExchangeRateCell: UITableViewCell {
         CharCode.text = valute.charCode
         
         if (valute.nameValute.count <= 20) {
-        NameValute.text = valute.nameValute
+            NameValute.text = valute.nameValute
         }
         else {
             var newValute = valute.nameValute

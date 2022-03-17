@@ -44,7 +44,7 @@ class CardPickController: UIViewController {
                 Task{
                     cardUser = await GetCardUser().getCardsFromBuySale(valute: valuteSymbol, buySale: buySaleToogle)
                     
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [self] in
                         if (cardUser.isEmpty){
                             CardTable.isHidden = true
                             AddNewCard.isHidden = false

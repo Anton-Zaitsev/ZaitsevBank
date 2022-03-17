@@ -22,8 +22,16 @@ class WalletViewCell: UITableViewCell {
     func configurated(with Card: Cards) {
         NameCard.text = Card.nameCard
         NumberCard.text = Card.numberCard
-        LabelMoney.text = "\(Card.moneyCount) \(Card.typeMoney)"
         WalletTypeImage.image = UIImage(named: Card.typeImageCard)
+        
+        if (Card.closed) {
+            LabelMoney.text = "Карта заблокирована"
+            LabelMoney.textColor = .red
+        }
+        else {
+            LabelMoney.text = "\(Card.moneyCount) \(Card.typeMoney)"
+            LabelMoney.textColor = .white
+        }
         
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

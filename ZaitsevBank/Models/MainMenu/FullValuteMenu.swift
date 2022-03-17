@@ -8,10 +8,9 @@
 import Foundation
 
 public class FullValuteMenu {
-    var exchangeValute : [ExchangeFull] = []
     var exchangeValuteDefault : [ExchangeFull] = []
+    var exchangeValute : [ExchangeFull] = []
     var exchangeValuteCriptoValute : [ExchangeFull] = []
-    let dataNow = "22.02.13"
 }
 
 public struct ExchangeFull {

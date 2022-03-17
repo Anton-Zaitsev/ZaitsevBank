@@ -22,6 +22,8 @@ public class StartMenu {
     public var dataBitExchange : [Exchange] = []
     
     public var dataValute : [ValuteMainLabel] = []
+    
+    public var cardUser : [Cards] = []
 }
 
 public struct ValuteMainLabel {

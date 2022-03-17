@@ -10,7 +10,7 @@ import UIKit
 class ExchangeRateController: UIViewController {
     
     private var dataExchange : FullValuteMenu = FullValuteMenu()
-    
+    private let apiValute = API_VALUTE_FULL()
     @IBOutlet weak var MainLabel: UILabel!
     
     private var valuteToogle = true
@@ -22,77 +22,57 @@ class ExchangeRateController: UIViewController {
         self.setNavigationBar("Курсы")
         ExchangeTable.delegate = self
         ExchangeTable.dataSource = self
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshAllData), for: .valueChanged)
+        ExchangeTable.refreshControl = refreshControl
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if (dataExchange.exchangeValute.isEmpty){
+        if (dataExchange.exchangeValuteDefault.isEmpty){
             getValute()
         }
     }
-    
+    @objc private func refreshAllData(refreshControl: UIRefreshControl) {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
+            Task{
+                if (valuteToogle) {
+                    dataExchange.exchangeValute = await apiValute.getValuteTableFull()
+                    dataExchange.exchangeValuteDefault = dataExchange.exchangeValute
+                }
+                else {
+                    dataExchange.exchangeValuteCriptoValute = await apiValute.getBitcoinTableFull()
+                    dataExchange.exchangeValuteDefault = dataExchange.exchangeValuteCriptoValute
+                }
+                DispatchQueue.main.async {
+                    self.ExchangeTable.reloadData()
+                    refreshControl.endRefreshing()
+                }
+            }
+        }
+    }
     
     @IBAction func ControllerExhangeTable(_ sender: UISegmentedControl) {
         dataExchange.exchangeValuteDefault.removeAll()
+        ExchangeTable.reloadData()
         switch sender.selectedSegmentIndex {
         case 0:
-            if (dataExchange.exchangeValute.isEmpty){
-                ExchangeTable.reloadData()
-                let loader = self.EnableLoader()
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
-                    Task{
-                        dataExchange.exchangeValute = await API_VALUTE_FULL.getValuteTableFull()
-                        dataExchange.exchangeValuteDefault = dataExchange.exchangeValute
-                        DispatchQueue.main.async {
-                            ExchangeTable.reloadData()
-                            self.DisableLoader(loader: loader)
-                            if (!dataExchange.exchangeValuteDefault.isEmpty){
-                                let indexPath = IndexPath(row: 0, section: 0)
-                                ExchangeTable.scrollToRow(at: indexPath, at: .top, animated: true)
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                dataExchange.exchangeValuteDefault = dataExchange.exchangeValute
-                ExchangeTable.reloadData()
-                if (!dataExchange.exchangeValuteDefault.isEmpty){
-                    let indexPath = IndexPath(row: 0, section: 0)
-                    ExchangeTable.scrollToRow(at: indexPath, at: .top, animated: true)
-                }
+            dataExchange.exchangeValuteDefault = dataExchange.exchangeValute
+            ExchangeTable.reloadData()
+            if (dataExchange.exchangeValute.isEmpty == false){
+                let indexPath = IndexPath(row: 0, section: 0)
+                ExchangeTable.scrollToRow(at: indexPath, at: .top, animated: true)
             }
             valuteToogle = true
-            
         case 1:
-            if (dataExchange.exchangeValuteCriptoValute.isEmpty){
-                ExchangeTable.reloadData()
-                let loader = self.EnableLoader()
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
-                    Task{
-                        dataExchange.exchangeValuteCriptoValute = await API_VALUTE_FULL.getBitcoinTableFull()
-                        dataExchange.exchangeValuteDefault = dataExchange.exchangeValuteCriptoValute
-                        DispatchQueue.main.async {
-                            ExchangeTable.reloadData()
-                            self.DisableLoader(loader: loader)
-                            if (!dataExchange.exchangeValuteDefault.isEmpty){
-                                let indexPath = IndexPath(row: 0, section: 0)
-                                ExchangeTable.scrollToRow(at: indexPath, at: .top, animated: true)
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                dataExchange.exchangeValuteDefault = dataExchange.exchangeValuteCriptoValute
-                ExchangeTable.reloadData()
-                if (!dataExchange.exchangeValuteDefault.isEmpty){
-                    let indexPath = IndexPath(row: 0, section: 0)
-                    ExchangeTable.scrollToRow(at: indexPath, at: .top, animated: true)
-                }
+            dataExchange.exchangeValuteDefault = dataExchange.exchangeValuteCriptoValute
+            ExchangeTable.reloadData()
+            if (dataExchange.exchangeValuteCriptoValute.isEmpty == false){
+                let indexPath = IndexPath(row: 0, section: 0)
+                ExchangeTable.scrollToRow(at: indexPath, at: .top, animated: true)
             }
             valuteToogle = false
-            
         default:
             valuteToogle = true
             return
@@ -103,12 +83,20 @@ class ExchangeRateController: UIViewController {
         let loader = self.EnableLoader()
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
             Task{
-                dataExchange.exchangeValute = await API_VALUTE_FULL.getValuteTableFull()
+                await withTaskGroup(of: Void.self) { group in
+                    group.addTask {
+                        await self.dataExchange.exchangeValute = await self.apiValute.getValuteTableFull()
+                    }
+                    group.addTask {
+                        await self.dataExchange.exchangeValuteCriptoValute = await self.apiValute.getBitcoinTableFull()
+                    }
+                }
                 dataExchange.exchangeValuteDefault = dataExchange.exchangeValute
                 DispatchQueue.main.async {
-                    ExchangeTable.reloadData()
+                    self.ExchangeTable.reloadData()
                     self.DisableLoader(loader: loader)
                 }
+                
             }
         }
     }
@@ -127,7 +115,7 @@ extension ExchangeRateController: UITableViewDelegate, UITableViewDataSource {
         var cell = UITableViewCell()
         
         if let ExchangeRateCell = tableView.dequeueReusableCell(withIdentifier: "exchange", for: indexPath) as? ExchangeRateCell {
-            ExchangeRateCell.configurated(with: self.dataExchange.exchangeValuteDefault[indexPath.row])
+            ExchangeRateCell.configurated(with: dataExchange.exchangeValuteDefault[indexPath.row])
             cell = ExchangeRateCell
         }
         return cell
@@ -145,8 +133,8 @@ extension ExchangeRateController: UITableViewDelegate, UITableViewDataSource {
                     Task{
                         
                         guard let data = self.valuteToogle ?
-                                await API_DinamicValute.GetDinamicValute(idValute: idValute) :
-                                    await API_DinamicValute.GetDinamicCriptoValute(nameValute: nameValute)
+                                await API_DinamicValute().GetDinamicValute(idValute: idValute) :
+                                    await API_DinamicValute().GetDinamicCriptoValute(nameValute: nameValute)
                         else {
                             DispatchQueue.main.async {
                                 self.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о \(nameValute)")

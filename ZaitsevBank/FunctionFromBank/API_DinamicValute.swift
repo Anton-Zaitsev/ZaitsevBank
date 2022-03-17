@@ -8,10 +8,11 @@
 import Foundation
 import SwiftSoup
 import SWXMLHash
+import SwiftyJSON
 
 public class API_DinamicValute {
     
-    public static func GetDinamicValute(idValute: String,_ data: DataDinamicValute = .month) async -> DinamicValute? {
+    public func GetDinamicValute(idValute: String,_ data: DataDinamicValute = .month) async -> DinamicValute? {
         
         
         let currentDate = Date()
@@ -65,7 +66,7 @@ public class API_DinamicValute {
         }
     }
     
-    public static func GetDinamicCriptoValute(nameValute: String,_ data: DataDinamicValute = .month) async -> DinamicValute? {
+    public func GetDinamicCriptoValute(nameValute: String,_ data: DataDinamicValute = .month) async -> DinamicValute? {
         
         let key = nameValute.lowercased().replacingOccurrences(of: " ", with: "-")
         let getDinamic = URL(string:"https://api.coincap.io/v2/assets/\(key)/history?interval=\(data.dataCriptoValute)")
@@ -81,35 +82,40 @@ public class API_DinamicValute {
                 print("Не скачалась дата")
                 return nil }
             
-            let json = try JSONEncoder.newJSONDecoder().decode(BitcoinChartTable.self, from: dataDinamicCripto)
+            if let json = try? JSON(data: dataDinamicCripto) {
             
-            if (!json.data.isEmpty) {
-                var dinamic : DinamicValute = DinamicValute(value: [], data: [], min: 0, max: 0, start: 0, now: 0)
-                
-                for data in json.data {
-                    if let valuteBuy = Double(data.priceUsd){
-                        dinamic.value.append(valuteBuy)
-                        
-                        let strategy = Date.ParseStrategy(format: "\(year: .defaultDigits)-\(month: .twoDigits)-\(day: .twoDigits)T\(hour: .twoDigits(clock: .twentyFourHour, hourCycle: .zeroBased)):\(minute: .twoDigits):\(second: .twoDigits)", timeZone: .current)
-                        var CurrentData = data.date
-                        for _ in 0..<5 {
-                            CurrentData.removeLast()
+                if (!json["data"].arrayValue.isEmpty) {
+                    var dinamic : DinamicValute = DinamicValute(value: [], data: [], min: 0, max: 0, start: 0, now: 0)
+                    
+                    for data in json["data"].arrayValue {
+                        if let valuteBuy = Double(data["priceUsd"].string ?? ""){
+                            if var CurrentData = data["date"].string {
+                                dinamic.value.append(valuteBuy)
+                                
+                                let strategy = Date.ParseStrategy(format: "\(year: .defaultDigits)-\(month: .twoDigits)-\(day: .twoDigits)T\(hour: .twoDigits(clock: .twentyFourHour, hourCycle: .zeroBased)):\(minute: .twoDigits):\(second: .twoDigits)", timeZone: .current)
+                                
+                                    for _ in 0..<5 {
+                                        CurrentData.removeLast()
+                                    }
+                                    let date = try Date(CurrentData, strategy: strategy)
+                                    let formatDate = DateFormatter()
+                                    formatDate.dateFormat = "dd/MM/yyyy"
+                                    let Date = formatDate.string(from: date)
+                                    dinamic.data.append(Date)
+                            }
                         }
-                        let date = try Date(CurrentData, strategy: strategy)
-                        let formatDate = DateFormatter()
-                        formatDate.dateFormat = "dd/MM/yyyy"
-                        let Date = formatDate.string(from: date)
-                        dinamic.data.append(Date)
                     }
+                    if (dinamic.value.count > 0) {
+                        dinamic.start = dinamic.value.first ?? 0
+                        dinamic.min = dinamic.value.minOrZero()
+                        dinamic.max = dinamic.value.maxOrZero()
+                        dinamic.now = dinamic.value.last ?? 0
+                    }
+                    return dinamic
                 }
-                
-                if (dinamic.value.count > 0) {
-                    dinamic.start = dinamic.value.first ?? 0
-                    dinamic.min = dinamic.value.minOrZero()
-                    dinamic.max = dinamic.value.maxOrZero()
-                    dinamic.now = dinamic.value.last ?? 0
+                else {
+                    return nil
                 }
-                return dinamic
             }
             else {
                 return nil
@@ -121,7 +127,7 @@ public class API_DinamicValute {
         
     }
     
-    public static func GetDinamicValuteFromDay(idValute: String) async -> [Double]? {
+    public func GetDinamicValuteFromDay(idValute: String) async -> [Double]? {
         
         
         let currentDate = Date()
@@ -154,9 +160,13 @@ public class API_DinamicValute {
             }.parse(xmlDinamic)
             
             
-            for elem in  xml["ValCurs"]["Record"].all {
-                if let costValue = Double(elem["Value"].element!.text.replacingOccurrences(of: ",", with: ".")) {
-                    dinamic.append(costValue)
+            for elem in xml["ValCurs"]["Record"].all {
+                if let costValue = Double(elem["Value"].element!.text.replacingOccurrences(of: ",", with: "."))
+                {
+                    if let nominal = Double(elem["Nominal"].element!.text.replacingOccurrences(of: ",", with: ".")) {
+                        
+                        dinamic.append(costValue / nominal)
+                    }
                 }
             }
             return dinamic
@@ -166,7 +176,7 @@ public class API_DinamicValute {
         }
     }
     
-    public static func GetDinamicCriptoValuteFromDay(nameValute: String) async -> [Double]? {
+    public func GetDinamicCriptoValuteFromDay(nameValute: String) async -> [Double]? {
         
         let key = nameValute.lowercased().replacingOccurrences(of: " ", with: "-")
         let getDinamic = URL(string:"https://api.coincap.io/v2/assets/\(key)/history?interval=d1")
@@ -182,18 +192,21 @@ public class API_DinamicValute {
                 print("Не скачалась дата")
                 return nil }
             
-            let json = try JSONEncoder.newJSONDecoder().decode(BitcoinChartTableDay.self, from: dataDinamicCripto)
-            
-            if (!json.data.isEmpty) {
-                var dinamic : [Double] = [Double]()
+            if let json = try? JSON(data: dataDinamicCripto) {
                 
-                for data in json.data {
-                    if let valuteBuy = Double(data.priceUsd){
-                        dinamic.append(valuteBuy)
+                if (!json["data"].arrayValue.isEmpty) {
+                    var dinamic : [Double] = [Double]()
+                    
+                    for data in json["data"].arrayValue {
+                        if let valuteBuy = Double(data["priceUsd"].string ?? ""){
+                            dinamic.append(valuteBuy)
+                        }
                     }
+                    return dinamic
                 }
-
-                return dinamic
+                else {
+                    return nil
+                }
             }
             else {
                 return nil

@@ -170,15 +170,15 @@ class ParametrsAddCardViewController: UIViewController {
                     
                     if (succAddNewCard) {
                         
-                        DispatchQueue.main.async {
-                            self.DisableLoader(loader: loader)
+                        DispatchQueue.main.async { [self] in
+                            DisableLoader(loader: loader)
                             let NavigationMain = storyboard?.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
-                            self.navigationController?.pushViewController(NavigationMain, animated: true)
+                            navigationController?.pushViewController(NavigationMain, animated: true)
                             
                         }
                     }
                     else {
-                        self.DisableLoader(loader: loader)
+                        DisableLoader(loader: loader)
                         showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось зарегистрировать новую карту.")
                     }
                 }

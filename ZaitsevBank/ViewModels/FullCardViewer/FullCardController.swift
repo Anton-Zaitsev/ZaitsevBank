@@ -18,7 +18,7 @@ class FullCardController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.setNavigationBar("Курсы")
+        self.setNavigationBar(cardFull[indexCard.row].nameCard)
         CollectionCard.isPagingEnabled = true
         CollectionCard.delegate = self
         CollectionCard.dataSource = self

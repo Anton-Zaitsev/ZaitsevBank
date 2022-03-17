@@ -6,61 +6,12 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 public class API_VALUTE {
     
-    public static func getDataValute() async -> [ValuteMainLabel] {
-        var arrayValute : [ValuteMainLabel] = [ValuteMainLabel]()
-        
-        let valute = URL(string: "https://www.cbr-xml-daily.ru/daily_json.js")
-        
-        let request = URLRequest(url: valute!)
-        
-        do {
-            let (dataValue,responce)  = try await URLSession.shared.data(for: request)
-            guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
-                print("Не скачалась дата")
-                return arrayValute }
-            
-            let json = try JSONEncoder.newJSONDecoder().decode(ValuteCb.self, from: dataValue)
-
-                            
-            if let dataUSD = json.valute.first(where:{$0.value.charCode == ValuteType.USD.rawValue}) {
-                let data = dataUSD.value
-                let changes = data.value - data.previous
-                let changesBool = changes >= 0
-                let valueDOLLAR = ValuteMainLabel(nameValute: data.name, countValute: data.value.valuteToTableFormat() + " рублей", changes: changesBool == true ? "+\(changes.valuteToTableFormat())" : changes.valuteToTableFormat(), ValuePlus: changesBool)
-                arrayValute.append(valueDOLLAR)
-            }
-            
-            if let dataEvro = json.valute.first(where:{$0.value.charCode == ValuteType.EUR.rawValue}) {
-                let data = dataEvro.value
-                let changes = data.value - data.previous
-                let changesBool = changes >= 0
-                let valueEVRO = ValuteMainLabel(nameValute: data.name, countValute: data.value.valuteToTableFormat() + " рублей", changes: changesBool == true ? "+\(changes.valuteToTableFormat())" : changes.valuteToTableFormat(), ValuePlus: changesBool)
-                arrayValute.append(valueEVRO)
-            }
-            
-            if let dataUKR = json.valute.first(where:{$0.value.charCode == ValuteType.UAH.rawValue}) {
-                let data = dataUKR.value
-                let changes = data.value - data.previous
-                let changesBool = changes >= 0
-                let valueYkraina = ValuteMainLabel(nameValute: data.name, countValute: data.value.valuteToTableFormat() + " рублей", changes: changesBool == true ? "+\(changes.valuteToTableFormat())" : changes.valuteToTableFormat(), ValuePlus: changesBool)
-                arrayValute.append(valueYkraina)
-            }
-            return arrayValute
-        }
-        catch {
-            print("Ошибка при декодинге")
-            return arrayValute
-        }
-       
-    }
- 
-    
-    
-    public static func getValuteTable() async -> [Exchange] {
-        
+    public static func getDataValute() async -> ([ValuteMainLabel],[Exchange]) {
+        var arrayValute : [ValuteMainLabel] = []
         var dataCB : [Exchange] = []
         
         let valute = URL(string: "https://www.cbr-xml-daily.ru/daily_json.js")
@@ -71,27 +22,81 @@ public class API_VALUTE {
             let (dataValue,responce)  = try await URLSession.shared.data(for: request)
             guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
                 print("Не скачалась дата")
-                return dataCB }
+                return (arrayValute,dataCB) }
             
-            let json = try JSONEncoder.newJSONDecoder().decode(ValuteCb.self, from: dataValue)
-            for data in json.valute {
-                let value = data.value
+            if let json = try? JSON(data: dataValue) {
                 
-                let valuteBuy = value.value / Double(value.nominal)
+                let jsonValute = json["Valute"].dictionaryValue
                 
-                let valuteSale = valuteBuy + Double.random(in: -3..<3)
+                if let dataUSD = jsonValute.first(where:{$0.value["CharCode"].string == ValuteType.USD.rawValue}) {
+                     
+                    let valueValute = dataUSD.value["Value"].double ?? 0
+                    let valuePrevious = dataUSD.value["Previous"].double ?? 0
+                    let valuteName = dataUSD.value["Name"].string ?? "None"
+                    
+                    let changes = valueValute - valuePrevious
+                    let changesBool = changes >= 0
+                    let valueDOLLAR = ValuteMainLabel(nameValute: valuteName, countValute: valueValute.valuteToTableFormat() + " рублей", changes: changesBool == true ? "+\(changes.valuteToTableFormat())" : changes.valuteToTableFormat(), ValuePlus: changesBool)
+                    arrayValute.append(valueDOLLAR)
+                }
                 
-                dataCB.append(Exchange(typeValute: ValuteType(rawValue: value.charCode)?.description ?? "N", nameValute: value.name, typeValuteExtended: value.charCode, buyValute: valuteBuy.valuteToTableFormat(), chartBuy: value.value > value.previous, saleValute: valuteSale.valuteToTableFormat(), chartSale: Bool.random()))
+                if let dataEvro = jsonValute.first(where:{$0.value["CharCode"].string == ValuteType.EUR.rawValue}) {
+                    
+                    let valueValute = dataEvro.value["Value"].double ?? 0
+                    let valuePrevious = dataEvro.value["Previous"].double ?? 0
+                    let valuteName = dataEvro.value["Name"].string ?? "None"
+                    
+                    let changes = valueValute - valuePrevious
+                    let changesBool = changes >= 0
+                    
+                    let valueEVRO = ValuteMainLabel(nameValute: valuteName, countValute: valueValute.valuteToTableFormat() + " рублей", changes: changesBool == true ? "+\(changes.valuteToTableFormat())" : changes.valuteToTableFormat(), ValuePlus: changesBool)
+                    
+                    arrayValute.append(valueEVRO)
+                }
+                
+                if let dataUKR = jsonValute.first(where:{$0.value["CharCode"].string == ValuteType.UAH.rawValue}) {
+                    
+                    let valueValute = dataUKR.value["Value"].double ?? 0
+                    let valuePrevious = dataUKR.value["Previous"].double ?? 0
+                    let valuteName = dataUKR.value["Name"].string ?? "None"
+                    
+                    let changes = valueValute - valuePrevious
+                    let changesBool = changes >= 0
+                    
+                    let valueYkraina = ValuteMainLabel(nameValute: valuteName, countValute: valueValute.valuteToTableFormat() + " рублей", changes: changesBool == true ? "+\(changes.valuteToTableFormat())" : changes.valuteToTableFormat(), ValuePlus: changesBool)
+                    
+                    arrayValute.append(valueYkraina)
+                }
+                
+                for data in jsonValute {
+                    let value = data.value
+                    
+                    if let valueValute = value["Value"].double{
+                        if let valuePrevious = value["Previous"].double{
+                            if let charCodeValute = value["CharCode"].string {
+                                
+                                let nominalValute = value["Nominal"].double ?? 1
+                                let valuteBuy = valueValute / nominalValute
+                                let valuteSale = valuteBuy + Double.random(in: -3..<3)
+                                let nameValute = value["Name"].stringValue
+                                
+                                dataCB.append(Exchange(typeValute: ValuteType(rawValue: charCodeValute)?.description ?? "None", nameValute: nameValute, typeValuteExtended: charCodeValute, buyValute: valuteBuy.valuteToTableFormat(), chartBuy: valueValute > valuePrevious, saleValute: valuteSale.valuteToTableFormat(), chartSale: Bool.random()))
+                            }
+                        }
+                    }
+                }
             }
-            return dataCB
+            return (arrayValute,dataCB)
+            
+
         }
         catch {
             print("Ошибка при декодинге")
-            return dataCB
+            return (arrayValute,dataCB)
         }
-        
+       
     }
-    
+ 
     public static func getBitcoinTable() async -> [Exchange]{
         var dataBit : [Exchange] = []
         let ListBitcoin = ["bitcoin","ethereum","tether"]
@@ -109,19 +114,21 @@ public class API_VALUTE {
                     print("Не скачалась дата")
                     continue }
                 
-                let json = try JSONEncoder.newJSONDecoder().decode(BitcoinValutes.self, from: dataBitcoin)
-                
-                let data = json.data
-                
-                if let ExchangeBuy = Double(data.priceUsd) {
+                if let json = try? JSON(data: dataBitcoin){
                     
-                    if let ExchengeChange = Double(data.changePercent24Hr){
-                        
-                        let valuteSale = ExchangeBuy + Double.random(in: -3..<3)
-                        
-                        dataBit.append(Exchange(typeValute: data.symbol, nameValute: data.name, typeValuteExtended: data.symbol, buyValute: ExchangeBuy.valuteToTableFormat(), chartBuy: ExchengeChange > 0, saleValute: valuteSale.valuteToTableFormat(), chartSale: Bool.random()))
+                    let data = json["data"]
+                    
+                    if let ExchangeBuy = Double(data.dictionaryValue["priceUsd"]?.string ?? "none") {
+                        if let ExchengeChange = Double(data.dictionaryValue["changePercent24Hr"]?.string ?? "none"){
+                            
+                            let valuteSale = ExchangeBuy + Double.random(in: -3..<3)
+                            
+                            dataBit.append(Exchange(typeValute: (data.dictionaryValue["symbol"]?.stringValue ?? "none") , nameValute: data.dictionaryValue["name"]?.stringValue ?? "none", typeValuteExtended: data.dictionaryValue["symbol"]?.stringValue ?? "none", buyValute: ExchangeBuy.valuteToTableFormat(), chartBuy: ExchengeChange > 0, saleValute: valuteSale.valuteToTableFormat(), chartSale: Bool.random()))
+                            
+                        }
                     }
                 }
+        
             }
             catch {
                 continue

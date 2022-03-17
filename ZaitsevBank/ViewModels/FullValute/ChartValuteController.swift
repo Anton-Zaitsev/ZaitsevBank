@@ -222,15 +222,15 @@ class ChartValuteController: UIViewController, ChartDelegate {
             Task{
                 
                 guard let data = valuteToogle ?
-                        await API_DinamicValute.GetDinamicValute(idValute: idValute, datavalute) :
-                            await API_DinamicValute.GetDinamicCriptoValute(nameValute: valuteName,datavalute) else {
+                        await API_DinamicValute().GetDinamicValute(idValute: idValute, datavalute) :
+                            await API_DinamicValute().GetDinamicCriptoValute(nameValute: valuteName,datavalute) else {
                                 return
                             }
                 dinamicValute = data
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [self] in
                     ViewChart.removeAllSeries()
                     getView()
-                    self.navigationItem.title = "Динамика \(valuteName ?? "none") \(datavalute.description)."
+                    navigationItem.title = "Динамика \(valuteName ?? "none") \(datavalute.description)."
                 }
             }
         }

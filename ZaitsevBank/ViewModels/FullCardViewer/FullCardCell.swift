@@ -82,11 +82,7 @@ class FullCardCell: UICollectionViewCell {
         ViewCVVCard.layer.cornerRadius = 8
     }
     func configurated(with data: Cards) {
-        
-        LabelMoney.text = "\(data.moneyCount) \(data.typeMoney)"
-        
-        LabelMoneyType.text = ValuteZaitsevBank(rawValue: data.typeMoneyExtended)?.descriptionTypeValute ?? "Неизвестная валюта"
-        
+                        
         BackroundImageFrontCard.image = UIImage(named: data.cardOperator == "MIR" ? "BacroundCardTypeMIR" : "BacroundCardTypeDefault")
         ImageTypeFrontCard.image = UIImage(named: CardType(rawValue: data.cardOperator)?.logoCardOperator ?? "")
         NumberCardFront.text = data.numberCard
@@ -103,14 +99,34 @@ class FullCardCell: UICollectionViewCell {
         formatDate.dateFormat = "MM/yy"
         LabelDataCard.text = formatDate.string(from: data.data)
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM"
-        dateFormatter.locale = Locale(identifier: "ru_RU")
-        let month = Int(dateFormatter.string(from: data.data))!
-        let monthAsString:String = dateFormatter.monthSymbols[month - 1]
         
-        LabelDataDetailed.text = "Можно пользоваться до 29 \(monthAsString)"
-       
+        if (data.closed){
+            LabelMoney.text = "Остаток: \(data.moneyCount) \(data.typeMoney)"
+            LabelMoney.textColor = .red
+            LabelMoneyType.text = "Ваша карта заблокирована"
+            LabelMoneyType.textColor = .red
+            LabelDataCard.textColor = .red
+            LabelDataDetailed.textColor = .red
+            
+            LabelDataDetailed.text = "Карта заблокирована"
+        }
+        else {
+            LabelMoney.text = "\(data.moneyCount) \(data.typeMoney)"
+            LabelMoney.textColor = .white
+            LabelMoneyType.text = ValuteZaitsevBank(rawValue: data.typeMoneyExtended)?.descriptionTypeValute ?? "Неизвестная валюта"
+            LabelMoneyType.textColor = .darkGray
+            LabelDataCard.textColor = .white
+            LabelDataDetailed.textColor = .darkGray
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM"
+            dateFormatter.locale = Locale(identifier: "ru_RU")
+            let month = Int(dateFormatter.string(from: data.data))!
+            let monthAsString:String = dateFormatter.monthSymbols[month - 1]
+            LabelDataDetailed.text = "Можно пользоваться до 29 \(monthAsString)"
+            
+            
+        }
     }
     
     @objc private func tap(_ gestureRecognizer: UITapGestureRecognizer) {

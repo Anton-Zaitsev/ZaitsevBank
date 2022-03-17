@@ -64,7 +64,7 @@ public class AuthFromFaceID {
                                 }
                             }
                             else {
-                                DispatchQueue.main.async{
+                                DispatchQueue.main.async{ [self] in
                                     viewController.Pass1.backgroundColor = .darkGray
                                     viewController.Pass2.backgroundColor = .darkGray
                                     viewController.Pass3.backgroundColor = .darkGray
@@ -131,7 +131,7 @@ public class AuthFromFaceID {
                     }
                 }
                 else {
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [self] in
                         viewController.Pass1.backgroundColor = .darkGray
                         viewController.Pass2.backgroundColor = .darkGray
                         viewController.Pass3.backgroundColor = .darkGray

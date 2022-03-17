@@ -95,26 +95,26 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
                                 let user = await authFunc.Registration(dataUser: ModelRegistration)
                                 let boolRegistration = (user == nil ? false : true)
                                 
-                                DispatchQueue.main.async {
+                                DispatchQueue.main.async { [self] in
                                     if (boolRegistration){
                                         Task(priority: .medium) {
                                             
                                             if let data = await GetDataUser().get() {
                                                 DataUser = data
-                                                self.DisableLoader(loader: loader)
+                                                DisableLoader(loader: loader)
                                                 SetAlertLocalPassword()
                                             }
                                             else {
-                                                self.DisableLoader(loader: loader)
+                                                DisableLoader(loader: loader)
                                                 showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные пользователя с сервера")
-                                                self.navigationController?.setNavigationBarHidden(false, animated: true) //Enable navigationBar
+                                                navigationController?.setNavigationBarHidden(false, animated: true) //Enable navigationBar
                                             }
                                         }
                                     }
                                     else {
-                                        self.DisableLoader(loader: loader)
+                                        DisableLoader(loader: loader)
                                         showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.ErrorAuthClient)
-                                        self.navigationController?.setNavigationBarHidden(false, animated: true) //Enable navigationBar
+                                        navigationController?.setNavigationBarHidden(false, animated: true) //Enable navigationBar
                                     }
                                 }
                                 

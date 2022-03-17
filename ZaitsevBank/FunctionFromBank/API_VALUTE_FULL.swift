@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 public class API_VALUTE_FULL {
     
-    public static func getValuteTableFull() async -> [ExchangeFull] {
+    private let api  = API_DinamicValute()
+    
+    public func getValuteTableFull() async -> [ExchangeFull] {
         
         var dataCB : [ExchangeFull] = []
         let valute = URL(string: "https://www.cbr-xml-daily.ru/daily_json.js")
@@ -22,26 +25,32 @@ public class API_VALUTE_FULL {
                 print("Не скачалась дата")
                 return dataCB }
                         
-            let json = try JSONEncoder.newJSONDecoder().decode(ValuteCb.self, from: dataValue)
+            if let json = try? JSON(data: dataValue) {
             
-            await withTaskGroup(of: ExchangeFull?.self) { taskGroup in
-             
-                for data in json.valute {
-                    taskGroup.addTask {
-                            let value = data.value
-                            let downloadedDinamic = await self.getDinamicParalles(_data: value)
-                            return downloadedDinamic
-                        }
-                }
+                let jsonValute = json["Valute"].dictionaryValue
                 
-                for await dataDownload in taskGroup {
-                    if let data = dataDownload {
-                        dataCB.append(data)
+                await withTaskGroup(of: ExchangeFull?.self) { taskGroup in
+                 
+                    for data in jsonValute {
+                        taskGroup.addTask {
+                                let value = data.value
+                                let downloadedDinamic = await self.getDinamicParalles(value)
+                                return downloadedDinamic
+                            }
+                    }
+                    
+                    for await dataDownload in taskGroup {
+                        if let data = dataDownload {
+                            dataCB.append(data)
+                        }
                     }
                 }
+                
+                return API_VALUTE.sortedValute(dataInput: dataCB,false)
             }
-            
-            return API_VALUTE.sortedValute(dataInput: dataCB,false)
+            else {
+                return dataCB
+            }
         }
         catch {
             print("Ошибка при декодинге")
@@ -49,7 +58,7 @@ public class API_VALUTE_FULL {
         }
     }
     
-    public static func getBitcoinTableFull() async -> [ExchangeFull] {
+    public func getBitcoinTableFull() async -> [ExchangeFull] {
         
         var dataCB : [ExchangeFull] = []
         let getBit = URL(string: "https://api.coincap.io/v2/assets")
@@ -65,15 +74,17 @@ public class API_VALUTE_FULL {
                 print("Не скачалась дата")
                 return dataCB }
             
-            let json = try JSONEncoder.newJSONDecoder().decode(BitcoinTableFullData.self, from: dataValue)
+            if let json = try? JSON(data: dataValue){
+                
+            let data = json["data"].arrayValue
              
             await withTaskGroup(of: ExchangeFull?.self) { taskGroup in
              
-                for index in 0..<json.data.count {
+                for value in data {
                     taskGroup.addTask {
                             
-                            let data = json.data[index]
-                            let downloadedDinamic = await self.getDinamicBitParalles(_data: data)
+                            let data = value
+                            let downloadedDinamic = await self.getDinamicBitParalles(data)
                             return downloadedDinamic
                         }
                     }
@@ -84,9 +95,11 @@ public class API_VALUTE_FULL {
                     }
                 }
             }
-                
-            
-            return API_VALUTE.sortedValute(dataInput: dataCB,true)
+                return API_VALUTE.sortedValute(dataInput: dataCB,true)
+            }
+            else {
+                return dataCB
+            }
         }
         catch {
             print("Ошибка при декодинге")
@@ -94,18 +107,21 @@ public class API_VALUTE_FULL {
         }
     }
     
-    private static func getDinamicBitParalles(_data: BitcoinTableData) async -> ExchangeFull?  {
+    private func getDinamicBitParalles(_ data: JSON) async -> ExchangeFull?  {
         
-        if let valuteBuy = Double(_data.priceUsd!){
-            if let changes = Double(_data.changePercent24Hr!){
+        if let valuteBuy = Double(data["priceUsd"].string ?? ""){
+            if let changes = Double(data["changePercent24Hr"].string ?? ""){
+                if let valuteName = data["name"].string {
+                    let valuteSale = valuteBuy + Double.random(in: -3..<3)
                 
-                let valuteSale = valuteBuy + Double.random(in: -3..<3)
-                
-                guard let dataChart = await API_DinamicValute.GetDinamicCriptoValuteFromDay(nameValute: _data.name!) else {
+                    guard let dataChart = await api.GetDinamicCriptoValuteFromDay(nameValute: valuteName) else {
+                        return nil }
+                    
+                    return ExchangeFull(IDValute: data["id"].stringValue, charCode: data["symbol"].stringValue, nameValute: valuteName, changesBuy: changes > 0, buy: valuteBuy.valuteToTableFormat(), changesSale: Bool.random(), sale: valuteSale.valuteToTableFormat(), dataChar: dataChart)
+                }
+                else {
                     return nil
                 }
-                return ExchangeFull(IDValute: _data.id!, charCode: _data.symbol!, nameValute: _data.name!, changesBuy: changes > 0, buy: valuteBuy.valuteToTableFormat(), changesSale: Bool.random(), sale: valuteSale.valuteToTableFormat(), dataChar: dataChart)
-
             }
             else {
                 return nil
@@ -116,14 +132,30 @@ public class API_VALUTE_FULL {
         }
     }
     
-    private static func getDinamicParalles(_data: Valute) async -> ExchangeFull?  {
+    private func getDinamicParalles(_ data: JSON) async -> ExchangeFull?  {
         
-        guard let dataChart = await API_DinamicValute.GetDinamicValuteFromDay(idValute: _data.id) else {
+        if let ID = data["ID"].string {
+            guard let dataChart = await api.GetDinamicValuteFromDay(idValute: ID) else {
+                return nil
+            }
+            if let valueValute = data["Value"].double{
+                if let valuePrevious = data["Previous"].double{
+                
+                    let valuteBuy = valueValute / (data["Nominal"].double ?? 1)
+                    let valuteSale = valuteBuy + Double.random(in: -3..<3)
+                
+                    return ExchangeFull(IDValute: ID, charCode: data["CharCode"].stringValue, nameValute: data["Name"].stringValue, changesBuy: valueValute > valuePrevious, buy: valuteBuy.valuteToTableFormat(), changesSale: Bool.random(), sale: valuteSale.valuteToTableFormat(), dataChar: dataChart)
+                }
+                else {
+                    return nil
+                }
+            }
+            else {
+                return nil
+            }
+        }
+        else {
             return nil
         }
-        let valuteBuy = _data.value / Double(_data.nominal)
-        let valuteSale = valuteBuy + Double.random(in: -3..<3)
-        
-        return ExchangeFull(IDValute: _data.id, charCode: _data.charCode, nameValute: _data.name, changesBuy: _data.value > _data.previous, buy: valuteBuy.valuteToTableFormat(), changesSale: Bool.random(), sale: valuteSale.valuteToTableFormat(), dataChar: dataChart)
     }
 }

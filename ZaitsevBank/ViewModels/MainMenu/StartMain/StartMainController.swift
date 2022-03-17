@@ -14,8 +14,7 @@ class StartMainController: UIViewController {
     private let modelStartMain : StartMenu = StartMenu()
     
     public var DataUser = clientZaitsevBank()
-    public var cardUser = [Cards]()
-        
+   
     private var ExhangeTableValute = true
     
     @IBOutlet weak var LabelName: UILabel!
@@ -102,19 +101,16 @@ class StartMainController: UIViewController {
             Task{
                 await withTaskGroup(of: Void.self) { group in
                     group.addTask {
-                        modelStartMain.dataValute = await API_VALUTE.getDataValute()
+                        await self.getDataUserTable()
                     }
                     group.addTask {
-                        await getDataUserTable()
+                        await self.getValuteExchange()
                     }
                     group.addTask {
-                        await getTableExchange()
+                        await self.getTableWallet()
                     }
                     group.addTask {
-                       await getTableWallet()
-                    }
-                    group.addTask {
-                        modelStartMain.dataBitExchange = await API_VALUTE.getBitcoinTable()
+                        self.modelStartMain.dataBitExchange = await API_VALUTE.getBitcoinTable()
                     }
                 }
             }
@@ -171,19 +167,16 @@ class StartMainController: UIViewController {
             Task{
                 await withTaskGroup(of: Void.self) { group in
                     group.addTask {
-                        modelStartMain.dataValute = await API_VALUTE.getDataValute()
+                        await self.getDataUserTable()
                     }
                     group.addTask {
-                        await getDataUserTable()
+                        await self.getValuteExchange()
                     }
                     group.addTask {
-                        await getTableExchange()
+                        await self.getTableWallet()
                     }
                     group.addTask {
-                       await getTableWallet()
-                    }
-                    group.addTask {
-                        modelStartMain.dataBitExchange = await API_VALUTE.getBitcoinTable()
+                        self.modelStartMain.dataBitExchange = await API_VALUTE.getBitcoinTable()
                     }
                 }
                 DispatchQueue.main.async {
@@ -213,7 +206,7 @@ class StartMainController: UIViewController {
                     modelStartMain.dataTableExchange = modelStartMain.dataBitExchange
                     
                     DispatchQueue.main.async {
-                        ExchangeTable.reloadData()
+                        self.ExchangeTable.reloadData()
                     }
                 }
             }
@@ -245,7 +238,7 @@ class StartMainController: UIViewController {
                     }
                     
                     DispatchQueue.main.async {
-                        ExchangeTable.reloadData()
+                        self.ExchangeTable.reloadData()
                     }
                 }
             }
@@ -258,9 +251,11 @@ class StartMainController: UIViewController {
         self.navigationController?.pushViewController(AddNewCardController, animated: true)
     }
     
-    private func getTableExchange() async {
+    private func getValuteExchange() async {
         
-        modelStartMain.dataExchange = await API_VALUTE.getValuteTable()
+        let data : ([ValuteMainLabel], [Exchange]) = await API_VALUTE.getDataValute()
+        modelStartMain.dataValute = data.0
+        modelStartMain.dataExchange = data.1
         modelStartMain.dataTableExchange.removeAll()
         
         if (modelStartMain.dataExchange.count > 0) {
@@ -292,7 +287,7 @@ class StartMainController: UIViewController {
     }
     
     private func getTableWallet() async{
-        cardUser = await GetCardUser().getCards()
+        modelStartMain.cardUser = await GetCardUser().getCards()
         DispatchQueue.main.async {
             self.WalletTable.reloadData()
         }
@@ -338,11 +333,11 @@ extension StartMainController: UITableViewDelegate, UITableViewDataSource {
         
         switch tableView{
         case WalletTable :
-            return cardUser.count
+            return modelStartMain.cardUser.count
         case ExchangeTable :
             return modelStartMain.dataTableExchange.count
         default:
-            return cardUser.count
+            return modelStartMain.cardUser.count
         }
     }
     
@@ -353,7 +348,7 @@ extension StartMainController: UITableViewDelegate, UITableViewDataSource {
         switch tableView {
         case WalletTable:
             if let WalletCell = tableView.dequeueReusableCell(withIdentifier: "cellWalet", for: indexPath) as? WalletViewCell {
-                WalletCell.configurated(with: (self.cardUser[indexPath.row]))
+                WalletCell.configurated(with: (self.modelStartMain.cardUser[indexPath.row]))
                 cell = WalletCell
             }
             return cell
@@ -374,7 +369,7 @@ extension StartMainController: UITableViewDelegate, UITableViewDataSource {
             let storyboardCardViewer : UIStoryboard = UIStoryboard(name: "CardViewer", bundle: nil)
             let CardViewer = storyboardCardViewer.instantiateViewController(withIdentifier: "CardView") as! FullCardController
 
-            CardViewer.cardFull = cardUser
+            CardViewer.cardFull = modelStartMain.cardUser
             CardViewer.indexCard = indexPath
             self.navigationController?.pushViewController(CardViewer, animated: true)
         }
