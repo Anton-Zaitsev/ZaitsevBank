@@ -53,7 +53,7 @@ final class ImageAnalyzer {
         let creditCardNumber: Regex = #"(?:\d[ -]*?){13,16}"#
         let month: Regex = #"(\d{2})\/\d{2}"#
         let year: Regex = #"\d{2}\/(\d{2})"#
-        let wordsToSkip = ["mastercard", "jcb", "visa", "express", "bank", "card", "platinum", "reward"]
+        let wordsToSkip = ["mastercard", "jcb", "visa", "express", "bank", "card", "platinum", "reward","сбербанк","900","мир"]
         // These may be contained in the date strings, so ignore them only for names
         let invalidNames = ["expiration", "valid", "since", "from", "until", "month", "year"]
         let name: Regex = #"([A-z]{2,}\h([A-z.]+\h)?[A-z]{2,})"#
@@ -103,10 +103,17 @@ final class ImageAnalyzer {
             }
         }
         // ExpireDate
-        if let date = creditCard.expireDate {
+        if var date = creditCard.expireDate {
             let count = strongSelf.predictedCardInfo[.expireDate(date), default: 0]
             strongSelf.predictedCardInfo[.expireDate(date)] = count + 1
             if count > 2 {
+                // Последний день текущего месяца
+                let cal = Calendar.current
+                var comps = DateComponents(calendar: cal, year: date.year, month: date.month)
+                comps.setValue(date.month! + 1, for: .month)
+                comps.setValue(0, for: .day)
+                let Date = cal.date(from: comps)!
+                date.day = cal.component(.day, from: Date)
                 strongSelf.selectedCard.expireDate = date
             }
         }
@@ -115,7 +122,7 @@ final class ImageAnalyzer {
             let count = strongSelf.predictedCardInfo[.number(number), default: 0]
             strongSelf.predictedCardInfo[.number(number)] = count + 1
             if count > 2 {
-                strongSelf.selectedCard.number = number
+                strongSelf.selectedCard.number = number.formatCardNumber()
             }
         }
 

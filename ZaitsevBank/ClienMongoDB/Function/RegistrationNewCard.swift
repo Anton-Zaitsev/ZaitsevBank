@@ -56,7 +56,7 @@ class RegistrationNewCard {
                         let cardRealm = clientCardsCredit_card()
                         cardRealm.nameCard = nameCard
                         cardRealm.typeCard = typeCard
-                        cardRealm.data = currentData.generateDataFromDB()
+                        cardRealm.data = currentData.endOfMonth().generateDataFromDB()// Конец текущего месяца + 4 года
                         cardRealm.numberCard = numberCard
                         cardRealm.cvvv = CVV
                         cardRealm.moneyCount = 0.0
@@ -79,4 +79,5 @@ class RegistrationNewCard {
             return false
         }
     }
+    
 }

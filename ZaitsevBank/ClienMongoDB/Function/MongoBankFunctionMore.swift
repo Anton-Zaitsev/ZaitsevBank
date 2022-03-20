@@ -20,13 +20,16 @@ public class MongoBankFunctionMore {
             guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
                 print("Не скачалась дата для определения даты")
                 return nil}
-            let optData = try? JSON(data: dataValue)
-            guard optData != nil else { return nil }
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd/MM/yyyy"
-            let dataString = optData!["formatted"].string ?? ""
-            let date = dateFormatter.date(from: dataString) ?? nil
-            return date
+            if let optData = try? JSON(data: dataValue){
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd/MM/yyyy"
+                let dataString = optData["formatted"].string ?? ""
+                let date = dateFormatter.date(from: dataString) ?? nil
+                return date
+            }
+            else {
+                return nil
+            }
         }
         catch{
             return nil
@@ -41,5 +44,12 @@ extension Date {
         let futureDate = Calendar.current.date(byAdding: dateComponent, to: self)
         return futureDate!
     }
+    func startOfMonth() -> Date {
+           return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Calendar.current.startOfDay(for: self)))!
+       }
+       
+   func endOfMonth() -> Date {
+       return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
+   }
 }
 

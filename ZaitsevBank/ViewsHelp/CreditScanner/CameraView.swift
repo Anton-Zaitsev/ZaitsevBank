@@ -16,10 +16,13 @@ protocol CameraViewDelegate: AnyObject {
 
 final class CameraView: UIView {
     public weak var delegate: CameraViewDelegate?
-    public var creditCardFrameStrokeColor: UIColor?
-    public var maskLayerColor: UIColor?
-    public var maskLayerAlpha: CGFloat?
-
+    
+    public var strokeLayer = CAShapeLayer()
+    
+    private let creditCardFrameStrokeColor: UIColor = .white
+    private let maskLayerColor: UIColor = .black
+    private let maskLayerAlpha: CGFloat = 0.7
+    
     // MARK: - Capture related
 
     private let captureSessionQueue = DispatchQueue(
@@ -124,7 +127,7 @@ final class CameraView: UIView {
         /// Mask layer that covering area around camera view
         let backLayer = CALayer()
         backLayer.frame = bounds
-        backLayer.backgroundColor = maskLayerColor!.withAlphaComponent(maskLayerAlpha!).cgColor
+        backLayer.backgroundColor = maskLayerColor.withAlphaComponent(maskLayerAlpha).cgColor
 
         //  culcurate cutoutted frame
         let cuttedWidth: CGFloat = bounds.width - 40.0
@@ -148,9 +151,8 @@ final class CameraView: UIView {
         backLayer.mask = maskLayer
         layer.addSublayer(backLayer)
 
-        let strokeLayer = CAShapeLayer()
         strokeLayer.lineWidth = 3.0
-        strokeLayer.strokeColor = creditCardFrameStrokeColor?.cgColor
+        strokeLayer.strokeColor = creditCardFrameStrokeColor.cgColor
         strokeLayer.path = UIBezierPath(roundedRect: cuttedRect, cornerRadius: 10.0).cgPath
         strokeLayer.fillColor = nil
         layer.addSublayer(strokeLayer)

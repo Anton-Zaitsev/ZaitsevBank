@@ -25,11 +25,31 @@ public extension CreditCardScannerViewControllerDelegate where Self: UIViewContr
 open class CardScannerController: UIViewController{
 
     @IBOutlet weak var cameraView: CameraView!
+        
+    @IBOutlet weak var CardView: UIView!
+    @IBOutlet weak var CardNumber: UILabel!
+    @IBOutlet weak var CardName: UILabel!
+    @IBOutlet weak var CardDate: UILabel!
+    @IBOutlet weak var CardType: UIImageView!
     
-    private var cameraViewCreditCardFrameStrokeColor: UIColor = .white
-    private var cameraViewMaskLayerColor: UIColor = .black
-    private var cameraViewMaskAlpha: CGFloat = 0.7
-    
+    public func getViewCard(_ card: CreditCard) {
+        if let number = card.number {
+            if let name = card.name {
+                if let data = card.expireDate {
+                    CardNumber.text = number
+                    CardName.text = name
+                    let month = data.month!
+                    let nowYear = 2000
+                    let year = String(data.year! - nowYear)
+                    let cardType = "\(number.first!)".searchOperatorCard()
+                    CardType.image = UIImage(named: cardType)
+                    CardDate.text = "До \(month < 10 ? "0\(month)" : "\(month)" )/\(year)"
+                    
+                    CardView.isHidden = false
+                }
+            }
+        }
+    }
     private lazy var analyzer = ImageAnalyzer(delegate: self)
 
     public weak var delegate: CreditCardScannerViewControllerDelegate?
@@ -53,10 +73,6 @@ open class CardScannerController: UIViewController{
     override open func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         cameraView.delegate = self
-        cameraView.creditCardFrameStrokeColor = cameraViewCreditCardFrameStrokeColor
-        cameraView.maskLayerColor = cameraViewMaskLayerColor
-        cameraView.maskLayerAlpha = cameraViewMaskAlpha
-        
         cameraView.setupRegionOfInterest()
     }
     
@@ -85,8 +101,12 @@ extension CardScannerController: ImageAnalyzerProtocol {
         case let .success(creditCard):
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
-                strongSelf.cameraView.stopSession()
-                strongSelf.delegate?.creditCardScannerViewController(strongSelf, didFinishWith: creditCard)
+                strongSelf.cameraView.strokeLayer.strokeColor = UIColor.green.cgColor // Рамку окрашиваем в зеленый цвет
+                self!.getViewCard(creditCard)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    strongSelf.cameraView.stopSession()
+                    strongSelf.delegate?.creditCardScannerViewController(strongSelf, didFinishWith: creditCard)
+                }
             }
 
         case let .failure(error):
