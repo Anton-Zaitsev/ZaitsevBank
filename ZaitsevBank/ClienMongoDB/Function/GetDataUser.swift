@@ -16,12 +16,9 @@ public class GetDataUser {
         let partitionKey = RealmSettings.getAuthIDClient()
         let configuration = user.configuration(partitionValue: partitionKey)
         
-        let userId: String = user.id.sha256()
-        
         do {
             let realm = try await Realm(configuration: configuration)
-            
-            if let data = realm.objects(clientZaitsevBank.self).filter("userID == '\(userId)' ").first {
+            if let data = realm.objects(clientZaitsevBank.self).filter("userID == '\(user.id)'").first {
                 return data
             }
             else {
@@ -39,12 +36,10 @@ public class GetDataUser {
         let partitionKey = RealmSettings.getAuthIDClient()
         let configuration = userFromSign.configuration(partitionValue: partitionKey)
         
-        let userId: String = userFromSign.id.sha256()
-        
         do {
             let realm = try await Realm(configuration: configuration)
             
-            if let data = realm.objects(clientZaitsevBank.self).filter("userID == '\(userId)' ").first {
+            if let data = realm.objects(clientZaitsevBank.self).filter("userID == '\(userFromSign.id)'").first {
                 return data
             }
             else {
@@ -54,6 +49,6 @@ public class GetDataUser {
         catch {
             return nil
         }
-               
+
     }
 }

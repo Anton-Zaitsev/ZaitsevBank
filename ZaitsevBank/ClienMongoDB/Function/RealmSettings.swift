@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+
 public class RealmSettings {
         
     public static func getApp() -> App {
@@ -18,8 +19,9 @@ public class RealmSettings {
     public static func getCardPartition() -> String {
        return ("ZaistevBankCard" + getUser().id).sha256()
     }
+
     public static func getUser() -> User {
         return getApp().currentUser!
     }
-        
 }
+

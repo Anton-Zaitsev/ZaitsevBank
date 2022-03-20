@@ -37,8 +37,8 @@ public class SafeLocalPassword {
         do {
             let objects = try context.fetch(fetchRequest)
             let dataModel = objects.first
-            let login = try! dataModel?.login?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
-            let password = try! dataModel?.password?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
+            let login = try dataModel?.login?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
+            let password = try dataModel?.password?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
             return  (login,password)
             
         }
@@ -61,12 +61,12 @@ public class SafeLocalPassword {
             
             let dataModel = objects.first
                        
-            let pincode = try! dataModel?.localPass?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
+            let pincode = try dataModel?.localPass?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
 
             if (PIN_CODE == pincode){
                 
-                let login = try! dataModel?.login?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
-                let password = try! dataModel?.password?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
+                let login = try dataModel?.login?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
+                let password = try dataModel?.password?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
                 return  (login,password)
             }
             else {

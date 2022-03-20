@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -492,6 +492,64 @@
             </objects>
             <point key="canvasLocation" x="11.594202898550726" y="37.5"/>
         </scene>
+        <!--Card Scanner Controller-->
+        <scene sceneID="iaa-v3-bSe">
+            <objects>
+                <viewController storyboardIdentifier="CreditScanner" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WuY-vN-fZm" customClass="CardScannerController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IHq-tF-GzG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9g-c9-wI7" customClass="CameraView" customModule="ZaitsevBank" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сканирование карты" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEO-Cj-aSQ">
+                                <rect key="frame" x="112" y="69" width="190" height="21.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HMI-pn-KPf">
+                                <rect key="frame" x="0.0" y="55" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Dlj-ae-67R"/>
+                                    <constraint firstAttribute="width" secondItem="HMI-pn-KPf" secondAttribute="height" multiplier="1:1" id="i9B-pl-chK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <imageReference key="image" image="chevron.left" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="CancelClick:" destination="WuY-vN-fZm" eventType="touchUpInside" id="Wyk-l8-3aL"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="XL2-iI-g0N"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="P9g-c9-wI7" secondAttribute="bottom" id="63j-wk-oCw"/>
+                            <constraint firstItem="EEO-Cj-aSQ" firstAttribute="centerX" secondItem="XL2-iI-g0N" secondAttribute="centerX" id="AKG-7G-KPH"/>
+                            <constraint firstItem="P9g-c9-wI7" firstAttribute="trailing" secondItem="XL2-iI-g0N" secondAttribute="trailing" id="Oql-QH-OoR"/>
+                            <constraint firstItem="P9g-c9-wI7" firstAttribute="leading" secondItem="XL2-iI-g0N" secondAttribute="leading" id="V61-fl-tH5"/>
+                            <constraint firstItem="HMI-pn-KPf" firstAttribute="top" secondItem="XL2-iI-g0N" secondAttribute="top" constant="11" id="b5d-B4-UMa"/>
+                            <constraint firstItem="P9g-c9-wI7" firstAttribute="top" secondItem="IHq-tF-GzG" secondAttribute="top" id="cQ2-7W-s6q"/>
+                            <constraint firstItem="EEO-Cj-aSQ" firstAttribute="top" secondItem="XL2-iI-g0N" secondAttribute="top" constant="25" id="gpq-xg-uB2"/>
+                            <constraint firstItem="HMI-pn-KPf" firstAttribute="leading" secondItem="XL2-iI-g0N" secondAttribute="leading" id="p4Q-mp-1ze"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cameraView" destination="P9g-c9-wI7" id="fg1-G7-aue"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tMr-nm-CCA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="28.985507246376812" y="707.8125"/>
+        </scene>
     </scenes>
     <color key="tintColor" systemColor="tintColor"/>
     <resources>
@@ -499,6 +557,7 @@
         <image name="LogoZaitsevBank" width="819" height="701"/>
         <image name="arrow.left.arrow.right.circle" catalog="system" width="128" height="121"/>
         <image name="chart.bar.doc.horizontal" catalog="system" width="115" height="128"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="key.icloud.fill" catalog="system" width="128" height="88"/>
         <image name="masterCardLogo" width="3565" height="2132"/>

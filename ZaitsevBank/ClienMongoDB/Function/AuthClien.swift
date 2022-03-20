@@ -41,53 +41,33 @@ public class AuthClient {
             let client = RealmSettings.getApp().emailPasswordAuth
             do {
                 try await client.registerUser(email: dataUser.Login, password: dataUser.Password.sha256())
-                var user =  await SignIn(login: dataUser.Login, pass: dataUser.Password)
+                
+                if let USER = await SignIn(login: dataUser.Login, pass: dataUser.Password) {
                 //Получение пользователя
-             
-                let configuration = user!.configuration(partitionValue: RealmSettings.getAuthIDClient())
-                
-                Realm.asyncOpen(configuration: configuration) { [self] (result) in
-                        switch result {
-                        case .failure(let error):
-                            ErrorAuthClient = "Ошибка при регистрации: \(error.localizedDescription)"
-                            DeleteUser(user: user!)
-                            user = nil
-                        case .success(let realm):
-                            let tasks = realm.objects(clientZaitsevBank.self)
-                            
-                            let notificationToken = tasks.observe { [self] (changes) in
-                                    switch changes {
-                                    case .initial: break
-                                    case .update(_, _, _, _):
-                                        break
-                                    case .error(let error):
-                                        ErrorAuthClient = "Ошибка при регистрации: \(error.localizedDescription)"
-                                        DeleteUser(user: user!)
-                                        user = nil
-                                    }
-                                }
-                            
-                            try! realm.write() {
-                                let clientModel = clientZaitsevBank()
-                                clientModel.authID = RealmSettings.getAuthIDClient()
-                                clientModel.name = dataUser.Name
-                                clientModel.family = dataUser.Family
-                                clientModel.familyName = dataUser.FamilyName
-                                clientModel.phone =  "+7 \(dataUser.Phone)"
-                                clientModel.birthday = dataUser.Year
-                                clientModel.pol = dataUser.Pol
-                                clientModel.userID = (user?.id.sha256())!
-                                clientModel.avatar = ""
-                                realm.add(clientModel)
-                            }
-                            
-                            
-                            notificationToken.invalidate()
-                        }
+                    let configuration = USER.configuration(partitionValue: RealmSettings.getAuthIDClient())
+                    let realm = try await Realm(configuration: configuration)
+                    
+                    try realm.write {
+                        let clientModel = clientZaitsevBank()
+                        clientModel.authID = RealmSettings.getAuthIDClient()
+                        clientModel.name = dataUser.Name
+                        clientModel.family = dataUser.Family
+                        clientModel.familyName = dataUser.FamilyName
+                        clientModel.phone =  "+7 \(dataUser.Phone)"
+                        clientModel.birthday = dataUser.Year
+                        clientModel.pol = dataUser.Pol
+                        clientModel.userID = USER.id
+                        clientModel.avatar = ""
+                        realm.add(clientModel)
                     }
+                    
+                    return USER
+                }
+                else {
+                    ErrorAuthClient = "Ошибка при регистрации: Пользователя не удалось создать."
+                    return nil
+                }
 
-                return user
-                
             } catch {
                 ErrorAuthClient = "Ошибка при регистрации: \(error.localizedDescription)"
                 return nil

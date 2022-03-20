@@ -13,7 +13,7 @@ public class API_VALUTE {
     public static func getDataValute() async -> ([ValuteMainLabel],[Exchange]) {
         var arrayValute : [ValuteMainLabel] = []
         var dataCB : [Exchange] = []
-        
+
         let valute = URL(string: "https://www.cbr-xml-daily.ru/daily_json.js")
         
         let request = URLRequest(url: valute!)

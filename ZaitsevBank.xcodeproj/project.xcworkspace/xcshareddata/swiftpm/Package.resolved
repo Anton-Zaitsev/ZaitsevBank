@@ -1,61 +1,50 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Realm",
-        "repositoryURL": "https://github.com/realm/realm-cocoa",
-        "state": {
-          "branch": null,
-          "revision": "2380340c876da7a2d17b0b59e21e339120d09bb3",
-          "version": "10.24.0"
-        }
-      },
-      {
-        "package": "RealmDatabase",
-        "repositoryURL": "https://github.com/realm/realm-core",
-        "state": {
-          "branch": null,
-          "revision": "e9eec444d13ebebc062202407e79b9833428a24e",
-          "version": "11.11.0"
-        }
-      },
-      {
-        "package": "RNCryptor",
-        "repositoryURL": "https://github.com/RNCryptor/RNCryptor",
-        "state": {
-          "branch": null,
-          "revision": "5e3bbf44f08bf90049537cb8902d8f4fa911a79a",
-          "version": "5.1.0"
-        }
-      },
-      {
-        "package": "SwiftSoup",
-        "repositoryURL": "https://github.com/scinfu/SwiftSoup",
-        "state": {
-          "branch": null,
-          "revision": "13ba661fd1146967270fca92ce8195b223631436",
-          "version": "2.3.8"
-        }
-      },
-      {
-        "package": "SwiftyJSON",
-        "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON",
-        "state": {
-          "branch": null,
-          "revision": "b3dcd7dbd0d488e1a7077cb33b00f2083e382f07",
-          "version": "5.0.1"
-        }
-      },
-      {
-        "package": "SWXMLHash",
-        "repositoryURL": "https://github.com/drmohundro/SWXMLHash",
-        "state": {
-          "branch": null,
-          "revision": "6469881a3f30417c5bb02404ea4b69207f297592",
-          "version": "6.0.0"
-        }
+  "pins" : [
+    {
+      "identity" : "realm-cocoa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-cocoa",
+      "state" : {
+        "revision" : "2380340c876da7a2d17b0b59e21e339120d09bb3",
+        "version" : "10.24.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "realm-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-core",
+      "state" : {
+        "revision" : "e9eec444d13ebebc062202407e79b9833428a24e",
+        "version" : "11.11.0"
+      }
+    },
+    {
+      "identity" : "rncryptor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RNCryptor/RNCryptor",
+      "state" : {
+        "revision" : "5e3bbf44f08bf90049537cb8902d8f4fa911a79a",
+        "version" : "5.1.0"
+      }
+    },
+    {
+      "identity" : "swiftyjson",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftyJSON/SwiftyJSON",
+      "state" : {
+        "revision" : "b3dcd7dbd0d488e1a7077cb33b00f2083e382f07",
+        "version" : "5.0.1"
+      }
+    },
+    {
+      "identity" : "swxmlhash",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/drmohundro/SWXMLHash",
+      "state" : {
+        "revision" : "6469881a3f30417c5bb02404ea4b69207f297592",
+        "version" : "6.0.0"
+      }
+    }
+  ],
+  "version" : 2
 }

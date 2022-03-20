@@ -7,6 +7,7 @@
 
 import Foundation
 import RNCryptor
+import CommonCrypto
 
 extension String {
     func encryptMessage(encryptionKey: String) throws -> String {
@@ -21,7 +22,6 @@ extension String {
         let decryptedString = String(data: decryptedData, encoding: .utf8)!
         return decryptedString
     }
-    
 }
 
 public class Ecryption{

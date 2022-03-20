@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4mZ-fl-wcx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4mZ-fl-wcx">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1162,14 +1162,40 @@
                     <view key="view" contentMode="scaleToFill" id="Bkr-KK-wzS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сканирование Карты" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rcq-p7-0wb">
+                                <rect key="frame" x="10" y="74" width="394" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpv-Ak-Mn8">
+                                <rect key="frame" x="151" y="432.5" width="112" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Сканировать"/>
+                                <connections>
+                                    <action selector="ScanCard:" destination="bdj-5j-HAa" eventType="touchUpInside" id="Fst-Ig-e0S"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="SZf-tG-K8Z"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="SZf-tG-K8Z" firstAttribute="trailing" secondItem="Rcq-p7-0wb" secondAttribute="trailing" constant="10" id="Dsg-Ff-RaR"/>
+                            <constraint firstItem="jpv-Ak-Mn8" firstAttribute="centerX" secondItem="Bkr-KK-wzS" secondAttribute="centerX" id="H9R-wa-KmH"/>
+                            <constraint firstItem="Rcq-p7-0wb" firstAttribute="leading" secondItem="SZf-tG-K8Z" secondAttribute="leading" constant="10" id="JPg-23-0gb"/>
+                            <constraint firstItem="jpv-Ak-Mn8" firstAttribute="centerY" secondItem="Bkr-KK-wzS" secondAttribute="centerY" id="Q6X-B8-2vC"/>
+                            <constraint firstItem="Rcq-p7-0wb" firstAttribute="top" secondItem="SZf-tG-K8Z" secondAttribute="top" constant="30" id="hl5-J8-lid"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Платежи" id="W8J-ds-zpl"/>
+                    <connections>
+                        <outlet property="ResultLabel" destination="Rcq-p7-0wb" id="YQN-Gb-8sN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1wW-fA-trn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-877" y="-26"/>
+            <point key="canvasLocation" x="-878.26086956521749" y="-26.116071428571427"/>
         </scene>
         <!--История-->
         <scene sceneID="IHF-nB-E8v">

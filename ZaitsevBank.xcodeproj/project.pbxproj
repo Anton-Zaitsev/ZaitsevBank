@@ -13,7 +13,6 @@
 		3A07798F27122CF30026BCAD /* MainMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A07798E27122CF20026BCAD /* MainMenu.storyboard */; };
 		3A0787EC2777203E00F678DD /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3A0787EB2777203E00F678DD /* Realm */; };
 		3A0787EE2777203E00F678DD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A0787ED2777203E00F678DD /* RealmSwift */; };
-		3A0787F12777205600F678DD /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 3A0787F02777205600F678DD /* SwiftSoup */; };
 		3A0787F42777207100F678DD /* RNCryptor in Frameworks */ = {isa = PBXBuildFile; productRef = 3A0787F32777207100F678DD /* RNCryptor */; };
 		3A0787F72777208400F678DD /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 3A0787F62777208400F678DD /* SWXMLHash */; };
 		3A0787F92778851900F678DD /* API_VALUTE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0787F82778851900F678DD /* API_VALUTE.swift */; };
@@ -74,6 +73,13 @@
 		3ACEFAA32721EBB7004BD739 /* AuthFromFaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */; };
 		3AD95367271DC7AB0081D50A /* LocalPassword.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AD95366271DC7AB0081D50A /* LocalPassword.xib */; };
 		3AD95369271DC7DA0081D50A /* LocalPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD95368271DC7DA0081D50A /* LocalPassword.swift */; };
+		3AF5D73027E69E3C0095A4DC /* ImageRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5D72A27E69E3B0095A4DC /* ImageRatio.swift */; };
+		3AF5D73127E69E3C0095A4DC /* ImageAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5D72B27E69E3C0095A4DC /* ImageAnalyzer.swift */; };
+		3AF5D73227E69E3C0095A4DC /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5D72C27E69E3C0095A4DC /* CreditCard.swift */; };
+		3AF5D73327E69E3C0095A4DC /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5D72D27E69E3C0095A4DC /* CameraView.swift */; };
+		3AF5D73527E69E3C0095A4DC /* CreditCardScannerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5D72F27E69E3C0095A4DC /* CreditCardScannerError.swift */; };
+		3AF5D73927E6B9CC0095A4DC /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5D73827E6B9CC0095A4DC /* Regex.swift */; };
+		3AF5D73B27E6BCD00095A4DC /* CardScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5D73A27E6BCD00095A4DC /* CardScannerController.swift */; };
 		3AF977A32714E595006C1B87 /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF977A22714E595006C1B87 /* CoreDataModel.swift */; };
 		3AF977A92714EBD3006C1B87 /* Ecryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF977A82714EBD3006C1B87 /* Ecryption.swift */; };
 /* End PBXBuildFile section */
@@ -142,6 +148,13 @@
 		3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFromFaceID.swift; sourceTree = "<group>"; };
 		3AD95366271DC7AB0081D50A /* LocalPassword.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocalPassword.xib; sourceTree = "<group>"; };
 		3AD95368271DC7DA0081D50A /* LocalPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPassword.swift; sourceTree = "<group>"; };
+		3AF5D72A27E69E3B0095A4DC /* ImageRatio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRatio.swift; sourceTree = "<group>"; };
+		3AF5D72B27E69E3C0095A4DC /* ImageAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAnalyzer.swift; sourceTree = "<group>"; };
+		3AF5D72C27E69E3C0095A4DC /* CreditCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
+		3AF5D72D27E69E3C0095A4DC /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		3AF5D72F27E69E3C0095A4DC /* CreditCardScannerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCardScannerError.swift; sourceTree = "<group>"; };
+		3AF5D73827E6B9CC0095A4DC /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
+		3AF5D73A27E6BCD00095A4DC /* CardScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardScannerController.swift; sourceTree = "<group>"; };
 		3AF977A22714E595006C1B87 /* CoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
 		3AF977A82714EBD3006C1B87 /* Ecryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ecryption.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,7 +169,6 @@
 				3A0787EE2777203E00F678DD /* RealmSwift in Frameworks */,
 				3A0787F72777208400F678DD /* SWXMLHash in Frameworks */,
 				3A0787EC2777203E00F678DD /* Realm in Frameworks */,
-				3A0787F12777205600F678DD /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +379,7 @@
 		3AB86B87270CAD8A008D0823 /* ViewsHelp */ = {
 			isa = PBXGroup;
 			children = (
+				3AF5D72927E69E0C0095A4DC /* CreditScanner */,
 				3AB8F1072743E8D000469C94 /* Charts */,
 				3A3AE94A271276FA001FF068 /* Loading.gif */,
 				3AB86B88270CADC6008D0823 /* Extension.swift */,
@@ -384,6 +397,20 @@
 				3AB8F1082743E8F600469C94 /* ChartSeries.swift */,
 			);
 			path = Charts;
+			sourceTree = "<group>";
+		};
+		3AF5D72927E69E0C0095A4DC /* CreditScanner */ = {
+			isa = PBXGroup;
+			children = (
+				3AF5D72D27E69E3C0095A4DC /* CameraView.swift */,
+				3AF5D72C27E69E3C0095A4DC /* CreditCard.swift */,
+				3AF5D72F27E69E3C0095A4DC /* CreditCardScannerError.swift */,
+				3AF5D72B27E69E3C0095A4DC /* ImageAnalyzer.swift */,
+				3AF5D72A27E69E3B0095A4DC /* ImageRatio.swift */,
+				3AF5D73827E6B9CC0095A4DC /* Regex.swift */,
+				3AF5D73A27E6BCD00095A4DC /* CardScannerController.swift */,
+			);
+			path = CreditScanner;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,7 +432,6 @@
 			packageProductDependencies = (
 				3A0787EB2777203E00F678DD /* Realm */,
 				3A0787ED2777203E00F678DD /* RealmSwift */,
-				3A0787F02777205600F678DD /* SwiftSoup */,
 				3A0787F32777207100F678DD /* RNCryptor */,
 				3A0787F62777208400F678DD /* SWXMLHash */,
 				3A8263A727D93BB200F96258 /* SwiftyJSON */,
@@ -443,7 +469,6 @@
 			mainGroup = 3A0FC943270A52B600B6B2F6;
 			packageReferences = (
 				3A0787EA2777203E00F678DD /* XCRemoteSwiftPackageReference "realm-cocoa" */,
-				3A0787EF2777205600F678DD /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				3A0787F22777207100F678DD /* XCRemoteSwiftPackageReference "RNCryptor" */,
 				3A0787F52777208400F678DD /* XCRemoteSwiftPackageReference "SWXMLHash" */,
 				3A8263A627D93BB100F96258 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
@@ -482,8 +507,10 @@
 			files = (
 				3A97F280274441AD00A40224 /* ExchangeRateCell.swift in Sources */,
 				3A85DED52713DF010059B5CB /* SettingApp.swift in Sources */,
+				3AF5D73B27E6BCD00095A4DC /* CardScannerController.swift in Sources */,
 				3A30489727139A010010A739 /* StartMenu.swift in Sources */,
 				3A2CDE6C2710B022005F0CF4 /* LastRegController.swift in Sources */,
+				3AF5D73227E69E3C0095A4DC /* CreditCard.swift in Sources */,
 				3A82E62E272B645C0054F36C /* OffersViewCell.swift in Sources */,
 				3A97F2822744477D00A40224 /* FullValuteMenu.swift in Sources */,
 				3A0862E027382776000C5407 /* ValuteStructures.swift in Sources */,
@@ -499,9 +526,12 @@
 				3AAB4CD2270A7F7000697F8B /* AuthClien.swift in Sources */,
 				3A21F5F62743AD7500D7E0CD /* RegistrationNewCard.swift in Sources */,
 				3AA907722749990100C7581D /* CardPickController.swift in Sources */,
+				3AF5D73127E69E3C0095A4DC /* ImageAnalyzer.swift in Sources */,
+				3AF5D73527E69E3C0095A4DC /* CreditCardScannerError.swift in Sources */,
 				3A0FC975270A54A000B6B2F6 /* LoginModel.swift in Sources */,
 				3A5EB0DA272D8C7E0037D006 /* GetCardUser.swift in Sources */,
 				3A6D957C2751CAE90064B11F /* API_DinamicValute.swift in Sources */,
+				3AF5D73927E6B9CC0095A4DC /* Regex.swift in Sources */,
 				3AD95369271DC7DA0081D50A /* LocalPassword.swift in Sources */,
 				3A9C9B792739DB0C009A2D4C /* PreferenceCardAddViewCell.swift in Sources */,
 				3A07798D271229C20026BCAD /* RealmSettings.swift in Sources */,
@@ -533,8 +563,10 @@
 				3A5EB0D6272D69ED0037D006 /* WalletViewCell.swift in Sources */,
 				3A99391B2738B074009B1B06 /* CarAddViewCell.swift in Sources */,
 				3AF977A32714E595006C1B87 /* CoreDataModel.swift in Sources */,
+				3AF5D73027E69E3C0095A4DC /* ImageRatio.swift in Sources */,
 				3A0FC973270A547E00B6B2F6 /* LoginController.swift in Sources */,
 				3AB8F10C2743E8F600469C94 /* ChartColors.swift in Sources */,
+				3AF5D73327E69E3C0095A4DC /* CameraView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -758,14 +790,6 @@
 				minimumVersion = 10.20.0;
 			};
 		};
-		3A0787EF2777205600F678DD /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/scinfu/SwiftSoup";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
 		3A0787F22777207100F678DD /* XCRemoteSwiftPackageReference "RNCryptor" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RNCryptor/RNCryptor";
@@ -802,11 +826,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3A0787EA2777203E00F678DD /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
-		};
-		3A0787F02777205600F678DD /* SwiftSoup */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3A0787EF2777205600F678DD /* XCRemoteSwiftPackageReference "SwiftSoup" */;
-			productName = SwiftSoup;
 		};
 		3A0787F32777207100F678DD /* RNCryptor */ = {
 			isa = XCSwiftPackageProductDependency;
