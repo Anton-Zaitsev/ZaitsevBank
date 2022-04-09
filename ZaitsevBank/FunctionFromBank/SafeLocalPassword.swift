@@ -103,7 +103,6 @@ public class SafeLocalPassword {
         do {
             let key = try Ecryption.generateEncryptionKey(withPassword: newAPPID.uuidString)
             
-            dataApp.appID = newAPPID
             dataApp.localPass = try localPassword.encryptMessage(encryptionKey: key)
             dataApp.login = try login.encryptMessage(encryptionKey: key)
             dataApp.password = try password.encryptMessage(encryptionKey: key)

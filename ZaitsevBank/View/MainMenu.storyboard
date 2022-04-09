@@ -1158,13 +1158,13 @@
         <!--Платежи-->
         <scene sceneID="rPg-PN-mEN">
             <objects>
-                <viewController storyboardIdentifier="Payments" id="bdj-5j-HAa" customClass="PaymentsController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Payments" title="Платежи" id="bdj-5j-HAa" customClass="PaymentsController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bkr-KK-wzS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сканирование Карты" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rcq-p7-0wb">
-                                <rect key="frame" x="10" y="74" width="394" height="24"/>
+                                <rect key="frame" x="10" y="54" width="394" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1181,14 +1181,15 @@
                         <viewLayoutGuide key="safeArea" id="SZf-tG-K8Z"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="SZf-tG-K8Z" firstAttribute="trailing" secondItem="Rcq-p7-0wb" secondAttribute="trailing" constant="10" id="Dsg-Ff-RaR"/>
+                            <constraint firstItem="SZf-tG-K8Z" firstAttribute="trailing" secondItem="Rcq-p7-0wb" secondAttribute="trailing" constant="10" id="54B-cg-jTr"/>
                             <constraint firstItem="jpv-Ak-Mn8" firstAttribute="centerX" secondItem="Bkr-KK-wzS" secondAttribute="centerX" id="H9R-wa-KmH"/>
-                            <constraint firstItem="Rcq-p7-0wb" firstAttribute="leading" secondItem="SZf-tG-K8Z" secondAttribute="leading" constant="10" id="JPg-23-0gb"/>
                             <constraint firstItem="jpv-Ak-Mn8" firstAttribute="centerY" secondItem="Bkr-KK-wzS" secondAttribute="centerY" id="Q6X-B8-2vC"/>
-                            <constraint firstItem="Rcq-p7-0wb" firstAttribute="top" secondItem="SZf-tG-K8Z" secondAttribute="top" constant="30" id="hl5-J8-lid"/>
+                            <constraint firstItem="Rcq-p7-0wb" firstAttribute="top" secondItem="SZf-tG-K8Z" secondAttribute="top" constant="10" id="Raw-9k-Ogo"/>
+                            <constraint firstItem="Rcq-p7-0wb" firstAttribute="leading" secondItem="SZf-tG-K8Z" secondAttribute="leading" constant="10" id="vjX-As-nCM"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Платежи" id="W8J-ds-zpl"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="ResultLabel" destination="Rcq-p7-0wb" id="YQN-Gb-8sN"/>
                     </connections>
@@ -1200,7 +1201,7 @@
         <!--История-->
         <scene sceneID="IHF-nB-E8v">
             <objects>
-                <viewController storyboardIdentifier="History" id="ZsB-Ng-h4z" customClass="HistoryController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="History" title="История" id="ZsB-Ng-h4z" customClass="HistoryController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oUj-Un-aMw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

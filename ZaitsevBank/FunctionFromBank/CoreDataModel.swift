@@ -23,7 +23,6 @@ extension AutoLoginSet {
     @NSManaged public var login: String?
     @NSManaged public var localPass: String?
     @NSManaged public var key: String?
-    @NSManaged public var appID: UUID?
     
 }
 
