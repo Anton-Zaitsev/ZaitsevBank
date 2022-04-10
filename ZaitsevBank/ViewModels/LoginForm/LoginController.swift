@@ -6,14 +6,13 @@
 //
 
 import UIKit
-import RealmSwift
 import CoreData
 
 class LoginController: UIViewController, LocalPasswordDelegate {
     
     private var loginModel = LoginModel() //Объявляем модель данных для Login
-    private let authFunc = AuthClient()
-    public var dataUser : clientZaitsevBank!
+    private let authFunc = AccountManager()
+    public var dataUser : UserModel!
     // LOCALPASSWORD
     public var LocalPasswordEncrypted: String = ""
     
@@ -69,26 +68,18 @@ class LoginController: UIViewController, LocalPasswordDelegate {
         DispatchQueue.global(qos: .utility).async{ [self] in
             
             Task(priority: .high) {
-                if let user = await authFunc.SignIn(login: loginModel.Login, pass: loginModel.Password){
+                if let user = await authFunc.SignAccount(login: loginModel.Login, password: loginModel.Password){
 
-                    if let data = await GetDataUser().getFromUser(user){
-                        DispatchQueue.main.async { [self] in
-                            SetAlertLocalPassword()
-                            dataUser = data
-                            DisableLoader(loader: loader)
-                        }
-                    }
-                    else {
-                        DispatchQueue.main.async { [self] in
-                            DisableLoader(loader: loader)
-                            showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о пользователе")
-                        }
+                    DispatchQueue.main.async { [self] in
+                        SetAlertLocalPassword()
+                        dataUser = user
+                        DisableLoader(loader: loader)
                     }
                 }
                 else {
                     DispatchQueue.main.async { [self] in
                     self.DisableLoader(loader: loader)
-                    showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.ErrorAuthClient)
+                    showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.Error)
                     }
                     return
                 }
@@ -120,7 +111,7 @@ class LoginController: UIViewController, LocalPasswordDelegate {
         
         if(succSafeLocalCode){
             
-            self.EnableMainLoader(dataUser.name!)
+            self.EnableMainLoader(dataUser.firstName)
             //MARK: Установка user на первоначальное вхождение и установка на true
             UserDefaults.standard.SetisLogin(true)
             //SafeLocalPassword.ReadDataLocal(database: ContainerLocalData)

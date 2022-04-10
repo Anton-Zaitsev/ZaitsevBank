@@ -26,7 +26,7 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
     private let Pol = ["Мужчина", "Женщина", "Не определился"]
     
     public var ModelRegistration = LoginModel()
-    private let authFunc = AuthClient()
+    private let authFunc = AccountManager()
     
     lazy var ContainerLocalData: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "ZaitsevBank")
@@ -76,7 +76,7 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
         FramePol.backgroundColor = Pol.contains(ModelRegistration.Pol) ? .green : .red
     }
     
-    private var DataUser: clientZaitsevBank!
+    private var DataUser: UserModel!
     
     @IBAction func CreateNewAccount(_ sender: Any) {
         if (FramePhone.backgroundColor == .green) {
@@ -91,32 +91,22 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
                     DispatchQueue.main.async {
                         let loader = self.EnableLoader()
                         DispatchQueue.global(qos: .utility).async{ [self] in
-                            Task(priority: .medium) {
-                                let user = await authFunc.Registration(dataUser: ModelRegistration)
-                                let boolRegistration = (user == nil ? false : true)
-                                
-                                DispatchQueue.main.async { [self] in
-                                    if (boolRegistration){
-                                        Task(priority: .medium) {
-                                            
-                                            if let data = await GetDataUser().get() {
-                                                DataUser = data
-                                                DisableLoader(loader: loader)
-                                                SetAlertLocalPassword()
-                                            }
-                                            else {
-                                                DisableLoader(loader: loader)
-                                                showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные пользователя с сервера")
-                                                navigationController?.setNavigationBarHidden(false, animated: true) //Enable navigationBar
-                                            }
-                                        }
-                                    }
-                                    else {
+                            Task(priority: .high) {
+                                if let user = await authFunc.CreateAccount(model: ModelRegistration) {
+                                    DispatchQueue.main.async { [self] in
+                                        DataUser = user
                                         DisableLoader(loader: loader)
-                                        showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.ErrorAuthClient)
+                                        SetAlertLocalPassword()
+                                    }
+                                }
+                                else {
+                                    DispatchQueue.main.async { [self] in
+                                        DisableLoader(loader: loader)
+                                        showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.Error)
                                         navigationController?.setNavigationBarHidden(false, animated: true) //Enable navigationBar
                                     }
                                 }
+                                
                                 
                             }
                         }

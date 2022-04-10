@@ -1,24 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "realm-cocoa",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-cocoa",
-      "state" : {
-        "revision" : "2380340c876da7a2d17b0b59e21e339120d09bb3",
-        "version" : "10.24.0"
-      }
-    },
-    {
-      "identity" : "realm-core",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-core",
-      "state" : {
-        "revision" : "e9eec444d13ebebc062202407e79b9833428a24e",
-        "version" : "11.11.0"
-      }
-    },
-    {
       "identity" : "rncryptor",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RNCryptor/RNCryptor",

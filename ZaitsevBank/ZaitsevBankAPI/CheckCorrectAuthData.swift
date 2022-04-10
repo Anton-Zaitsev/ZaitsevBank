@@ -2,7 +2,7 @@
 //  CheckCorrectAuthData.swift
 //  ZaitsevBank
 //
-//  Created by Антон Зайцев on 05.10.2021.
+//  Created by Антон Зайцев on 09.04.2022.
 //
 
 import Foundation

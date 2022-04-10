@@ -16,7 +16,7 @@ class ParametrsAddCardViewController: UIViewController {
     
     private var pickerValute = UIPickerView()
     
-    private let NewCardAdd = RegistrationNewCard()
+    //private let NewCardAdd = RegistrationNewCard()
     
     private let ValutePicker = ["Рубли", "Доллары", "Евро","Биткоин", "Эфириум"]
     
@@ -34,6 +34,8 @@ class ParametrsAddCardViewController: UIViewController {
     public var ValutePick : String?
     
     private var CVVNUMBER : String = ""
+    
+    private let cardsManager : CardsManager = CardsManager()
     
     @IBOutlet weak var FrontCardView: UIView!
     @IBOutlet weak var BackCardView: UIView!
@@ -158,15 +160,10 @@ class ParametrsAddCardViewController: UIViewController {
             
             DispatchQueue.global(qos: .utility).async{ [self] in
                 Task(priority: .high) {
-                    
-                    let numberCar = CardNumber.text!.replacingOccurrences(of: "  ", with: " ")
-                    
-                    
+                                        
                     let typeMoney = ValutePick ?? ValuteDB.first
-                    
-                    let typeCar = generateIcon(type: CARDDATA.typeCard)
-                    
-                    let succAddNewCard = await NewCardAdd.newCard(cardOperator: CARDDATA.typeCard, typeCard: typeCar, nameCard: CARDDATA.typeLabelCard, numberCard: numberCar, typeMoney: typeMoney!, CVV: CVVNUMBER)
+          
+                    let succAddNewCard = await cardsManager.CreateCard(CardOperator: CARDDATA.typeCard, NameCard: CARDDATA.typeLabelCard, TypeMoney: typeMoney!)
                     
                     if (succAddNewCard) {
                         
@@ -181,6 +178,7 @@ class ParametrsAddCardViewController: UIViewController {
                         DisableLoader(loader: loader)
                         showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось зарегистрировать новую карту.")
                     }
+                     
                 }
             }
             

@@ -51,13 +51,13 @@ class CardGenerator {
         let currentDate = Date()
         let formatDate = DateFormatter()
         formatDate.dateFormat = "MM/yy"
-        return formatDate.string(from: currentDate.generateDataFromDB())
+        return formatDate.string(from: currentDate)
     }
     
 
     public func generateTransactionID(NumberCard: String) -> String {
         let replaced = NumberCard.trimmingCharacters(in: NSCharacterSet.whitespaces)
-        return replaced.sha256()
+        return replaced
     }
     
     
@@ -69,7 +69,6 @@ class CardGenerator {
                 return "masterCardLogo"
             case "МИР":
                 return "mirLogo"
-                
             default:
                 return "mirLogo"
             }

@@ -8,6 +8,7 @@
 import Foundation
 
 struct SettingApp {
+    static let userIDZaitsevBank = "userID"
     static let nameKeyFirstSettings = "isLogin"
     static let nameKeyUseFaceTouchID = "isFaceID"
     static let nameKeyNameScreensaver = "isNameScreensaver"
@@ -45,4 +46,16 @@ extension UserDefaults{
         self.set(settings, forKey: SettingApp.nameKeyNameScreensaver)
     }
     
+    //MARK: Check userID
+    
+    func checkUserID() -> Bool {
+       return self.object(forKey: SettingApp.userIDZaitsevBank) != nil
+    }
+    func isUserID() -> String {
+       return string(forKey: SettingApp.userIDZaitsevBank)!
+
+    }
+    func SetisUserID(_ settings: String) {
+        self.set(settings, forKey: SettingApp.userIDZaitsevBank)
+    }
 }

@@ -1,0 +1,104 @@
+//
+//  AccountManager.swift
+//  ZaitsevBank
+//
+//  Created by Антон Зайцев on 09.04.2022.
+//
+
+import Foundation
+
+public class AccountManager {
+    
+    public var Error = "Не удалось выполнить запрос"
+    
+    public func CreateAccount(model: LoginModel) async -> UserModel? {
+        let request = ClienZaitsevBankAPI.getRequestCreateAccount(model: model)
+        
+        do {
+            let (user,responce)  = try await URLSession.shared.data(for: request)
+            if let code = (responce as? HTTPURLResponse)?.statusCode {
+                
+                if let requestResult =  RequestResult.init(rawValue: code){
+                    switch requestResult{
+                    case .OK :
+                        let decoder = JSONDecoder()
+                        let Account = try decoder.decode(UserModel.self, from: user)
+                        UserDefaults.standard.SetisUserID(Account.userID)
+                        return Account
+                    case .NotFound:
+                        Error = "Пользователь не найден"
+                        return nil
+                    case .EthernalServer:
+                        Error = "Сервер временно не доступен"
+                        return nil
+                    case .NotCreate:
+                        Error = "Не удалось создать пользователя"
+                        return nil
+                    case .BadRequest:
+                        Error = "Не удалось выполнить ваш запрос"
+                        return nil
+                    }
+                }
+                else { return nil}
+                
+            } else {return nil }
+        }
+        catch { return nil }
+    }
+    
+    public func SignAccount(login: String,password: String) async -> UserModel? {
+        let request = ClienZaitsevBankAPI.getRequestSignAccount(login: login, password: password)
+        
+        do {
+            let (user,responce)  = try await URLSession.shared.data(for: request)
+            if let code = (responce as? HTTPURLResponse)?.statusCode {
+                
+                if let requestResult =  RequestResult.init(rawValue: code){
+                    switch requestResult{
+                    case .OK :
+                        let decoder = JSONDecoder()
+                        let Account = try decoder.decode(UserModel.self, from: user)
+                        UserDefaults.standard.SetisUserID(Account.userID)
+                        return Account
+                    case .NotFound:
+                        Error = "Пользователь не найден"
+                        return nil
+                    case .EthernalServer:
+                        Error = "Сервер временно не доступен"
+                        return nil
+                    case .NotCreate:
+                        Error = "Не верный email"
+                        return nil
+                    case .BadRequest:
+                        Error = "Не удалось выполнить ваш запрос"
+                        return nil
+                    }
+                }
+                else { return nil}
+                
+            } else {return nil }
+        }
+        catch { return nil }
+    }
+    
+    public func GetUserData () async -> UserModel? {
+        if (UserDefaults.standard.checkUserID()) {
+            let userID = UserDefaults.standard.isUserID()
+            
+            let request = ClienZaitsevBankAPI.getRequestGetUserData(userID: userID)
+            do {
+                let (user,responce)  = try await URLSession.shared.data(for: request)
+                guard (responce as? HTTPURLResponse)?.statusCode == RequestResult.OK.rawValue else {
+                    return nil }
+                let decoder = JSONDecoder()
+                let Account = try decoder.decode(UserModel.self, from: user)
+                return Account
+            }
+            catch {
+                return nil
+            }
+        }
+        else {return nil}
+    }
+    
+}

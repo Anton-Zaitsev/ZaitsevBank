@@ -13,8 +13,7 @@ class StartMainController: UIViewController {
     
     private let modelStartMain : StartMenu = StartMenu()
     
-    public var DataUser = clientZaitsevBank()
-   
+    public var DataUser = UserModel()
     private var ExhangeTableValute = true
     
     @IBOutlet weak var LabelName: UILabel!
@@ -147,7 +146,7 @@ class StartMainController: UIViewController {
     
     @objc private func AddNewCard(sender: UITapGestureRecognizer) {
         LabelFullAddCard.textColor = .white
-        AddNewCardFunction(OwnerNameFamily: "\(DataUser.name!) \(DataUser.family!)")
+        AddNewCardFunction(OwnerNameFamily: "\(DataUser.firstName) \(DataUser.lastName)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -187,7 +186,7 @@ class StartMainController: UIViewController {
     }
     
     @IBAction func NewCardPlus(_ sender: Any) {
-        AddNewCardFunction(OwnerNameFamily: "\(DataUser.name!) \(DataUser.family!)")
+        AddNewCardFunction(OwnerNameFamily: "\(DataUser.firstName) \(DataUser.lastName)")
     }
     
     
@@ -287,19 +286,19 @@ class StartMainController: UIViewController {
     }
     
     private func getTableWallet() async{
-        modelStartMain.cardUser = await GetCardUser().getCards()
+        modelStartMain.cardUser = await CardsManager().GetAllCards()
         DispatchQueue.main.async {
             self.WalletTable.reloadData()
         }
     }
     
     private func getDataUserTable() async {
-        if let dataUser = await GetDataUser().get(){
+        if let dataUser = await AccountManager().GetUserData(){
             DataUser = dataUser
             DispatchQueue.main.async {
                 self.LabelFullAddCard.isEnabled = true
                 self.LabelAddCard.isEnabled = true
-                self.LabelName.text = dataUser.name
+                self.LabelName.text = dataUser.firstName
             }
         }
         else {

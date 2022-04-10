@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 public class LoginModel {
     

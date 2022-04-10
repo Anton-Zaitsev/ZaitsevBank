@@ -48,5 +48,11 @@ public extension String {
             return "LogoZaitsevBank"
         }
     }
+    func searchLogoWalletCard() -> String {
+        switch self {
+        case "MIR": return "MirCard"
+        default: return "SberCard"
+        }
+    }
 }
 

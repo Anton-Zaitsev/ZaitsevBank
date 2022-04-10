@@ -42,8 +42,7 @@ class CardPickController: UIViewController {
         if(cardUser.isEmpty){
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                 Task{
-                    cardUser = await GetCardUser().getCardsFromBuySale(valute: valuteSymbol, buySale: buySaleToogle)
-                    
+                    cardUser = await CardsManager().GetCardsBuySale(TypeValute: valuteSymbol, BuySale: buySaleToogle)
                     DispatchQueue.main.async { [self] in
                         if (cardUser.isEmpty){
                             CardTable.isHidden = true
@@ -62,11 +61,12 @@ class CardPickController: UIViewController {
 
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             Task(priority: .medium) {
-                if let data = await GetDataUser().get(){
+                
+                if let data = await AccountManager().GetUserData(){
                     DispatchQueue.main.async {
                         let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
                         let AddNewCardController = storyboardMainMenu.instantiateViewController(withIdentifier: "NewCardMenu") as! NewCardController
-                        AddNewCardController.nameFamilyOwner = "\(data.name!) \(data.family!)"
+                        AddNewCardController.nameFamilyOwner = "\(data.firstName) \(data.lastName)"
                         AddNewCardController.ValutePick = self.valuteSymbol
                         
                         let navigationController = UINavigationController(rootViewController: AddNewCardController)

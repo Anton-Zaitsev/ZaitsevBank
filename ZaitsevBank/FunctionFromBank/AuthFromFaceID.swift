@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 public class AuthFromFaceID {
     
-    private let authFunc = AuthClient()
+    private let authFunc = AccountManager()
     
     public func signUSER(_ viewController: NavigationController, DatabaseLinkAutoLogin: NSPersistentContainer, loader: UIView) {
         
@@ -48,7 +48,7 @@ public class AuthFromFaceID {
                                 viewController.Pass5.backgroundColor = .green
                             }
                             
-                            if (await authFunc.SignIn(login: login, pass: password)) != nil { // Если нашел такого пользователя
+                            if (await authFunc.SignAccount(login: login, password: password)) != nil { // Если нашел такого пользователя
                                                                                                     
                                 DispatchQueue.main.async{
                                     viewController.EnableMainLoader()
@@ -71,7 +71,7 @@ public class AuthFromFaceID {
                                     viewController.Pass4.backgroundColor = .darkGray
                                     viewController.Pass5.backgroundColor = .darkGray
                                     viewController.DisableLoader(loader: loader)
-                                    viewController.showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.ErrorAuthClient)
+                                    viewController.showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.Error)
                                 }
                             }
                             
@@ -115,7 +115,7 @@ public class AuthFromFaceID {
                     viewController.Pass5.backgroundColor = .green
                 }
                 
-                if (await authFunc.SignIn(login: login, pass: password)) != nil {
+                if (await authFunc.SignAccount(login: login, password: password)) != nil {
                                  
                     DispatchQueue.main.async {
                         viewController.DisableLoader(loader: loader)
@@ -138,7 +138,7 @@ public class AuthFromFaceID {
                         viewController.Pass4.backgroundColor = .darkGray
                         viewController.Pass5.backgroundColor = .darkGray
                         viewController.DisableLoader(loader: loader)
-                        viewController.showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.ErrorAuthClient)
+                        viewController.showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.Error)
                     }
                 }
                 

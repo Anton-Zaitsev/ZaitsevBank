@@ -80,7 +80,6 @@ public class SafeLocalPassword {
         
     }
     
-    
     public static func AppSettingAppend(_ database: NSPersistentContainer, localPassword: String, login: String, password: String ) -> Bool {
         
         let context: NSManagedObjectContext = {
