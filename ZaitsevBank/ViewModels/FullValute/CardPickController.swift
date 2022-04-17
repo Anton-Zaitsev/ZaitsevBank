@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CardPickDelegate: AnyObject {
+    func CardPick(Cards: [Cards]?,indexPickCard: Int?)
+}
+
 class CardPickController: UIViewController {
     
     @IBOutlet weak var UpView: UIView!
@@ -19,10 +23,11 @@ class CardPickController: UIViewController {
     public var textMainLable: String!
     public var buySaleToogle : Bool!
     
-    
+    weak var delegate: CardPickDelegate?
     
     @IBOutlet weak var CardTable: UITableView!
     public var cardUser : [Cards] =  [Cards]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getView()
@@ -31,14 +36,18 @@ class CardPickController: UIViewController {
         view.layer.cornerRadius = 25
         UpView.layer.cornerRadius = UpView.layer.frame.height / 2
         MainLabel.text = textMainLable
+        
         CardTable.delegate = self
         CardTable.dataSource = self
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(AddNewCardFunction))
         AddNewCard.isUserInteractionEnabled = true
         AddNewCard.addGestureRecognizer(tap)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let loader = self.EnableLoader()
         if(cardUser.isEmpty){
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                 Task{
@@ -51,41 +60,16 @@ class CardPickController: UIViewController {
                         else {
                             CardTable.reloadData()
                         }
+                        DisableLoader(loader: loader)
                     }
                 }
             }
         }
-        
     }
+    
     @objc func AddNewCardFunction(sender: UITapGestureRecognizer) {
-
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-            Task(priority: .medium) {
-                
-                if let data = await AccountManager().GetUserData(){
-                    DispatchQueue.main.async {
-                        let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
-                        let AddNewCardController = storyboardMainMenu.instantiateViewController(withIdentifier: "NewCardMenu") as! NewCardController
-                        AddNewCardController.nameFamilyOwner = "\(data.firstName) \(data.lastName)"
-                        AddNewCardController.ValutePick = self.valuteSymbol
-                        
-                        let navigationController = UINavigationController(rootViewController: AddNewCardController)
-                        navigationController.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
-                        navigationController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                        
-                        self.present(navigationController, animated: true, completion: nil)
-                    }
-                }
-                else {
-                    DispatchQueue.main.async {
-                        self.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о пользователе")
-                    }
-                }
-                
-            }
-            
-        }
-        
+        self.dismiss(animated: true, completion: nil)
+        delegate?.CardPick(Cards: nil,indexPickCard: nil)
     }
 }
 extension CardPickController: UITableViewDelegate, UITableViewDataSource {
@@ -97,12 +81,16 @@ extension CardPickController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
         if let WalletCell = tableView.dequeueReusableCell(withIdentifier: "cellCard", for: indexPath) as? WalletViewCell {
-            WalletCell.configurated(with: (self.cardUser[indexPath.row]))
+            WalletCell.configurated(with: (cardUser[indexPath.row]))
             cell = WalletCell
+            cell.selectionStyle = .none
         }
         return cell
     }
-    
-    
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.dismiss(animated: true, completion: nil)
+        delegate?.CardPick(Cards: cardUser,indexPickCard: indexPath.row)
+    }
     
 }

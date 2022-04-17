@@ -7,7 +7,44 @@
 
 import UIKit
 
-class ChartValuteController: UIViewController, ChartDelegate {
+class ChartValuteController: UIViewController, ChartDelegate,CardPickDelegate {
+    func CardPick(Cards: [Cards]?,indexPickCard: Int?) {
+        if let CardsUser = Cards {
+            
+            let MenuBuyPayValute = self.storyboard?.instantiateViewController(withIdentifier: "BuyPayValute") as! MenuBuyPayValuteController
+            MenuBuyPayValute.cardBuy = CardsUser
+            MenuBuyPayValute.IndexFirstCard = indexPickCard ?? 0
+            MenuBuyPayValute.BuySaleToogle = valuteBuySaleToogle
+            self.navigationController?.pushViewController(MenuBuyPayValute, animated: true)
+        }
+        else {
+            let loader = self.EnableLoader()
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                Task(priority: .medium) {
+                    
+                    if let data = await AccountManager().GetUserData(){
+                        DispatchQueue.main.async {
+                            let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
+                            let AddNewCardController = storyboardMainMenu.instantiateViewController(withIdentifier: "NewCardMenu") as! NewCardController
+                            AddNewCardController.nameFamilyOwner = "\(data.firstName) \(data.lastName)"
+                            AddNewCardController.ValutePick = self.valuteSymbol
+                            
+                            self.DisableLoader(loader: loader)
+                            self.navigationController?.pushViewController(AddNewCardController, animated: true)
+                        }
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            self.DisableLoader(loader: loader)
+                            self.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о пользователе")
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    
 
     @IBOutlet weak var ButtonMenuDate: UIButton!
     
@@ -19,6 +56,7 @@ class ChartValuteController: UIViewController, ChartDelegate {
     @IBOutlet weak var BuySaleStack: UIStackView!
     
     public var valuteToogle : Bool!
+    public var valuteBuySaleToogle: Bool = false
     
     @IBOutlet weak var MainLabel: UILabel!
     
@@ -49,19 +87,23 @@ class ChartValuteController: UIViewController, ChartDelegate {
     }
     
     @IBAction func ClickedBuy(_ sender: Any) {
+        valuteBuySaleToogle = true
         let CardPick = storyboard?.instantiateViewController(withIdentifier: "CardPick") as! CardPickController
         CardPick.textMainLable = "покупки валюты."
-        CardPick.buySaleToogle = true
+        CardPick.buySaleToogle = valuteBuySaleToogle
         CardPick.valuteSymbol = valuteSymbol
+        CardPick.delegate = self
         CardPick.sheetPresentationController?.detents = [.medium()]
         present(CardPick, animated: true)
     }
     
     @IBAction func ClickedSale(_ sender: Any) {
+        valuteBuySaleToogle = false
         let CardPick = storyboard?.instantiateViewController(withIdentifier: "CardPick") as! CardPickController
         CardPick.textMainLable = "продажи валюты."
         CardPick.valuteSymbol = valuteSymbol
-        CardPick.buySaleToogle = false
+        CardPick.buySaleToogle = valuteBuySaleToogle
+        CardPick.delegate = self
         CardPick.sheetPresentationController?.detents = [.medium()]
         present(CardPick, animated: true)
     }
@@ -87,6 +129,7 @@ class ChartValuteController: UIViewController, ChartDelegate {
             
         ])
         ButtonMenuDate.menu = menuDate
+        
     }
     
     private func getView() {

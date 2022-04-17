@@ -68,4 +68,32 @@ public class ClienZaitsevBankAPI {
         request.httpMethod = "GET"
         return request
     }
+    
+    public static func getRequestGetPopListValute(ElectronValute: Bool) -> URLRequest {
+        let electronValute = ElectronValute ? "true" : "false"
+        let GetPopListValute = URL(string:"\(server)api/Valute/GetPopListValute?ElectronValute=\(electronValute)")
+        var request = URLRequest(url: GetPopListValute!)
+        request.httpMethod = "GET"
+        return request
+    }
+    
+    public static func getRequestValuteAtoValuteB(ValuteA: String, ValuteB: String,BuySale: Bool,Count: Double = 1) -> URLRequest {
+        let buySale = BuySale ? "true" : "false"
+        let count = Count == 1 ? "" : "&count=\(Count)"
+        let ValuteAtoValuteB = URL(string:"\(server)api/Valute/ValuteATOValuteB?ValuteA=\(ValuteA)&ValuteB=\(ValuteB)&BuySale=\(buySale)\(count)")
+        var request = URLRequest(url: ValuteAtoValuteB!)
+        request.httpMethod = "GET"
+        return request
+    }
+    
+    public static func getRequestGetExchangeList(ElectronValute: Bool) -> URLRequest {
+        let electronValute = ElectronValute ? "true" : "false"
+        let GetExchangeList = URL(string:"\(server)api/Valute/GetExchangeList?ElectronValute=\(electronValute)")
+        var request = URLRequest(url: GetExchangeList!)
+        request.httpMethod = "GET"
+        return request
+    }
+    
 }
+
+

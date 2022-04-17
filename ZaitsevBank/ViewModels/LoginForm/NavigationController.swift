@@ -13,7 +13,7 @@ public class NavigationController: UIViewController {
     
     private let authFaceID: AuthFromFaceID = AuthFromFaceID()
     
-    private var pinCode : String = ""
+    public var pinCode : String = ""
     
     fileprivate let biometricsType: LABiometryType = {
         let laContext = LAContext()
@@ -78,7 +78,7 @@ public class NavigationController: UIViewController {
         else {
             GetView()
         }
-
+        
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -278,23 +278,4 @@ public class NavigationController: UIViewController {
         return appVersion
     }
 }
-/*
-import SwiftUI
 
-struct MainPreview : PreviewProvider {
-    static var previews: some View {
-        ContainerView().edgesIgnoringSafeArea(.all)
-    }
-    
-    struct ContainerView : UIViewControllerRepresentable {
-        
-        func makeUIViewController(context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) -> some NavigationController {
-            return NavigationController()
-        }
-        func updateUIViewController(_ uiViewController: MainPreview.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) {
-            
-        }
-    }
-}
-
-*/

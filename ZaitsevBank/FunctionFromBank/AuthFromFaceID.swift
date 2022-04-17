@@ -34,8 +34,15 @@ public class AuthFromFaceID {
                             let(login, password) = userData
                             
                             if (login == "none" || password == "none") {
-                                DispatchQueue.main.async {
-                                    viewController.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось распознать логин или пароль.")
+                                DispatchQueue.main.async{
+                                    viewController.Pass1.backgroundColor = .darkGray
+                                    viewController.Pass2.backgroundColor = .darkGray
+                                    viewController.Pass3.backgroundColor = .darkGray
+                                    viewController.Pass4.backgroundColor = .darkGray
+                                    viewController.Pass5.backgroundColor = .darkGray
+                                    viewController.DisableLoader(loader: loader)
+                                    viewController.pinCode = ""
+                                    viewController.showAlert(withTitle: "Не удалось распознать логин или пароль.", withMessage: self.authFunc.Error)
                                 }
                                 return
                             }
@@ -64,14 +71,15 @@ public class AuthFromFaceID {
                                 }
                             }
                             else {
-                                DispatchQueue.main.async{ [self] in
+                                DispatchQueue.main.async{
                                     viewController.Pass1.backgroundColor = .darkGray
                                     viewController.Pass2.backgroundColor = .darkGray
                                     viewController.Pass3.backgroundColor = .darkGray
                                     viewController.Pass4.backgroundColor = .darkGray
                                     viewController.Pass5.backgroundColor = .darkGray
                                     viewController.DisableLoader(loader: loader)
-                                    viewController.showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.Error)
+                                    viewController.pinCode = ""
+                                    viewController.showAlert(withTitle: "Произошла ошибка", withMessage: self.authFunc.Error)
                                 }
                             }
                             
@@ -100,10 +108,18 @@ public class AuthFromFaceID {
                 let(login, password) = userData
                 
                 if (login == "none" || password == "none"){
+                    
                     DispatchQueue.main.async {
+                        viewController.Pass1.backgroundColor = .darkGray
+                        viewController.Pass2.backgroundColor = .darkGray
+                        viewController.Pass3.backgroundColor = .darkGray
+                        viewController.Pass4.backgroundColor = .darkGray
+                        viewController.Pass5.backgroundColor = .darkGray
                         viewController.DisableLoader(loader: loader)
+                        viewController.pinCode = ""
                         viewController.showAlert(withTitle: "Произошла ошибка", withMessage: "Не правильный PIN CODE")
                     }
+
                     return
                 }
                 
@@ -131,14 +147,15 @@ public class AuthFromFaceID {
                     }
                 }
                 else {
-                    DispatchQueue.main.async { [self] in
+                    DispatchQueue.main.async {
                         viewController.Pass1.backgroundColor = .darkGray
                         viewController.Pass2.backgroundColor = .darkGray
                         viewController.Pass3.backgroundColor = .darkGray
                         viewController.Pass4.backgroundColor = .darkGray
                         viewController.Pass5.backgroundColor = .darkGray
                         viewController.DisableLoader(loader: loader)
-                        viewController.showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.Error)
+                        viewController.pinCode = ""
+                        viewController.showAlert(withTitle: "Произошла ошибка", withMessage: self.authFunc.Error)
                     }
                 }
                 

@@ -117,6 +117,7 @@ extension ExchangeRateController: UITableViewDelegate, UITableViewDataSource {
         if let ExchangeRateCell = tableView.dequeueReusableCell(withIdentifier: "exchange", for: indexPath) as? ExchangeRateCell {
             ExchangeRateCell.configurated(with: dataExchange.exchangeValuteDefault[indexPath.row])
             cell = ExchangeRateCell
+            cell.selectionStyle = .none
         }
         return cell
     }

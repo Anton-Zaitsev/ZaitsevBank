@@ -15,28 +15,21 @@ public class API_VALUTE_FULL {
     public func getValuteTableFull() async -> [ExchangeFull] {
         
         var dataCB : [ExchangeFull] = []
-        let valute = URL(string: "https://www.cbr-xml-daily.ru/daily_json.js")
-        
-        let request = URLRequest(url: valute!)
         
         do {
-            let (dataValue,responce)  = try await URLSession.shared.data(for: request)
+            let (dataValue,responce)  = try await URLSession.shared.data(for: ClienZaitsevBankAPI.getRequestGetExchangeList(ElectronValute: false))
             guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
-                print("Не скачалась дата")
                 return dataCB }
-                        
-            if let json = try? JSON(data: dataValue) {
             
-                let jsonValute = json["Valute"].dictionaryValue
+            if let json = try? JSON(data: dataValue) {
                 
                 await withTaskGroup(of: ExchangeFull?.self) { taskGroup in
-                 
-                    for data in jsonValute {
+                    
+                    for (_,subJson):(String, JSON) in json {
                         taskGroup.addTask {
-                                let value = data.value
-                                let downloadedDinamic = await self.getDinamicParalles(value)
-                                return downloadedDinamic
-                            }
+                            let downloadedDinamic = await self.getDinamicParalles(subJson,valuteElectron: false)
+                            return downloadedDinamic
+                        }
                     }
                     
                     for await dataDownload in taskGroup {
@@ -61,40 +54,30 @@ public class API_VALUTE_FULL {
     public func getBitcoinTableFull() async -> [ExchangeFull] {
         
         var dataCB : [ExchangeFull] = []
-        let getBit = URL(string: "https://api.coincap.io/v2/assets")
-        
-        var request = URLRequest(url: getBit!)
-        request.setValue("Bearer \(SettingApp.APICoinCap)", forHTTPHeaderField: "Authorization")
-        request.setValue("gzip,deflate,br", forHTTPHeaderField: "Accept-Encoding")
-        
         
         do {
-            let (dataValue,responce)  = try await URLSession.shared.data(for: request)
+            let (dataValue,responce)  = try await URLSession.shared.data(for: ClienZaitsevBankAPI.getRequestGetExchangeList(ElectronValute: true))
+            
             guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
-                print("Не скачалась дата")
                 return dataCB }
             
             if let json = try? JSON(data: dataValue){
                 
-            let data = json["data"].arrayValue
-             
-            await withTaskGroup(of: ExchangeFull?.self) { taskGroup in
-             
-                for value in data {
-                    taskGroup.addTask {
-                            
-                            let data = value
-                            let downloadedDinamic = await self.getDinamicBitParalles(data)
+                await withTaskGroup(of: ExchangeFull?.self) { taskGroup in
+                    
+                    for (_,subJson):(String, JSON) in json {
+                        taskGroup.addTask {
+                            let downloadedDinamic = await self.getDinamicParalles(subJson,valuteElectron: true)
                             return downloadedDinamic
                         }
                     }
-                
-                for await dataDownload in taskGroup {
-                    if let data = dataDownload {
-                        dataCB.append(data)
+                    
+                    for await dataDownload in taskGroup {
+                        if let data = dataDownload {
+                            dataCB.append(data)
+                        }
                     }
                 }
-            }
                 return API_VALUTE.sortedValute(dataInput: dataCB,true)
             }
             else {
@@ -107,55 +90,12 @@ public class API_VALUTE_FULL {
         }
     }
     
-    private func getDinamicBitParalles(_ data: JSON) async -> ExchangeFull?  {
+    private func getDinamicParalles(_ data: JSON,valuteElectron: Bool) async -> ExchangeFull?  {
         
-        if let valuteBuy = Double(data["priceUsd"].string ?? ""){
-            if let changes = Double(data["changePercent24Hr"].string ?? ""){
-                if let valuteName = data["name"].string {
-                    let valuteSale = valuteBuy + Double.random(in: -3..<3)
-                
-                    guard let dataChart = await api.GetDinamicCriptoValuteFromDay(nameValute: valuteName) else {
-                        return nil }
-                    
-                    return ExchangeFull(IDValute: data["id"].stringValue, charCode: data["symbol"].stringValue, nameValute: valuteName, changesBuy: changes > 0, buy: valuteBuy.valuteToTableFormat(), changesSale: Bool.random(), sale: valuteSale.valuteToTableFormat(), dataChar: dataChart)
-                }
-                else {
-                    return nil
-                }
-            }
-            else {
-                return nil
-            }
-        }
-        else {
+        let idValute = data["idValute"].stringValue
+        guard let dataChart = valuteElectron ? await api.GetDinamicCriptoValuteFromDay(nameValute: idValute) : await api.GetDinamicValuteFromDay(idValute: idValute) else {
             return nil
         }
-    }
-    
-    private func getDinamicParalles(_ data: JSON) async -> ExchangeFull?  {
-        
-        if let ID = data["ID"].string {
-            guard let dataChart = await api.GetDinamicValuteFromDay(idValute: ID) else {
-                return nil
-            }
-            if let valueValute = data["Value"].double{
-                if let valuePrevious = data["Previous"].double{
-                
-                    let valuteBuy = valueValute / (data["Nominal"].double ?? 1)
-                    let valuteSale = valuteBuy + Double.random(in: -3..<3)
-                
-                    return ExchangeFull(IDValute: ID, charCode: data["CharCode"].stringValue, nameValute: data["Name"].stringValue, changesBuy: valueValute > valuePrevious, buy: valuteBuy.valuteToTableFormat(), changesSale: Bool.random(), sale: valuteSale.valuteToTableFormat(), dataChar: dataChart)
-                }
-                else {
-                    return nil
-                }
-            }
-            else {
-                return nil
-            }
-        }
-        else {
-            return nil
-        }
+        return ExchangeFull(IDValute: idValute, charCode: data["charCode"].stringValue, nameValute: data["nameValute"].stringValue, changesBuy: data["changesBuy"].boolValue, buy: data["valuteBuy"].doubleValue.valuteToTableFormat(), changesSale: data["changesSale"].boolValue, sale: data["valuteSale"].doubleValue.valuteToTableFormat(), dataChar: dataChart)
     }
 }

@@ -61,7 +61,7 @@ class LoginController: UIViewController, LocalPasswordDelegate {
                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         setupVisualEffectView()
     }
-        
+    
     @IBAction func SignClick(_ sender: Any){
         
         let loader = self.EnableLoader()
@@ -69,7 +69,7 @@ class LoginController: UIViewController, LocalPasswordDelegate {
             
             Task(priority: .high) {
                 if let user = await authFunc.SignAccount(login: loginModel.Login, password: loginModel.Password){
-
+                    
                     DispatchQueue.main.async { [self] in
                         SetAlertLocalPassword()
                         dataUser = user
@@ -78,12 +78,12 @@ class LoginController: UIViewController, LocalPasswordDelegate {
                 }
                 else {
                     DispatchQueue.main.async { [self] in
-                    self.DisableLoader(loader: loader)
-                    showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.Error)
+                        DisableLoader(loader: loader)
+                        showAlert(withTitle: "Произошла ошибка", withMessage: authFunc.Error)
                     }
                     return
                 }
-
+                
             }
         }
     }
@@ -114,10 +114,10 @@ class LoginController: UIViewController, LocalPasswordDelegate {
             self.EnableMainLoader(dataUser.firstName)
             //MARK: Установка user на первоначальное вхождение и установка на true
             UserDefaults.standard.SetisLogin(true)
-            //SafeLocalPassword.ReadDataLocal(database: ContainerLocalData)
+
             let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
             let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
-                        
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
                 self.navigationController?.pushViewController(NavigationTabBar, animated: true)
             }
@@ -126,7 +126,7 @@ class LoginController: UIViewController, LocalPasswordDelegate {
             showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось сохранить ваш локальный пароль")
         }
     }
-        
+    
     private func SetAlertLocalPassword() {
         view.addSubview(AlertLocalPassword)
         AlertLocalPassword.center = view.center

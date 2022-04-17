@@ -63,6 +63,17 @@ public enum ValuteZaitsevBank : String {
         case .ETH : return "Карта в эфириуме"
         }
     }
+    func SaleValuteTitle(buySale: Bool, currentCurse: String) -> String {
+        let type = buySale ? "Покупка" : "Продажа"
+        
+        switch self {
+        case .EUR : return "\(type) евро \(currentCurse) €"
+        case .USD : return "\(type) долларов \(currentCurse) $"
+        case .RUB : return "\(type) рубля \(currentCurse) ₽"
+        case .BTC : return "\(type) биткойна \(currentCurse) Ƀ"
+        case .ETH : return "\(type) эфириума \(currentCurse) ◊"
+        }
+    }
     
     var electronValute : Bool {
         switch self{

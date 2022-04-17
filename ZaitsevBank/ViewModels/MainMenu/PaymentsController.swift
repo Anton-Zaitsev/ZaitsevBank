@@ -16,7 +16,6 @@ class PaymentsController: UIViewController {
 
     }
     
-
     @IBAction func ScanCard(_ sender: Any) {
 
         let storyboard = UIStoryboard(name: "CardViewer", bundle: nil)

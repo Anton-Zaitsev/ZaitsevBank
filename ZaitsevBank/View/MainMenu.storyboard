@@ -1232,15 +1232,15 @@
     </scenes>
     <resources>
         <image name="LogoZaitsevBank" width="819" height="701"/>
-        <image name="bell.fill" catalog="system" width="128" height="124"/>
-        <image name="chevron.down" catalog="system" width="128" height="72"/>
-        <image name="chevron.up" catalog="system" width="128" height="72"/>
-        <image name="creditcard.and.123" catalog="system" width="128" height="90"/>
+        <image name="bell.fill" catalog="system" width="32" height="32"/>
+        <image name="chevron.down" catalog="system" width="32" height="32"/>
+        <image name="chevron.up" catalog="system" width="32" height="32"/>
+        <image name="creditcard.and.123" catalog="system" width="32" height="32"/>
         <image name="goldCardSIM" width="96" height="96"/>
         <image name="masterCardLogo" width="3565" height="2132"/>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="wifi" catalog="system" width="128" height="91"/>
+        <image name="person.fill" catalog="system" width="32" height="32"/>
+        <image name="plus" catalog="system" width="32" height="32"/>
+        <image name="wifi" catalog="system" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

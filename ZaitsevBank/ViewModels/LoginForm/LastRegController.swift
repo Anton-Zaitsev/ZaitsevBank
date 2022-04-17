@@ -106,8 +106,6 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
                                         navigationController?.setNavigationBarHidden(false, animated: true) //Enable navigationBar
                                     }
                                 }
-                                
-                                
                             }
                         }
                     }
@@ -177,9 +175,9 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
         }
     }
     
-    var LocalPasswordEncrypted: String = ""
+    public var LocalPasswordEncrypted: String = ""
     
-    func SetAlertLocalPassword() {
+    private func SetAlertLocalPassword() {
         view.addSubview(AlertLocalPassword)
         AlertLocalPassword.center = view.center
         animateIn()

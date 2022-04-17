@@ -15,6 +15,8 @@ public class StartMenu {
         OffersData(title: "Все сервисы", backgroundImage: "chart.bar.doc.horizontal"),
         OffersData(title: "Перевод денег",backgroundImage: "person.crop.circle.fill.badge.checkmark")
     ]
+    public var DataUser : UserModel = UserModel()
+    
     public var dataExchange : [Exchange] = []
     
     public var dataTableExchange : [Exchange] = []

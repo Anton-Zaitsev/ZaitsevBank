@@ -34,6 +34,7 @@
 		3A49B5102755591300ECC979 /* FullCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49B50F2755591300ECC979 /* FullCardController.swift */; };
 		3A49B5142755701F00ECC979 /* FullCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49B5132755701F00ECC979 /* FullCardCell.swift */; };
 		3A5EB0D6272D69ED0037D006 /* WalletViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EB0D5272D69ED0037D006 /* WalletViewCell.swift */; };
+		3A62E9F228061DAE00173BD8 /* MenuBuyPayValuteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A62E9F128061DAE00173BD8 /* MenuBuyPayValuteController.swift */; };
 		3A6D957C2751CAE90064B11F /* API_DinamicValute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */; };
 		3A8263A827D93BB200F96258 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 3A8263A727D93BB200F96258 /* SwiftyJSON */; };
 		3A82E62E272B645C0054F36C /* OffersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A82E62D272B645C0054F36C /* OffersViewCell.swift */; };
@@ -107,6 +108,7 @@
 		3A49B50F2755591300ECC979 /* FullCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardController.swift; sourceTree = "<group>"; };
 		3A49B5132755701F00ECC979 /* FullCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardCell.swift; sourceTree = "<group>"; };
 		3A5EB0D5272D69ED0037D006 /* WalletViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewCell.swift; sourceTree = "<group>"; };
+		3A62E9F128061DAE00173BD8 /* MenuBuyPayValuteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBuyPayValuteController.swift; sourceTree = "<group>"; };
 		3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_DinamicValute.swift; sourceTree = "<group>"; };
 		3A82E62D272B645C0054F36C /* OffersViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersViewCell.swift; sourceTree = "<group>"; };
 		3A835FD227320CD9000310EC /* ExchangeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewCell.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 		3A2BCAF42743E30A00189086 /* FullValute */ = {
 			isa = PBXGroup;
 			children = (
+				3A62E9F028061D7200173BD8 /* BuyPayValute */,
 				3A2BCAF52743E34000189086 /* ExchangeRateController.swift */,
 				3A97F27F274441AD00A40224 /* ExchangeRateCell.swift */,
 				3A97F27D2744148500A40224 /* ChartValuteController.swift */,
@@ -309,6 +312,14 @@
 				3A49B5132755701F00ECC979 /* FullCardCell.swift */,
 			);
 			path = FullCardViewer;
+			sourceTree = "<group>";
+		};
+		3A62E9F028061D7200173BD8 /* BuyPayValute */ = {
+			isa = PBXGroup;
+			children = (
+				3A62E9F128061DAE00173BD8 /* MenuBuyPayValuteController.swift */,
+			);
+			path = BuyPayValute;
 			sourceTree = "<group>";
 		};
 		3A82E62C272B63E80054F36C /* StartMain */ = {
@@ -511,6 +522,7 @@
 				3AE09EBC28020E890016E1EF /* CheckCorrectAuthData.swift in Sources */,
 				3A49B5142755701F00ECC979 /* FullCardCell.swift in Sources */,
 				3AF977A92714EBD3006C1B87 /* Ecryption.swift in Sources */,
+				3A62E9F228061DAE00173BD8 /* MenuBuyPayValuteController.swift in Sources */,
 				3AB687EA272218B2002BD6EB /* NavigationTabBarMain.swift in Sources */,
 				3AB687EC272220B6002BD6EB /* PaymentsController.swift in Sources */,
 				3AB8F10B2743E8F600469C94 /* ChartSeries.swift in Sources */,

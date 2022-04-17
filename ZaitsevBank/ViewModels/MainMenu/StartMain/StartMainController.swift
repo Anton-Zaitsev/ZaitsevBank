@@ -12,8 +12,9 @@ import UIKit
 class StartMainController: UIViewController {
     
     private let modelStartMain : StartMenu = StartMenu()
+    private let accountManager : AccountManager = AccountManager()
+    private let cardManager : CardsManager = CardsManager()
     
-    public var DataUser = UserModel()
     private var ExhangeTableValute = true
     
     @IBOutlet weak var LabelName: UILabel!
@@ -52,7 +53,7 @@ class StartMainController: UIViewController {
     private func GetView() {
         LabelFullAddCard.isEnabled = false
         LabelAddCard.isEnabled = false
-                
+        
         CollectionOffers.delegate = self
         CollectionOffers.dataSource = self
         IndicatorMonthlyExpenses.layer.cornerRadius = IndicatorMonthlyExpenses.frame.height / 2
@@ -72,7 +73,7 @@ class StartMainController: UIViewController {
         ButtonValute.setTitleColor(.black, for: .normal)
         ButtonCriptoValute.backgroundColor = #colorLiteral(red: 0.2114904225, green: 0.2115325928, blue: 0.2114848793, alpha: 1)
         ButtonCriptoValute.setTitleColor(.white, for: .normal)
-                
+        
         _ = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(getDataStartMenu), userInfo: nil, repeats: false)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(AddNewCard))
@@ -146,14 +147,14 @@ class StartMainController: UIViewController {
     
     @objc private func AddNewCard(sender: UITapGestureRecognizer) {
         LabelFullAddCard.textColor = .white
-        AddNewCardFunction(OwnerNameFamily: "\(DataUser.firstName) \(DataUser.lastName)")
+        AddNewCardFunction(OwnerNameFamily: "\(modelStartMain.DataUser.firstName) \(modelStartMain.DataUser.lastName)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true;
     }
-  
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false;
@@ -186,7 +187,7 @@ class StartMainController: UIViewController {
     }
     
     @IBAction func NewCardPlus(_ sender: Any) {
-        AddNewCardFunction(OwnerNameFamily: "\(DataUser.firstName) \(DataUser.lastName)")
+        AddNewCardFunction(OwnerNameFamily: "\(modelStartMain.DataUser.firstName) \(modelStartMain.DataUser.lastName)")
     }
     
     
@@ -286,15 +287,15 @@ class StartMainController: UIViewController {
     }
     
     private func getTableWallet() async{
-        modelStartMain.cardUser = await CardsManager().GetAllCards()
+        modelStartMain.cardUser = await cardManager.GetAllCards()
         DispatchQueue.main.async {
             self.WalletTable.reloadData()
         }
     }
     
     private func getDataUserTable() async {
-        if let dataUser = await AccountManager().GetUserData(){
-            DataUser = dataUser
+        if let dataUser = await accountManager.GetUserData(){
+            modelStartMain.DataUser = dataUser
             DispatchQueue.main.async {
                 self.LabelFullAddCard.isEnabled = true
                 self.LabelAddCard.isEnabled = true
@@ -367,7 +368,7 @@ extension StartMainController: UITableViewDelegate, UITableViewDataSource {
             tableView.deselectRow(at: indexPath, animated: true)
             let storyboardCardViewer : UIStoryboard = UIStoryboard(name: "CardViewer", bundle: nil)
             let CardViewer = storyboardCardViewer.instantiateViewController(withIdentifier: "CardView") as! FullCardController
-
+            
             CardViewer.cardFull = modelStartMain.cardUser
             CardViewer.indexCard = indexPath
             self.navigationController?.pushViewController(CardViewer, animated: true)
