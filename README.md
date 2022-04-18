@@ -8,11 +8,9 @@ ____
 
 * UIKit
 
-* Realm
+* ZaitsevBankAPI
 
 * RNCryptor - CryptionData and DecryptionData
-
-* SwiftSoup - ParseHTML
 
 * SWXMLHash - ParseXML
 ____
