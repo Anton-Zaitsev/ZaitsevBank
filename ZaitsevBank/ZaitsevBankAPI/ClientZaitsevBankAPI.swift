@@ -77,9 +77,9 @@ public class ClienZaitsevBankAPI {
         return request
     }
     
-    public static func getRequestValuteAtoValuteB(ValuteA: String, ValuteB: String,BuySale: Bool,Count: Double = 1) -> URLRequest {
+    public static func getRequestValuteAtoValuteB(ValuteA: String, ValuteB: String,BuySale: Bool,Count: Double?) -> URLRequest {
         let buySale = BuySale ? "true" : "false"
-        let count = Count == 1 ? "" : "&count=\(Count)"
+        let count = Count == nil ? "" : "&count=\(Count!)"
         let ValuteAtoValuteB = URL(string:"\(server)api/Valute/ValuteATOValuteB?ValuteA=\(ValuteA)&ValuteB=\(ValuteB)&BuySale=\(buySale)\(count)")
         var request = URLRequest(url: ValuteAtoValuteB!)
         request.httpMethod = "GET"

@@ -54,6 +54,16 @@ public enum ValuteZaitsevBank : String {
         }
     }
     
+    var descriptionExpense: String {
+        switch self {
+        case .EUR : return "Евро €"
+        case .USD : return "Долларах $"
+        case .RUB : return "Рублях ₽"
+        case .BTC : return "Биткойне Ƀ"
+        case .ETH : return "Эфириуме ◊"
+        }
+    }
+    
     var descriptionTypeValute: String {
         switch self {
         case .EUR : return "Карта в евро"
@@ -63,15 +73,21 @@ public enum ValuteZaitsevBank : String {
         case .ETH : return "Карта в эфириуме"
         }
     }
-    func SaleValuteTitle(buySale: Bool, currentCurse: String) -> String {
-        let type = buySale ? "Покупка" : "Продажа"
-        
+    func SaleValuteTitle(buySale: Bool, currentCurse: Double,count: Double,ValuteB: String) -> String {
+        let CurrentCurse = currentCurse.valuteToCurseFormat()
+        let Count = count.valuteToCurseFormat()
+        let valuteDescription = "\(ValuteB) \(ValuteZaitsevBank.init(rawValue: ValuteB)!.description)"
         switch self {
-        case .EUR : return "\(type) евро \(currentCurse) €"
-        case .USD : return "\(type) долларов \(currentCurse) $"
-        case .RUB : return "\(type) рубля \(currentCurse) ₽"
-        case .BTC : return "\(type) биткойна \(currentCurse) Ƀ"
-        case .ETH : return "\(type) эфириума \(currentCurse) ◊"
+        case .EUR : return
+            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) €" : "Продажа \(Count) евро за \(CurrentCurse) \(valuteDescription)"
+        case .USD : return
+            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) $" : "Продажа \(Count) доллара за \(CurrentCurse) \(valuteDescription)"
+        case .RUB : return
+            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) ₽" : "Продажа \(Count) рубля за \(CurrentCurse) \(valuteDescription)"
+        case .BTC : return
+            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) Ƀ" : "Продажа \(Count) биткойна за \(CurrentCurse) \(valuteDescription)"
+        case .ETH : return
+            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) ◊" : "Продажа \(Count) эфириума за \(CurrentCurse) \(valuteDescription)"
         }
     }
     

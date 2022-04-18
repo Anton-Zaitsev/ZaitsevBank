@@ -55,7 +55,7 @@ public class API_VALUTE {
         var dataBit : [Exchange] = []
         do {
             
-            let (dataBitcoin,responce)  = try await URLSession.shared.data(for: ClienZaitsevBankAPI.getRequestGetPopListValute(ElectronValute: true))
+            let (dataBitcoin,responce) = try await URLSession.shared.data(for: ClienZaitsevBankAPI.getRequestGetPopListValute(ElectronValute: true))
             guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
                 return dataBit }
             

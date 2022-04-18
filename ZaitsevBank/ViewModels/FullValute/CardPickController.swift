@@ -21,11 +21,12 @@ class CardPickController: UIViewController {
     
     public var valuteSymbol: String!
     public var textMainLable: String!
-    public var buySaleToogle : Bool!
+    public var buySaleToogle : Bool?
     
     weak var delegate: CardPickDelegate?
     
     @IBOutlet weak var CardTable: UITableView!
+    
     public var cardUser : [Cards] =  [Cards]()
     
     override func viewDidLoad() {
@@ -47,11 +48,12 @@ class CardPickController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let loader = self.EnableLoader()
+        let loader = self.EnableLoader(CGRect(x: 0, y: UIScreen.main.bounds.height / 1.5, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2 ))
         if(cardUser.isEmpty){
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                 Task{
-                    cardUser = await CardsManager().GetCardsBuySale(TypeValute: valuteSymbol, BuySale: buySaleToogle)
+                    cardUser = await CardsManager().GetCardsBuySale(TypeValute: valuteSymbol, BuySale: buySaleToogle!)
+                    
                     DispatchQueue.main.async { [self] in
                         if (cardUser.isEmpty){
                             CardTable.isHidden = true
@@ -87,7 +89,7 @@ extension CardPickController: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.dismiss(animated: true, completion: nil)
         delegate?.CardPick(Cards: cardUser,indexPickCard: indexPath.row)

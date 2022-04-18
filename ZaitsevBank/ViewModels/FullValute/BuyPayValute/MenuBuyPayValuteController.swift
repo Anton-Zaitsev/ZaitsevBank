@@ -7,7 +7,43 @@
 
 import UIKit
 
-class MenuBuyPayValuteController: UIViewController {
+class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
+    
+    func CardPick(Cards: [Cards]?, indexPickCard: Int?) {
+        
+        if let CardsUser = Cards {
+            СhoiceCard ? configuratedViewOffs(data: CardsUser[indexPickCard!]) : configuratedViewEnrollment(data: CardsUser[indexPickCard!])
+        }
+        else {
+            let loader = self.EnableLoader()
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                Task(priority: .medium) {
+                    
+                    if let data = await AccountManager().GetUserData(){
+                        DispatchQueue.main.async {
+                            let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
+                            let AddNewCardController = storyboardMainMenu.instantiateViewController(withIdentifier: "NewCardMenu") as! NewCardController
+                            AddNewCardController.nameFamilyOwner = "\(data.firstName) \(data.lastName)"
+                            
+                            if (self.BuySaleToogle!){ // Если валюту нужно создать единсвенную выбранную, любую, тогда не нужно создавать экземпляр валюты
+                                AddNewCardController.ValutePick = self.TypeValuteEnrollment!
+                            }
+                            self.DisableLoader(loader: loader)
+                            self.navigationController?.pushViewController(AddNewCardController, animated: true)
+                        }
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            self.DisableLoader(loader: loader)
+                            self.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о пользователе")
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    
     
     @IBOutlet weak var TitleLabel: UILabel!
     
@@ -43,29 +79,40 @@ class MenuBuyPayValuteController: UIViewController {
     
     @IBOutlet weak var ValuteETH: UILabel!
     
-    @IBOutlet weak var ViewNewCard: UIStackView!
-    
     @IBOutlet weak var TextNewCard: UILabel!
     
-    public var cardBuy: [Cards] = []
-    private var cardPay: [Cards] = []
+    @IBOutlet weak var ViewOffs: UIView! // View валюты Списания
     
-    public var BuySaleToogle: Bool = false
-    public var TypeValuteBuy: String = ""
-    public var IndexFirstCard: Int = 0
+    @IBOutlet weak var ViewEnrollment: UIView!
+    // View валюты Зачисления
+    
+    @IBOutlet weak var ViewNewCard: UIStackView!
+    
+    @IBOutlet weak var ValuteCount: UIView!
+    
+    @IBOutlet weak var StackValute: UIStackView!
+    
+    
+    
+    public var cardBuy: [Cards] = []
+    
+    private var cardPay: [Cards] = []
+    private let cardsManager = CardsManager()
+    private var СhoiceCard = true // Дефолтное значение для выбора карт для Списания ... false для зачисления
+    
+    public var BuySaleToogle: Bool?
+    public var TypeValuteOffs : String? // Тип валюты Списания
+    public var TypeValuteEnrollment: String? // Тип валюты Зачисления
+    public var IndexFirstCard: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ViewNewCard.isHidden = true
+        ValuteCount.isHidden = true
+        StackValute.isHidden = true
         
-        NamePayCard.text = cardBuy[IndexFirstCard].nameCard
-        ImageBuyCard.image = UIImage(named: cardBuy[IndexFirstCard].typeImageCard)
-        NumberBuyCard.text = cardBuy[IndexFirstCard].numberCard
-        
-        MoneyBuyCard.text = "\(cardBuy[IndexFirstCard].moneyCount) \(cardBuy[IndexFirstCard].typeMoney)"
-        TypeValuteBuy = cardBuy[IndexFirstCard].typeMoneyExtended
-        
-        TitleLabel.text = ValuteZaitsevBank.init(rawValue: TypeValuteBuy)?.SaleValuteTitle(buySale: BuySaleToogle, currentCurse: "228")
+        configuratedViewOffs(data: cardBuy[IndexFirstCard!]) // Конфигурация настроек для Счета Списания
         
         ValuteRUB.layer.cornerRadius = ValuteRUB.frame.height / 2
         ValuteRUB.layer.masksToBounds = true
@@ -82,9 +129,78 @@ class MenuBuyPayValuteController: UIViewController {
         NSAttributedString(string: "Сумма зачисления", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
         
         NameBuyCard.text = "Загрузка карты ..."
+        TextNewCard.text = ""
+        TitleLabel.text = ""
         ImageBuyCard.isHidden = true
         NumberBuyCard.isHidden = true
         MoneyBuyCard.isHidden = true
+        
+        let tapOffs = UITapGestureRecognizer(target: self, action: #selector(СhoiceCardOffs))
+        ViewOffs.isUserInteractionEnabled = true
+        ViewOffs.addGestureRecognizer(tapOffs)
+        
+        let tapEnrollment = UITapGestureRecognizer(target: self, action: #selector(СhoiceCardEnrollment))
+        ViewEnrollment.isUserInteractionEnabled = true
+        ViewEnrollment.addGestureRecognizer(tapEnrollment)
+        
+    }
+    
+    @objc private func СhoiceCardOffs(sender: UITapGestureRecognizer) {
+        СhoiceCard = true
+        let CardPick = storyboard?.instantiateViewController(withIdentifier: "CardPick") as! CardPickController
+        CardPick.valuteSymbol = TypeValuteOffs
+        CardPick.cardUser = cardBuy
+        CardPick.textMainLable = "списания."
+        CardPick.delegate = self
+        CardPick.sheetPresentationController?.detents = [.medium()]
+        present(CardPick, animated: true)
+    }
+    
+    @objc private func СhoiceCardEnrollment(sender: UITapGestureRecognizer) {
+        СhoiceCard = false
+        let CardPick = storyboard?.instantiateViewController(withIdentifier: "CardPick") as! CardPickController
+        CardPick.valuteSymbol = TypeValuteEnrollment
+        CardPick.buySaleToogle = false // Toogle только для поиска
+        CardPick.cardUser = cardPay
+        CardPick.textMainLable = "зачисления."
+        CardPick.delegate = self
+        CardPick.sheetPresentationController?.detents = [.medium()]
+        present(CardPick, animated: true)
+    }
+    
+    private func configuratedViewOffs(data: Cards){
+        NamePayCard.text = data.nameCard
+        ImagePayCard.image = UIImage(named: data.typeImageCard)
+        NumberPayCard.text = data.numberCard
+        
+        MoneyPayCard.text = "\(data.moneyCount) \(data.typeMoney)"
+    }
+    private func configuratedViewEnrollment(data: Cards){
+        
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
+            Task{
+                let TypeValuteB = data.typeMoneyExtended // Зачислем на нашу карту VALUTE
+                if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteB, BuySale: BuySaleToogle!) {
+                    
+                    DispatchQueue.main.async { [self] in
+                        
+                        NameBuyCard.text = data.nameCard
+                        ImageBuyCard.image = UIImage(named: data.typeImageCard)
+                        NumberBuyCard.text = data.numberCard
+                        MoneyBuyCard.text = "\(data.moneyCount) \(data.typeMoney)"
+                        pickValute(valute: TypeValuteB)
+                        
+                        TitleLabel.text = ValuteZaitsevBank.init(rawValue: TypeValuteOffs!)?.SaleValuteTitle(buySale: BuySaleToogle!, currentCurse: valuteConvert,count: count, ValuteB: data.typeMoneyExtended)
+                    }
+                }
+                else {
+                    DispatchQueue.main.async { [self] in
+                        NameBuyCard.text = "Оформите новый счет"
+                        ViewNewCard.isHidden = false
+                    }
+                }
+            }
+        }
     }
     
     //Если buyPay - то покупка, иначе продажа
@@ -95,20 +211,32 @@ class MenuBuyPayValuteController: UIViewController {
             let loader = self.EnableLoader()
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                 Task{
-                    cardPay = await CardsManager().GetCardsBuySale(TypeValute: TypeValuteBuy, BuySale: BuySaleToogle)
-                    DispatchQueue.main.async { [self] in
-                        if (cardPay.isEmpty == false) {
-                            pickValute(valute: cardPay.first!.typeMoneyExtended)
-                            
-                            NameBuyCard.text = cardPay.first!.nameCard
-                            ImageBuyCard.image = UIImage(named: cardPay.first!.typeImageCard)
+                    TypeValuteOffs = cardBuy[IndexFirstCard!].typeMoneyExtended // Списываем с нашей карты idVALUTE VALUTE A
+                    
+                    cardPay = await cardsManager.GetCardsBuySale(TypeValute: TypeValuteEnrollment!, BuySale: BuySaleToogle! ? false : true) // Меняем buySale для того, чтобы найти карты для зачисления на
+                    if (cardPay.isEmpty == false) {
+                        configuratedViewEnrollment(data: cardPay.first!) // Конфигурация для зачисления
+                        
+                        DispatchQueue.main.async { [self] in
                             ImageBuyCard.isHidden = false
-                            NumberBuyCard.text = cardPay.first!.numberCard
                             NumberBuyCard.isHidden = false
-                            MoneyBuyCard.text = "\(cardPay.first!.moneyCount) \(cardPay.first!.typeMoney)"
                             MoneyBuyCard.isHidden = false
+                            ValuteCount.isHidden = false
+                            
+                            StackValute.isHidden = false
+                            
+                            DisableLoader(loader: loader)
                         }
-                        DisableLoader(loader: loader)
+                        
+                    }
+                    else {
+                        DispatchQueue.main.async { [self] in
+                            TextNewCard.text = BuySaleToogle! ? "Для завершения операции вам необходимо открыть счет в \(ValuteZaitsevBank.init(rawValue: TypeValuteEnrollment!)!.descriptionExpense)." : "Для завершения операции вам необходимо открыть новый счет в другой валюте."
+                            
+                            NameBuyCard.text = "Оформите новый счет"
+                            ViewNewCard.isHidden = false
+                            DisableLoader(loader: loader)
+                        }
                     }
                 }
             }
@@ -117,8 +245,8 @@ class MenuBuyPayValuteController: UIViewController {
     
     
     private func pickValute(valute: String) {
-        let valute = ValuteZaitsevBank.init(rawValue: TypeValuteBuy)
-        let defaultColor = UIColor(red: 52, green: 52, blue: 52, alpha: 0)
+        let valute = ValuteZaitsevBank.init(rawValue: valute)
+        let defaultColor = UIColor("#343434")
         
         ValuteRUB.backgroundColor = defaultColor
         ValuteRUB.textColor = .white
@@ -130,6 +258,7 @@ class MenuBuyPayValuteController: UIViewController {
         ValuteBTC.textColor = .white
         ValuteETH.backgroundColor = defaultColor
         ValuteETH.textColor = .white
+        
         
         switch valute {
         case .RUB :
@@ -153,10 +282,38 @@ class MenuBuyPayValuteController: UIViewController {
             ValuteETH.textColor = defaultColor
         default: break
         }
+        
     }
     
     @IBAction func AddNewCard(_ sender: Any) {
         
+        let loader = self.EnableLoader()
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            Task(priority: .medium) {
+                
+                if let data = await AccountManager().GetUserData(){
+                    DispatchQueue.main.async {
+                        let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
+                        let AddNewCardController = storyboardMainMenu.instantiateViewController(withIdentifier: "NewCardMenu") as! NewCardController
+                        AddNewCardController.nameFamilyOwner = "\(data.firstName) \(data.lastName)"
+                        
+                        if (self.BuySaleToogle!){ // Если валюту нужно создать единсвенную выбранную, любую, тогда не нужно создавать экземпляр валюты
+                            AddNewCardController.ValutePick = self.TypeValuteEnrollment!
+                        }
+                        
+                        self.DisableLoader(loader: loader)
+                        self.navigationController?.pushViewController(AddNewCardController, animated: true)
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                        self.DisableLoader(loader: loader)
+                        self.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о пользователе")
+                    }
+                }
+                
+            }
+        }
     }
     
 }

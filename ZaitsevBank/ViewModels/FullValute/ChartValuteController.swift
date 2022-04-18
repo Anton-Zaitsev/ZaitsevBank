@@ -8,12 +8,14 @@
 import UIKit
 
 class ChartValuteController: UIViewController, ChartDelegate,CardPickDelegate {
+    
     func CardPick(Cards: [Cards]?,indexPickCard: Int?) {
         if let CardsUser = Cards {
             
             let MenuBuyPayValute = self.storyboard?.instantiateViewController(withIdentifier: "BuyPayValute") as! MenuBuyPayValuteController
             MenuBuyPayValute.cardBuy = CardsUser
-            MenuBuyPayValute.IndexFirstCard = indexPickCard ?? 0
+            MenuBuyPayValute.TypeValuteEnrollment = valuteSymbol
+            MenuBuyPayValute.IndexFirstCard = indexPickCard!
             MenuBuyPayValute.BuySaleToogle = valuteBuySaleToogle
             self.navigationController?.pushViewController(MenuBuyPayValute, animated: true)
         }

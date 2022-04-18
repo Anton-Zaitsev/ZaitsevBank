@@ -59,10 +59,7 @@ public class CardsManager {
             numberCard = "•• \(numberCard)"
             
             let typeImageCard = card.CardOperator.searchLogoWalletCard()
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS"
-            
+                        
             return Cards(typeImageCard: typeImageCard, typeMoney: valuteTypeBank.description, nameCard: card.NameCard, numberCard: numberCard, moneyCount: moneyCount, cvv: card.CVV, data: formattedData, cardOperator: card.CardOperator, typeMoneyExtended: card.TypeMoney, fullNumberCard: card.NumberCard.formatCardNumber(), transactionID: card.TransactionCard, closed: card.ClosedCard)
             
         }
@@ -175,7 +172,6 @@ public class CardsManager {
         if (UserDefaults.standard.checkUserID()) {
             let userID = UserDefaults.standard.isUserID()
             let request = ClienZaitsevBankAPI.getRequestGetCardsBuySale(userID: userID, TypeValute: TypeValute, BuySale: BuySale)
-            
             do {
                 let (cardData,responce) = try await URLSession.shared.data(for: request)
                 if let code = (responce as? HTTPURLResponse)?.statusCode {
@@ -224,4 +220,36 @@ public class CardsManager {
         }
     }
     
+    public func ConvertValute(ValuteA: String, ValuteB: String,BuySale: Bool,_ Count: Double? = nil) async -> (Double,Double,String)?{
+        
+        do {
+            let (count,responce) = try await URLSession.shared.data(for: ClienZaitsevBankAPI.getRequestValuteAtoValuteB(ValuteA: ValuteA, ValuteB: ValuteB, BuySale: BuySale,Count: Count))
+            guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
+                return nil }
+            if let json = try? JSON(data: count){
+                let convert = json["valuteConvert"].doubleValue
+                let count = json["count"].doubleValue
+                let actualData = json["actualDateTime"].stringValue
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                if let formattedData = dateFormatter.date(from: actualData) {
+                    
+                    dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
+                    let someDateTime = dateFormatter.string(from: formattedData)
+                    return (convert,count,someDateTime)
+                }
+                else {
+                    return nil
+                }
+            }
+            else {
+                return nil
+            }
+            
+        }
+        catch {
+            return nil
+        }
+        
+    }
 }

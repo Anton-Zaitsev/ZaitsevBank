@@ -9,8 +9,22 @@ import Foundation
 
 public extension Double {
      func valuteToTableFormat() -> String {
-        let valute = String(format: "%.2f", self)
-        return valute.replacingOccurrences(of: ".", with: ",")
+         if let converted = Int(exactly: self) {
+             return String(converted)
+         }
+         else {
+             let valute = String(format: "%.2f", self)
+             return valute.replacingOccurrences(of: ".", with: ",")
+         }
+    }
+    func valuteToCurseFormat() -> String {
+        if let converted = Int(exactly: self) {
+            return String(converted)
+        }
+        else {
+            let valute = String(format: "%.5f", self)
+            return valute.replacingOccurrences(of: ".", with: ",")
+        }
     }
 }
 public extension String {
