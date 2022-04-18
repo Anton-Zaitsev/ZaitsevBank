@@ -26,6 +26,16 @@ public extension Double {
             return valute.replacingOccurrences(of: ".", with: ",")
         }
     }
+    func maxNumber() -> Bool {
+        if self == Double(Int(self)) {
+            let integerString = String(Int(self))
+            return integerString.count <= 9
+        }
+        let integerString = String(Int(self))
+        let doubleString = String(Double(self))
+        let decimalCount = doubleString.count - integerString.count - 1
+        return decimalCount <= 5
+    }
 }
 public extension String {
     func formatCardNumber() -> String {

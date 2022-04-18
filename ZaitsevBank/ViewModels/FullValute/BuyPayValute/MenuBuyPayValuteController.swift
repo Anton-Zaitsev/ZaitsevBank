@@ -108,6 +108,7 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        TextFieldSUMM.delegate = self
         ViewNewCard.isHidden = true
         ValuteCount.isHidden = true
         StackValute.isHidden = true
@@ -160,7 +161,7 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
         СhoiceCard = false
         let CardPick = storyboard?.instantiateViewController(withIdentifier: "CardPick") as! CardPickController
         CardPick.valuteSymbol = TypeValuteEnrollment
-        CardPick.buySaleToogle = false // Toogle только для поиска
+        CardPick.buySaleToogle = BuySaleToogle! ? false : true // Toogle только для поиска
         CardPick.cardUser = cardPay
         CardPick.textMainLable = "зачисления."
         CardPick.delegate = self
@@ -285,6 +286,33 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
         
     }
     
+    @IBAction func ChangedTextFieldSUMM(_ sender: Any) {
+        let summText = TextFieldSUMM.text ?? ""
+        if let summ = Double(summText.replacingOccurrences(of: ",", with: ".")){
+            if (summ.maxNumber()){
+                TextFieldSUMM.textColor = .white
+                TextFieldSUMM.text = summText
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
+                    Task{
+                        if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteEnrollment!, BuySale: BuySaleToogle!,summ) {
+                            
+                            DispatchQueue.main.async { [self] in
+                                TitleLabel.text = ValuteZaitsevBank.init(rawValue: TypeValuteOffs!)?.SaleValuteTitle(buySale: BuySaleToogle!, currentCurse: valuteConvert,count: count, ValuteB: TypeValuteEnrollment!)
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                TextFieldSUMM.textColor = .red
+            }
+        }
+        else {
+            TextFieldSUMM.textColor = .red
+        }
+        
+    }
+    
     @IBAction func AddNewCard(_ sender: Any) {
         
         let loader = self.EnableLoader()
@@ -316,4 +344,10 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
         }
     }
     
+}
+extension MenuBuyPayValuteController: UITextFieldDelegate{
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        TextFieldSUMM.resignFirstResponder()
+        return true;
+    }
 }

@@ -29,7 +29,9 @@ class ChartValuteController: UIViewController, ChartDelegate,CardPickDelegate {
                             let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
                             let AddNewCardController = storyboardMainMenu.instantiateViewController(withIdentifier: "NewCardMenu") as! NewCardController
                             AddNewCardController.nameFamilyOwner = "\(data.firstName) \(data.lastName)"
+                            if (self.valuteBuySaleToogle == false){
                             AddNewCardController.ValutePick = self.valuteSymbol
+                            }
                             
                             self.DisableLoader(loader: loader)
                             self.navigationController?.pushViewController(AddNewCardController, animated: true)
