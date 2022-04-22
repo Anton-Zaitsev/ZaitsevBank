@@ -43,7 +43,17 @@ public enum ValuteZaitsevBank : String {
     case RUB
     case BTC
     case ETH
-        
+       
+    var CountMaxDouble : Int {
+        switch self {
+        case .EUR : return 2
+        case .USD : return 2
+        case .RUB : return 2
+        case .BTC : return 5
+        case .ETH : return 5
+        }
+    }
+    
     var description: String {
         switch self {
         case .EUR : return "€"

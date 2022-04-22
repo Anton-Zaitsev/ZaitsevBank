@@ -175,13 +175,33 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
         NumberPayCard.text = data.numberCard
         
         MoneyPayCard.text = "\(data.moneyCount) \(data.typeMoney)"
+        
+        TypeValuteOffs = data.typeMoneyExtended // Новая валюта списания
+        
+        if (cardPay.isEmpty == false) { // Если валюта зачисления есть
+            
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
+                Task{
+                    if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteEnrollment!, BuySale: BuySaleToogle!, ConvertToDouble(Text: TextFieldSUMM.text ?? "")?.0) {
+                        
+                        DispatchQueue.main.async { [self] in
+                            
+                            TitleLabel.text = ValuteZaitsevBank.init(rawValue: TypeValuteOffs!)?.SaleValuteTitle(buySale: BuySaleToogle!, currentCurse: valuteConvert,count: count, ValuteB: TypeValuteEnrollment!)
+                        }
+                    }
+                }
+            }
+        }
+        
     }
+    
     private func configuratedViewEnrollment(data: Cards){
         
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
             Task{
                 let TypeValuteB = data.typeMoneyExtended // Зачислем на нашу карту VALUTE
-                if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteB, BuySale: BuySaleToogle!) {
+                
+                if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteB, BuySale: BuySaleToogle!, ConvertToDouble(Text: TextFieldSUMM.text ?? "")?.0) {
                     
                     DispatchQueue.main.async { [self] in
                         
@@ -190,6 +210,8 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
                         NumberBuyCard.text = data.numberCard
                         MoneyBuyCard.text = "\(data.moneyCount) \(data.typeMoney)"
                         pickValute(valute: TypeValuteB)
+                        
+                        TypeValuteEnrollment = data.typeMoneyExtended // Указать новый тип валюты зачисления
                         
                         TitleLabel.text = ValuteZaitsevBank.init(rawValue: TypeValuteOffs!)?.SaleValuteTitle(buySale: BuySaleToogle!, currentCurse: valuteConvert,count: count, ValuteB: data.typeMoneyExtended)
                     }
@@ -286,25 +308,50 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
         
     }
     
-    @IBAction func ChangedTextFieldSUMM(_ sender: Any) {
-        let summText = TextFieldSUMM.text ?? ""
-        if let summ = Double(summText.replacingOccurrences(of: ",", with: ".")){
-            if (summ.maxNumber()){
-                TextFieldSUMM.textColor = .white
-                TextFieldSUMM.text = summText
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
-                    Task{
-                        if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteEnrollment!, BuySale: BuySaleToogle!,summ) {
-                            
-                            DispatchQueue.main.async { [self] in
-                                TitleLabel.text = ValuteZaitsevBank.init(rawValue: TypeValuteOffs!)?.SaleValuteTitle(buySale: BuySaleToogle!, currentCurse: valuteConvert,count: count, ValuteB: TypeValuteEnrollment!)
-                            }
-                        }
-                    }
+    private func ConvertToDouble(Text: String) -> (Double,String)? {
+        
+        let formatText = String(Text.compactMap({ $0.isWhitespace ? nil : $0 })).replacingOccurrences(of:  ",", with: ".")
+        if let summToInt = Int(formatText){
+            let summToIntToDouble = Double(summToInt)
+            if (summToIntToDouble.maxNumber(CountMax: ValuteZaitsevBank.init(rawValue: TypeValuteOffs!)!.CountMaxDouble)){
+                let fmt = NumberFormatter()
+                fmt.numberStyle = .decimal
+                fmt.locale = Locale(identifier: "fr_FR")
+                return (summToIntToDouble,fmt.string(for: summToInt)!)
+            }
+            else {
+                return nil
+            }
+        }
+        else {
+            if let summ = Double (formatText) {
+                if (summ.maxNumber(CountMax: ValuteZaitsevBank.init(rawValue: TypeValuteOffs!)!.CountMaxDouble)){
+                    return (summ,formatText.replacingOccurrences(of:  ".", with: ","))
+                }
+                else {
+                    return nil
                 }
             }
             else {
-                TextFieldSUMM.textColor = .red
+                return nil
+            }
+        }
+    }
+    
+    @IBAction func ChangedTextFieldSUMM(_ sender: Any) {
+        
+        if let (valute, textValute) = ConvertToDouble(Text: TextFieldSUMM.text ?? ""){
+            TextFieldSUMM.textColor = .white
+            TextFieldSUMM.text = textValute
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
+                Task{
+                    if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteEnrollment!, BuySale: BuySaleToogle!,valute) {
+                        
+                        DispatchQueue.main.async { [self] in
+                            TitleLabel.text = ValuteZaitsevBank.init(rawValue: TypeValuteOffs!)?.SaleValuteTitle(buySale: BuySaleToogle!, currentCurse: valuteConvert,count: count, ValuteB: TypeValuteEnrollment!)
+                        }
+                    }
+                }
             }
         }
         else {
