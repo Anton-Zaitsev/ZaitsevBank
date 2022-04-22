@@ -27,6 +27,9 @@ class NavigationTabBarMain: UITabBarController {
         self.setViewControllers([Main,Payments,History], animated: false)
         self.tabBar.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         
+        let customViewControllersArray : NSArray = [self]
+        navigationController?.viewControllers = customViewControllersArray as! [UIViewController]
+      
     }
 
     

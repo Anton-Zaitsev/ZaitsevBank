@@ -35,6 +35,7 @@
 		3A49B5142755701F00ECC979 /* FullCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49B5132755701F00ECC979 /* FullCardCell.swift */; };
 		3A5EB0D6272D69ED0037D006 /* WalletViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EB0D5272D69ED0037D006 /* WalletViewCell.swift */; };
 		3A62E9F228061DAE00173BD8 /* MenuBuyPayValuteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A62E9F128061DAE00173BD8 /* MenuBuyPayValuteController.swift */; };
+		3A6B52E0281346B400C1D741 /* HistroryOperationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B52DF281346B400C1D741 /* HistroryOperationCell.swift */; };
 		3A6D957C2751CAE90064B11F /* API_DinamicValute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */; };
 		3A8263A827D93BB200F96258 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 3A8263A727D93BB200F96258 /* SwiftyJSON */; };
 		3A82E62E272B645C0054F36C /* OffersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A82E62D272B645C0054F36C /* OffersViewCell.swift */; };
@@ -109,6 +110,7 @@
 		3A49B5132755701F00ECC979 /* FullCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardCell.swift; sourceTree = "<group>"; };
 		3A5EB0D5272D69ED0037D006 /* WalletViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewCell.swift; sourceTree = "<group>"; };
 		3A62E9F128061DAE00173BD8 /* MenuBuyPayValuteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBuyPayValuteController.swift; sourceTree = "<group>"; };
+		3A6B52DF281346B400C1D741 /* HistroryOperationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistroryOperationCell.swift; sourceTree = "<group>"; };
 		3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_DinamicValute.swift; sourceTree = "<group>"; };
 		3A82E62D272B645C0054F36C /* OffersViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersViewCell.swift; sourceTree = "<group>"; };
 		3A835FD227320CD9000310EC /* ExchangeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewCell.swift; sourceTree = "<group>"; };
@@ -297,10 +299,10 @@
 		3A3AE94C27127883001FF068 /* MainMenu */ = {
 			isa = PBXGroup;
 			children = (
-				3A82E62C272B63E80054F36C /* StartMain */,
 				3AB687E9272218B2002BD6EB /* NavigationTabBarMain.swift */,
-				3AB687EB272220B6002BD6EB /* PaymentsController.swift */,
-				3AB687ED272221BC002BD6EB /* HistoryController.swift */,
+				3A82E62C272B63E80054F36C /* StartMain */,
+				3A6B52DE2813467E00C1D741 /* Payments */,
+				3A6B52E128134A6A00C1D741 /* History */,
 			);
 			path = MainMenu;
 			sourceTree = "<group>";
@@ -320,6 +322,23 @@
 				3A62E9F128061DAE00173BD8 /* MenuBuyPayValuteController.swift */,
 			);
 			path = BuyPayValute;
+			sourceTree = "<group>";
+		};
+		3A6B52DE2813467E00C1D741 /* Payments */ = {
+			isa = PBXGroup;
+			children = (
+				3AB687EB272220B6002BD6EB /* PaymentsController.swift */,
+				3A6B52DF281346B400C1D741 /* HistroryOperationCell.swift */,
+			);
+			path = Payments;
+			sourceTree = "<group>";
+		};
+		3A6B52E128134A6A00C1D741 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				3AB687ED272221BC002BD6EB /* HistoryController.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 		3A82E62C272B63E80054F36C /* StartMain */ = {
@@ -510,6 +529,7 @@
 				3AB8F10D2743E8F600469C94 /* Chart.swift in Sources */,
 				3AA907722749990100C7581D /* CardPickController.swift in Sources */,
 				3AF5D73127E69E3C0095A4DC /* ImageAnalyzer.swift in Sources */,
+				3A6B52E0281346B400C1D741 /* HistroryOperationCell.swift in Sources */,
 				3AF5D73527E69E3C0095A4DC /* CreditCardScannerError.swift in Sources */,
 				3A0FC975270A54A000B6B2F6 /* LoginModel.swift in Sources */,
 				3A6D957C2751CAE90064B11F /* API_DinamicValute.swift in Sources */,

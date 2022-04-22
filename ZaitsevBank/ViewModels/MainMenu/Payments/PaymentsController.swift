@@ -9,13 +9,31 @@ import UIKit
 
 class PaymentsController: UIViewController {
 
-    @IBOutlet weak var ResultLabel: UILabel!
+    @IBOutlet weak var HistroryCollection: UICollectionView!
+    private var dataHistory : [HistoryOperation] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        dataHistory = getDefaultHistory()
+        HistroryCollection.delegate = self
+        HistroryCollection.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.isNavigationBarHidden = true;
+    }
+        
+    private func getDefaultHistory() -> [HistoryOperation] {
+        var operation: [HistoryOperation]  = []
+        let operationMoneyTransfer = HistoryOperation(typeOperation: "Перевод", iconOperation: UIImage(systemName: "arrow.uturn.forward")!, nameOperation: "Перевести денег")
+        operation.append(operationMoneyTransfer)
+        
+        return operation
+    }
+    /*
     @IBAction func ScanCard(_ sender: Any) {
 
         let storyboard = UIStoryboard(name: "CardViewer", bundle: nil)
@@ -24,8 +42,28 @@ class PaymentsController: UIViewController {
         storyboardInstance.modalPresentationStyle = .fullScreen
         present(storyboardInstance, animated: true, completion: nil)
     }
+     */
+}
+extension PaymentsController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataHistory.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        var cell = UICollectionViewCell()
+        
+        if let HistoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "historyOperation", for: indexPath) as? HistoryOperationCell {
+            HistoryCell.configurated(with: dataHistory[indexPath.row])
+            cell = HistoryCell
+        }
+        return cell
+    }
 }
 
+
+
+/*
 extension PaymentsController: CreditCardScannerViewControllerDelegate {
     func creditCardScannerViewControllerDidCancel(_ viewController: CardScannerController) {
         viewController.dismiss(animated: true, completion: nil)
@@ -54,3 +92,4 @@ extension PaymentsController: CreditCardScannerViewControllerDelegate {
         print("\(card)")
     }
 }
+*/

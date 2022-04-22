@@ -49,7 +49,17 @@ class StartMainController: UIViewController {
         GetView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true;
+    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        LabelFullAddCard.textColor = #colorLiteral(red: 0, green: 0.6389579177, blue: 0, alpha: 1)
+        AllExchange.textColor = #colorLiteral(red: 0, green: 0.6389579177, blue: 0, alpha: 1)
+    }
+        
     private func GetView() {
         LabelFullAddCard.isEnabled = false
         LabelAddCard.isEnabled = false
@@ -142,6 +152,7 @@ class StartMainController: UIViewController {
         AllExchange.textColor = .white
         let storyboardValuteMenuMenu : UIStoryboard = UIStoryboard(name: "ValuteMenu", bundle: nil)
         let ExhangeRate = storyboardValuteMenuMenu.instantiateViewController(withIdentifier: "ExhangeAllValute") as! ExchangeRateController
+        navigationController?.isNavigationBarHidden = false;
         self.navigationController?.pushViewController(ExhangeRate, animated: true)
     }
     
@@ -150,17 +161,6 @@ class StartMainController: UIViewController {
         AddNewCardFunction(OwnerNameFamily: "\(modelStartMain.DataUser.firstName) \(modelStartMain.DataUser.lastName)")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true;
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = false;
-        LabelFullAddCard.textColor = #colorLiteral(red: 0, green: 0.6389579177, blue: 0, alpha: 1)
-        AllExchange.textColor = #colorLiteral(red: 0, green: 0.6389579177, blue: 0, alpha: 1)
-    }
     
     @objc private func refreshAllData(refreshControl: UIRefreshControl) {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
@@ -246,6 +246,7 @@ class StartMainController: UIViewController {
     }
     
     private func AddNewCardFunction(OwnerNameFamily: String) {
+        navigationController?.isNavigationBarHidden = false;
         let AddNewCardController = storyboard?.instantiateViewController(withIdentifier: "NewCardMenu") as! NewCardController
         AddNewCardController.nameFamilyOwner = OwnerNameFamily
         self.navigationController?.pushViewController(AddNewCardController, animated: true)
@@ -366,11 +367,14 @@ extension StartMainController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (tableView == WalletTable){
             tableView.deselectRow(at: indexPath, animated: true)
+            
             let storyboardCardViewer : UIStoryboard = UIStoryboard(name: "CardViewer", bundle: nil)
             let CardViewer = storyboardCardViewer.instantiateViewController(withIdentifier: "CardView") as! FullCardController
             
             CardViewer.cardFull = modelStartMain.cardUser
             CardViewer.indexCard = indexPath
+            navigationController?.isNavigationBarHidden = false;
+            
             self.navigationController?.pushViewController(CardViewer, animated: true)
         }
     }
