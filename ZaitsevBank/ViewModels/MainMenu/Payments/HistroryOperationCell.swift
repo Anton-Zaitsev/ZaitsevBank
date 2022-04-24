@@ -18,7 +18,7 @@ class HistoryOperationCell: UICollectionViewCell {
     
     @IBOutlet weak var ViewHistory: UIView!
     
-    func configurated(with histrory: HistoryOperation) {
+    func configurated(with histrory: HistoryOperationPayments) {
         
         ViewHistory.layer.cornerRadius = 15
         ViewHistory.backgroundColor = UIColor.darkGray.withAlphaComponent(0.3)
@@ -28,10 +28,4 @@ class HistoryOperationCell: UICollectionViewCell {
     }
 }
 
-public struct HistoryOperation {
-    public let typeOperation : String
-    public let iconOperation : UIImage
-    public let nameOperation : String
-    
-}
 
