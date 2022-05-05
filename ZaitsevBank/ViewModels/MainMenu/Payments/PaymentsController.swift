@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PermissionsKit
 
 class PaymentsController: UIViewController {
 
@@ -39,17 +40,40 @@ class PaymentsController: UIViewController {
         navigationController?.isNavigationBarHidden = true;
     }
         
-    /*
-    @IBAction func ScanCard(_ sender: Any) {
-
-        let storyboard = UIStoryboard(name: "CardViewer", bundle: nil)
-        let storyboardInstance = storyboard.instantiateViewController(withIdentifier: "CreditScanner") as! CardScannerController
-        storyboardInstance.delegate = self
-        storyboardInstance.modalPresentationStyle = .fullScreen
-        present(storyboardInstance, animated: true, completion: nil)
-    }
-     */
 }
+extension PaymentsController: PermissionsDelegate,PermissionsDataSource {
+    
+    func configure(_ cell: PermissionTableViewCell, for permission: Permission) {
+
+    }
+        
+        func deniedPermissionAlertTexts(for permission: Permission) -> DeniedPermissionAlertTexts? {
+            // You can create custom texts
+            
+            
+             let texts = DeniedPermissionAlertTexts()
+             texts.titleText = "В разрешении отказано!"
+             texts.descriptionText = "Пожалуйста, перейдите в Настройки и разрешите разрешение."
+             texts.actionText = "Настройки"
+             texts.cancelText = "Отмена"
+             return texts
+
+
+        }
+    
+    func didHidePermissions(_ permissions: [Permission]) {
+        print("Example App: did hide with permissions", permissions.map { $0.debugName })
+    }
+    
+    func didAllowPermission(_ permission: Permission) {
+        print("Example App: did allow", permission.debugName)
+    }
+    
+    func didDeniedPermission(_ permission: Permission) {
+        print("Example App: did denied", permission.debugName)
+    }
+}
+
 extension PaymentsController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -107,8 +131,10 @@ extension PaymentsController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         switch tableView{
         case TransferTable :
+            historyPayments.OperationTransfer[indexPath.row].typeOperation.OperationPerform(self)
             break
         case PaymentTable :
+            historyPayments.OperationPayment[indexPath.row].typeOperation.OperationPerform(self)
             break
         default: return
         }
@@ -129,34 +155,3 @@ extension PaymentsController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-
-/*
-extension PaymentsController: CreditCardScannerViewControllerDelegate {
-    func creditCardScannerViewControllerDidCancel(_ viewController: CardScannerController) {
-        viewController.dismiss(animated: true, completion: nil)
-        print("cancel")
-    }
-
-    func creditCardScannerViewController(_ viewController: CardScannerController, didErrorWith error: CreditCardScannerError) {
-        print(error.errorDescription ?? "")
-        ResultLabel.text = error.errorDescription
-        viewController.dismiss(animated: true, completion: nil)
-    }
-
-    func creditCardScannerViewController(_ viewController: CardScannerController, didFinishWith card: CreditCard) {
-        viewController.dismiss(animated: true, completion: nil)
-
-        var dateComponents = card.expireDate
-        dateComponents?.calendar = Calendar.current
-        let dateFormater = DateFormatter()
-        dateFormater.dateStyle = .short
-        let date = dateComponents?.date.flatMap(dateFormater.string)
-
-        let text = [card.number, date, card.name]
-            .compactMap { $0 }
-            .joined(separator: "\n")
-        ResultLabel.text = text
-        print("\(card)")
-    }
-}
-*/

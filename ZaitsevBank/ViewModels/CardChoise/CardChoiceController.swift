@@ -1,49 +1,31 @@
 //
-//  CardPickController.swift
+//  CardChoiceController.swift
 //  ZaitsevBank
 //
-//  Created by Антон Зайцев on 20.11.2021.
+//  Created by Антон Зайцев on 26.04.2022.
 //
 
 import UIKit
 
-protocol CardPickDelegate: AnyObject {
+
+protocol CardChoiseDelegate: AnyObject {
     func CardPick(Cards: [Cards]?,indexPickCard: Int?)
 }
 
-class CardPickController: UIViewController {
-    
-    @IBOutlet weak var UpView: UIView!
+class CardChoiceController: UIViewController {
+
     
     @IBOutlet weak var AddNewCard: UIStackView!
-    
-    @IBOutlet weak var MainLabel: UILabel!
-    
-    public var valuteSymbol: String!
-    public var textMainLable: String!
-    public var buySaleToogle : Bool?
-    
-    weak var delegate: CardPickDelegate?
     
     @IBOutlet weak var CardTable: UITableView!
     
     public var cardUser : [Cards] =  [Cards]()
     
+    weak var delegate: CardChoiseDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getView()
-    }
-    private func getView() {
-        view.layer.cornerRadius = 25
-        UpView.layer.cornerRadius = UpView.layer.frame.height / 2
-        MainLabel.text = textMainLable
-        
-        CardTable.delegate = self
-        CardTable.dataSource = self
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(AddNewCardFunction))
-        AddNewCard.isUserInteractionEnabled = true
-        AddNewCard.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +34,7 @@ class CardPickController: UIViewController {
         if(cardUser.isEmpty){
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                 Task{
-                    cardUser = await CardsManager().GetCardsBuySale(TypeValute: valuteSymbol, BuySale: buySaleToogle!)
+                    cardUser = await CardsManager().GetAllCards()
                     
                     DispatchQueue.main.async { [self] in
                         if (cardUser.isEmpty){
@@ -69,12 +51,21 @@ class CardPickController: UIViewController {
         }
     }
     
+    private func getView() {
+        CardTable.delegate = self
+        CardTable.dataSource = self
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(AddNewCardFunction))
+        AddNewCard.isUserInteractionEnabled = true
+        AddNewCard.addGestureRecognizer(tap)
+    }
     @objc private func AddNewCardFunction(sender: UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
         delegate?.CardPick(Cards: nil,indexPickCard: nil)
     }
 }
-extension CardPickController: UITableViewDelegate, UITableViewDataSource {
+
+extension CardChoiceController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cardUser.count

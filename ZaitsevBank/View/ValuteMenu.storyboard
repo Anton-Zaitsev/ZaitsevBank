@@ -1003,10 +1003,10 @@
     <color key="tintColor" red="0.001092183928" green="0.62712389729999996" blue="0.023422600469999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
     <resources>
         <image name="SberCard" width="106" height="142"/>
-        <image name="banknote.fill" catalog="system" width="32" height="32"/>
-        <image name="chevron.forward" catalog="system" width="32" height="32"/>
-        <image name="chevron.up" catalog="system" width="32" height="32"/>
-        <image name="plus" catalog="system" width="32" height="32"/>
+        <image name="banknote.fill" catalog="system" width="128" height="78"/>
+        <image name="chevron.forward" catalog="system" width="96" height="128"/>
+        <image name="chevron.up" catalog="system" width="128" height="72"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

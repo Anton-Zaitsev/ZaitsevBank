@@ -1288,7 +1288,7 @@
                                                                 <constraint firstAttribute="height" constant="38" id="256-PP-ww7"/>
                                                                 <constraint firstAttribute="width" secondItem="sSR-GM-kNu" secondAttribute="height" multiplier="1:1" id="xuU-32-OtL"/>
                                                             </constraints>
-                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="light"/>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="light"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="if8-hV-nF3">
                                                             <rect key="frame" x="50" y="49" width="324" height="1"/>
@@ -1298,18 +1298,28 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Клиенту ZaitsevBank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0N-GK-LS0">
-                                                            <rect key="frame" x="50" y="15" width="304" height="21.5"/>
+                                                            <rect key="frame" x="50" y="15" width="282" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="b9B-vN-Kke">
+                                                            <rect key="frame" x="340" y="17" width="20" height="16.5"/>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="MLz-3a-y4m"/>
+                                                                <constraint firstAttribute="width" secondItem="b9B-vN-Kke" secondAttribute="height" multiplier="1:1" id="t13-8e-LcP"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="b9B-vN-Kke" firstAttribute="leading" secondItem="b0N-GK-LS0" secondAttribute="trailing" constant="8" id="93a-e5-Ajx"/>
                                                         <constraint firstItem="sSR-GM-kNu" firstAttribute="top" secondItem="wPm-MV-3H1" secondAttribute="top" constant="6" id="JuS-IL-SnJ"/>
                                                         <constraint firstItem="b0N-GK-LS0" firstAttribute="top" secondItem="wPm-MV-3H1" secondAttribute="topMargin" constant="4" id="Ltk-3y-AHS"/>
                                                         <constraint firstAttribute="bottom" secondItem="if8-hV-nF3" secondAttribute="bottom" id="MEG-Ey-zCA"/>
+                                                        <constraint firstAttribute="trailing" secondItem="b9B-vN-Kke" secondAttribute="trailing" constant="14" id="Oyf-2m-hzV"/>
                                                         <constraint firstItem="if8-hV-nF3" firstAttribute="leading" secondItem="sSR-GM-kNu" secondAttribute="trailing" constant="12" id="U0r-MQ-gIs"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="b0N-GK-LS0" secondAttribute="trailing" id="W0a-UT-vyo"/>
+                                                        <constraint firstItem="b9B-vN-Kke" firstAttribute="centerY" secondItem="wPm-MV-3H1" secondAttribute="centerY" id="XO9-8y-KTn"/>
                                                         <constraint firstItem="if8-hV-nF3" firstAttribute="top" secondItem="b0N-GK-LS0" secondAttribute="bottom" constant="12.5" id="eaY-RQ-Hy3"/>
                                                         <constraint firstItem="sSR-GM-kNu" firstAttribute="leading" secondItem="wPm-MV-3H1" secondAttribute="leading" id="jmj-vr-69a"/>
                                                         <constraint firstItem="b0N-GK-LS0" firstAttribute="leading" secondItem="sSR-GM-kNu" secondAttribute="trailing" constant="12" id="pt5-Pz-rUh"/>
@@ -1361,11 +1371,20 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Оплатить по QR коду" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQz-9P-Sr0">
-                                                            <rect key="frame" x="48" y="14" width="306" height="21.5"/>
+                                                            <rect key="frame" x="48" y="14" width="284" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="C8P-2V-43u">
+                                                            <rect key="frame" x="340" y="17" width="20" height="16.5"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="65V-Ij-w6b"/>
+                                                                <constraint firstAttribute="width" secondItem="C8P-2V-43u" secondAttribute="height" multiplier="1:1" id="ELX-HF-aVE"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="Ivl-hJ-b7L" firstAttribute="top" secondItem="TQz-9P-Sr0" secondAttribute="bottom" constant="13.5" id="2WS-Kt-1jw"/>
@@ -1375,8 +1394,10 @@
                                                         <constraint firstItem="TQz-9P-Sr0" firstAttribute="leading" secondItem="06i-97-PTt" secondAttribute="trailing" constant="10" id="DcP-7F-dd2"/>
                                                         <constraint firstItem="06i-97-PTt" firstAttribute="top" secondItem="Oco-15-ams" secondAttribute="top" constant="6" id="Id1-YA-EFy"/>
                                                         <constraint firstAttribute="bottom" secondItem="Ivl-hJ-b7L" secondAttribute="bottom" id="UaU-kZ-qvv"/>
+                                                        <constraint firstItem="C8P-2V-43u" firstAttribute="leading" secondItem="TQz-9P-Sr0" secondAttribute="trailing" constant="8" id="Xbb-G1-Zwq"/>
                                                         <constraint firstAttribute="trailing" secondItem="Ivl-hJ-b7L" secondAttribute="trailing" id="alW-pa-rcF"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="TQz-9P-Sr0" secondAttribute="trailing" id="cez-nn-Jds"/>
+                                                        <constraint firstAttribute="trailing" secondItem="C8P-2V-43u" secondAttribute="trailing" constant="14" id="jgC-E3-hzu"/>
+                                                        <constraint firstItem="C8P-2V-43u" firstAttribute="centerY" secondItem="Oco-15-ams" secondAttribute="centerY" id="ytP-WP-cLk"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1439,14 +1460,36 @@
                     <view key="view" contentMode="scaleToFill" id="oUj-Un-aMw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoZaitsevBank" translatesAutoresizingMaskIntoConstraints="NO" id="KTQ-IW-ubc">
+                                <rect key="frame" x="0.0" y="144" width="414" height="380"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="380" id="G5F-rg-Oa1"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ДЕНЕГ ДОХУЯ, БУДТО Я БАНКИР)))" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XOb-Hm-DGX">
+                                <rect key="frame" x="20" y="532" width="374" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="fpj-CT-xdQ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="KTQ-IW-ubc" firstAttribute="top" secondItem="fpj-CT-xdQ" secondAttribute="top" constant="100" id="1Fa-30-6LR"/>
+                            <constraint firstItem="fpj-CT-xdQ" firstAttribute="trailing" secondItem="XOb-Hm-DGX" secondAttribute="trailing" constant="20" id="5re-SB-jQt"/>
+                            <constraint firstItem="XOb-Hm-DGX" firstAttribute="leading" secondItem="fpj-CT-xdQ" secondAttribute="leading" constant="20" id="BlR-oM-g8S"/>
+                            <constraint firstItem="KTQ-IW-ubc" firstAttribute="trailing" secondItem="fpj-CT-xdQ" secondAttribute="trailing" id="FPZ-Ww-ffT"/>
+                            <constraint firstItem="KTQ-IW-ubc" firstAttribute="leading" secondItem="fpj-CT-xdQ" secondAttribute="leading" id="hZm-6T-Y4K"/>
+                            <constraint firstItem="XOb-Hm-DGX" firstAttribute="top" secondItem="KTQ-IW-ubc" secondAttribute="bottom" constant="8" symbolic="YES" id="wMy-JV-svO"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="История" id="R2O-Co-cbI"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6xu-Zk-bIS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-877" y="676"/>
+            <point key="canvasLocation" x="-878.26086956521749" y="675"/>
         </scene>
         <!--Navigation Tab Bar Main-->
         <scene sceneID="3BC-Hr-aRe">
@@ -1468,6 +1511,7 @@
         <image name="LogoZaitsevBank" width="819" height="701"/>
         <image name="bell.fill" catalog="system" width="128" height="124"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="chevron.up" catalog="system" width="128" height="72"/>
         <image name="creditcard.and.123" catalog="system" width="128" height="90"/>
         <image name="goldCardSIM" width="96" height="96"/>
@@ -1476,9 +1520,6 @@
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="wifi" catalog="system" width="128" height="91"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

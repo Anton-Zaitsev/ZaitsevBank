@@ -20,6 +20,8 @@ class HistoryOperationCell: UICollectionViewCell {
     
     func configurated(with histrory: HistoryOperationPayments) {
         
+        ButtonDeleteHistory.isHidden = histrory.defaultOperation
+        
         ViewHistory.layer.cornerRadius = 15
         ViewHistory.backgroundColor = UIColor.darkGray.withAlphaComponent(0.3)
         

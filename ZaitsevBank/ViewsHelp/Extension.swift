@@ -24,6 +24,7 @@ extension UIViewController {
 }
 
 
+
 extension UIViewController {
     
     func EnableMainLoader(_ NameUser: String = ""){
@@ -121,25 +122,22 @@ extension UIImageView {
         gifImageView.animationImages = images
         return gifImageView
     }
+    
 }
 
+
 extension UIView {
-    
     class func loadFromNib<T: UIView>() -> T {
         return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
     }
     
-}
-
-extension UIView {
-
-        func fadeTransition(_ duration:CFTimeInterval) {
-            let animation = CATransition()
-            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-            animation.type = CATransitionType.fade
-            animation.duration = duration
-            layer.add(animation, forKey: CATransitionType.fade.rawValue)
-        }
+    func fadeTransition(_ duration:CFTimeInterval) {
+        let animation = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        animation.type = CATransitionType.fade
+        animation.duration = duration
+        layer.add(animation, forKey: CATransitionType.fade.rawValue)
+    }
 }
 
 extension NSMutableAttributedString {
