@@ -47,16 +47,31 @@ public class ClienZaitsevBankAPI {
         return request
     }
     
-    public static func getRequestGetAllCards(userID: String) -> URLRequest {
-        let GetUserData = URL(string: "\(server)api/Card/GetAllCards?userID=\(userID)")
-        var request = URLRequest(url: GetUserData!)
+    public static func getRequestGetAllCards(userID: String, _ filterCardTransaction: String? = nil) -> URLRequest {
+        if let filter = filterCardTransaction {
+            let GetUserData = URL(string: "\(server)api/Card/GetAllCards?userID=\(userID)&filterCard=\(filter)")
+            var request = URLRequest(url: GetUserData!)
+            request.httpMethod = "GET"
+            return request
+        }
+        else {
+            let GetUserData = URL(string: "\(server)api/Card/GetAllCards?userID=\(userID)")
+            var request = URLRequest(url: GetUserData!)
+            request.httpMethod = "GET"
+            return request
+        }
+    }
+    
+    public static func getRequestGetCardFromPhone(Phone: String,userID: String) -> URLRequest {
+        let GetCardFromPhone = URL(string: "\(server)api/Card/GetCardFromPhone?Phone=\(Phone)&userID=\(userID)")
+        var request = URLRequest(url: GetCardFromPhone!)
         request.httpMethod = "GET"
         return request
     }
     
-    public static func getRequestGetCardFromPhone(Phone: String, TypeValute: String) -> URLRequest {
-        let GetUserData = URL(string: "\(server)api/Card/GetCardFromPhone?Phone=\(Phone)&TypeValute=\(TypeValute)")
-        var request = URLRequest(url: GetUserData!)
+    public static func getRequestGetCardFromNumber(NumberCard: String,userID: String) -> URLRequest {
+        let GetCardFromNumber = URL(string: "\(server)api/Card/GetCardFromNumber?NumberCard=\(String(NumberCard.compactMap({ $0.isWhitespace ? nil : $0 })))&userID=\(userID)")
+        var request = URLRequest(url: GetCardFromNumber!)
         request.httpMethod = "GET"
         return request
     }
@@ -93,7 +108,14 @@ public class ClienZaitsevBankAPI {
         request.httpMethod = "GET"
         return request
     }
+    // Transactions
     
+    public static func getRequestTransferClient(TransactionSender: String, TransactionRecipient: String, summ: String) -> URLRequest{
+        let TransferClient = URL(string:"\(server)api/Transactions/TransferClient?TransactionSender=\(TransactionSender)&TransactionRecipient=\(TransactionRecipient)&Summ=\(summ)")
+        var request = URLRequest(url: TransferClient!)
+        request.httpMethod = "POST"
+        return request
+    }
 }
 
 

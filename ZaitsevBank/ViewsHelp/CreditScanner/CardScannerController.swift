@@ -50,6 +50,7 @@ open class CardScannerController: UIViewController{
             }
         }
     }
+    
     private lazy var analyzer = ImageAnalyzer(delegate: self)
 
     public weak var delegate: CreditCardScannerViewControllerDelegate?

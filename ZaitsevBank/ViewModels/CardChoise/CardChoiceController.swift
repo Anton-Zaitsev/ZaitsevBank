@@ -21,6 +21,8 @@ class CardChoiceController: UIViewController {
     
     public var cardUser : [Cards] =  [Cards]()
     
+    public var filterCardID : String? = nil
+    
     weak var delegate: CardChoiseDelegate?
     
     override func viewDidLoad() {
@@ -34,7 +36,7 @@ class CardChoiceController: UIViewController {
         if(cardUser.isEmpty){
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                 Task{
-                    cardUser = await CardsManager().GetAllCards()
+                    cardUser = await CardsManager().GetAllCards(filterCardID)
                     
                     DispatchQueue.main.async { [self] in
                         if (cardUser.isEmpty){

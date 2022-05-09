@@ -107,6 +107,8 @@ class StartMainController: UIViewController {
     }
     
     @objc private func getDataStartMenu() {
+        let loaderView = EnableLoader()
+        
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
             Task{
                 await withTaskGroup(of: Void.self) { group in
@@ -126,6 +128,7 @@ class StartMainController: UIViewController {
             }
         }
         
+        DisableLoader(loader: loaderView)
         var count = 0
         
         Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [self] (_) in

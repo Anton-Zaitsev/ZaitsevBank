@@ -33,7 +33,7 @@ public enum OperationPayments {
             Permission.camera.request {
                 
                 if (Permission.camera.authorized){
-                    controller.navigationController?.isNavigationBarHidden = false;
+                    controller.navigationController?.isNavigationBarHidden = false
                     let storyboard = UIStoryboard(name: "TransferMenu", bundle: nil)
                     let storyboardInstance = storyboard.instantiateViewController(withIdentifier: "TransferCamera") as! TransferCameraController
                     controller.navigationController?.pushViewController(storyboardInstance, animated: true)
@@ -49,6 +49,10 @@ public enum OperationPayments {
         case .makeCredit:
             break
         case .paymentQR:
+            controller.navigationController?.isNavigationBarHidden = false
+            let storyboard = UIStoryboard(name: "TransferMenu", bundle: nil)
+            let storyboardInstance = storyboard.instantiateViewController(withIdentifier: "TransactionTemplate") as! TransactionTemplateController
+            controller.navigationController?.pushViewController(storyboardInstance, animated: true)
             break
         case .education:
             break

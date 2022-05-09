@@ -34,6 +34,8 @@
 		3A3700D427530DC700387894 /* CardViewer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A3700D327530DC700387894 /* CardViewer.storyboard */; };
 		3A3AE94B271276FA001FF068 /* Loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A3AE94A271276FA001FF068 /* Loading.gif */; };
 		3A3AE94E271278A3001FF068 /* StartMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3AE94D271278A3001FF068 /* StartMainController.swift */; };
+		3A3FAEFE282945F100A8DE39 /* TransactionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3FAEFD282945F100A8DE39 /* TransactionManager.swift */; };
+		3A3FAF01282953C600A8DE39 /* TransactionTemplateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3FAF00282953C600A8DE39 /* TransactionTemplateController.swift */; };
 		3A49B5102755591300ECC979 /* FullCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49B50F2755591300ECC979 /* FullCardController.swift */; };
 		3A49B5142755701F00ECC979 /* FullCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49B5132755701F00ECC979 /* FullCardCell.swift */; };
 		3A5851B62816D3D000A7D0F7 /* CameraPermission in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5851B52816D3D000A7D0F7 /* CameraPermission */; };
@@ -71,6 +73,7 @@
 		3AB8F10B2743E8F600469C94 /* ChartSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB8F1082743E8F600469C94 /* ChartSeries.swift */; };
 		3AB8F10C2743E8F600469C94 /* ChartColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB8F1092743E8F600469C94 /* ChartColors.swift */; };
 		3AB8F10D2743E8F600469C94 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB8F10A2743E8F600469C94 /* Chart.swift */; };
+		3AC468522823D8F8005540FC /* CardSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC468512823D8F8005540FC /* CardSearch.swift */; };
 		3ACEFA9D2720AC6D004BD739 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACEFA9C2720AC6D004BD739 /* NavigationController.swift */; };
 		3ACEFAA32721EBB7004BD739 /* AuthFromFaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */; };
 		3AD95367271DC7AB0081D50A /* LocalPassword.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AD95366271DC7AB0081D50A /* LocalPassword.xib */; };
@@ -119,6 +122,8 @@
 		3A3700D327530DC700387894 /* CardViewer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardViewer.storyboard; sourceTree = "<group>"; };
 		3A3AE94A271276FA001FF068 /* Loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Loading.gif; sourceTree = "<group>"; };
 		3A3AE94D271278A3001FF068 /* StartMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMainController.swift; sourceTree = "<group>"; };
+		3A3FAEFD282945F100A8DE39 /* TransactionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionManager.swift; sourceTree = "<group>"; };
+		3A3FAF00282953C600A8DE39 /* TransactionTemplateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplateController.swift; sourceTree = "<group>"; };
 		3A49B50F2755591300ECC979 /* FullCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardController.swift; sourceTree = "<group>"; };
 		3A49B5132755701F00ECC979 /* FullCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardCell.swift; sourceTree = "<group>"; };
 		3A5851A22816A60700A7D0F7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -153,6 +158,7 @@
 		3AB8F1082743E8F600469C94 /* ChartSeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartSeries.swift; sourceTree = "<group>"; };
 		3AB8F1092743E8F600469C94 /* ChartColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartColors.swift; sourceTree = "<group>"; };
 		3AB8F10A2743E8F600469C94 /* Chart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
+		3AC468512823D8F8005540FC /* CardSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSearch.swift; sourceTree = "<group>"; };
 		3ACEFA9C2720AC6D004BD739 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFromFaceID.swift; sourceTree = "<group>"; };
 		3AD95366271DC7AB0081D50A /* LocalPassword.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocalPassword.xib; sourceTree = "<group>"; };
@@ -238,6 +244,7 @@
 		3A0FC967270A530200B6B2F6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3A3FAEFF2829537000A8DE39 /* TransactionTemplate */,
 				3A74D85828182439004047B9 /* CardChoise */,
 				3A12C8782815C15000EE1CC2 /* TransferByCamera */,
 				3A49B50E275558C100ECC979 /* FullCardViewer */,
@@ -338,6 +345,14 @@
 				3A6B52E128134A6A00C1D741 /* History */,
 			);
 			path = MainMenu;
+			sourceTree = "<group>";
+		};
+		3A3FAEFF2829537000A8DE39 /* TransactionTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				3A3FAF00282953C600A8DE39 /* TransactionTemplateController.swift */,
+			);
+			path = TransactionTemplate;
 			sourceTree = "<group>";
 		};
 		3A49B50E275558C100ECC979 /* FullCardViewer */ = {
@@ -447,6 +462,7 @@
 				3AABE0AC28025CD200EB3623 /* CardsManager.swift */,
 				3AE09EBB28020E890016E1EF /* CheckCorrectAuthData.swift */,
 				3AE09EC228021C3A0016E1EF /* RequestResult.swift */,
+				3A3FAEFD282945F100A8DE39 /* TransactionManager.swift */,
 			);
 			path = ZaitsevBankAPI;
 			sourceTree = "<group>";
@@ -456,6 +472,7 @@
 			children = (
 				3AE09EC028021B050016E1EF /* UserModel.swift */,
 				3AABE0AE280261D300EB3623 /* CardModel.swift */,
+				3AC468512823D8F8005540FC /* CardSearch.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -579,15 +596,18 @@
 				3A97F2822744477D00A40224 /* FullValuteMenu.swift in Sources */,
 				3A0862E027382776000C5407 /* ValuteStructures.swift in Sources */,
 				3A36DAF427417F5000F9CE9C /* CardGenerator.swift in Sources */,
+				3A3FAF01282953C600A8DE39 /* TransactionTemplateController.swift in Sources */,
 				3A6B52EA281425CC00C1D741 /* PaymentCell.swift in Sources */,
 				3AB86B89270CADC7008D0823 /* Extension.swift in Sources */,
 				3AABE0AF280261D300EB3623 /* CardModel.swift in Sources */,
 				3A2BCAF62743E34000189086 /* ExchangeRateController.swift in Sources */,
 				3A8D79A2273B1CB500B6EA98 /* ParametrsAddCardViewController.swift in Sources */,
+				3AC468522823D8F8005540FC /* CardSearch.swift in Sources */,
 				3A0FC950270A52B600B6B2F6 /* AppDelegate.swift in Sources */,
 				3AB8F10D2743E8F600469C94 /* Chart.swift in Sources */,
 				3AA907722749990100C7581D /* CardPickController.swift in Sources */,
 				3A74D85A2818244A004047B9 /* CardChoiceController.swift in Sources */,
+				3A3FAEFE282945F100A8DE39 /* TransactionManager.swift in Sources */,
 				3AF5D73127E69E3C0095A4DC /* ImageAnalyzer.swift in Sources */,
 				3A6B52E0281346B400C1D741 /* HistroryOperationCell.swift in Sources */,
 				3AF5D73527E69E3C0095A4DC /* CreditCardScannerError.swift in Sources */,

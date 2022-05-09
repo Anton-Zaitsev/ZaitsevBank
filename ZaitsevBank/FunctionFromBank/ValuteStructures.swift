@@ -86,21 +86,37 @@ public enum ValuteZaitsevBank : String {
     func SaleValuteTitle(buySale: Bool, currentCurse: Double,count: Double,ValuteB: String) -> String {
         let CurrentCurse = currentCurse.valuteToCurseFormat()
         let Count = count.valuteToCurseFormat()
-        let valuteDescription = "\(ValuteB) \(ValuteZaitsevBank.init(rawValue: ValuteB)!.description)"
+        let valuteDescription = ValuteZaitsevBank.init(rawValue: ValuteB)!.description
         switch self {
         case .EUR : return
-            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) €" : "Продажа \(Count) евро за \(CurrentCurse) \(valuteDescription)"
+            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) €" : "Продажа \(Count) € за \(CurrentCurse) \(valuteDescription)"
         case .USD : return
-            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) $" : "Продажа \(Count) доллара за \(CurrentCurse) \(valuteDescription)"
+            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) $" : "Продажа \(Count) $ за \(CurrentCurse) \(valuteDescription)"
         case .RUB : return
-            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) ₽" : "Продажа \(Count) рубля за \(CurrentCurse) \(valuteDescription)"
+            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) ₽" : "Продажа \(Count) ₽ за \(CurrentCurse) \(valuteDescription)"
         case .BTC : return
-            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) Ƀ" : "Продажа \(Count) биткойна за \(CurrentCurse) \(valuteDescription)"
+            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) Ƀ" : "Продажа \(Count) Ƀ за \(CurrentCurse) \(valuteDescription)"
         case .ETH : return
-            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) ◊" : "Продажа \(Count) эфириума за \(CurrentCurse) \(valuteDescription)"
+            buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) ◊" : "Продажа \(Count) ◊ за \(CurrentCurse) \(valuteDescription)"
         }
     }
-    
+    func SaleValuteSubtitle(currentCurse: Double,count: Double,ValuteB: String) -> (String,String) {
+        let CurrentCurse = currentCurse.valuteToCurseFormat()
+        let Count = count.valuteToCurseFormat()
+        let valuteDescription = ValuteZaitsevBank.init(rawValue: ValuteB)!.description
+        switch self {
+        case .EUR : return ("\(CurrentCurse) \(valuteDescription)", "\(Count) €")
+            
+        case .USD : return ("\(CurrentCurse) \(valuteDescription)", "\(Count) $")
+           
+        case .RUB : return ("\(CurrentCurse) \(valuteDescription)", "\(Count) ₽")
+           
+        case .BTC : return ("\(CurrentCurse) \(valuteDescription)", "\(Count) Ƀ")
+            
+        case .ETH : return ("\(CurrentCurse) \(valuteDescription)", "\(Count) ◊")
+            
+        }
+    }
     var electronValute : Bool {
         switch self{
         case .RUB : return false

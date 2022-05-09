@@ -9,7 +9,7 @@ import UIKit
 import PermissionsKit
 
 class PaymentsController: UIViewController {
-
+    
     @IBOutlet weak var VIewAllCollection: UIView!
     
     @IBOutlet weak var HistroryCollection: UICollectionView!
@@ -22,15 +22,15 @@ class PaymentsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         VIewAllCollection.roundTopCorners(radius: 20)
         
         HistroryCollection.delegate = self
         HistroryCollection.dataSource = self
-                
+        
         TransferTable.delegate = self
         TransferTable.dataSource = self
-                
+        
         PaymentTable.delegate = self
         PaymentTable.dataSource = self
     }
@@ -39,27 +39,33 @@ class PaymentsController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true;
     }
-        
+    @objc private func tapCollection(_ sender: UITapGestureRecognizer) {
+
+       let location = sender.location(in: self.HistroryCollection)
+       let indexPath = self.HistroryCollection.indexPathForItem(at: location)
+
+       if let index = indexPath {
+           historyPayments.HistoryOperationHeader[index.row].typeOperation.OperationPerform(self)
+       }
+    }
 }
 extension PaymentsController: PermissionsDelegate,PermissionsDataSource {
     
     func configure(_ cell: PermissionTableViewCell, for permission: Permission) {
-
-    }
         
-        func deniedPermissionAlertTexts(for permission: Permission) -> DeniedPermissionAlertTexts? {
-            // You can create custom texts
-            
-            
-             let texts = DeniedPermissionAlertTexts()
-             texts.titleText = "В разрешении отказано!"
-             texts.descriptionText = "Пожалуйста, перейдите в Настройки и разрешите разрешение."
-             texts.actionText = "Настройки"
-             texts.cancelText = "Отмена"
-             return texts
-
-
-        }
+    }
+    
+    func deniedPermissionAlertTexts(for permission: Permission) -> DeniedPermissionAlertTexts? {
+        // You can create custom texts
+    
+        let texts = DeniedPermissionAlertTexts()
+        texts.titleText = "В разрешении отказано!"
+        texts.descriptionText = "Пожалуйста, перейдите в Настройки и разрешите разрешение."
+        texts.actionText = "Настройки"
+        texts.cancelText = "Отмена"
+        return texts
+        
+    }
     
     func didHidePermissions(_ permissions: [Permission]) {
         print("Example App: did hide with permissions", permissions.map { $0.debugName })
@@ -79,13 +85,14 @@ extension PaymentsController: UICollectionViewDelegateFlowLayout, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return historyPayments.HistoryOperationHeader.count
     }
-    
+        
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell = UICollectionViewCell()
         
         if let HistoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "historyOperation", for: indexPath) as? HistoryOperationCell {
             HistoryCell.configurated(with: historyPayments.HistoryOperationHeader[indexPath.row])
             cell = HistoryCell
+            cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapCollection)))
         }
         return cell
     }
@@ -138,18 +145,6 @@ extension PaymentsController: UITableViewDelegate, UITableViewDataSource {
             break
         default: return
         }
-        
-        
-            /*
-            let storyboardCardViewer : UIStoryboard = UIStoryboard(name: "CardViewer", bundle: nil)
-            let CardViewer = storyboardCardViewer.instantiateViewController(withIdentifier: "CardView") as! FullCardController
-            
-            CardViewer.cardFull = modelStartMain.cardUser
-            CardViewer.indexCard = indexPath
-            navigationController?.isNavigationBarHidden = false;
-            
-            self.navigationController?.pushViewController(CardViewer, animated: true)
-             */
         
     }
     

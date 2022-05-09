@@ -23,8 +23,6 @@ extension UIViewController {
     }
 }
 
-
-
 extension UIViewController {
     
     func EnableMainLoader(_ NameUser: String = ""){

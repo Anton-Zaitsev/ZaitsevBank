@@ -64,7 +64,7 @@ class LoginController: UIViewController, LocalPasswordDelegate {
     
     @IBAction func SignClick(_ sender: Any){
         
-        let loader = self.EnableLoader()
+        let loader = EnableLoader()
         DispatchQueue.global(qos: .utility).async{ [self] in
             
             Task(priority: .high) {

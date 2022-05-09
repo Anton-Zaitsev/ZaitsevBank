@@ -59,7 +59,7 @@ public class CardsManager {
             numberCard = "•• \(numberCard)"
             
             let typeImageCard = card.CardOperator.searchLogoWalletCard()
-                        
+            
             return Cards(typeImageCard: typeImageCard, typeMoney: valuteTypeBank.description, nameCard: card.NameCard, numberCard: numberCard, moneyCount: moneyCount, cvv: card.CVV, data: formattedData, cardOperator: card.CardOperator, typeMoneyExtended: card.TypeMoney, fullNumberCard: card.NumberCard.formatCardNumber(), transactionID: card.TransactionCard, closed: card.ClosedCard)
             
         }
@@ -70,11 +70,11 @@ public class CardsManager {
     
     public var Error = "Не удалось выполнить запрос"
     
-    public func GetAllCards() async -> [Cards] {
+    public func GetAllCards(_ filterCardTransaction: String? = nil) async -> [Cards] {
         var cards = [Cards]()
         if (UserDefaults.standard.checkUserID()) {
             let userID = UserDefaults.standard.isUserID()
-            let request = ClienZaitsevBankAPI.getRequestGetAllCards(userID: userID)
+            let request = ClienZaitsevBankAPI.getRequestGetAllCards(userID: userID,filterCardTransaction)
             
             do {
                 let (cardData,responce) = try await URLSession.shared.data(for: request)
@@ -216,7 +216,7 @@ public class CardsManager {
             }
         }
         else {
-           return cards
+            return cards
         }
     }
     
@@ -251,5 +251,112 @@ public class CardsManager {
             return nil
         }
         
+    }
+    
+    public func GetCardFromPhone(Phone: String) async -> CardSearch? {
+        if (UserDefaults.standard.checkUserID()) {
+            
+            let userID = UserDefaults.standard.isUserID()
+            let request = ClienZaitsevBankAPI.getRequestGetCardFromPhone(Phone: Phone, userID: userID)
+            do {
+                let (cardSearch,responce) = try await URLSession.shared.data(for: request)
+                if let code = (responce as? HTTPURLResponse)?.statusCode {
+                    
+                    if let requestResult =  RequestResult.init(rawValue: code){
+                        switch requestResult{
+                        case .OK :
+                            if let jsonData = decryptJSON(userID,data: cardSearch) {
+                                let card = try JSONDecoder().decode(CardSearch.self, from: jsonData)
+                                return card
+                            }
+                            else {
+                                return nil
+                            }
+                        case .NotFound:
+                            Error = "Карта получателя не была найдена"
+                            return nil
+                        case .EthernalServer:
+                            Error = "Сервер временно не доступен"
+                            return nil
+                        case .NotCreate:
+                            Error = "Не правильный номер телефона"
+                            return nil
+                        case .BadRequest:
+                            Error = "Не удалось выполнить ваш запрос"
+                            return nil
+                        }
+                    }
+                    else { return nil}
+                }
+                else { return nil}
+                
+            }
+            catch {
+                return nil
+            }
+            
+        }
+        else {
+            return nil
+        }
+    }
+    
+    
+    public func GetCardFromNumberCard(numberCard: String?) async -> (CardSearch,Cards)? {
+        if let NumberCard = numberCard {
+            if (UserDefaults.standard.checkUserID()) {
+                let userID = UserDefaults.standard.isUserID()
+                let request = ClienZaitsevBankAPI.getRequestGetCardFromNumber(NumberCard: NumberCard, userID: userID)
+                do {
+                    let (cardSearch,responce) = try await URLSession.shared.data(for: request)
+                    if let code = (responce as? HTTPURLResponse)?.statusCode {
+                        
+                        if let requestResult =  RequestResult.init(rawValue: code){
+                            switch requestResult{
+                            case .OK :
+                                if let jsonData = decryptJSON(userID,data: cardSearch) {
+                                    let card = try JSONDecoder().decode(CardSearch.self, from: jsonData)
+                                    if let convertedCard = convertedCardDB_CardZaitsevBank(card.CardFirst){
+                                        return (card,convertedCard)
+                                    }
+                                    else {
+                                        return nil
+                                    }
+                                }
+                                else {
+                                    return nil
+                                }
+                            case .NotFound:
+                                Error = "Карта получателя/клиента не была найдена"
+                                return nil
+                            case .EthernalServer:
+                                Error = "Сервер временно не доступен"
+                                return nil
+                            case .NotCreate:
+                                Error = "Не правильный номер карты"
+                                return nil
+                            case .BadRequest:
+                                Error = "Не удалось выполнить ваш запрос"
+                                return nil
+                            }
+                        }
+                        else { return nil}
+                    }
+                    else { return nil}
+                    
+                }
+                catch {
+                    print("Ошибка транскриптиции")
+                    return nil
+                }
+                
+            }
+            else {
+                return nil
+            }
+        }
+        else {
+            return nil
+        }
     }
 }

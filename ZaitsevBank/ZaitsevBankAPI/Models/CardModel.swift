@@ -32,5 +32,3 @@ public class CardModel: Codable {
     public var TransactionCard: String = ""
     
 }
-
-typealias CardModelArray = [CardModel]

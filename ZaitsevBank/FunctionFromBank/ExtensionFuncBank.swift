@@ -7,6 +7,17 @@
 
 import Foundation
 
+public extension Int {
+
+    init?(doubleVal: Double) {
+        guard (doubleVal <= Double(Int.max).nextDown) && (doubleVal >= Double(Int.min).nextUp) else {
+        return nil
+    }
+
+    self.init(doubleVal)
+}
+}
+    
 public extension Double {
      func valuteToTableFormat() -> String {
          if let converted = Int(exactly: self) {
@@ -38,6 +49,7 @@ public extension Double {
         return decimalCount <= CountMax
     }
 }
+
 public extension String {
     func formatCardNumber() -> String {
         let mask = "XXXX XXXX XXXX XXXX"
