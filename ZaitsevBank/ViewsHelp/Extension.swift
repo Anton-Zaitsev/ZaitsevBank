@@ -139,16 +139,16 @@ extension UIView {
 }
 
 extension NSMutableAttributedString {
-
+    
     func setColor(color: UIColor, forText stringValue: String) {
-       let range: NSRange = self.mutableString.range(of: stringValue, options: .caseInsensitive)
-       self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+        let range: NSRange = self.mutableString.range(of: stringValue, options: .caseInsensitive)
+        self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
     }
-
+    
 }
 
 extension UIView{
-
+    
     func showFlip(){
         if self.isHidden{
             
@@ -166,34 +166,34 @@ extension UIView{
     
     func roundTopCorners(radius: CGFloat = 10) {
         
-           self.clipsToBounds = true
-           self.layer.cornerRadius = radius
-           if #available(iOS 11.0, *) {
-               self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-           } else {
-               self.roundCorners(corners: [.topLeft, .topRight], radius: radius)
-           }
-       }
-
-       func roundBottomCorners(radius: CGFloat = 10) {
-        
-           self.clipsToBounds = true
-           self.layer.cornerRadius = radius
-           if #available(iOS 11.0, *) {
-               self.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-           } else {
-               self.roundCorners(corners: [.bottomLeft, .bottomRight], radius: radius)
-           }
-       }
-
-       private func roundCorners(corners: UIRectCorner, radius: CGFloat) {
-        
-            let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-            let mask = CAShapeLayer()
-            mask.path = path.cgPath
-            layer.mask = mask
+        self.clipsToBounds = true
+        self.layer.cornerRadius = radius
+        if #available(iOS 11.0, *) {
+            self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        } else {
+            self.roundCorners(corners: [.topLeft, .topRight], radius: radius)
         }
-
+    }
+    
+    func roundBottomCorners(radius: CGFloat = 10) {
+        
+        self.clipsToBounds = true
+        self.layer.cornerRadius = radius
+        if #available(iOS 11.0, *) {
+            self.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        } else {
+            self.roundCorners(corners: [.bottomLeft, .bottomRight], radius: radius)
+        }
+    }
+    
+    private func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
+    }
+    
 }
 extension UIViewController {
     func setNavigationBar(_ title: String,_ color: UIColor = UIColor.white) {
@@ -205,35 +205,35 @@ extension UIViewController {
 }
 extension UIColor {
     convenience init?(_ string: String) {
-            let hex = string.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        let hex = string.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        
+        if #available(iOS 13, *) {
+            //If your string is not a hex colour String then we are returning white color. you can change this to any default colour you want.
+            guard let int = Scanner(string: hex).scanInt32(representation: .hexadecimal) else { return nil }
             
-            if #available(iOS 13, *) {
-                //If your string is not a hex colour String then we are returning white color. you can change this to any default colour you want.
-                guard let int = Scanner(string: hex).scanInt32(representation: .hexadecimal) else { return nil }
-                
-                let a, r, g, b: Int32
-                switch hex.count {
-                case 3:     (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)  // RGB (12-bit)
-                case 6:     (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)                    // RGB (24-bit)
-                case 8:     (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)       // ARGB (32-bit)
-                default:    (a, r, g, b) = (255, 0, 0, 0)
-                }
-                
-                self.init(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(a) / 255.0)
-                
-            } else {
-                var int = UInt32()
-                
-                Scanner(string: hex).scanHexInt32(&int)
-                let a, r, g, b: UInt32
-                switch hex.count {
-                case 3:     (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)  // RGB (12-bit)
-                case 6:     (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)                    // RGB (24-bit)
-                case 8:     (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)       // ARGB (32-bit)
-                default:    (a, r, g, b) = (255, 0, 0, 0)
-                }
-                
-                self.init(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(a) / 255.0)
+            let a, r, g, b: Int32
+            switch hex.count {
+            case 3:     (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)  // RGB (12-bit)
+            case 6:     (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)                    // RGB (24-bit)
+            case 8:     (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)       // ARGB (32-bit)
+            default:    (a, r, g, b) = (255, 0, 0, 0)
             }
+            
+            self.init(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(a) / 255.0)
+            
+        } else {
+            var int = UInt32()
+            
+            Scanner(string: hex).scanHexInt32(&int)
+            let a, r, g, b: UInt32
+            switch hex.count {
+            case 3:     (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)  // RGB (12-bit)
+            case 6:     (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)                    // RGB (24-bit)
+            case 8:     (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)       // ARGB (32-bit)
+            default:    (a, r, g, b) = (255, 0, 0, 0)
+            }
+            
+            self.init(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(a) / 255.0)
         }
+    }
 }

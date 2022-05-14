@@ -39,6 +39,7 @@ class PaymentsController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true;
     }
+    
     @objc private func tapCollection(_ sender: UITapGestureRecognizer) {
 
        let location = sender.location(in: self.HistroryCollection)

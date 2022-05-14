@@ -27,6 +27,10 @@ public enum OperationPayments {
         case .toClientZaitsevBank:
             break
         case .betweenYour:
+            controller.navigationController?.isNavigationBarHidden = false
+            let storyboard = UIStoryboard(name: "TransferMenu", bundle: nil)
+            let storyboardInstance = storyboard.instantiateViewController(withIdentifier: "TransferBetween") as! TransferBetweenController
+            controller.navigationController?.pushViewController(storyboardInstance, animated: true)
             break
         case .transferFromCamera:
             

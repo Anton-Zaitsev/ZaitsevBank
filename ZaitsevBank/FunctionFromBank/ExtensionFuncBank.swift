@@ -51,6 +51,53 @@ public extension Double {
 }
 
 public extension String {
+    func convertToDouble(valutePay: String) -> (Double,String)? {
+        let formatText = String(self.compactMap({ $0.isWhitespace ? nil : $0 })).replacingOccurrences(of:  ",", with: ".")
+        
+        if let summToInt = Int(formatText){
+            let summToIntToDouble = Double(summToInt)
+            if (summToIntToDouble.maxNumber(CountMax: ValuteZaitsevBank.init(rawValue: valutePay)!.CountMaxDouble)){
+                
+                let fmt = NumberFormatter()
+                fmt.numberStyle = .decimal
+                fmt.locale = Locale(identifier: "fr_FR")
+                return (summToIntToDouble, fmt.string(for: summToInt)! )
+            }
+            else {
+                return nil
+            }
+        }
+        else {
+            if let summ = Double (formatText) {
+                if (summ.maxNumber(CountMax: ValuteZaitsevBank.init(rawValue: valutePay)!.CountMaxDouble)){
+                    return (summ,formatText.replacingOccurrences(of:  ".", with: ","))
+                }
+                else {
+                    return nil
+                }
+            }
+            else {
+                return nil
+            }
+        }
+        
+    }
+    func convertDouble() -> Double? {
+        let formatText = String(self.compactMap({ $0.isWhitespace ? nil : $0 })).replacingOccurrences(of:  ",", with: ".")
+        
+        if let summToInt = Int(formatText){
+            let summToIntToDouble = Double(summToInt)
+            return summToIntToDouble
+        }
+        else {
+            if let summ = Double (formatText) {
+                return summ
+            }
+            else {
+                return nil
+            }
+        }
+    }
     func formatCardNumber() -> String {
         let mask = "XXXX XXXX XXXX XXXX"
         let numbers = self.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)

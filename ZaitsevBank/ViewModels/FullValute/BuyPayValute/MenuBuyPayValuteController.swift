@@ -132,7 +132,7 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
         NameBuyCard.text = "Загрузка карты ..."
         TextNewCard.text = ""
         TitleLabel.text = ""
-        ImageBuyCard.isHidden = true
+
         NumberBuyCard.isHidden = true
         MoneyBuyCard.isHidden = true
         
@@ -182,7 +182,7 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
             
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                 Task{
-                    if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteEnrollment!, BuySale: BuySaleToogle!, ConvertToDouble(Text: TextFieldSUMM.text ?? "")?.0) {
+                    if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteEnrollment!, BuySale: BuySaleToogle!, (TextFieldSUMM.text ?? "").convertDouble()!) {
                         
                         DispatchQueue.main.async { [self] in
                             
@@ -201,7 +201,7 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
             Task{
                 let TypeValuteB = data.typeMoneyExtended // Зачислем на нашу карту VALUTE
                 
-                if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteB, BuySale: BuySaleToogle!, ConvertToDouble(Text: TextFieldSUMM.text ?? "")?.0) {
+                if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteB, BuySale: BuySaleToogle!, (TextFieldSUMM.text ?? "").convertDouble()!) {
                     
                     DispatchQueue.main.async { [self] in
                         
@@ -218,6 +218,7 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
                 }
                 else {
                     DispatchQueue.main.async { [self] in
+                        ImageBuyCard.image = UIImage(systemName: "wand.and.rays")
                         NameBuyCard.text = "Оформите новый счет"
                         ViewNewCard.isHidden = false
                     }
@@ -255,6 +256,8 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
                     else {
                         DispatchQueue.main.async { [self] in
                             TextNewCard.text = BuySaleToogle! ? "Для завершения операции вам необходимо открыть счет в \(ValuteZaitsevBank.init(rawValue: TypeValuteEnrollment!)!.descriptionExpense)." : "Для завершения операции вам необходимо открыть новый счет в другой валюте."
+                            
+                            ImageBuyCard.image = UIImage(systemName: "wand.and.rays")
                             
                             NameBuyCard.text = "Оформите новый счет"
                             ViewNewCard.isHidden = false
@@ -308,39 +311,9 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
         
     }
     
-    private func ConvertToDouble(Text: String) -> (Double,String)? {
-        
-        let formatText = String(Text.compactMap({ $0.isWhitespace ? nil : $0 })).replacingOccurrences(of:  ",", with: ".")
-        if let summToInt = Int(formatText){
-            let summToIntToDouble = Double(summToInt)
-            if (summToIntToDouble.maxNumber(CountMax: ValuteZaitsevBank.init(rawValue: TypeValuteOffs!)!.CountMaxDouble)){
-                let fmt = NumberFormatter()
-                fmt.numberStyle = .decimal
-                fmt.locale = Locale(identifier: "fr_FR")
-                return (summToIntToDouble,fmt.string(for: summToInt)!)
-            }
-            else {
-                return nil
-            }
-        }
-        else {
-            if let summ = Double (formatText) {
-                if (summ.maxNumber(CountMax: ValuteZaitsevBank.init(rawValue: TypeValuteOffs!)!.CountMaxDouble)){
-                    return (summ,formatText.replacingOccurrences(of:  ".", with: ","))
-                }
-                else {
-                    return nil
-                }
-            }
-            else {
-                return nil
-            }
-        }
-    }
-    
     @IBAction func ChangedTextFieldSUMM(_ sender: Any) {
         
-        if let (valute, textValute) = ConvertToDouble(Text: TextFieldSUMM.text ?? ""){
+        if let (valute, textValute) =  (TextFieldSUMM.text ?? "").convertToDouble(valutePay: TypeValuteOffs!){
             TextFieldSUMM.textColor = .white
             TextFieldSUMM.text = textValute
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in

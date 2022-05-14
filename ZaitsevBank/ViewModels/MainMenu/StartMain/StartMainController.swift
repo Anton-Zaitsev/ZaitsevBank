@@ -107,28 +107,29 @@ class StartMainController: UIViewController {
     }
     
     @objc private func getDataStartMenu() {
-        let loaderView = EnableLoader()
-        
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
-            Task{
-                await withTaskGroup(of: Void.self) { group in
-                    group.addTask {
-                        await self.getDataUserTable()
-                    }
-                    group.addTask {
-                        await self.getValuteExchange()
-                    }
-                    group.addTask {
-                        await self.getTableWallet()
-                    }
-                    group.addTask {
-                        self.modelStartMain.dataBitExchange = await API_VALUTE.getBitcoinTable()
+        DispatchQueue.main.async { [self] in
+            let loaderView = EnableLoader()
+            
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
+                Task{
+                    await withTaskGroup(of: Void.self) { group in
+                        group.addTask {
+                            await self.getDataUserTable()
+                        }
+                        group.addTask {
+                            await self.getValuteExchange()
+                        }
+                        group.addTask {
+                            await self.getTableWallet()
+                        }
+                        group.addTask {
+                            self.modelStartMain.dataBitExchange = await API_VALUTE.getBitcoinTable()
+                        }
                     }
                 }
             }
+            DisableLoader(loader: loaderView)
         }
-        
-        DisableLoader(loader: loaderView)
         var count = 0
         
         Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [self] (_) in

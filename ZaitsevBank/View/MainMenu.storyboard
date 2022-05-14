@@ -1371,7 +1371,7 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Оплатить по QR коду" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQz-9P-Sr0">
-                                                            <rect key="frame" x="45" y="14" width="287" height="21.5"/>
+                                                            <rect key="frame" x="45" y="15" width="287" height="22"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -1387,8 +1387,8 @@
                                                         </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="Ivl-hJ-b7L" firstAttribute="top" secondItem="TQz-9P-Sr0" secondAttribute="bottom" constant="13.5" id="2WS-Kt-1jw"/>
-                                                        <constraint firstItem="TQz-9P-Sr0" firstAttribute="top" secondItem="Oco-15-ams" secondAttribute="topMargin" constant="3" id="55U-3f-PIc"/>
+                                                        <constraint firstItem="Ivl-hJ-b7L" firstAttribute="top" secondItem="TQz-9P-Sr0" secondAttribute="bottom" constant="12" id="2WS-Kt-1jw"/>
+                                                        <constraint firstItem="TQz-9P-Sr0" firstAttribute="top" secondItem="Oco-15-ams" secondAttribute="topMargin" constant="4" id="55U-3f-PIc"/>
                                                         <constraint firstItem="Ivl-hJ-b7L" firstAttribute="leading" secondItem="06i-97-PTt" secondAttribute="trailing" constant="12" id="Bcj-Gl-6mx"/>
                                                         <constraint firstItem="06i-97-PTt" firstAttribute="leading" secondItem="Oco-15-ams" secondAttribute="leading" id="C9U-PU-voS"/>
                                                         <constraint firstItem="TQz-9P-Sr0" firstAttribute="leading" secondItem="06i-97-PTt" secondAttribute="trailing" constant="10" id="DcP-7F-dd2"/>

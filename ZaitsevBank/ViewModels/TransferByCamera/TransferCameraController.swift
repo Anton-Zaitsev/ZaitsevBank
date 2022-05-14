@@ -83,6 +83,12 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
         PayCardID = card.transactionID
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false;
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = .black
@@ -100,8 +106,9 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
         TextFieldSumm.attributedPlaceholder =
         NSAttributedString(string: "Сумма зачисления", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         
-        ImageExpence.image = UIImage(named: "")
-        NameCard.text = "Отсканируйте карту клиента нажав на надпись"
+        TextFieldSumm.isEnabled = false // Блокируем сумму зачисления
+        ImageExpence.image = UIImage(systemName: "wand.and.rays")
+        NameCard.text = "Отсканируйте карту клиента"
         CountLabel.text = ""
         NumberCard.text = ""
         
@@ -134,40 +141,10 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
         }
     }
     
-    private func ConvertToDouble(Text: String) -> (Double,String)? {
-        
-        let formatText = String(Text.compactMap({ $0.isWhitespace ? nil : $0 })).replacingOccurrences(of:  ",", with: ".")
-        if let summToInt = Int(formatText){
-            let summToIntToDouble = Double(summToInt)
-            if (summToIntToDouble.maxNumber(CountMax: ValuteZaitsevBank.init(rawValue: ValutePay!)!.CountMaxDouble)){
-                
-                let fmt = NumberFormatter()
-                fmt.numberStyle = .decimal
-                fmt.locale = Locale(identifier: "fr_FR")
-                return (summToIntToDouble, fmt.string(for: summToInt)! )
-            }
-            else {
-                return nil
-            }
-        }
-        else {
-            if let summ = Double (formatText) {
-                if (summ.maxNumber(CountMax: ValuteZaitsevBank.init(rawValue: ValutePay!)!.CountMaxDouble)){
-                    return (summ,formatText.replacingOccurrences(of:  ".", with: ","))
-                }
-                else {
-                    return nil
-                }
-            }
-            else {
-                return nil
-            }
-        }
-    }
     @IBAction func TransferContinue(_ sender: Any) {
         if let cardRecipient = FilterCardID {
             if let cardSender = PayCardID {
-                if let summ = Double(TextFieldSumm.text ?? "") {
+                if let summ = Double((TextFieldSumm.text ?? "").replacingOccurrences(of: ",", with: ".")) {
                 let loaderView = EnableLoader()
                 DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                     Task{
@@ -176,7 +153,12 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
                             DispatchQueue.main.async { [self] in
                                 if (succ){
                                     DisableLoader(loader: loaderView)
-                                    showAlert(withTitle: "Успешно", withMessage: "Перевод успешно отправлен")
+                                    
+                                    let transactionTemplate = storyboard?.instantiateViewController(withIdentifier: "TransactionTemplate") as! TransactionTemplateController
+                                    transactionTemplate.operationName = "Перевод доставлен"
+                                    transactionTemplate.operationTitle = "\(TextFieldSumm.text!) \(ValuteZaitsevBank.init(rawValue: ValutePay!)!.description)"
+                                    transactionTemplate.operationSubTitle = NameClient.text!
+                                    navigationController?.pushViewController(transactionTemplate, animated: true)
                                 }
                                 else {
                                     DisableLoader(loader: loaderView)
@@ -188,7 +170,7 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
                 }
                 else {
                     showAlert(withTitle: "Произошла ошибка", withMessage: "Вы ввели не верную сумму для перевода")
-                    }
+                }
             }
             else{
                 showAlert(withTitle: "Произошла ошибка", withMessage: "Выберите карту из доступных вам")
@@ -204,33 +186,32 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
     }
     
     @IBAction func SummEditing(_ sender: Any) {
-        if let valutePay = ValutePay {
-            if let valuteClient = ValuteClient{
-                if (valutePay == ValuteClient) {return}
-                if let (valute, textValute) = ConvertToDouble(Text: TextFieldSumm.text ?? ""){
-                    TextFieldSumm.textColor = .black
-                    TextFieldSumm.text = textValute
-                    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
-                        Task{
-                            if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: valutePay, ValuteB: valuteClient, BuySale: true,valute) {
-                                
-                                let (valuteA,valuteB) : (String,String) = (ValuteZaitsevBank.init(rawValue: valutePay)?.SaleValuteSubtitle(currentCurse: valuteConvert, count: count, ValuteB: valuteClient))!
-                                
-                                DispatchQueue.main.async { [self] in
-                                    TransferView.isHidden = false
-                                    ValuteA.text = valuteA
-                                    ValuteB.text = valuteB
-                                }
+        if (ValutePay != nil && ValuteClient != nil){
+            if (ValutePay == ValuteClient) {
+                TransferView.isHidden = true
+                return}
+            if let (valute, textValute) = (TextFieldSumm.text ?? "").convertToDouble(valutePay: ValutePay!){
+                TextFieldSumm.textColor = .black
+                TextFieldSumm.text = textValute
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
+                    Task{
+                        if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: ValutePay!, ValuteB: ValuteClient!, BuySale: true,valute) {
+                            
+                            let (valuteA,valuteB) : (String,String) = (ValuteZaitsevBank.init(rawValue: ValutePay!)?.SaleValuteSubtitle(currentCurse: valuteConvert, count: count, ValuteB: ValuteClient!))!
+                            
+                            DispatchQueue.main.async { [self] in
+                                TransferView.isHidden = false
+                                ValuteA.text = valuteA
+                                ValuteB.text = valuteB
                             }
                         }
                     }
                 }
-                else {
-                    TextFieldSumm.textColor = .red
-                }
+            }
+            else {
+                TextFieldSumm.textColor = .red
             }
         }
-        
     }
 }
 
@@ -267,7 +248,7 @@ extension TransferCameraController: CreditCardScannerViewControllerDelegate {
                     FilterCardID = cardSearch.TransactionCard
                     
                     DispatchQueue.main.async { [self] in
-                        TextFieldSumm.becomeFirstResponder()
+                        TextFieldSumm.isEnabled = true // Разблокируем при удачном случае
                         SummLabel.text = ValuteClient == ValutePay ? "Сумма в \(ValutePay!)" : "Сумма в \(ValutePay!) с переводом в \(ValuteClient!)"
                         TextNumberPhone.text = cardSearch.PhoneNumber
                         NameClient.text = cardSearch.NameUser
@@ -277,11 +258,13 @@ extension TransferCameraController: CreditCardScannerViewControllerDelegate {
                         if (cardSearch.IdeticalValute == false){
                             showAlert(withTitle: "Предупреждение!", withMessage: "У \(cardSearch.NameUser) разная валюта с вашими счетами")
                         }
+                        TextFieldSumm.becomeFirstResponder()
                         DisableLoader(loader: loader)
                     }
                 }
                 else {
                     DispatchQueue.main.async { [self] in
+                        TextFieldSumm.isEnabled = false // Блокируем сумму зачисления
                         NameCard.text = "Выбере карту для перевода"
                         DisableLoader(loader: loader)
                         showAlert(withTitle: "Произошла ошибка", withMessage: cardManager.Error)

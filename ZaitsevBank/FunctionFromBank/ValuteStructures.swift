@@ -84,8 +84,9 @@ public enum ValuteZaitsevBank : String {
         }
     }
     func SaleValuteTitle(buySale: Bool, currentCurse: Double,count: Double,ValuteB: String) -> String {
-        let CurrentCurse = currentCurse.valuteToCurseFormat()
-        let Count = count.valuteToCurseFormat()
+        let CurrentCurse = self.electronValute ? currentCurse.valuteToCurseFormat() : currentCurse.valuteToTableFormat()
+        let Count = ValuteZaitsevBank.init(rawValue: ValuteB)!.electronValute ? count.valuteToCurseFormat() : count.valuteToTableFormat()
+        
         let valuteDescription = ValuteZaitsevBank.init(rawValue: ValuteB)!.description
         switch self {
         case .EUR : return
@@ -101,8 +102,9 @@ public enum ValuteZaitsevBank : String {
         }
     }
     func SaleValuteSubtitle(currentCurse: Double,count: Double,ValuteB: String) -> (String,String) {
-        let CurrentCurse = currentCurse.valuteToCurseFormat()
-        let Count = count.valuteToCurseFormat()
+        let CurrentCurse = self.electronValute ? currentCurse.valuteToCurseFormat() : currentCurse.valuteToTableFormat()
+        let Count = ValuteZaitsevBank.init(rawValue: ValuteB)!.electronValute ? count.valuteToCurseFormat() : count.valuteToTableFormat()
+        
         let valuteDescription = ValuteZaitsevBank.init(rawValue: ValuteB)!.description
         switch self {
         case .EUR : return ("\(CurrentCurse) \(valuteDescription)", "\(Count) €")

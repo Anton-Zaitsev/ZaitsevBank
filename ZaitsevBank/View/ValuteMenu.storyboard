@@ -695,7 +695,7 @@
                                         <rect key="frame" x="0.0" y="240" width="414" height="60"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Сумма зачисления" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o7x-Gr-eDN">
-                                                <rect key="frame" x="64" y="0.0" width="330" height="44"/>
+                                                <rect key="frame" x="60" y="0.0" width="334" height="44"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
@@ -705,17 +705,17 @@
                                                 </connections>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ekT-mL-zTG">
-                                                <rect key="frame" x="64" y="51" width="330" height="2"/>
+                                                <rect key="frame" x="60" y="51" width="334" height="2"/>
                                                 <color key="backgroundColor" red="0.1215686275" green="0.1333333333" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="JZn-0J-2ZN"/>
                                                 </constraints>
                                             </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banknote.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1U8-7B-YNm">
-                                                <rect key="frame" x="8" y="11" width="44" height="44"/>
+                                                <rect key="frame" x="8" y="22" width="40" height="36"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="IPy-qd-lyL"/>
-                                                    <constraint firstAttribute="width" secondItem="1U8-7B-YNm" secondAttribute="height" multiplier="1:1" constant="-4" id="btS-jh-3nl"/>
+                                                    <constraint firstAttribute="height" constant="40" id="CQO-1t-vIM"/>
+                                                    <constraint firstAttribute="width" secondItem="1U8-7B-YNm" secondAttribute="height" multiplier="1:1" id="PS9-IM-802"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
@@ -731,7 +731,7 @@
                                             <constraint firstAttribute="trailing" secondItem="o7x-Gr-eDN" secondAttribute="trailing" constant="20" id="c9P-56-NM0"/>
                                             <constraint firstAttribute="bottom" secondItem="ekT-mL-zTG" secondAttribute="bottom" constant="7" id="dbc-dV-TLJ"/>
                                             <constraint firstItem="o7x-Gr-eDN" firstAttribute="leading" secondItem="1U8-7B-YNm" secondAttribute="trailing" constant="12" id="fow-Nu-ozZ"/>
-                                            <constraint firstItem="1U8-7B-YNm" firstAttribute="top" secondItem="5tA-e9-l7x" secondAttribute="top" constant="9" id="gGU-pT-HoY"/>
+                                            <constraint firstAttribute="bottom" secondItem="1U8-7B-YNm" secondAttribute="bottom" id="peJ-ed-Yel"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sn0-n0-c7C">

@@ -36,6 +36,11 @@
 		3A3AE94E271278A3001FF068 /* StartMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3AE94D271278A3001FF068 /* StartMainController.swift */; };
 		3A3FAEFE282945F100A8DE39 /* TransactionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3FAEFD282945F100A8DE39 /* TransactionManager.swift */; };
 		3A3FAF01282953C600A8DE39 /* TransactionTemplateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3FAF00282953C600A8DE39 /* TransactionTemplateController.swift */; };
+		3A3FAF0428297CD700A8DE39 /* TransactionTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3FAF0328297CD700A8DE39 /* TransactionTemplates.swift */; };
+		3A3FAF0628297FF200A8DE39 /* TransactionTemplateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3FAF0528297FF200A8DE39 /* TransactionTemplateCell.swift */; };
+		3A3FAF082829841000A8DE39 /* ZaitsevPay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A3FAF072829841000A8DE39 /* ZaitsevPay.mp3 */; };
+		3A3FAF0A28298D4300A8DE39 /* MorgenTest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A3FAF0928298D4200A8DE39 /* MorgenTest.mp3 */; };
+		3A3FAF0D282A95BD00A8DE39 /* TransferBetweenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3FAF0C282A95BD00A8DE39 /* TransferBetweenController.swift */; };
 		3A49B5102755591300ECC979 /* FullCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49B50F2755591300ECC979 /* FullCardController.swift */; };
 		3A49B5142755701F00ECC979 /* FullCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49B5132755701F00ECC979 /* FullCardCell.swift */; };
 		3A5851B62816D3D000A7D0F7 /* CameraPermission in Frameworks */ = {isa = PBXBuildFile; productRef = 3A5851B52816D3D000A7D0F7 /* CameraPermission */; };
@@ -124,6 +129,11 @@
 		3A3AE94D271278A3001FF068 /* StartMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMainController.swift; sourceTree = "<group>"; };
 		3A3FAEFD282945F100A8DE39 /* TransactionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionManager.swift; sourceTree = "<group>"; };
 		3A3FAF00282953C600A8DE39 /* TransactionTemplateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplateController.swift; sourceTree = "<group>"; };
+		3A3FAF0328297CD700A8DE39 /* TransactionTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplates.swift; sourceTree = "<group>"; };
+		3A3FAF0528297FF200A8DE39 /* TransactionTemplateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTemplateCell.swift; sourceTree = "<group>"; };
+		3A3FAF072829841000A8DE39 /* ZaitsevPay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ZaitsevPay.mp3; sourceTree = "<group>"; };
+		3A3FAF0928298D4200A8DE39 /* MorgenTest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MorgenTest.mp3; sourceTree = "<group>"; };
+		3A3FAF0C282A95BD00A8DE39 /* TransferBetweenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferBetweenController.swift; sourceTree = "<group>"; };
 		3A49B50F2755591300ECC979 /* FullCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardController.swift; sourceTree = "<group>"; };
 		3A49B5132755701F00ECC979 /* FullCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCardCell.swift; sourceTree = "<group>"; };
 		3A5851A22816A60700A7D0F7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -234,6 +244,7 @@
 		3A0FC966270A52F400B6B2F6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3A3FAF0228297CB600A8DE39 /* TransactionTemplates */,
 				3A6B52E22813835600C1D741 /* Payments */,
 				3A304894271399D60010A739 /* MainMenu */,
 				3A0FC96F270A544D00B6B2F6 /* LoginForm */,
@@ -244,9 +255,10 @@
 		3A0FC967270A530200B6B2F6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3A12C8782815C15000EE1CC2 /* TransferByCamera */,
+				3A3FAF0B282A957000A8DE39 /* TransferBetween */,
 				3A3FAEFF2829537000A8DE39 /* TransactionTemplate */,
 				3A74D85828182439004047B9 /* CardChoise */,
-				3A12C8782815C15000EE1CC2 /* TransferByCamera */,
 				3A49B50E275558C100ECC979 /* FullCardViewer */,
 				3A2BCAF42743E30A00189086 /* FullValute */,
 				3A9939192738B04A009B1B06 /* AddNewCard */,
@@ -351,8 +363,25 @@
 			isa = PBXGroup;
 			children = (
 				3A3FAF00282953C600A8DE39 /* TransactionTemplateController.swift */,
+				3A3FAF0528297FF200A8DE39 /* TransactionTemplateCell.swift */,
 			);
 			path = TransactionTemplate;
+			sourceTree = "<group>";
+		};
+		3A3FAF0228297CB600A8DE39 /* TransactionTemplates */ = {
+			isa = PBXGroup;
+			children = (
+				3A3FAF0328297CD700A8DE39 /* TransactionTemplates.swift */,
+			);
+			path = TransactionTemplates;
+			sourceTree = "<group>";
+		};
+		3A3FAF0B282A957000A8DE39 /* TransferBetween */ = {
+			isa = PBXGroup;
+			children = (
+				3A3FAF0C282A95BD00A8DE39 /* TransferBetweenController.swift */,
+			);
+			path = TransferBetween;
 			sourceTree = "<group>";
 		};
 		3A49B50E275558C100ECC979 /* FullCardViewer */ = {
@@ -436,6 +465,8 @@
 				3AF5D72927E69E0C0095A4DC /* CreditScanner */,
 				3AB8F1072743E8D000469C94 /* Charts */,
 				3A3AE94A271276FA001FF068 /* Loading.gif */,
+				3A3FAF0928298D4200A8DE39 /* MorgenTest.mp3 */,
+				3A3FAF072829841000A8DE39 /* ZaitsevPay.mp3 */,
 				3AB86B88270CADC6008D0823 /* Extension.swift */,
 				3AD95366271DC7AB0081D50A /* LocalPassword.xib */,
 				3AD95368271DC7DA0081D50A /* LocalPassword.swift */,
@@ -570,9 +601,11 @@
 				3A3700D427530DC700387894 /* CardViewer.storyboard in Resources */,
 				3A07798F27122CF30026BCAD /* MainMenu.storyboard in Resources */,
 				3AD95367271DC7AB0081D50A /* LocalPassword.xib in Resources */,
+				3A3FAF0A28298D4300A8DE39 /* MorgenTest.mp3 in Resources */,
 				3A0FC971270A546600B6B2F6 /* LoginForm.storyboard in Resources */,
 				3A12C8752815A0B900EE1CC2 /* TransferMenu.storyboard in Resources */,
 				3A21F5F82743CF9200D7E0CD /* ValuteMenu.storyboard in Resources */,
+				3A3FAF082829841000A8DE39 /* ZaitsevPay.mp3 in Resources */,
 				3A3AE94B271276FA001FF068 /* Loading.gif in Resources */,
 				3A0FC95F270A52BA00B6B2F6 /* LaunchScreen.storyboard in Resources */,
 				3A0FC95C270A52BA00B6B2F6 /* Assets.xcassets in Resources */,
@@ -604,6 +637,7 @@
 				3A8D79A2273B1CB500B6EA98 /* ParametrsAddCardViewController.swift in Sources */,
 				3AC468522823D8F8005540FC /* CardSearch.swift in Sources */,
 				3A0FC950270A52B600B6B2F6 /* AppDelegate.swift in Sources */,
+				3A3FAF0628297FF200A8DE39 /* TransactionTemplateCell.swift in Sources */,
 				3AB8F10D2743E8F600469C94 /* Chart.swift in Sources */,
 				3AA907722749990100C7581D /* CardPickController.swift in Sources */,
 				3A74D85A2818244A004047B9 /* CardChoiceController.swift in Sources */,
@@ -630,9 +664,11 @@
 				3A12C8772815A60200EE1CC2 /* OperationPayments.swift in Sources */,
 				3AB8F10B2743E8F600469C94 /* ChartSeries.swift in Sources */,
 				3A0787FB2778854500F678DD /* API_VALUTE_FULL.swift in Sources */,
+				3A3FAF0D282A95BD00A8DE39 /* TransferBetweenController.swift in Sources */,
 				3AABE0AD28025CD200EB3623 /* CardsManager.swift in Sources */,
 				3AB86B8D270D0A84008D0823 /* FirstRegController.swift in Sources */,
 				3A49B5102755591300ECC979 /* FullCardController.swift in Sources */,
+				3A3FAF0428297CD700A8DE39 /* TransactionTemplates.swift in Sources */,
 				3A9C9B772739C82B009A2D4C /* CardAdd.swift in Sources */,
 				3A0FC95A270A52B700B6B2F6 /* ZaitsevBank.xcdatamodeld in Sources */,
 				3A6B52E628141F3E00C1D741 /* HistoryOperationPayments.swift in Sources */,

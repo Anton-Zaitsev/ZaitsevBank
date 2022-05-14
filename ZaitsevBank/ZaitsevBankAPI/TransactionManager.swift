@@ -17,7 +17,7 @@ public class TransactionManager {
             request = ClienZaitsevBankAPI.getRequestTransferClient(TransactionSender: TransactionSender, TransactionRecipient: TransactionRecipient, summ: String(summintVal))
         }
         else {
-            let summString = String(summ).replacingOccurrences(of: ",", with: ".")
+            let summString = String(summ).replacingOccurrences(of: ".", with: ",")
             request = ClienZaitsevBankAPI.getRequestTransferClient(TransactionSender: TransactionSender, TransactionRecipient: TransactionRecipient, summ: summString)
         }
         
