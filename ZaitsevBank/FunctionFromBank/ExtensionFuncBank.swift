@@ -7,6 +7,12 @@
 
 import Foundation
 
+
+extension StringProtocol {
+    var firstUppercased: String { prefix(1).uppercased() + dropFirst() }
+    var firstCapitalized: String { prefix(1).capitalized + dropFirst() }
+}
+
 public extension Int {
 
     init?(doubleVal: Double) {
@@ -51,6 +57,7 @@ public extension Double {
 }
 
 public extension String {
+        
     func convertToDouble(valutePay: String) -> (Double,String)? {
         let formatText = String(self.compactMap({ $0.isWhitespace ? nil : $0 })).replacingOccurrences(of:  ",", with: ".")
         
@@ -104,21 +111,78 @@ public extension String {
         var result = ""
         var index = numbers.startIndex // numbers iterator
 
-        // iterate over the mask characters until the iterator of numbers ends
         for ch in mask where index < numbers.endIndex {
             if ch == "X" {
-                // mask requires a number in this place, so take the next one
                 result.append(numbers[index])
-
-                // move numbers iterator to the next index
                 index = numbers.index(after: index)
 
             } else {
-                result.append(ch) // just append a mask character
+                result.append(ch)
             }
         }
         return result
     }
+    
+    func formatPhoneTextField() -> String { 
+        let cleanPhoneNumber = self.replacingOccurrences(of: "+7", with: "").components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        let mask = "+7 (###) ###-##-##"
+         var result = ""
+         var index = cleanPhoneNumber.startIndex
+        for ch in mask where index < cleanPhoneNumber.endIndex {
+             if ch == "#" {
+                 result.append(cleanPhoneNumber[index])
+                 index = cleanPhoneNumber.index(after: index)
+             } else {
+                 result.append(ch)
+             }
+         }
+         return result
+        
+    }
+    
+    func formatCardTextField() -> String {
+        let cleanPhoneNumber = self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        let mask = "#### #### #### ####"
+         var result = ""
+         var index = cleanPhoneNumber.startIndex
+        for ch in mask where index < cleanPhoneNumber.endIndex {
+             if ch == "#" {
+                 result.append(cleanPhoneNumber[index])
+                 index = cleanPhoneNumber.index(after: index)
+             } else {
+                 result.append(ch)
+             }
+         }
+         return result
+        
+    }
+    
+    func formatPhone() -> String {
+        
+        var phoneReplaced = String(self.compactMap({ $0.isWhitespace ? nil : $0 })).replacingOccurrences(of:  "(", with: "").replacingOccurrences(of:  ")", with: "").replacingOccurrences(of:  "-", with: "").replacingOccurrences(of:  "+", with: "")
+        
+        if (phoneReplaced.count > 10){ // На тот случай, если это номер с индефикатором страны, else будет выполняться почти всегда
+            phoneReplaced.removeFirst()
+        }
+        phoneReplaced = "7" + phoneReplaced
+        
+        let mask = "+X (XXX) XXX-XX-XX"
+        let numbers = phoneReplaced.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        var result = ""
+        var index = numbers.startIndex // numbers iterator
+
+        for ch in mask where index < numbers.endIndex {
+            if ch == "X" {
+                result.append(numbers[index])
+                index = numbers.index(after: index)
+
+            } else {
+                result.append(ch)
+            }
+        }
+        return result
+    }
+    
     func searchOperatorCard() -> String {
         let symbol = Int(self)
         switch symbol{

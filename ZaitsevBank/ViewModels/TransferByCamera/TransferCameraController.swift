@@ -41,6 +41,8 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
     
     @IBOutlet weak var ViewCard: UIView!
     
+    public var  SearchCard : (CardSearch,Cards)?
+    
     private var ValutePay: String?
     private var ValuteClient: String?
     private let cardsManager = CardsManager()
@@ -75,14 +77,6 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
     
     @IBOutlet weak var ValuteB: UILabel!
     
-    private func configuratedExpence (card: Cards)  {
-        ImageExpence.image = UIImage(named: card.typeImageCard)
-        NameCard.text = card.nameCard
-        CountLabel.text = "\(card.moneyCount) \(card.typeMoney)"
-        NumberCard.text = card.numberCard
-        PayCardID = card.transactionID
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = false;
@@ -116,12 +110,17 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
         ViewCard.isUserInteractionEnabled = true
         ViewCard.addGestureRecognizer(tapOffs)
         
-        let storyboard = UIStoryboard(name: "CardViewer", bundle: nil)
-        let storyboardInstance = storyboard.instantiateViewController(withIdentifier: "CreditScanner") as! CardScannerController
-        storyboardInstance.delegate = self
-        storyboardInstance.modalPresentationStyle = .fullScreen
-        
-        present(storyboardInstance, animated: false, completion: nil)
+        if let searchCard = SearchCard {
+            configuratedSearchCard(cardData: searchCard)
+        }
+        else {
+            let storyboard = UIStoryboard(name: "CardViewer", bundle: nil)
+            let storyboardInstance = storyboard.instantiateViewController(withIdentifier: "CreditScanner") as! CardScannerController
+            storyboardInstance.delegate = self
+            storyboardInstance.modalPresentationStyle = .fullScreen
+            
+            present(storyboardInstance, animated: false, completion: nil)
+        }
     }
     
     @objc private func СhoiceCard(sender: UITapGestureRecognizer) {
@@ -186,6 +185,39 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
     }
     
     @IBAction func SummEditing(_ sender: Any) {
+        ConvertedValuteCheck()
+    }
+    
+    private func configuratedExpence (card: Cards)  {
+        ImageExpence.image = UIImage(named: card.typeImageCard)
+        NameCard.text = card.nameCard
+        CountLabel.text = "\(card.moneyCount) \(card.typeMoney)"
+        NumberCard.text = card.numberCard
+        PayCardID = card.transactionID
+        ValutePay = card.typeMoneyExtended
+        SummLabel.text = ValuteClient == ValutePay ? "Сумма в \(ValutePay!)" : "Сумма в \(ValutePay!) с переводом в \(ValuteClient!)"
+        ConvertedValuteCheck()
+    }
+    
+    private func configuratedSearchCard(cardData: (CardSearch,Cards)) {
+        let (cardSearch,cardConverted) = cardData
+
+        ValuteClient = cardSearch.ValuteReceiver
+        FilterCardID = cardSearch.TransactionCard
+        
+        configuratedExpence(card: cardConverted)
+        
+        TextFieldSumm.isEnabled = true // Разблокируем при удачном случае
+        TextNumberPhone.text = cardSearch.PhoneNumber
+        NameClient.text = cardSearch.NameUser
+        ImageClient.text = String(cardSearch.NameUser.first ?? "?")
+        ImageClient.isHidden = false
+        if (cardSearch.IdeticalValute == false){
+            showAlert(withTitle: "Предупреждение!", withMessage: "У \(cardSearch.NameUser) разная валюта с вашими счетами")
+        }
+        TextFieldSumm.becomeFirstResponder()
+    }
+    private func ConvertedValuteCheck() {
         if (ValutePay != nil && ValuteClient != nil){
             if (ValutePay == ValuteClient) {
                 TransferView.isHidden = true
@@ -215,7 +247,12 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
     }
 }
 
-
+extension TransferCameraController: UITextFieldDelegate{
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        TextFieldSumm.resignFirstResponder()
+        return true;
+    }
+}
 extension TransferCameraController: CreditCardScannerViewControllerDelegate {
     func creditCardScannerViewControllerDidCancel(_ viewController: CardScannerController) {
         viewController.dismiss(animated: true, completion: nil)
@@ -229,36 +266,13 @@ extension TransferCameraController: CreditCardScannerViewControllerDelegate {
     func creditCardScannerViewController(_ viewController: CardScannerController, didFinishWith card: CreditCard) {
         viewController.dismiss(animated: true, completion: nil)
         
-        /*
-        var dateComponents = card.expireDate
-        dateComponents?.calendar = Calendar.current
-        let dateFormater = DateFormatter()
-        dateFormater.dateStyle = .short
-        let date = dateComponents?.date.flatMap(dateFormater.string)
-        */
-        
         let loader = EnableLoader()
         DispatchQueue.global(qos: .utility).async{ [self] in
             Task(priority: .high) {
                 let cardManager = CardsManager()
-                if let (cardSearch,cardConverted) = await cardManager.GetCardFromNumberCard(numberCard: card.number){
-                    
-                    ValuteClient = cardSearch.ValuteReceiver
-                    ValutePay = cardConverted.typeMoneyExtended
-                    FilterCardID = cardSearch.TransactionCard
-                    
+                if let cardSearch = await cardManager.GetCardFromNumberCard(numberCard: card.number){
                     DispatchQueue.main.async { [self] in
-                        TextFieldSumm.isEnabled = true // Разблокируем при удачном случае
-                        SummLabel.text = ValuteClient == ValutePay ? "Сумма в \(ValutePay!)" : "Сумма в \(ValutePay!) с переводом в \(ValuteClient!)"
-                        TextNumberPhone.text = cardSearch.PhoneNumber
-                        NameClient.text = cardSearch.NameUser
-                        ImageClient.text = String(cardSearch.NameUser.first ?? "?")
-                        ImageClient.isHidden = false
-                        configuratedExpence(card: cardConverted)
-                        if (cardSearch.IdeticalValute == false){
-                            showAlert(withTitle: "Предупреждение!", withMessage: "У \(cardSearch.NameUser) разная валюта с вашими счетами")
-                        }
-                        TextFieldSumm.becomeFirstResponder()
+                        configuratedSearchCard(cardData: cardSearch)
                         DisableLoader(loader: loader)
                     }
                 }
@@ -273,18 +287,19 @@ extension TransferCameraController: CreditCardScannerViewControllerDelegate {
                 
             }
         }
+        
+        
         /*
+        var dateComponents = card.expireDate
+        dateComponents?.calendar = Calendar.current
+        let dateFormater = DateFormatter()
+        dateFormater.dateStyle = .short
+        let date = dateComponents?.date.flatMap(dateFormater.string)
         let text = [card.number, date, card.name]
             .compactMap { $0 }
             .joined(separator: "\n")
         
         print("\(text)")
          */
-    }
-}
-extension TransferCameraController: UITextFieldDelegate{
-    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        TextFieldSumm.resignFirstResponder()
-        return true;
     }
 }

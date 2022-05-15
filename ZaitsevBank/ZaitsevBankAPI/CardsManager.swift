@@ -253,11 +253,17 @@ public class CardsManager {
         
     }
     
-    public func GetCardFromPhone(Phone: String) async -> CardSearch? {
+    public func GetCardFromPhone(Phone: String) async -> (CardSearch,Cards)? {
         if (UserDefaults.standard.checkUserID()) {
             
             let userID = UserDefaults.standard.isUserID()
-            let request = ClienZaitsevBankAPI.getRequestGetCardFromPhone(Phone: Phone, userID: userID)
+            
+            var currentPhone = String(Phone.compactMap({ $0.isWhitespace ? nil : $0 })).replacingOccurrences(of:  "(", with: "").replacingOccurrences(of:  ")", with: "").replacingOccurrences(of:  "-", with: "").replacingOccurrences(of:  "+", with: "")
+            
+            currentPhone.removeFirst()
+            currentPhone = "8" + currentPhone
+
+            let request = ClienZaitsevBankAPI.getRequestGetCardFromPhone(Phone: currentPhone, userID: userID)
             do {
                 let (cardSearch,responce) = try await URLSession.shared.data(for: request)
                 if let code = (responce as? HTTPURLResponse)?.statusCode {
@@ -267,7 +273,12 @@ public class CardsManager {
                         case .OK :
                             if let jsonData = decryptJSON(userID,data: cardSearch) {
                                 let card = try JSONDecoder().decode(CardSearch.self, from: jsonData)
-                                return card
+                                if let convertedCard = convertedCardDB_CardZaitsevBank(card.CardFirst){
+                                    return (card,convertedCard)
+                                }
+                                else {
+                                    return nil
+                                }
                             }
                             else {
                                 return nil

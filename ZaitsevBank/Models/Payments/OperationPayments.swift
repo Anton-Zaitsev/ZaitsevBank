@@ -25,6 +25,20 @@ public enum OperationPayments {
     func OperationPerform(_ controller : PaymentsController) {
         switch self {
         case .toClientZaitsevBank:
+            Permission.contacts.request {
+                if (Permission.contacts.authorized){
+                    controller.navigationController?.isNavigationBarHidden = false
+                    let storyboard = UIStoryboard(name: "TransferMenu", bundle: nil)
+                    let storyboardInstance = storyboard.instantiateViewController(withIdentifier: "TransferZaitsevClient") as! TransferZaitsevClientController
+                    controller.navigationController?.pushViewController(storyboardInstance, animated: true)
+                }
+                else {
+                    let controllerPermission = PermissionsKit.dialog([.contacts])
+                    controllerPermission.dataSource = controller
+                    controllerPermission.delegate = controller
+                    controllerPermission.present(on: controller)
+                }
+            }
             break
         case .betweenYour:
             controller.navigationController?.isNavigationBarHidden = false
@@ -33,7 +47,6 @@ public enum OperationPayments {
             controller.navigationController?.pushViewController(storyboardInstance, animated: true)
             break
         case .transferFromCamera:
-            
             Permission.camera.request {
                 
                 if (Permission.camera.authorized){
@@ -49,7 +62,6 @@ public enum OperationPayments {
                     controllerPermission.present(on: controller)
                 }
             }
-   
         case .makeCredit:
             break
         case .paymentQR:

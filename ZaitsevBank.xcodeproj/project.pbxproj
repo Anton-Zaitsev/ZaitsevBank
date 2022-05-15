@@ -28,6 +28,8 @@
 		3A21F5F82743CF9200D7E0CD /* ValuteMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A21F5F72743CF9200D7E0CD /* ValuteMenu.storyboard */; };
 		3A2BCAF62743E34000189086 /* ExchangeRateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2BCAF52743E34000189086 /* ExchangeRateController.swift */; };
 		3A2CDE6C2710B022005F0CF4 /* LastRegController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2CDE6B2710B022005F0CF4 /* LastRegController.swift */; };
+		3A2EDDAE2830531B00F47577 /* TransferContactsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2EDDAD2830531B00F47577 /* TransferContactsModel.swift */; };
+		3A2EDDB12830542B00F47577 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2EDDB02830542B00F47577 /* ContactCell.swift */; };
 		3A30489727139A010010A739 /* StartMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30489627139A010010A739 /* StartMenu.swift */; };
 		3A30489A27139BAD0010A739 /* SafeLocalPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30489927139BAD0010A739 /* SafeLocalPassword.swift */; };
 		3A36DAF427417F5000F9CE9C /* CardGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A36DAF327417F5000F9CE9C /* CardGenerator.swift */; };
@@ -59,6 +61,7 @@
 		3A835FD327320CD9000310EC /* ExchangeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A835FD227320CD9000310EC /* ExchangeViewCell.swift */; };
 		3A85DED52713DF010059B5CB /* SettingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85DED42713DF010059B5CB /* SettingApp.swift */; };
 		3A8D79A2273B1CB500B6EA98 /* ParametrsAddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D79A1273B1CB500B6EA98 /* ParametrsAddCardViewController.swift */; };
+		3A905B4C2830485900E92F65 /* TransferZaitsevClientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A905B4B2830485900E92F65 /* TransferZaitsevClientController.swift */; };
 		3A97F27E2744148500A40224 /* ChartValuteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A97F27D2744148500A40224 /* ChartValuteController.swift */; };
 		3A97F280274441AD00A40224 /* ExchangeRateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A97F27F274441AD00A40224 /* ExchangeRateCell.swift */; };
 		3A97F2822744477D00A40224 /* FullValuteMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A97F2812744477D00A40224 /* FullValuteMenu.swift */; };
@@ -121,6 +124,8 @@
 		3A21F5F72743CF9200D7E0CD /* ValuteMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ValuteMenu.storyboard; sourceTree = "<group>"; };
 		3A2BCAF52743E34000189086 /* ExchangeRateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateController.swift; sourceTree = "<group>"; };
 		3A2CDE6B2710B022005F0CF4 /* LastRegController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastRegController.swift; sourceTree = "<group>"; };
+		3A2EDDAD2830531B00F47577 /* TransferContactsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferContactsModel.swift; sourceTree = "<group>"; };
+		3A2EDDB02830542B00F47577 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		3A30489627139A010010A739 /* StartMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenu.swift; sourceTree = "<group>"; };
 		3A30489927139BAD0010A739 /* SafeLocalPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeLocalPassword.swift; sourceTree = "<group>"; };
 		3A36DAF327417F5000F9CE9C /* CardGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGenerator.swift; sourceTree = "<group>"; };
@@ -149,6 +154,7 @@
 		3A835FD227320CD9000310EC /* ExchangeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewCell.swift; sourceTree = "<group>"; };
 		3A85DED42713DF010059B5CB /* SettingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingApp.swift; sourceTree = "<group>"; };
 		3A8D79A1273B1CB500B6EA98 /* ParametrsAddCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametrsAddCardViewController.swift; sourceTree = "<group>"; };
+		3A905B4B2830485900E92F65 /* TransferZaitsevClientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferZaitsevClientController.swift; sourceTree = "<group>"; };
 		3A97F27D2744148500A40224 /* ChartValuteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartValuteController.swift; sourceTree = "<group>"; };
 		3A97F27F274441AD00A40224 /* ExchangeRateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateCell.swift; sourceTree = "<group>"; };
 		3A97F2812744477D00A40224 /* FullValuteMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullValuteMenu.swift; sourceTree = "<group>"; };
@@ -244,6 +250,7 @@
 		3A0FC966270A52F400B6B2F6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3A2EDDAB283052E800F47577 /* TransferContactsModel */,
 				3A3FAF0228297CB600A8DE39 /* TransactionTemplates */,
 				3A6B52E22813835600C1D741 /* Payments */,
 				3A304894271399D60010A739 /* MainMenu */,
@@ -255,6 +262,7 @@
 		3A0FC967270A530200B6B2F6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3A905B4A2830483600E92F65 /* TransferZaitsevClient */,
 				3A12C8782815C15000EE1CC2 /* TransferByCamera */,
 				3A3FAF0B282A957000A8DE39 /* TransferBetween */,
 				3A3FAEFF2829537000A8DE39 /* TransactionTemplate */,
@@ -318,6 +326,14 @@
 				3AA907712749990100C7581D /* CardPickController.swift */,
 			);
 			path = FullValute;
+			sourceTree = "<group>";
+		};
+		3A2EDDAB283052E800F47577 /* TransferContactsModel */ = {
+			isa = PBXGroup;
+			children = (
+				3A2EDDAD2830531B00F47577 /* TransferContactsModel.swift */,
+			);
+			path = TransferContactsModel;
 			sourceTree = "<group>";
 		};
 		3A304894271399D60010A739 /* MainMenu */ = {
@@ -446,6 +462,15 @@
 				3A835FD227320CD9000310EC /* ExchangeViewCell.swift */,
 			);
 			path = StartMain;
+			sourceTree = "<group>";
+		};
+		3A905B4A2830483600E92F65 /* TransferZaitsevClient */ = {
+			isa = PBXGroup;
+			children = (
+				3A905B4B2830485900E92F65 /* TransferZaitsevClientController.swift */,
+				3A2EDDB02830542B00F47577 /* ContactCell.swift */,
+			);
+			path = TransferZaitsevClient;
 			sourceTree = "<group>";
 		};
 		3A9939192738B04A009B1B06 /* AddNewCard */ = {
@@ -647,10 +672,12 @@
 				3AF5D73527E69E3C0095A4DC /* CreditCardScannerError.swift in Sources */,
 				3A0FC975270A54A000B6B2F6 /* LoginModel.swift in Sources */,
 				3A6D957C2751CAE90064B11F /* API_DinamicValute.swift in Sources */,
+				3A2EDDB12830542B00F47577 /* ContactCell.swift in Sources */,
 				3AE09EBA28020CB80016E1EF /* ClientZaitsevBankAPI.swift in Sources */,
 				3AE09EC328021C3A0016E1EF /* RequestResult.swift in Sources */,
 				3AF5D73927E6B9CC0095A4DC /* Regex.swift in Sources */,
 				3AD95369271DC7DA0081D50A /* LocalPassword.swift in Sources */,
+				3A905B4C2830485900E92F65 /* TransferZaitsevClientController.swift in Sources */,
 				3A9C9B792739DB0C009A2D4C /* PreferenceCardAddViewCell.swift in Sources */,
 				3A6B52E82814210300C1D741 /* TransferCell.swift in Sources */,
 				3A12C87A2815CCA600EE1CC2 /* TransferCameraController.swift in Sources */,
@@ -660,6 +687,7 @@
 				3AF977A92714EBD3006C1B87 /* Ecryption.swift in Sources */,
 				3A62E9F228061DAE00173BD8 /* MenuBuyPayValuteController.swift in Sources */,
 				3AB687EA272218B2002BD6EB /* NavigationTabBarMain.swift in Sources */,
+				3A2EDDAE2830531B00F47577 /* TransferContactsModel.swift in Sources */,
 				3AB687EC272220B6002BD6EB /* PaymentsController.swift in Sources */,
 				3A12C8772815A60200EE1CC2 /* OperationPayments.swift in Sources */,
 				3AB8F10B2743E8F600469C94 /* ChartSeries.swift in Sources */,
