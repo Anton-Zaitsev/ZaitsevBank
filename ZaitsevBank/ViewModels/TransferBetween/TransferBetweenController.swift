@@ -53,7 +53,7 @@ class TransferBetweenController: UIViewController,CardChoiseDelegate {
         
     }
     
-
+    
     
     @IBOutlet weak var ViewBuy: UIView!
     @IBOutlet weak var ImageBuy: UIImageView!
@@ -120,17 +120,17 @@ class TransferBetweenController: UIViewController,CardChoiseDelegate {
         super.viewDidLoad()
         TextFieldSumm.delegate = self
         setNavigationBar("Перевод между счетами")
-           
+        
         TextFieldSumm.attributedPlaceholder =
         NSAttributedString(string: "Сумма зачисления", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
-                
+        
         configuratedCardBuy()
         configuratedCardSale()
         
         TextFieldSumm.isEnabled = false // Отключаем textField
         CurrentСourse.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         let tapCardBuy = UITapGestureRecognizer(target: self, action: #selector(СhoiceCardBuy))
         ViewBuy.isUserInteractionEnabled = true
@@ -199,7 +199,7 @@ class TransferBetweenController: UIViewController,CardChoiseDelegate {
             }
         }
     }
-
+    
     @objc private func keyboardWillHide(notification: NSNotification) {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
@@ -210,22 +210,27 @@ class TransferBetweenController: UIViewController,CardChoiseDelegate {
             if (cardBuy?.typeMoneyExtended == cardSale?.typeMoneyExtended) {
                 CurrentСourse.isHidden = true
                 return}
-            if let (valute, textValute) = (TextFieldSumm.text ?? "").convertToDouble(valutePay: cardSale!.typeMoneyExtended){
-                TextFieldSumm.textColor = .white
-                TextFieldSumm.text = textValute
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
-                    Task{
-                        if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: cardBuy!.typeMoneyExtended, ValuteB: cardSale!.typeMoneyExtended, BuySale: true,valute) {
-                            
-                            let (valuteA,valuteB) : (String,String) = (ValuteZaitsevBank.init(rawValue: cardBuy!.typeMoneyExtended)?.SaleValuteSubtitle(currentCurse: valuteConvert, count: count, ValuteB: cardSale!.typeMoneyExtended))!
-                            
-                            DispatchQueue.main.async { [self] in
-                                CurrentСourse.isHidden = false
-                                ValuteA.text = valuteA
-                                ValuteB.text = valuteB
+            if ((TextFieldSumm.text ?? "").count <= 15){
+                if let (valute, textValute) = (TextFieldSumm.text ?? "").convertToDouble(valutePay: cardSale!.typeMoneyExtended){
+                    TextFieldSumm.textColor = .white
+                    TextFieldSumm.text = textValute
+                    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
+                        Task{
+                            if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: cardBuy!.typeMoneyExtended, ValuteB: cardSale!.typeMoneyExtended, BuySale: true,valute) {
+                                
+                                let (valuteA,valuteB) : (String,String) = (ValuteZaitsevBank.init(rawValue: cardBuy!.typeMoneyExtended)?.SaleValuteSubtitle(currentCurse: valuteConvert, count: count, ValuteB: cardSale!.typeMoneyExtended))!
+                                
+                                DispatchQueue.main.async { [self] in
+                                    CurrentСourse.isHidden = false
+                                    ValuteA.text = valuteA
+                                    ValuteB.text = valuteB
+                                }
                             }
                         }
                     }
+                }
+                else {
+                    TextFieldSumm.textColor = .red
                 }
             }
             else {
@@ -239,7 +244,7 @@ class TransferBetweenController: UIViewController,CardChoiseDelegate {
     @IBAction func TransferBetweenClick(_ sender: Any) {
         if (cardBuy != nil) {
             if (cardSale != nil){
-
+                
                 if let summ = (TextFieldSumm.text ?? "").convertDouble() {
                     
                     if (summ <= cardBuy!.moneyCount.convertDouble()!){
@@ -248,23 +253,23 @@ class TransferBetweenController: UIViewController,CardChoiseDelegate {
                             Task{
                                 let succ = await transactionManager.TransferClient(TransactionSender: cardBuy!.transactionID, TransactionRecipient: cardSale!.transactionID, summ: summ)
                                 
-                                    DispatchQueue.main.async { [self] in
-                                        if (succ){
-                                            DisableLoader(loader: loaderView)
-                                            
-                                            let transactionTemplate = storyboard?.instantiateViewController(withIdentifier: "TransactionTemplate") as! TransactionTemplateController
-                                            transactionTemplate.operationName = "Перевод"
-                                            transactionTemplate.operationTitle = "\(TextFieldSumm.text!) \(ValuteZaitsevBank.init(rawValue: cardBuy!.typeMoneyExtended)!.description)"
-                                            transactionTemplate.operationSubTitle = "Перевод между своими счетами"
-                                            navigationController?.pushViewController(transactionTemplate, animated: true)
-                                        }
-                                        else {
-                                            DisableLoader(loader: loaderView)
-                                            showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось сделать перевод")
-                                        }
+                                DispatchQueue.main.async { [self] in
+                                    if (succ){
+                                        DisableLoader(loader: loaderView)
+                                        
+                                        let transactionTemplate = storyboard?.instantiateViewController(withIdentifier: "TransactionTemplate") as! TransactionTemplateController
+                                        transactionTemplate.operationName = "Перевод"
+                                        transactionTemplate.operationTitle = "\(TextFieldSumm.text!) \(ValuteZaitsevBank.init(rawValue: cardBuy!.typeMoneyExtended)!.description)"
+                                        transactionTemplate.operationSubTitle = "Перевод между своими счетами"
+                                        navigationController?.pushViewController(transactionTemplate, animated: true)
+                                    }
+                                    else {
+                                        DisableLoader(loader: loaderView)
+                                        showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось сделать перевод")
                                     }
                                 }
                             }
+                        }
                     }
                     else {
                         showAlert(withTitle: "Произошла ошибка", withMessage: "Вы ввели не верную сумму для перевода")

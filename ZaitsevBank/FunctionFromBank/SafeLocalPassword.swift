@@ -28,7 +28,7 @@ public class SafeLocalPassword {
         
     }
     
-    public static func CheckDataLocal(database: NSPersistentContainer) -> (String, String) {
+    public static func CheckDataLocal(database: NSPersistentContainer) -> (String, String)? {
         
         let context: NSManagedObjectContext = {
             return database.viewContext
@@ -37,18 +37,26 @@ public class SafeLocalPassword {
         do {
             let objects = try context.fetch(fetchRequest)
             let dataModel = objects.first
-            let login = try dataModel?.login?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
-            let password = try dataModel?.password?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
-            return  (login,password)
+            if let login = try dataModel?.login?.decryptMessage(encryptionKey: (dataModel?.key)!){
+                if let password = try dataModel?.password?.decryptMessage(encryptionKey: (dataModel?.key)!){
+                    return  (login,password)
+                }
+                else {
+                    return nil
+                }
+            }
+            else {
+                return nil
+            }
             
         }
         catch {
-            return ("none","none")
+            return nil
         }
         
     }
     
-    public static func CheckDataLocalFromPINCODE(PIN_CODE: String ,database: NSPersistentContainer) -> (String, String) {
+    public static func CheckDataLocalFromPINCODE(PIN_CODE: String ,database: NSPersistentContainer) -> (String, String)? {
         
         
         let context: NSManagedObjectContext = {
@@ -60,22 +68,35 @@ public class SafeLocalPassword {
             let objects = try context.fetch(fetchRequest)
             
             let dataModel = objects.first
-                       
-            let pincode = try dataModel?.localPass?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
-
-            if (PIN_CODE == pincode){
+            
+            if let pincode = try dataModel?.localPass?.decryptMessage(encryptionKey: (dataModel?.key)!) {
                 
-                let login = try dataModel?.login?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
-                let password = try dataModel?.password?.decryptMessage(encryptionKey: (dataModel?.key)!) ?? "none"
-                return  (login,password)
+                if (PIN_CODE == pincode){
+                    
+                    if let login = try dataModel?.login?.decryptMessage(encryptionKey: (dataModel?.key)!) {
+                        if let password = try dataModel?.password?.decryptMessage(encryptionKey: (dataModel?.key)!) {
+                            return  (login,password)
+                        }
+                        else {
+                            return nil
+                        }
+                    }
+                    else {
+                        return nil
+                    }
+                    
+                }
+                else {
+                    return nil
+                }
             }
             else {
-                return ("none","none")
+                return nil
             }
             
         }
         catch {
-            return ("none","none")
+            return nil
         }
         
     }

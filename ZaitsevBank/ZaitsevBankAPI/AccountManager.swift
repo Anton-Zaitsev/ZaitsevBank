@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 public class AccountManager {
     
     public var Error = "Не удалось выполнить запрос"
     
-    public func CreateAccount(model: LoginModel) async -> UserModel? {
+    public func CreateAccount(model: LoginModel) async -> String? {
+        
         let request = ClienZaitsevBankAPI.getRequestCreateAccount(model: model)
         
         do {
@@ -21,10 +23,15 @@ public class AccountManager {
                 if let requestResult =  RequestResult.init(rawValue: code){
                     switch requestResult{
                     case .OK :
-                        let decoder = JSONDecoder()
-                        let Account = try decoder.decode(UserModel.self, from: user)
-                        UserDefaults.standard.SetisUserID(Account.userID)
-                        return Account
+                        if let json = try? JSON(data: user){
+                            let userID = json["userID"].stringValue
+                            let nameUser = json["nameUser"].stringValue
+                            UserDefaults.standard.SetisUserID(userID)
+                            return nameUser
+                        }
+                        else {
+                            return nil
+                        }
                     case .NotFound:
                         Error = "Пользователь не найден"
                         return nil
@@ -46,7 +53,7 @@ public class AccountManager {
         catch { return nil }
     }
     
-    public func SignAccount(login: String,password: String) async -> UserModel? {
+    public func SignAccount(login: String,password: String) async -> String? {
         let request = ClienZaitsevBankAPI.getRequestSignAccount(login: login, password: password)
         
         do {
@@ -56,10 +63,15 @@ public class AccountManager {
                 if let requestResult =  RequestResult.init(rawValue: code){
                     switch requestResult{
                     case .OK :
-                        let decoder = JSONDecoder()
-                        let Account = try decoder.decode(UserModel.self, from: user)
-                        UserDefaults.standard.SetisUserID(Account.userID)
-                        return Account
+                        if let json = try? JSON(data: user){
+                            let userID = json["userID"].stringValue
+                            let nameUser = json["nameUser"].stringValue
+                            UserDefaults.standard.SetisUserID(userID)
+                            return nameUser
+                        }
+                        else {
+                            return nil
+                        }
                     case .NotFound:
                         Error = "Пользователь не найден"
                         return nil

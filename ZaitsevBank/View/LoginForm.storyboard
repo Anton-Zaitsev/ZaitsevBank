@@ -734,7 +734,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="827.536231884058" y="520.98214285714289"/>
+            <point key="canvasLocation" x="813" y="88"/>
         </scene>
         <!--Персональные данные-->
         <scene sceneID="QEd-aB-Wsn">
@@ -954,7 +954,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1736" y="521"/>
+            <point key="canvasLocation" x="1690" y="88"/>
         </scene>
         <!--Финиш-->
         <scene sceneID="3FC-5Y-cgM">
@@ -1178,7 +1178,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xUC-9v-wen" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="KUn-Ae-MoA"/>
             </objects>
-            <point key="canvasLocation" x="2579.7101449275365" y="520.98214285714289"/>
+            <point key="canvasLocation" x="2528" y="88"/>
         </scene>
     </scenes>
     <color key="tintColor" systemColor="tintColor"/>

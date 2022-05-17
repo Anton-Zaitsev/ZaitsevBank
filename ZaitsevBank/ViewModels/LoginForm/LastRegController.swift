@@ -28,6 +28,8 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
     public var ModelRegistration = LoginModel()
     private let authFunc = AccountManager()
     
+    private var nameUser: String = "USER"
+    
     lazy var ContainerLocalData: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "ZaitsevBank")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -75,9 +77,7 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
         PolTextField.text = ModelRegistration.Pol
         FramePol.backgroundColor = Pol.contains(ModelRegistration.Pol) ? .green : .red
     }
-    
-    private var DataUser: UserModel!
-    
+        
     @IBAction func CreateNewAccount(_ sender: Any) {
         if (FramePhone.backgroundColor == .green) {
             let dateFormatter = DateFormatter()
@@ -94,7 +94,7 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
                             Task(priority: .high) {
                                 if let user = await authFunc.CreateAccount(model: ModelRegistration) {
                                     DispatchQueue.main.async { [self] in
-                                        DataUser = user
+                                        nameUser = user
                                         DisableLoader(loader: loader)
                                         SetAlertLocalPassword()
                                     }
@@ -155,17 +155,18 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
         
         let succSafeLocalCode =  SafeLocalPassword.AppSettingAppend(ContainerLocalData, localPassword: LocalPasswordEncrypted, login: ModelRegistration.Login, password: ModelRegistration.Password)
         
+        
         if(succSafeLocalCode){
             //MARK: Установка user на первоначальное вхождение и установка на true
             UserDefaults.standard.SetisLogin(true)
             
-            self.EnableMainLoader(ModelRegistration.Name)
+            EnableMainLoader(nameUser)
             //SafeLocalPassword.ReadDataLocal(database: ContainerLocalData)
             let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
             
             let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 self.navigationController?.pushViewController(NavigationTabBar, animated: true)
             }
             

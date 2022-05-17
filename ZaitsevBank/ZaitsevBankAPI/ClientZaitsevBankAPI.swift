@@ -23,12 +23,14 @@ public class ClienZaitsevBankAPI {
     }
     
     public static func getRequestCreateAccount(model: LoginModel) -> URLRequest {
-        let CreateAccount = URL(string: "\(server)api/Users/CreateAccount?FirstName=\(model.Name)&LastName=\(model.Family)&MiddleName=\(model.FamilyName)&Birthday=\(model.Year)&Gender=\(model.Pol)")
+        let phone = "8" + String(model.Phone.compactMap({ $0.isWhitespace ? nil : $0 })).replacingOccurrences(of:  "(", with: "").replacingOccurrences(of:  ")", with: "").replacingOccurrences(of:  "-", with: "").replacingOccurrences(of:  "+", with: "")
+        
+        let CreateAccount = URL(string: "\(server)api/Users/CreateAccount?FirstName=\(model.Name)&LastName=\(model.Family)&MiddleName=\(model.FamilyName)&Birthday=\(model.Year)&Gender=\(model.Pol)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
         
         var request = URLRequest(url: CreateAccount!)
         request.setValue(model.Login, forHTTPHeaderField: "login")
         request.setValue(model.Password, forHTTPHeaderField: "password")
-        request.setValue(model.Phone, forHTTPHeaderField: "phone")
+        request.setValue(phone, forHTTPHeaderField: "phone")
         request.httpMethod = "POST"
         return request
     }

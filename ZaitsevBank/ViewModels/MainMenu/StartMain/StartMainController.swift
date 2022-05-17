@@ -61,6 +61,7 @@ class StartMainController: UIViewController {
     }
         
     private func GetView() {
+        LabelName.text = ""
         LabelFullAddCard.isEnabled = false
         LabelAddCard.isEnabled = false
         
@@ -309,7 +310,7 @@ class StartMainController: UIViewController {
         }
         else {
             DispatchQueue.main.async {
-                self.LabelName.text = "USER"
+                self.LabelName.text = "НЕ НАЙДЕН"
             }
         }
     }

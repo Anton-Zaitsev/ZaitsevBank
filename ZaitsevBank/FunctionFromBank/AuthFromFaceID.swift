@@ -15,13 +15,18 @@ public class AuthFromFaceID {
     
     public func signUSER(_ viewController: NavigationController, DatabaseLinkAutoLogin: NSPersistentContainer, loader: UIView) {
         
+        viewController.Pass1.backgroundColor = .green
+        viewController.Pass2.backgroundColor = .green
+        viewController.Pass3.backgroundColor = .green
+        viewController.Pass4.backgroundColor = .green
+        viewController.Pass5.backgroundColor = .green
+        
         let localAuthenticationContext = LAContext()
         localAuthenticationContext.localizedFallbackTitle = "Пожалуйста введите ваш пароль"
         let reason = "Для продолжения вам требуется аутентификация"
         
         var authorizationError: NSError?
-        
-        
+                
         if localAuthenticationContext.canEvaluatePolicy(LAPolicy.deviceOwnerAuthentication, error: &authorizationError) {
             
             localAuthenticationContext.evaluatePolicy(LAPolicy.deviceOwnerAuthentication, localizedReason: reason) { (success, evaluationError) in
@@ -30,43 +35,34 @@ public class AuthFromFaceID {
                     
                     DispatchQueue.global(qos: .utility).async{ [self] in
                         Task(priority: .high) {
-                            let userData: (String, String) = SafeLocalPassword.CheckDataLocal(database: DatabaseLinkAutoLogin)
-                            let(login, password) = userData
-                            
-                            if (login == "none" || password == "none") {
-                                DispatchQueue.main.async{
-                                    viewController.Pass1.backgroundColor = .darkGray
-                                    viewController.Pass2.backgroundColor = .darkGray
-                                    viewController.Pass3.backgroundColor = .darkGray
-                                    viewController.Pass4.backgroundColor = .darkGray
-                                    viewController.Pass5.backgroundColor = .darkGray
-                                    viewController.DisableLoader(loader: loader)
-                                    viewController.pinCode = ""
-                                    viewController.showAlert(withTitle: "Не удалось распознать логин или пароль.", withMessage: self.authFunc.Error)
-                                }
-                                return
-                            }
-                            
-                            DispatchQueue.main.async{
-                                viewController.Pass1.backgroundColor = .green
-                                viewController.Pass2.backgroundColor = .green
-                                viewController.Pass3.backgroundColor = .green
-                                viewController.Pass4.backgroundColor = .green
-                                viewController.Pass5.backgroundColor = .green
-                            }
-                            
-                            if (await authFunc.SignAccount(login: login, password: password)) != nil { // Если нашел такого пользователя
-                                                                                                    
-                                DispatchQueue.main.async{
-                                    viewController.EnableMainLoader()
-                                       
-                                    let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
+                            if let userData = SafeLocalPassword.CheckDataLocal(database: DatabaseLinkAutoLogin){
+                                let(login, password) = userData
+                                
+                                if let user = await authFunc.SignAccount(login: login, password: password) { // Если нашел такого пользователя
                                     
-                                    let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
-                                    
+                                    DispatchQueue.main.async{
+                                        viewController.EnableMainLoader(user)
                                         
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                        viewController.navigationController?.pushViewController(NavigationTabBar, animated: true)
+                                        let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
+                                        
+                                        let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
+                                        
+                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                                            viewController.navigationController?.pushViewController(NavigationTabBar, animated: true)
+                                        }
+                                    }
+                                }
+                                else {
+                                    DispatchQueue.main.async{
+                                        viewController.Pass1.backgroundColor = .darkGray
+                                        viewController.Pass2.backgroundColor = .darkGray
+                                        viewController.Pass3.backgroundColor = .darkGray
+                                        viewController.Pass4.backgroundColor = .darkGray
+                                        viewController.Pass5.backgroundColor = .darkGray
+                                        viewController.DisableLoader(loader: loader)
+                                        viewController.pinCode = ""
+                                        viewController.showAlert(withTitle: "Произошла ошибка", withMessage: self.authFunc.Error)
                                     }
                                 }
                             }
@@ -79,7 +75,7 @@ public class AuthFromFaceID {
                                     viewController.Pass5.backgroundColor = .darkGray
                                     viewController.DisableLoader(loader: loader)
                                     viewController.pinCode = ""
-                                    viewController.showAlert(withTitle: "Произошла ошибка", withMessage: self.authFunc.Error)
+                                    viewController.showAlert(withTitle: "Не удалось распознать логин или пароль.", withMessage: self.authFunc.Error)
                                 }
                             }
                             
@@ -99,50 +95,45 @@ public class AuthFromFaceID {
     }
     
     public func signUserByPINCODE(_ viewController: NavigationController, DatabaseLinkAutoLogin: NSPersistentContainer, PIN_CODE: String, loader: UIView) {
-
+        
+        viewController.Pass1.backgroundColor = .green
+        viewController.Pass2.backgroundColor = .green
+        viewController.Pass3.backgroundColor = .green
+        viewController.Pass4.backgroundColor = .green
+        viewController.Pass5.backgroundColor = .green
+        
         DispatchQueue.global(qos: .utility).async{ [self] in
             Task(priority: .high) {
                 
-                let userData: (String, String) =  SafeLocalPassword.CheckDataLocalFromPINCODE(PIN_CODE: PIN_CODE, database: DatabaseLinkAutoLogin)
-                
-                let(login, password) = userData
-                
-                if (login == "none" || password == "none"){
+                if let userData =  SafeLocalPassword.CheckDataLocalFromPINCODE(PIN_CODE: PIN_CODE, database: DatabaseLinkAutoLogin){
                     
-                    DispatchQueue.main.async {
-                        viewController.Pass1.backgroundColor = .darkGray
-                        viewController.Pass2.backgroundColor = .darkGray
-                        viewController.Pass3.backgroundColor = .darkGray
-                        viewController.Pass4.backgroundColor = .darkGray
-                        viewController.Pass5.backgroundColor = .darkGray
-                        viewController.DisableLoader(loader: loader)
-                        viewController.pinCode = ""
-                        viewController.showAlert(withTitle: "Произошла ошибка", withMessage: "Не правильный PIN CODE")
+                    let(login, password) = userData
+                    
+                    if let user = await authFunc.SignAccount(login: login, password: password) {
+                        
+                        DispatchQueue.main.async {
+                            viewController.DisableLoader(loader: loader)
+                            viewController.EnableMainLoader(user)
+                            
+                            let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
+                            
+                            let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                                viewController.navigationController?.pushViewController(NavigationTabBar, animated: true)
+                            }
+                        }
                     }
-
-                    return
-                }
-                
-                DispatchQueue.main.async{
-                    viewController.Pass1.backgroundColor = .green
-                    viewController.Pass2.backgroundColor = .green
-                    viewController.Pass3.backgroundColor = .green
-                    viewController.Pass4.backgroundColor = .green
-                    viewController.Pass5.backgroundColor = .green
-                }
-                
-                if (await authFunc.SignAccount(login: login, password: password)) != nil {
-                                 
-                    DispatchQueue.main.async {
-                        viewController.DisableLoader(loader: loader)
-                        viewController.EnableMainLoader()
-                        
-                        let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
-                        
-                        let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
-                    
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            viewController.navigationController?.pushViewController(NavigationTabBar, animated: true)
+                    else {
+                        DispatchQueue.main.async {
+                            viewController.Pass1.backgroundColor = .darkGray
+                            viewController.Pass2.backgroundColor = .darkGray
+                            viewController.Pass3.backgroundColor = .darkGray
+                            viewController.Pass4.backgroundColor = .darkGray
+                            viewController.Pass5.backgroundColor = .darkGray
+                            viewController.DisableLoader(loader: loader)
+                            viewController.pinCode = ""
+                            viewController.showAlert(withTitle: "Произошла ошибка", withMessage: self.authFunc.Error)
                         }
                     }
                 }
@@ -155,7 +146,7 @@ public class AuthFromFaceID {
                         viewController.Pass5.backgroundColor = .darkGray
                         viewController.DisableLoader(loader: loader)
                         viewController.pinCode = ""
-                        viewController.showAlert(withTitle: "Произошла ошибка", withMessage: self.authFunc.Error)
+                        viewController.showAlert(withTitle: "Произошла ошибка", withMessage: "Не правильный PIN CODE")
                     }
                 }
                 

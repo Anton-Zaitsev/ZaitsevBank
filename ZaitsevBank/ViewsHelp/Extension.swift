@@ -25,9 +25,8 @@ extension UIViewController {
 
 extension UIViewController {
     
-    func EnableMainLoader(_ NameUser: String = ""){
-        var nameUser = NameUser
-        
+    func EnableMainLoader(_ nameUser: String){
+
         let screen = UIScreen.main.bounds
         let viewLoader = UIView(frame: screen)
         viewLoader.backgroundColor = .black
@@ -36,12 +35,6 @@ extension UIViewController {
         
         let labelName = UILabel(frame: CGRect(x: 0, y: CGFloat(100), width: screen.width, height: 100))
         
-        if (UserDefaults.standard.checkNameScreensaver()) {
-            nameUser = UserDefaults.standard.isNameScreensaver()
-        }
-        else {
-            UserDefaults.standard.SetisNameScreensaver(NameUser)
-        }
         let date = Date()
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: date)

@@ -113,7 +113,7 @@ class TransferZaitsevClientController: UIViewController {
 
     @IBAction func TransferCardNumber(_ sender: Any) {
         let cardText = SearchBar.text ?? ""
-        if (cardText.count == 20){
+        if (cardText.count == 19){
             SearchBar.resignFirstResponder()
             let loader = EnableLoader()
             DispatchQueue.global(qos: .utility).async{ [self] in

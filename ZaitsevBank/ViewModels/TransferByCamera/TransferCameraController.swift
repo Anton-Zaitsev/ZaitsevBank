@@ -144,11 +144,11 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
         if let cardRecipient = FilterCardID {
             if let cardSender = PayCardID {
                 if let summ = Double((TextFieldSumm.text ?? "").replacingOccurrences(of: ",", with: ".")) {
-                let loaderView = EnableLoader()
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
-                    Task{
-                        let succ = await transactionManager.TransferClient(TransactionSender: cardSender, TransactionRecipient: cardRecipient, summ: summ)
-                        
+                    let loaderView = EnableLoader()
+                    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
+                        Task{
+                            let succ = await transactionManager.TransferClient(TransactionSender: cardSender, TransactionRecipient: cardRecipient, summ: summ)
+                            
                             DispatchQueue.main.async { [self] in
                                 if (succ){
                                     DisableLoader(loader: loaderView)
@@ -195,20 +195,21 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
         NumberCard.text = card.numberCard
         PayCardID = card.transactionID
         ValutePay = card.typeMoneyExtended
-        SummLabel.text = ValuteClient == ValutePay ? "Сумма в \(ValutePay!)" : "Сумма в \(ValutePay!) с переводом в \(ValuteClient!)"
+        
+        SummLabel.text = ValuteClient == ValutePay ? "Сумма в \(ValuteZaitsevBank.init(rawValue: ValutePay!)!.description)" : "Сумма в \(ValuteZaitsevBank.init(rawValue: ValutePay!)!.description) с переводом в \(ValuteZaitsevBank.init(rawValue: ValuteClient!)!.description)"
         ConvertedValuteCheck()
     }
     
     private func configuratedSearchCard(cardData: (CardSearch,Cards)) {
         let (cardSearch,cardConverted) = cardData
-
+        
         ValuteClient = cardSearch.ValuteReceiver
         FilterCardID = cardSearch.TransactionCard
         
         configuratedExpence(card: cardConverted)
         
         TextFieldSumm.isEnabled = true // Разблокируем при удачном случае
-        TextNumberPhone.text = cardSearch.PhoneNumber
+        TextNumberPhone.text = cardSearch.PhoneNumber.formatPhone()
         NameClient.text = cardSearch.NameUser
         ImageClient.text = String(cardSearch.NameUser.first ?? "?")
         ImageClient.isHidden = false
@@ -222,22 +223,27 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
             if (ValutePay == ValuteClient) {
                 TransferView.isHidden = true
                 return}
-            if let (valute, textValute) = (TextFieldSumm.text ?? "").convertToDouble(valutePay: ValutePay!){
-                TextFieldSumm.textColor = .black
-                TextFieldSumm.text = textValute
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
-                    Task{
-                        if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: ValutePay!, ValuteB: ValuteClient!, BuySale: true,valute) {
-                            
-                            let (valuteA,valuteB) : (String,String) = (ValuteZaitsevBank.init(rawValue: ValutePay!)?.SaleValuteSubtitle(currentCurse: valuteConvert, count: count, ValuteB: ValuteClient!))!
-                            
-                            DispatchQueue.main.async { [self] in
-                                TransferView.isHidden = false
-                                ValuteA.text = valuteA
-                                ValuteB.text = valuteB
+            if ((TextFieldSumm.text ?? "").count <= 15){
+                if let (valute, textValute) = (TextFieldSumm.text ?? "").convertToDouble(valutePay: ValutePay!){
+                    TextFieldSumm.textColor = .black
+                    TextFieldSumm.text = textValute
+                    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
+                        Task{
+                            if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: ValutePay!, ValuteB: ValuteClient!, BuySale: true,valute) {
+                                
+                                let (valuteA,valuteB) : (String,String) = (ValuteZaitsevBank.init(rawValue: ValutePay!)?.SaleValuteSubtitle(currentCurse: valuteConvert, count: count, ValuteB: ValuteClient!))!
+                                
+                                DispatchQueue.main.async { [self] in
+                                    TransferView.isHidden = false
+                                    ValuteA.text = valuteA
+                                    ValuteB.text = valuteB
+                                }
                             }
                         }
                     }
+                }
+                else {
+                    TextFieldSumm.textColor = .red
                 }
             }
             else {
@@ -290,16 +296,16 @@ extension TransferCameraController: CreditCardScannerViewControllerDelegate {
         
         
         /*
-        var dateComponents = card.expireDate
-        dateComponents?.calendar = Calendar.current
-        let dateFormater = DateFormatter()
-        dateFormater.dateStyle = .short
-        let date = dateComponents?.date.flatMap(dateFormater.string)
-        let text = [card.number, date, card.name]
-            .compactMap { $0 }
-            .joined(separator: "\n")
-        
-        print("\(text)")
+         var dateComponents = card.expireDate
+         dateComponents?.calendar = Calendar.current
+         let dateFormater = DateFormatter()
+         dateFormater.dateStyle = .short
+         let date = dateComponents?.date.flatMap(dateFormater.string)
+         let text = [card.number, date, card.name]
+         .compactMap { $0 }
+         .joined(separator: "\n")
+         
+         print("\(text)")
          */
     }
 }

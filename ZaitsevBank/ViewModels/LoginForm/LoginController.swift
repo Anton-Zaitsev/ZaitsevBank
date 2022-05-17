@@ -12,7 +12,7 @@ class LoginController: UIViewController, LocalPasswordDelegate {
     
     private var loginModel = LoginModel() //Объявляем модель данных для Login
     private let authFunc = AccountManager()
-    public var dataUser : UserModel!
+    private var getNameUser : String = "USER"
     // LOCALPASSWORD
     public var LocalPasswordEncrypted: String = ""
     
@@ -71,9 +71,9 @@ class LoginController: UIViewController, LocalPasswordDelegate {
                 if let user = await authFunc.SignAccount(login: loginModel.Login, password: loginModel.Password){
                     
                     DispatchQueue.main.async { [self] in
-                        SetAlertLocalPassword()
-                        dataUser = user
+                        getNameUser = user
                         DisableLoader(loader: loader)
+                        SetAlertLocalPassword()
                     }
                 }
                 else {
@@ -107,18 +107,18 @@ class LoginController: UIViewController, LocalPasswordDelegate {
     func SigninFromPassword() {
         animateOut()
         
-        let succSafeLocalCode =  SafeLocalPassword.AppSettingAppend(ContainerLocalData, localPassword: LocalPasswordEncrypted, login: loginModel.Login, password: loginModel.Password)
+        let succSafeLocalCode = SafeLocalPassword.AppSettingAppend(ContainerLocalData, localPassword: LocalPasswordEncrypted, login: loginModel.Login, password: loginModel.Password)
         
         if(succSafeLocalCode){
             
-            self.EnableMainLoader(dataUser.firstName)
+            EnableMainLoader(getNameUser)
             //MARK: Установка user на первоначальное вхождение и установка на true
             UserDefaults.standard.SetisLogin(true)
 
             let storyboardMainMenu : UIStoryboard = UIStoryboard(name: "MainMenu", bundle: nil)
             let NavigationTabBar = storyboardMainMenu.instantiateViewController(withIdentifier: "ControllerMainMenu") as! NavigationTabBarMain
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 self.navigationController?.pushViewController(NavigationTabBar, animated: true)
             }
         }
