@@ -182,13 +182,23 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
         
         if (cardPay.isEmpty == false) { // Если валюта зачисления есть
             
+            let text = (TextFieldSUMM.text ?? "")
+            let ValutesConverted = text.convertToDouble(valutePay: TypeValuteOffs!)
+            TextFieldSUMM.textColor =  ValutesConverted == nil ? .red : .white
+            TextFieldSUMM.text = ValutesConverted == nil ? text : ValutesConverted!.1
+            
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                 Task{
-                    if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteEnrollment!, BuySale: BuySaleToogle!, (TextFieldSUMM.text ?? "").convertDouble()) {
+                    if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteEnrollment!, BuySale: BuySaleToogle!,ValutesConverted == nil ? nil : text.convertDouble()) {
                         
                         DispatchQueue.main.async { [self] in
                             
                             TitleLabel.text = ValuteZaitsevBank.init(rawValue: TypeValuteOffs!)?.SaleValuteTitle(buySale: BuySaleToogle!, currentCurse: valuteConvert,count: count, ValuteB: TypeValuteEnrollment!)
+                        }
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            self.TitleLabel.text = ""
                         }
                     }
                 }
@@ -199,33 +209,35 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
     
     private func configuratedViewEnrollment(data: Cards){
         
+        NameBuyCard.text = data.nameCard
+        ImageBuyCard.image = UIImage(named: data.typeImageCard)
+        NumberBuyCard.text = data.numberCard
+        MoneyBuyCard.text = "\(data.moneyCount) \(data.typeMoney)"
+        
+        TypeValuteEnrollment = data.typeMoneyExtended // Указать новый тип валюты зачисления
+        
+        pickValute(valute: TypeValuteEnrollment!)
+        
+        let text = (TextFieldSUMM.text ?? "")
+        let ValutesConverted = text.convertToDouble(valutePay: TypeValuteOffs!)
+        TextFieldSUMM.textColor =  ValutesConverted == nil ? .red : .white
+        TextFieldSUMM.text = ValutesConverted == nil ? text : ValutesConverted!.1
+        
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
             Task{
-                let TypeValuteB = data.typeMoneyExtended // Зачислем на нашу карту VALUTE
-                
-                if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteB, BuySale: BuySaleToogle!, (TextFieldSUMM.text ?? "").convertDouble()) {
+                if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteEnrollment!, BuySale: BuySaleToogle!, ValutesConverted == nil ? nil : text.convertDouble()){
                     
                     DispatchQueue.main.async { [self] in
                         
-                        NameBuyCard.text = data.nameCard
-                        ImageBuyCard.image = UIImage(named: data.typeImageCard)
-                        NumberBuyCard.text = data.numberCard
-                        MoneyBuyCard.text = "\(data.moneyCount) \(data.typeMoney)"
-                        pickValute(valute: TypeValuteB)
-                        
-                        TypeValuteEnrollment = data.typeMoneyExtended // Указать новый тип валюты зачисления
-                        
                         TitleLabel.text = ValuteZaitsevBank.init(rawValue: TypeValuteOffs!)?.SaleValuteTitle(buySale: BuySaleToogle!, currentCurse: valuteConvert,count: count, ValuteB: TypeValuteEnrollment!)
+                        if (text.count > 16) { TextFieldSUMM.textColor = .red }
                     }
                 }
                 else {
-                    DispatchQueue.main.async { [self] in
-                        ImageBuyCard.image = UIImage(systemName: "wand.and.rays")
-                        NameBuyCard.text = "Оформите новый счет"
-                        ViewNewCard.isHidden = false
+                    DispatchQueue.main.async {
+                        self.TitleLabel.text = ""
                     }
                 }
-                
             }
         }
     }
@@ -316,23 +328,26 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
     
     @IBAction func ChangedTextFieldSUMM(_ sender: Any) {
         
-        if ((TextFieldSUMM.text ?? "").count <= 15){
-            if let (valute, textValute) = (TextFieldSUMM.text ?? "").convertToDouble(valutePay: TypeValuteOffs!){
-                TextFieldSUMM.textColor = .white
-                TextFieldSUMM.text = textValute
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
-                    Task{
-                        if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteEnrollment!, BuySale: BuySaleToogle!,valute) {
+        let text = (TextFieldSUMM.text ?? "")
+        if (text.count <= 15){
+            let ValutesConverted = text.convertToDouble(valutePay: TypeValuteOffs!)
+            TextFieldSUMM.textColor =  ValutesConverted == nil ? .red : .white
+            TextFieldSUMM.text = ValutesConverted == nil ? text : ValutesConverted!.1
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
+                Task{
+                    if let (valuteConvert,count,_ ) = await cardsManager.ConvertValute(ValuteA: TypeValuteOffs!, ValuteB: TypeValuteEnrollment!, BuySale: BuySaleToogle!,ValutesConverted == nil ? nil : ValutesConverted!.0) {
+                        
+                        DispatchQueue.main.async { [self] in
                             
-                            DispatchQueue.main.async { [self] in
-                                TitleLabel.text = ValuteZaitsevBank.init(rawValue: TypeValuteOffs!)?.SaleValuteTitle(buySale: BuySaleToogle!, currentCurse: valuteConvert,count: count, ValuteB: TypeValuteEnrollment!)
-                            }
+                            TitleLabel.text = ValuteZaitsevBank.init(rawValue: TypeValuteOffs!)?.SaleValuteTitle(buySale: BuySaleToogle!, currentCurse: valuteConvert,count: count, ValuteB: TypeValuteEnrollment!)
+                        }
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            self.TitleLabel.text = ""
                         }
                     }
                 }
-            }
-            else {
-                TextFieldSUMM.textColor = .red
             }
         }
         else {

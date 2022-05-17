@@ -13,8 +13,8 @@ public class TransactionManager {
         
         var request : URLRequest
         
-        if let summintVal = Int(doubleVal: summ){
-            request = ClienZaitsevBankAPI.getRequestTransferClient(TransactionSender: TransactionSender, TransactionRecipient: TransactionRecipient, summ: String(summintVal))
+        if let summInt = Int(exactly: summ){
+            request = ClienZaitsevBankAPI.getRequestTransferClient(TransactionSender: TransactionSender, TransactionRecipient: TransactionRecipient, summ: String(summInt))
         }
         else {
             let summString = String(summ).replacingOccurrences(of: ".", with: ",")

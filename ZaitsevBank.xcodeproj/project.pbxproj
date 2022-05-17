@@ -91,6 +91,9 @@
 		3AE09EBE28021A5F0016E1EF /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE09EBD28021A5F0016E1EF /* AccountManager.swift */; };
 		3AE09EC128021B050016E1EF /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE09EC028021B050016E1EF /* UserModel.swift */; };
 		3AE09EC328021C3A0016E1EF /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE09EC228021C3A0016E1EF /* RequestResult.swift */; };
+		3AEB861228344330005A71F0 /* HistoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB861128344330005A71F0 /* HistoryModels.swift */; };
+		3AEB861428344989005A71F0 /* HistoryTransactionOperationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB861328344989005A71F0 /* HistoryTransactionOperationCell.swift */; };
+		3AEB8616283449A5005A71F0 /* TransactionFilterOperationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB8615283449A5005A71F0 /* TransactionFilterOperationCell.swift */; };
 		3AF5D73027E69E3C0095A4DC /* ImageRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5D72A27E69E3B0095A4DC /* ImageRatio.swift */; };
 		3AF5D73127E69E3C0095A4DC /* ImageAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5D72B27E69E3C0095A4DC /* ImageAnalyzer.swift */; };
 		3AF5D73227E69E3C0095A4DC /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5D72C27E69E3C0095A4DC /* CreditCard.swift */; };
@@ -184,6 +187,9 @@
 		3AE09EBD28021A5F0016E1EF /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		3AE09EC028021B050016E1EF /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3AE09EC228021C3A0016E1EF /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
+		3AEB861128344330005A71F0 /* HistoryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModels.swift; sourceTree = "<group>"; };
+		3AEB861328344989005A71F0 /* HistoryTransactionOperationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionOperationCell.swift; sourceTree = "<group>"; };
+		3AEB8615283449A5005A71F0 /* TransactionFilterOperationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFilterOperationCell.swift; sourceTree = "<group>"; };
 		3AF5D72A27E69E3B0095A4DC /* ImageRatio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRatio.swift; sourceTree = "<group>"; };
 		3AF5D72B27E69E3C0095A4DC /* ImageAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAnalyzer.swift; sourceTree = "<group>"; };
 		3AF5D72C27E69E3C0095A4DC /* CreditCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
@@ -250,6 +256,7 @@
 		3A0FC966270A52F400B6B2F6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3AEB86102834431F005A71F0 /* HistoryModels */,
 				3A2EDDAB283052E800F47577 /* TransferContactsModel */,
 				3A3FAF0228297CB600A8DE39 /* TransactionTemplates */,
 				3A6B52E22813835600C1D741 /* Payments */,
@@ -432,6 +439,8 @@
 			isa = PBXGroup;
 			children = (
 				3AB687ED272221BC002BD6EB /* HistoryController.swift */,
+				3AEB861328344989005A71F0 /* HistoryTransactionOperationCell.swift */,
+				3AEB8615283449A5005A71F0 /* TransactionFilterOperationCell.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -531,6 +540,14 @@
 				3AC468512823D8F8005540FC /* CardSearch.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		3AEB86102834431F005A71F0 /* HistoryModels */ = {
+			isa = PBXGroup;
+			children = (
+				3AEB861128344330005A71F0 /* HistoryModels.swift */,
+			);
+			path = HistoryModels;
 			sourceTree = "<group>";
 		};
 		3AF5D72927E69E0C0095A4DC /* CreditScanner */ = {
@@ -696,6 +713,7 @@
 				3AABE0AD28025CD200EB3623 /* CardsManager.swift in Sources */,
 				3AB86B8D270D0A84008D0823 /* FirstRegController.swift in Sources */,
 				3A49B5102755591300ECC979 /* FullCardController.swift in Sources */,
+				3AEB861228344330005A71F0 /* HistoryModels.swift in Sources */,
 				3A3FAF0428297CD700A8DE39 /* TransactionTemplates.swift in Sources */,
 				3A9C9B772739C82B009A2D4C /* CardAdd.swift in Sources */,
 				3A0FC95A270A52B700B6B2F6 /* ZaitsevBank.xcdatamodeld in Sources */,
@@ -706,12 +724,14 @@
 				3ACEFAA32721EBB7004BD739 /* AuthFromFaceID.swift in Sources */,
 				3A3AE94E271278A3001FF068 /* StartMainController.swift in Sources */,
 				3A0FC952270A52B700B6B2F6 /* SceneDelegate.swift in Sources */,
+				3AEB8616283449A5005A71F0 /* TransactionFilterOperationCell.swift in Sources */,
 				3AB687EE272221BC002BD6EB /* HistoryController.swift in Sources */,
 				3A99391D2738B15B009B1B06 /* NewCardController.swift in Sources */,
 				3A0787F92778851900F678DD /* API_VALUTE.swift in Sources */,
 				3AE09EBE28021A5F0016E1EF /* AccountManager.swift in Sources */,
 				3A835FD327320CD9000310EC /* ExchangeViewCell.swift in Sources */,
 				3AB86B86270BAA62008D0823 /* RegistrationController.swift in Sources */,
+				3AEB861428344989005A71F0 /* HistoryTransactionOperationCell.swift in Sources */,
 				3A5EB0D6272D69ED0037D006 /* WalletViewCell.swift in Sources */,
 				3A99391B2738B074009B1B06 /* CarAddViewCell.swift in Sources */,
 				3AE09EC128021B050016E1EF /* UserModel.swift in Sources */,
@@ -790,7 +810,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -847,7 +867,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -13,10 +13,10 @@ public struct TransferContactsModel {
     public var Contacts : [ContactsModel]
 }
 public struct ContactsModel {
-    public var ImageContact: UIImage?
-    public var NameContact: String
-    public var FamilyContact: String
-    public var PhoneNumber: String
+    public let ImageContact: UIImage?
+    public let NameContact: String
+    public let FamilyContact: String
+    public let PhoneNumber: String
 }
 public enum TransferZaitsevType {
     case Contacts

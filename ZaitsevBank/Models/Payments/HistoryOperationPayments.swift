@@ -28,8 +28,8 @@ public class HistoryPayment{
         OperationTransfer.append(HistoryOperationPayments.init(typeOperation: OperationPayments.transferFromCamera, iconOperation: UIImage(systemName: "camera.shutter.button")!, nameOperation: "Перевод по сканеру карты"))
         OperationTransfer.append(HistoryOperationPayments.init(typeOperation: OperationPayments.makeCredit, iconOperation: UIImage(systemName: "creditcard")!, nameOperation: "Оформить кредит"))
         
-        OperationPayment.append(HistoryOperationPayments.init(typeOperation: OperationPayments.paymentQR, iconOperation: UIImage(systemName: "iphone")!, nameOperation: "Оплата по QR или штрихкоду"))
-        OperationPayment.append(HistoryOperationPayments.init(typeOperation: OperationPayments.education, iconOperation: UIImage(systemName: "building.2.fill")!, nameOperation: "Образование"))
+        OperationPayment.append(HistoryOperationPayments.init(typeOperation: OperationPayments.buyValute, iconOperation: UIImage(systemName: "dollarsign.circle")!, nameOperation: "Купить валюту"))
+        OperationPayment.append(HistoryOperationPayments.init(typeOperation: OperationPayments.saleValute, iconOperation: UIImage(systemName: "eurosign.circle")!, nameOperation: "Продать валюту"))
         OperationPayment.append(HistoryOperationPayments.init(typeOperation: OperationPayments.creditPayment, iconOperation: UIImage(systemName: "building.columns")!, nameOperation: "Оплатить кредит"))
     }
     

@@ -15,11 +15,6 @@ public class AuthFromFaceID {
     
     public func signUSER(_ viewController: NavigationController, DatabaseLinkAutoLogin: NSPersistentContainer, loader: UIView) {
         
-        viewController.Pass1.backgroundColor = .green
-        viewController.Pass2.backgroundColor = .green
-        viewController.Pass3.backgroundColor = .green
-        viewController.Pass4.backgroundColor = .green
-        viewController.Pass5.backgroundColor = .green
         
         let localAuthenticationContext = LAContext()
         localAuthenticationContext.localizedFallbackTitle = "Пожалуйста введите ваш пароль"
@@ -31,6 +26,15 @@ public class AuthFromFaceID {
             
             localAuthenticationContext.evaluatePolicy(LAPolicy.deviceOwnerAuthentication, localizedReason: reason) { (success, evaluationError) in
                 if success {
+                    
+                    DispatchQueue.main.async{
+                        viewController.Pass1.backgroundColor = .green
+                        viewController.Pass2.backgroundColor = .green
+                        viewController.Pass3.backgroundColor = .green
+                        viewController.Pass4.backgroundColor = .green
+                        viewController.Pass5.backgroundColor = .green
+                    }
+                    
                     UserDefaults.standard.SetisFaceTouchId(true) //Начать использование FaceID
                     
                     DispatchQueue.global(qos: .utility).async{ [self] in
@@ -96,11 +100,13 @@ public class AuthFromFaceID {
     
     public func signUserByPINCODE(_ viewController: NavigationController, DatabaseLinkAutoLogin: NSPersistentContainer, PIN_CODE: String, loader: UIView) {
         
-        viewController.Pass1.backgroundColor = .green
-        viewController.Pass2.backgroundColor = .green
-        viewController.Pass3.backgroundColor = .green
-        viewController.Pass4.backgroundColor = .green
-        viewController.Pass5.backgroundColor = .green
+        DispatchQueue.main.async{
+            viewController.Pass1.backgroundColor = .green
+            viewController.Pass2.backgroundColor = .green
+            viewController.Pass3.backgroundColor = .green
+            viewController.Pass4.backgroundColor = .green
+            viewController.Pass5.backgroundColor = .green
+        }
         
         DispatchQueue.global(qos: .utility).async{ [self] in
             Task(priority: .high) {

@@ -13,26 +13,15 @@ extension StringProtocol {
     var firstCapitalized: String { prefix(1).capitalized + dropFirst() }
 }
 
-public extension Int {
-
-    init?(doubleVal: Double) {
-        guard (doubleVal <= Double(Int.max).nextDown) && (doubleVal >= Double(Int.min).nextUp) else {
-        return nil
-    }
-
-    self.init(doubleVal)
-}
-}
-    
 public extension Double {
-     func valuteToTableFormat() -> String {
-         if let converted = Int(exactly: self) {
-             return String(converted)
-         }
-         else {
-             let valute = String(format: "%.2f", self)
-             return valute.replacingOccurrences(of: ".", with: ",")
-         }
+    func valuteToTableFormat() -> String {
+        if let converted = Int(exactly: self) {
+            return String(converted)
+        }
+        else {
+            let valute = String(format: "%.2f", self)
+            return valute.replacingOccurrences(of: ".", with: ",")
+        }
     }
     func valuteToCurseFormat() -> String {
         if let converted = Int(exactly: self) {
@@ -57,7 +46,7 @@ public extension Double {
 }
 
 public extension String {
-        
+    
     func convertToDouble(valutePay: String) -> (Double,String)? {
         let formatText = String(self.compactMap({ $0.isWhitespace ? nil : $0 })).replacingOccurrences(of:  ",", with: ".")
         
@@ -110,12 +99,12 @@ public extension String {
         let numbers = self.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""
         var index = numbers.startIndex // numbers iterator
-
+        
         for ch in mask where index < numbers.endIndex {
             if ch == "X" {
                 result.append(numbers[index])
                 index = numbers.index(after: index)
-
+                
             } else {
                 result.append(ch)
             }
@@ -123,37 +112,37 @@ public extension String {
         return result
     }
     
-    func formatPhoneTextField() -> String { 
+    func formatPhoneTextField() -> String {
         let cleanPhoneNumber = self.replacingOccurrences(of: "+7", with: "").components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         let mask = "+7 (###) ###-##-##"
-         var result = ""
-         var index = cleanPhoneNumber.startIndex
+        var result = ""
+        var index = cleanPhoneNumber.startIndex
         for ch in mask where index < cleanPhoneNumber.endIndex {
-             if ch == "#" {
-                 result.append(cleanPhoneNumber[index])
-                 index = cleanPhoneNumber.index(after: index)
-             } else {
-                 result.append(ch)
-             }
-         }
-         return result
+            if ch == "#" {
+                result.append(cleanPhoneNumber[index])
+                index = cleanPhoneNumber.index(after: index)
+            } else {
+                result.append(ch)
+            }
+        }
+        return result
         
     }
     
     func formatCardTextField() -> String {
         let cleanPhoneNumber = self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         let mask = "#### #### #### ####"
-         var result = ""
-         var index = cleanPhoneNumber.startIndex
+        var result = ""
+        var index = cleanPhoneNumber.startIndex
         for ch in mask where index < cleanPhoneNumber.endIndex {
-             if ch == "#" {
-                 result.append(cleanPhoneNumber[index])
-                 index = cleanPhoneNumber.index(after: index)
-             } else {
-                 result.append(ch)
-             }
-         }
-         return result
+            if ch == "#" {
+                result.append(cleanPhoneNumber[index])
+                index = cleanPhoneNumber.index(after: index)
+            } else {
+                result.append(ch)
+            }
+        }
+        return result
         
     }
     
@@ -170,12 +159,12 @@ public extension String {
         let numbers = phoneReplaced.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""
         var index = numbers.startIndex // numbers iterator
-
+        
         for ch in mask where index < numbers.endIndex {
             if ch == "X" {
                 result.append(numbers[index])
                 index = numbers.index(after: index)
-
+                
             } else {
                 result.append(ch)
             }
@@ -186,12 +175,12 @@ public extension String {
     func searchOperatorCard() -> String {
         let symbol = Int(self)
         switch symbol{
-            case 4:
-                return CardType.VISA.logoCardOperator
-            case 5:
-                return CardType.MASTERCARD.logoCardOperator
-            case 2:
-                return CardType.MIR.logoCardOperator
+        case 4:
+            return CardType.VISA.logoCardOperator
+        case 5:
+            return CardType.MASTERCARD.logoCardOperator
+        case 2:
+            return CardType.MIR.logoCardOperator
         default:
             return "LogoZaitsevBank"
         }

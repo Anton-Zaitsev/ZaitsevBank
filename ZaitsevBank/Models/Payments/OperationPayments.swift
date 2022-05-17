@@ -18,8 +18,8 @@ public enum OperationPayments {
     case transferFromCamera // Перевод по сканеру карты
     case makeCredit // Оформить кредит
     
-    case paymentQR // Оплата по QR или штрихкоду
-    case education // Образование
+    case buyValute // Купить валюту
+    case saleValute // Продать валюту
     case creditPayment // Оплатить кредит
     
     func OperationPerform(_ controller : PaymentsController) {
@@ -64,13 +64,17 @@ public enum OperationPayments {
             }
         case .makeCredit:
             break
-        case .paymentQR:
+        case .buyValute:
             controller.navigationController?.isNavigationBarHidden = false
-            let storyboard = UIStoryboard(name: "TransferMenu", bundle: nil)
-            let storyboardInstance = storyboard.instantiateViewController(withIdentifier: "TransactionTemplate") as! TransactionTemplateController
-            controller.navigationController?.pushViewController(storyboardInstance, animated: true)
+            let storyboardValuteMenuMenu : UIStoryboard = UIStoryboard(name: "ValuteMenu", bundle: nil)
+            let ExhangeRate = storyboardValuteMenuMenu.instantiateViewController(withIdentifier: "ExhangeAllValute") as! ExchangeRateController
+            controller.navigationController?.pushViewController(ExhangeRate, animated: true)
             break
-        case .education:
+        case .saleValute:
+            controller.navigationController?.isNavigationBarHidden = false
+            let storyboardValuteMenuMenu : UIStoryboard = UIStoryboard(name: "ValuteMenu", bundle: nil)
+            let ExhangeRate = storyboardValuteMenuMenu.instantiateViewController(withIdentifier: "ExhangeAllValute") as! ExchangeRateController
+            controller.navigationController?.pushViewController(ExhangeRate, animated: true)
             break
         case .creditPayment:
             break

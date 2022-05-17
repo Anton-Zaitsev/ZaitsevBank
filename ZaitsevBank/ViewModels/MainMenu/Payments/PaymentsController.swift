@@ -20,8 +20,22 @@ class PaymentsController: UIViewController {
     
     private let historyPayments = HistoryPayment()
     
+    private lazy var gradient: CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.type = .axial
+        gradient.colors = [
+            UIColor("#141218")!.cgColor,
+            UIColor("#141425")!.cgColor
+        ]
+        gradient.locations = [0, 0.25]
+        return gradient
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        gradient.frame = view.bounds
+        view.layer.insertSublayer(gradient, at: 0)
         
         VIewAllCollection.roundTopCorners(radius: 20)
         

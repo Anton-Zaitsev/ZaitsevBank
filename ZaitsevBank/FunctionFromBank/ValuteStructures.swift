@@ -84,10 +84,14 @@ public enum ValuteZaitsevBank : String {
         }
     }
     func SaleValuteTitle(buySale: Bool, currentCurse: Double,count: Double,ValuteB: String) -> String {
-        let CurrentCurse = self.electronValute ? currentCurse.valuteToCurseFormat() : currentCurse.valuteToTableFormat()
-        let Count = ValuteZaitsevBank.init(rawValue: ValuteB)!.electronValute ? count.valuteToCurseFormat() : count.valuteToTableFormat()
         
-        let valuteDescription = ValuteZaitsevBank.init(rawValue: ValuteB)!.description
+        let valuteB = ValuteZaitsevBank.init(rawValue: ValuteB)!
+        
+        let Count = self.electronValute ? count.valuteToCurseFormat() : count.valuteToTableFormat()
+        
+        let CurrentCurse = valuteB.electronValute ? currentCurse.valuteToCurseFormat() : currentCurse.valuteToTableFormat()
+        
+        let valuteDescription = valuteB.description
         switch self {
         case .EUR : return
             buySale ? "Покупка \(CurrentCurse) \(valuteDescription) за \(Count) €" : "Продажа \(Count) € за \(CurrentCurse) \(valuteDescription)"
@@ -102,10 +106,14 @@ public enum ValuteZaitsevBank : String {
         }
     }
     func SaleValuteSubtitle(currentCurse: Double,count: Double,ValuteB: String) -> (String,String) {
-        let CurrentCurse = self.electronValute ? currentCurse.valuteToCurseFormat() : currentCurse.valuteToTableFormat()
-        let Count = ValuteZaitsevBank.init(rawValue: ValuteB)!.electronValute ? count.valuteToCurseFormat() : count.valuteToTableFormat()
         
-        let valuteDescription = ValuteZaitsevBank.init(rawValue: ValuteB)!.description
+        let valuteB = ValuteZaitsevBank.init(rawValue: ValuteB)!
+        
+        let Count = self.electronValute ? count.valuteToCurseFormat() : count.valuteToTableFormat()
+        
+        let CurrentCurse = valuteB.electronValute ? currentCurse.valuteToCurseFormat() : currentCurse.valuteToTableFormat()
+        
+        let valuteDescription = valuteB.description
         switch self {
         case .EUR : return ("\(CurrentCurse) \(valuteDescription)", "\(Count) €")
             

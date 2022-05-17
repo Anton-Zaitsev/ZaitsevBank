@@ -211,7 +211,7 @@ class TransferBetweenController: UIViewController,CardChoiseDelegate {
                 CurrentСourse.isHidden = true
                 return}
             if ((TextFieldSumm.text ?? "").count <= 15){
-                if let (valute, textValute) = (TextFieldSumm.text ?? "").convertToDouble(valutePay: cardSale!.typeMoneyExtended){
+                if let (valute, textValute) = (TextFieldSumm.text ?? "").convertToDouble(valutePay: cardBuy!.typeMoneyExtended){
                     TextFieldSumm.textColor = .white
                     TextFieldSumm.text = textValute
                     DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
@@ -245,13 +245,13 @@ class TransferBetweenController: UIViewController,CardChoiseDelegate {
         if (cardBuy != nil) {
             if (cardSale != nil){
                 
-                if let summ = (TextFieldSumm.text ?? "").convertDouble() {
+                if let summ = (TextFieldSumm.text ?? "").convertToDouble(valutePay: cardBuy!.typeMoneyExtended) {
                     
-                    if (summ <= cardBuy!.moneyCount.convertDouble()!){
+                    if (summ.0 <= cardBuy!.moneyCount.convertDouble()!){
                         let loaderView = EnableLoader()
                         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                             Task{
-                                let succ = await transactionManager.TransferClient(TransactionSender: cardBuy!.transactionID, TransactionRecipient: cardSale!.transactionID, summ: summ)
+                                let succ = await transactionManager.TransferClient(TransactionSender: cardBuy!.transactionID, TransactionRecipient: cardSale!.transactionID, summ: summ.0)
                                 
                                 DispatchQueue.main.async { [self] in
                                     if (succ){
