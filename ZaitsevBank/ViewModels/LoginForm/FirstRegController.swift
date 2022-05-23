@@ -37,8 +37,26 @@ class FirstRegController: UIViewController {
                                                                    attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         FamilyNameTextField.attributedPlaceholder = NSAttributedString(string: "Ваше отчество",
                                                                        attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        NameTextField.delegate = self
+        FamilyTextField.delegate = self
+        FamilyNameTextField.delegate = self
     }
     
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if view.frame.origin.y == 0 {
+                view.frame.origin.y -= keyboardSize.height / 5
+                navigationController?.setNavigationBarHidden(true, animated: false)
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        view.frame.origin.y = 0
+    }
     
     @IBAction func NameChanged(_ sender: Any) {
         ModelRegistration.Name = NameTextField.text ?? ""
@@ -53,6 +71,7 @@ class FirstRegController: UIViewController {
         FrameFamilyName.backgroundColor = .green
     }
     @IBAction func ClickCheckDataUser(_ sender: Any) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
         if (ModelRegistration.Name.count > 2 && ModelRegistration.Family.count > 2) {
             
             let LastRegView = storyboard?.instantiateViewController(withIdentifier: "LastRegistration") as! LastRegController
@@ -64,11 +83,23 @@ class FirstRegController: UIViewController {
         }
     }
     
-    
-    @IBAction func TapClearKeyboard(_ sender: Any) {
-        NameTextField.resignFirstResponder()
-        FamilyTextField.resignFirstResponder()
-        FamilyNameTextField.resignFirstResponder()
+}
+extension FirstRegController: UITextFieldDelegate{
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        switch textField {
+        case NameTextField :
+            NameTextField.resignFirstResponder()
+            return true;
+        case FamilyTextField :
+            FamilyTextField.resignFirstResponder()
+            return true;
+        case FamilyNameTextField :
+            FamilyNameTextField.resignFirstResponder()
+            return true;
+        default:
+            return true
+        }
+       
     }
-    
 }

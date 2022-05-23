@@ -118,6 +118,14 @@ public class ClienZaitsevBankAPI {
         request.httpMethod = "POST"
         return request
     }
+    
+    public static func getRequestGetAllTransactiont(userID: String,DateFrom: String, DateTo: String) -> URLRequest{
+        let GetAllTransactiont = URL(string:"\(server)api/Transactions/GetAllTransaction?userID=\(userID)&dataFrom=\(DateFrom)&dataTo=\(DateTo)")
+        print("\(server)api/Transactions/GetAllTransaction?userID=\(userID)&dataFrom=\(DateFrom)&dataTo=\(DateTo)")
+        var request = URLRequest(url: GetAllTransactiont!)
+        request.httpMethod = "GET"
+        return request
+    }
 }
 
 

@@ -16,7 +16,7 @@ class LoginController: UIViewController, LocalPasswordDelegate {
     // LOCALPASSWORD
     public var LocalPasswordEncrypted: String = ""
     
-    lazy var ContainerLocalData: NSPersistentContainer = {
+    private lazy var ContainerLocalData: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "ZaitsevBank")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -26,13 +26,13 @@ class LoginController: UIViewController, LocalPasswordDelegate {
         return container
     }()
     
-    @IBOutlet weak var MainLabel: UILabel!
-    @IBOutlet weak var SubMainLabel: UILabel!
     
+
     @IBOutlet weak var BorderFrameLogin: UIView!
+
     @IBOutlet weak var BorderFramePassword: UIView!
-    @IBOutlet weak var LoginTextField: UITextField!
     
+    @IBOutlet weak var LoginTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
     
     override func viewDidLoad() {
@@ -51,14 +51,14 @@ class LoginController: UIViewController, LocalPasswordDelegate {
     }
     
     private func GetView() {
-        MainLabel.numberOfLines = 0
-        SubMainLabel.numberOfLines = 0
         BorderFrameLogin.layer.cornerRadius = 3
         BorderFramePassword.layer.cornerRadius = 3
         LoginTextField.attributedPlaceholder = NSAttributedString(string: "Email",
                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Пароль",
                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        LoginTextField.delegate = self
+        PasswordTextField.delegate = self
         setupVisualEffectView()
     }
     
@@ -178,4 +178,18 @@ class LoginController: UIViewController, LocalPasswordDelegate {
     }
     
 }
-
+extension LoginController: UITextFieldDelegate{
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case LoginTextField :
+            LoginTextField.resignFirstResponder()
+            return true;
+        case PasswordTextField :
+            PasswordTextField.resignFirstResponder()
+            return true;
+        default:
+            return true
+        }
+       
+    }
+}

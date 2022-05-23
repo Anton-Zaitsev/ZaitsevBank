@@ -29,10 +29,29 @@ class RegistrationController: UIViewController {
                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Придумайте пароль",
                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        LoginTextField.delegate = self
+        PasswordTextField.delegate = self
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if (view.frame.origin.y == 0){
+                view.frame.origin.y -= keyboardSize.height / 6
+                navigationController?.setNavigationBarHidden(true, animated: false)
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+            view.frame.origin.y = 0
     }
     
     
     @IBAction func ClickGoCheck(_ sender: Any) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
         if (CheckCorrectAuthData.checkLogin(login: ModelRegistration.Login)){
             
             if (CheckCorrectAuthData.checkPassword(pass:ModelRegistration.Password)){
@@ -62,8 +81,21 @@ class RegistrationController: UIViewController {
         BorderFramePassword.backgroundColor = CheckCorrectAuthData.checkPassword(pass: ModelRegistration.Password) ? .green : .red
     }
     
-    @IBAction func TapClearKeyboard(_ sender: Any) {
-        LoginTextField.resignFirstResponder()
-        PasswordTextField.resignFirstResponder()
+}
+
+extension RegistrationController: UITextFieldDelegate{
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        switch textField {
+        case LoginTextField :
+            LoginTextField.resignFirstResponder()
+            return true;
+        case PasswordTextField :
+            PasswordTextField.resignFirstResponder()
+            return true;
+        default:
+            return true
+        }
+       
     }
 }

@@ -11,6 +11,10 @@ class HistoryController: UIViewController {
 
     private let ModelsHistory: HistoryTransactionModels = HistoryTransactionModels()
     
+    private let transactionManager : TransactionManager = TransactionManager()
+    
+    private var transaction: [SortedAllTransaction] = []
+    
     private lazy var gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.type = .axial
@@ -25,6 +29,8 @@ class HistoryController: UIViewController {
     @IBOutlet weak var HistroryOperation: UICollectionView!
     
     @IBOutlet weak var FilterCollection: UICollectionView!
+    
+    @IBOutlet weak var TransactionTable: UITableView!
     
     @IBOutlet weak var ViewTransaction: UIView!
     
@@ -41,13 +47,121 @@ class HistoryController: UIViewController {
         
         FilterCollection.delegate = self
         FilterCollection.dataSource = self
+        
+        
+        TransactionTable.delegate = self
+        TransactionTable.dataSource = self
+        TransactionTable.backgroundColor = .clear
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true;
+        let loader = EnableLoader()
+        DispatchQueue.global(qos: .utility).async{ [self] in
+            Task(priority: .high) {
+                if let allTransaction = await transactionManager.GetAllTransaction(){
+                    transaction = allTransaction
+                    print(transaction.count)
+                    DispatchQueue.main.async {[self] in
+                        DisableLoader(loader: loader)
+                        TransactionTable.reloadData()
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {[self] in
+                        DisableLoader(loader: loader)
+                        print("Не удача")
+                    }
+                }
+            }
+        }
     }
 }
+extension HistoryController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+
+         //For Header Background Color
+        view.tintColor = UIColor("#2F2F2F")
+
+        // For Header Text Color
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        header.textLabel?.textColor = .white
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return transaction.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return transaction[section].allTransactions.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return transaction[section].date
+    }
+    
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        var cell = UITableViewCell()
+        
+        let typeOperation = AllTransactionsOperation.init(rawValue: transaction[indexPath.section].allTransactions[indexPath.row].typeTransaction)!
+        
+        if (typeOperation == AllTransactionsOperation.IncomingTransfer
+            || typeOperation == AllTransactionsOperation.OutgoingTransfer
+            || typeOperation == AllTransactionsOperation.IncomingTransferAndCurrencyTransfer
+            || typeOperation == AllTransactionsOperation.OutgoingTransferAndCurrencyTransfer
+            || typeOperation == AllTransactionsOperation.TakeCredit ){
+            
+            if let InOutcomingCell = tableView.dequeueReusableCell(withIdentifier: "InOutcomingCell", for: indexPath) as? InOutcomingCell {
+                InOutcomingCell.configurated(with: transaction[indexPath.section].allTransactions[indexPath.row], with: typeOperation)
+                //TransferCell.configurated(with: historyPayments.OperationTransfer[indexPath.row])
+                cell = InOutcomingCell
+            }
+        }
+        else if (typeOperation == AllTransactionsOperation.BetweenMyCards || typeOperation == AllTransactionsOperation.BetweenMyCardsAndCurrencyTransfer){
+            
+            if let BetweenMyCardsCell = tableView.dequeueReusableCell(withIdentifier: "BetweenMyCardsCell", for: indexPath) as? BetweenMyCardsCell {
+                BetweenMyCardsCell.configurated(with: transaction[indexPath.section].allTransactions[indexPath.row], with: typeOperation)
+                cell = BetweenMyCardsCell
+            }
+        }
+        else if (typeOperation == AllTransactionsOperation.CurrencyTransfer){
+            if let CurrencyTransferCell = tableView.dequeueReusableCell(withIdentifier: "CurrencyTransferCell", for: indexPath) as? CurrencyTransferCell {
+                CurrencyTransferCell.configurated(with: transaction[indexPath.section].allTransactions[indexPath.row], with: typeOperation)
+                cell = CurrencyTransferCell
+            }
+        }
+        else if (typeOperation == AllTransactionsOperation.ActivationCard || typeOperation == AllTransactionsOperation.DeActivationCard){
+            
+            if let CardTransactionCell = tableView.dequeueReusableCell(withIdentifier: "CreditCardTransactionCell", for: indexPath) as? CardTransactionCell {
+                CardTransactionCell.configurated(with: transaction[indexPath.section].allTransactions[indexPath.row], with: typeOperation)
+                cell = CardTransactionCell
+            }
+        }
+        else if (typeOperation == AllTransactionsOperation.PaymentCredit || typeOperation == AllTransactionsOperation.RepaymentCredit){
+            if let PayCreditCell = tableView.dequeueReusableCell(withIdentifier: "CreditServiceCell", for: indexPath) as? PayCreditCell {
+                PayCreditCell.configurated(with: transaction[indexPath.section].allTransactions[indexPath.row], with: typeOperation)
+                cell = PayCreditCell
+            }
+        }
+        cell.backgroundColor = .clear
+        return cell
+
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
+    
+}
+
 extension HistoryController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

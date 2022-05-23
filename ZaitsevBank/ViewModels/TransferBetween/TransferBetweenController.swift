@@ -194,8 +194,8 @@ class TransferBetweenController: UIViewController,CardChoiseDelegate {
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
-                navigationController?.setNavigationBarHidden(true, animated: true)
                 self.view.frame.origin.y -= keyboardSize.height / 2
+                navigationController?.setNavigationBarHidden(true, animated: true)
             }
         }
     }
@@ -313,8 +313,8 @@ class TransferBetweenController: UIViewController,CardChoiseDelegate {
 }
 extension TransferBetweenController: UITextFieldDelegate{
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        navigationController?.setNavigationBarHidden(false, animated: true)
         TextFieldSumm.resignFirstResponder()
+        navigationController?.setNavigationBarHidden(false, animated: true)
         return true;
     }
 }

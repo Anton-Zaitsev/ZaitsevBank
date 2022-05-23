@@ -59,9 +59,11 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
         pickerPol.delegate = self
         pickerPol.dataSource = self;
         PolTextField.inputView = pickerPol
+                
         setupVisualEffectView()
     }
     
+ 
     @IBAction func PhoneChanged(_ sender: Any) {
         PhoneTextField.text = CheckCorrectAuthData.formattedPhone(number: PhoneTextField.text ?? "")
         ModelRegistration.Phone = PhoneTextField.text ?? ""
@@ -79,6 +81,7 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
     }
         
     @IBAction func CreateNewAccount(_ sender: Any) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
         if (FramePhone.backgroundColor == .green) {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd.MM.yyyy"
@@ -246,3 +249,4 @@ extension LastRegController : UIPickerViewDelegate, UIPickerViewDataSource {
         PolTextField.resignFirstResponder()
     }
 }
+

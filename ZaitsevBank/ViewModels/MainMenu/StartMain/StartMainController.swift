@@ -25,7 +25,7 @@ class StartMainController: UIViewController {
     @IBOutlet weak var AllExchange: UILabel!
     
     @IBOutlet weak var MonthlyExpenses: UILabel!
-    @IBOutlet weak var IndicatorMonthlyExpenses: UIView!
+    @IBOutlet weak var IndicatorMonthlyExpenses: LineView!
     @IBOutlet weak var ViewMonthlyExpenses: UIView!
     
     @IBOutlet weak var WalletView: UIView!
@@ -42,6 +42,16 @@ class StartMainController: UIViewController {
     @IBOutlet weak var LabelFullAddCard: UILabel!
     @IBOutlet weak var LabelAddCard: UIButton!
     
+    private lazy var gradient: CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.type = .axial
+        gradient.colors = [
+            UIColor("#141425")!.cgColor,
+            UIColor.black.cgColor
+        ]
+        gradient.locations = [0, 0.5]
+        return gradient
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,13 +71,27 @@ class StartMainController: UIViewController {
     }
         
     private func GetView() {
+        
+        gradient.frame = view.bounds
+        view.layer.insertSublayer(gradient, at: 0)
+        
         LabelName.text = ""
         LabelFullAddCard.isEnabled = false
         LabelAddCard.isEnabled = false
         
         CollectionOffers.delegate = self
         CollectionOffers.dataSource = self
-        IndicatorMonthlyExpenses.layer.cornerRadius = IndicatorMonthlyExpenses.frame.height / 2
+ 
+        IndicatorMonthlyExpenses.colors = [
+            UIColor(red: 1.0, green: 31.0/255.0, blue: 73.0/255.0, alpha: 1.0), // red
+            UIColor(red:1.0, green: 138.0/255.0, blue: 0.0, alpha:1.0), // orange
+            UIColor(red: 122.0/255.0, green: 108.0/255.0, blue: 1.0, alpha: 1.0), // purple
+            UIColor(red: 0.0, green: 100.0/255.0, blue: 1.0, alpha: 1.0), // dark blue
+            UIColor(red: 100.0/255.0, green: 241.0/255.0, blue: 183.0/255.0, alpha: 1.0), // green
+            UIColor(red: 0.0, green: 222.0/255.0, blue: 1.0, alpha: 1.0) // blue
+        ]
+        IndicatorMonthlyExpenses.values = [0.15, 0.1, 0.35, 0.15, 0.1, 0.15]
+        
         
         ViewMonthlyExpenses.layer.cornerRadius = 6
         let dateFormatter = DateFormatter()
