@@ -88,7 +88,7 @@ public class API_VALUTE {
             mass_valute = ["BTC", "ETH", "USDT", "DOGE", "LTC", "BCH", "DASH", "ALGO"].reversed()
         }
         else {
-            mass_valute = ["USD", "EUR", "BYN" ,"UAH"].reversed()
+            mass_valute = ["USD", "EUR", "BYN","CNY" ,"UAH"].reversed()
         }
         
         let order = Dictionary(uniqueKeysWithValues: mass_valute.enumerated().map { ($0.1, $0.0) })

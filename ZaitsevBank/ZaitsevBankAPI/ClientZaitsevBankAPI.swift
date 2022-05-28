@@ -121,9 +121,30 @@ public class ClienZaitsevBankAPI {
     
     public static func getRequestGetAllTransactiont(userID: String,DateFrom: String, DateTo: String) -> URLRequest{
         let GetAllTransactiont = URL(string:"\(server)api/Transactions/GetAllTransaction?userID=\(userID)&dataFrom=\(DateFrom)&dataTo=\(DateTo)")
-        print("\(server)api/Transactions/GetAllTransaction?userID=\(userID)&dataFrom=\(DateFrom)&dataTo=\(DateTo)")
         var request = URLRequest(url: GetAllTransactiont!)
         request.httpMethod = "GET"
+        return request
+    }
+    
+    public static func getRequestValuteBuySale(transactionCardA: String, transactionCardB: String,Summ: String, BuySale: Bool) -> URLRequest{
+        let bool = BuySale ? "true" : "false"
+        let ValuteBuySale = URL(string:"\(server)api/Transactions/ValuteBuySale?CardA=\(transactionCardA)&CardB=\(transactionCardB)&Summ=\(Summ)&BuySale=\(bool)")
+        var request = URLRequest(url: ValuteBuySale!)
+        request.httpMethod = "POST"
+        return request
+    }
+    
+    public static func getRequestCheckCredit(count: String, year: String) -> URLRequest {
+        let checkCredit = URL(string:"\(server)api/Transactions/CheckCredit?count=\(count)&year=\(year)")
+        var request = URLRequest(url: checkCredit!)
+        request.httpMethod = "GET"
+        return request
+    }
+    
+    public static func getRequestApplyCredit(count: String, year: String, transactionCard: String) -> URLRequest{
+        let ApplyCredit = URL(string:"\(server)api/Transactions/ApplyCredit?count=\(count)&year=\(year)&transactionCard=\(transactionCard)")
+        var request = URLRequest(url: ApplyCredit!)
+        request.httpMethod = "POST"
         return request
     }
 }

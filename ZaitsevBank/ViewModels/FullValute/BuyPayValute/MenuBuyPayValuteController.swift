@@ -107,6 +107,9 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
     
     public var IndexFirstCard: Int?
     
+    private var transactionCardA: String?
+    private var transactionCardB: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -180,6 +183,8 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
         
         TypeValuteOffs = data.typeMoneyExtended // Новая валюта списания
         
+        transactionCardA = data.transactionID
+        
         if (cardPay.isEmpty == false) { // Если валюта зачисления есть
             
             let text = (TextFieldSUMM.text ?? "")
@@ -213,6 +218,8 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
         ImageBuyCard.image = UIImage(named: data.typeImageCard)
         NumberBuyCard.text = data.numberCard
         MoneyBuyCard.text = "\(data.moneyCount) \(data.typeMoney)"
+        
+        transactionCardB = data.transactionID
         
         TypeValuteEnrollment = data.typeMoneyExtended // Указать новый тип валюты зачисления
         
@@ -384,6 +391,54 @@ class MenuBuyPayValuteController: UIViewController,CardPickDelegate {
                 }
                 
             }
+        }
+    }
+    private let transactionManager : TransactionManager = TransactionManager()
+    
+    @IBAction func BuyPayValute(_ sender: Any) {
+        if let transCardA = transactionCardA {
+            if let transCardB = transactionCardB {
+                
+                if let ValutesConverted = (TextFieldSUMM.text ?? "").convertDouble(){
+                    let loader = self.EnableLoader()
+                    
+                    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
+                        Task(priority: .high) {
+                            
+                            if (await transactionManager.ValuteBuySale(transactionCardA: transCardA, transactionCardB: transCardB, Summ: ValutesConverted, BuySale: BuySaleToogle!)){
+    
+                                DispatchQueue.main.async { [self] in
+                                    DisableLoader(loader: loader)
+                                    
+                                    let storyboardCorrect : UIStoryboard = UIStoryboard(name: "TransferMenu", bundle: nil)
+                                    let transactionTemplate = storyboardCorrect.instantiateViewController(withIdentifier: "TransactionTemplate") as! TransactionTemplateController
+                                    transactionTemplate.operationName = BuySaleToogle! ? "Покупка" : "Продажа"
+                                    transactionTemplate.operationTitle = TitleLabel.text
+                                    transactionTemplate.operationSubTitle = BuySaleToogle! ? "Покупка валюты" : "Продажа валюты"
+                                    navigationController?.pushViewController(transactionTemplate, animated: true)
+                                }
+                                
+                            }
+                            else{
+                                DispatchQueue.main.async {
+                                    self.DisableLoader(loader: loader)
+                                    self.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось совершить \(self.BuySaleToogle! ? "покупку" : "продажу") валюты!")
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+                else{
+                    showAlert(withTitle: "Произошла ошибка", withMessage: "Не верная сумма зачисления")
+                }
+            }
+            else {
+                showAlert(withTitle: "Произошла ошибка", withMessage: "Не выбрана карта для зачисления")
+            }
+        }
+        else {
+            showAlert(withTitle: "Произошла ошибка", withMessage: "Не выбрана карта для списания")
         }
     }
     

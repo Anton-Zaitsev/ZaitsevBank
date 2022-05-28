@@ -1202,7 +1202,7 @@
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoZaitsevBank" translatesAutoresizingMaskIntoConstraints="NO" id="r5m-79-jqq">
                                                             <rect key="frame" x="10" y="8" width="35" height="35"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <color key="tintColor" red="0.16581539649999999" green="0.49487082199999999" blue="0.1040751618" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <color key="tintColor" systemColor="systemYellowColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="35" id="5tg-pA-FKq"/>
                                                                 <constraint firstAttribute="width" secondItem="r5m-79-jqq" secondAttribute="height" multiplier="1:1" id="gvO-9r-jj2"/>
@@ -1284,7 +1284,7 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoZaitsevBank" translatesAutoresizingMaskIntoConstraints="NO" id="sSR-GM-kNu">
                                                             <rect key="frame" x="0.0" y="7.5" width="35" height="35"/>
-                                                            <color key="tintColor" red="0.001092183928" green="0.62712389729999996" blue="0.023422600469999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <color key="tintColor" red="0.0" green="0.63529411764705879" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="35" id="256-PP-ww7"/>
                                                                 <constraint firstAttribute="width" secondItem="sSR-GM-kNu" secondAttribute="height" multiplier="1:1" id="xuU-32-OtL"/>
@@ -1299,29 +1299,19 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Клиенту ZaitsevBank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0N-GK-LS0">
-                                                            <rect key="frame" x="47" y="15" width="285" height="21.5"/>
+                                                            <rect key="frame" x="47" y="15" width="287" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="b9B-vN-Kke">
-                                                            <rect key="frame" x="340" y="17" width="20" height="16.5"/>
-                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="20" id="MLz-3a-y4m"/>
-                                                                <constraint firstAttribute="width" secondItem="b9B-vN-Kke" secondAttribute="height" multiplier="1:1" id="t13-8e-LcP"/>
-                                                            </constraints>
-                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="b9B-vN-Kke" firstAttribute="leading" secondItem="b0N-GK-LS0" secondAttribute="trailing" constant="8" id="93a-e5-Ajx"/>
                                                         <constraint firstItem="b0N-GK-LS0" firstAttribute="top" secondItem="wPm-MV-3H1" secondAttribute="topMargin" constant="4" id="Ltk-3y-AHS"/>
                                                         <constraint firstAttribute="bottom" secondItem="if8-hV-nF3" secondAttribute="bottom" id="MEG-Ey-zCA"/>
-                                                        <constraint firstAttribute="trailing" secondItem="b9B-vN-Kke" secondAttribute="trailing" constant="14" id="Oyf-2m-hzV"/>
                                                         <constraint firstItem="if8-hV-nF3" firstAttribute="leading" secondItem="sSR-GM-kNu" secondAttribute="trailing" constant="12" id="U0r-MQ-gIs"/>
-                                                        <constraint firstItem="b9B-vN-Kke" firstAttribute="centerY" secondItem="wPm-MV-3H1" secondAttribute="centerY" id="XO9-8y-KTn"/>
                                                         <constraint firstItem="if8-hV-nF3" firstAttribute="top" secondItem="b0N-GK-LS0" secondAttribute="bottom" constant="12.5" id="eaY-RQ-Hy3"/>
                                                         <constraint firstItem="sSR-GM-kNu" firstAttribute="leading" secondItem="wPm-MV-3H1" secondAttribute="leading" id="jmj-vr-69a"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="b0N-GK-LS0" secondAttribute="trailing" constant="20" id="lej-34-eq6"/>
                                                         <constraint firstItem="b0N-GK-LS0" firstAttribute="leading" secondItem="sSR-GM-kNu" secondAttribute="trailing" constant="12" id="pt5-Pz-rUh"/>
                                                         <constraint firstItem="sSR-GM-kNu" firstAttribute="centerY" secondItem="wPm-MV-3H1" secondAttribute="centerY" id="qxv-ka-8aI"/>
                                                         <constraint firstAttribute="trailing" secondItem="if8-hV-nF3" secondAttribute="trailing" id="sey-ke-wQN"/>
@@ -1357,7 +1347,7 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoZaitsevBank" translatesAutoresizingMaskIntoConstraints="NO" id="06i-97-PTt">
                                                             <rect key="frame" x="0.0" y="7.5" width="35" height="35"/>
-                                                            <color key="tintColor" red="0.001092183928" green="0.62712389729999996" blue="0.023422600469999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <color key="tintColor" red="0.0" green="0.63529411764705879" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="35" id="OLr-tk-Hrr"/>
                                                                 <constraint firstAttribute="width" secondItem="06i-97-PTt" secondAttribute="height" multiplier="1:1" id="ab9-a1-bYf"/>
@@ -1372,20 +1362,11 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Оплатить по QR коду" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQz-9P-Sr0">
-                                                            <rect key="frame" x="45" y="15" width="287" height="22"/>
+                                                            <rect key="frame" x="45" y="15" width="289" height="22"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="C8P-2V-43u">
-                                                            <rect key="frame" x="340" y="17" width="20" height="16.5"/>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="20" id="65V-Ij-w6b"/>
-                                                                <constraint firstAttribute="width" secondItem="C8P-2V-43u" secondAttribute="height" multiplier="1:1" id="ELX-HF-aVE"/>
-                                                            </constraints>
-                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="Ivl-hJ-b7L" firstAttribute="top" secondItem="TQz-9P-Sr0" secondAttribute="bottom" constant="12" id="2WS-Kt-1jw"/>
@@ -1393,12 +1374,10 @@
                                                         <constraint firstItem="Ivl-hJ-b7L" firstAttribute="leading" secondItem="06i-97-PTt" secondAttribute="trailing" constant="12" id="Bcj-Gl-6mx"/>
                                                         <constraint firstItem="06i-97-PTt" firstAttribute="leading" secondItem="Oco-15-ams" secondAttribute="leading" id="C9U-PU-voS"/>
                                                         <constraint firstItem="TQz-9P-Sr0" firstAttribute="leading" secondItem="06i-97-PTt" secondAttribute="trailing" constant="10" id="DcP-7F-dd2"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="TQz-9P-Sr0" secondAttribute="trailing" constant="20" id="MM3-Pj-jpQ"/>
                                                         <constraint firstAttribute="bottom" secondItem="Ivl-hJ-b7L" secondAttribute="bottom" id="UaU-kZ-qvv"/>
-                                                        <constraint firstItem="C8P-2V-43u" firstAttribute="leading" secondItem="TQz-9P-Sr0" secondAttribute="trailing" constant="8" id="Xbb-G1-Zwq"/>
                                                         <constraint firstAttribute="trailing" secondItem="Ivl-hJ-b7L" secondAttribute="trailing" id="alW-pa-rcF"/>
-                                                        <constraint firstAttribute="trailing" secondItem="C8P-2V-43u" secondAttribute="trailing" constant="14" id="jgC-E3-hzu"/>
                                                         <constraint firstItem="06i-97-PTt" firstAttribute="centerY" secondItem="Oco-15-ams" secondAttribute="centerY" id="lN4-an-NtL"/>
-                                                        <constraint firstItem="C8P-2V-43u" firstAttribute="centerY" secondItem="Oco-15-ams" secondAttribute="centerY" id="ytP-WP-cLk"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1685,7 +1664,7 @@
                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="WBv-bM-flk">
                                                                             <rect key="frame" x="42.5" y="23" width="102" height="20"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120 $ " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="pfQ-5o-CQR">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120 $ " textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="pfQ-5o-CQR">
                                                                                     <rect key="frame" x="0.0" y="2" width="38.5" height="16"/>
                                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1698,7 +1677,7 @@
                                                                                     <imageReference key="image" image="arrow.left.arrow.right" catalog="system" symbolScale="small"/>
                                                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="medium"/>
                                                                                 </imageView>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="650 ₽ " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="uMt-xR-nRY">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="650 ₽ " textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="uMt-xR-nRY">
                                                                                     <rect key="frame" x="61" y="2" width="41" height="16"/>
                                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1817,7 +1796,7 @@
                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="iN2-aU-9eq">
                                                                             <rect key="frame" x="1" y="24" width="102" height="27"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120 $ " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="NM6-K0-4KV">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120 $ " textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="NM6-K0-4KV">
                                                                                     <rect key="frame" x="0.0" y="5.5" width="38.5" height="16"/>
                                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1830,7 +1809,7 @@
                                                                                     <imageReference key="image" image="arrow.left.arrow.right" catalog="system" symbolScale="small"/>
                                                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="medium"/>
                                                                                 </imageView>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="650 ₽ " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="WFk-or-jnG">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="650 ₽ " textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="WFk-or-jnG">
                                                                                     <rect key="frame" x="61" y="5.5" width="41" height="16"/>
                                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1882,32 +1861,32 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GRW-mq-3Vn">
-                                                            <rect key="frame" x="62" y="12" width="337" height="56"/>
+                                                            <rect key="frame" x="62" y="14.5" width="337" height="51"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="TT9-G7-Myy">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="261.5" height="56"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="264.5" height="51"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="BQd-LH-4WC">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="196.5" height="36"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="174" height="31"/>
                                                                             <subviews>
                                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="srK-ah-xDp">
-                                                                                    <rect key="frame" x="0.0" y="2.5" width="17" height="30.5"/>
+                                                                                    <rect key="frame" x="0.0" y="2.5" width="17" height="25.5"/>
                                                                                     <color key="tintColor" red="0.5607843137254902" green="0.5607843137254902" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                     <imageReference key="image" image="return.right" catalog="system" symbolScale="small"/>
                                                                                 </imageView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="TJj-Wt-hoO">
-                                                                                    <rect key="frame" x="19" y="0.0" width="177.5" height="36"/>
+                                                                                    <rect key="frame" x="19" y="0.0" width="155" height="31"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MasterCard ZaitsevBank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRm-N5-R3W">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="166" height="17"/>
-                                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="145" height="14.5"/>
+                                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                             <size key="shadowOffset" width="0.0" height="0.0"/>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Молодежная ZaitsevBank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBt-ex-dAx">
-                                                                                            <rect key="frame" x="0.0" y="19" width="177.5" height="17"/>
-                                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                                                            <rect key="frame" x="0.0" y="16.5" width="155" height="14.5"/>
+                                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                             <size key="shadowOffset" width="0.0" height="0.0"/>
@@ -1919,7 +1898,7 @@
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </stackView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Покупка/Продажа валюты А" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obh-ie-m6F">
-                                                                            <rect key="frame" x="0.0" y="39" width="195" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="34" width="195" height="17"/>
                                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -1928,25 +1907,25 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </stackView>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="bottom" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="3HV-Mb-vqv">
-                                                                    <rect key="frame" x="271.5" y="0.0" width="65.5" height="56"/>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="3HV-Mb-vqv">
+                                                                    <rect key="frame" x="274.5" y="0.0" width="62.5" height="51"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120 $ " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbt-W6-44Q">
-                                                                            <rect key="frame" x="22" y="0.0" width="43.5" height="16.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120 $ " textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbt-W6-44Q">
+                                                                            <rect key="frame" x="21.5" y="0.0" width="41" height="15"/>
+                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                             <size key="shadowOffset" width="0.0" height="0.0"/>
                                                                         </label>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ry0-DG-xom">
-                                                                            <rect key="frame" x="46.5" y="21.5" width="19" height="14"/>
+                                                                            <rect key="frame" x="38.5" y="17.5" width="24" height="15.5"/>
                                                                             <color key="tintColor" systemColor="systemGreenColor"/>
-                                                                            <imageReference key="image" image="arrow.triangle.2.circlepath" catalog="system" symbolScale="small"/>
+                                                                            <imageReference key="image" image="arrow.triangle.2.circlepath" catalog="system" symbolScale="medium"/>
                                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="medium"/>
                                                                         </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="650 ₽ " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFR-M1-8eU">
-                                                                            <rect key="frame" x="19" y="40.5" width="46.5" height="15.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="650 ₽ " textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFR-M1-8eU">
+                                                                            <rect key="frame" x="19" y="36" width="43.5" height="15"/>
+                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                             <size key="shadowOffset" width="0.0" height="0.0"/>
@@ -2006,21 +1985,21 @@
                                                             <rect key="frame" x="62" y="7" width="337" height="61"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MasterCard ZaitsevBank 5228 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Fn-gO-Ah5">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="234.5" height="22"/>
-                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="221.5" height="20.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <size key="shadowOffset" width="0.0" height="0.0"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Активация карты" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6e7-go-bZ8">
-                                                                    <rect key="frame" x="0.0" y="23" width="118.5" height="19"/>
+                                                                    <rect key="frame" x="0.0" y="21.5" width="118.5" height="20"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <size key="shadowOffset" width="0.0" height="0.0"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Успешно выполнена" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGh-Tg-BSs">
-                                                                    <rect key="frame" x="0.0" y="43" width="132.5" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="42.5" width="132.5" height="18.5"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                                     <color key="textColor" red="0.0" green="0.62745098040000002" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <nil key="highlightedColor"/>
@@ -2215,7 +2194,6 @@
         <image name="bell.fill" catalog="system" width="128" height="124"/>
         <image name="chart.pie.fill" catalog="system" width="128" height="121"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
-        <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="chevron.up" catalog="system" width="128" height="72"/>
         <image name="creditcard.and.123" catalog="system" width="128" height="90"/>
         <image name="goldCardSIM" width="96" height="96"/>
@@ -2236,6 +2214,9 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

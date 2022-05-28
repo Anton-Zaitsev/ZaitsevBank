@@ -55,6 +55,10 @@
 		3A6B52EA281425CC00C1D741 /* PaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B52E9281425CC00C1D741 /* PaymentCell.swift */; };
 		3A6D957C2751CAE90064B11F /* API_DinamicValute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */; };
 		3A74D85A2818244A004047B9 /* CardChoiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A74D8592818244A004047B9 /* CardChoiceController.swift */; };
+		3A7CA4A32841401500989411 /* CheckCredit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7CA4A22841401500989411 /* CheckCredit.swift */; };
+		3A7CA4A52841427200989411 /* CreditOfferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7CA4A42841427200989411 /* CreditOfferController.swift */; };
+		3A7CA4A728419AC200989411 /* CalculationCreditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7CA4A628419AC200989411 /* CalculationCreditController.swift */; };
+		3A7CA4A928419B3800989411 /* CalculationCreditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7CA4A828419B3800989411 /* CalculationCreditCell.swift */; };
 		3A8263A827D93BB200F96258 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 3A8263A727D93BB200F96258 /* SwiftyJSON */; };
 		3A82E62E272B645C0054F36C /* OffersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A82E62D272B645C0054F36C /* OffersViewCell.swift */; };
 		3A835FD327320CD9000310EC /* ExchangeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A835FD227320CD9000310EC /* ExchangeViewCell.swift */; };
@@ -87,6 +91,7 @@
 		3ABDB664283BA2310004FCE8 /* AllTransactionsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABDB663283BA2310004FCE8 /* AllTransactionsOperation.swift */; };
 		3ABDB666283BCAAE0004FCE8 /* CardTransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABDB665283BCAAE0004FCE8 /* CardTransactionCell.swift */; };
 		3ABDB668283BD07B0004FCE8 /* PayCreditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABDB667283BD07B0004FCE8 /* PayCreditCell.swift */; };
+		3ABDB66B283E62F50004FCE8 /* StartOffersCreditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABDB66A283E62F50004FCE8 /* StartOffersCreditController.swift */; };
 		3AC468522823D8F8005540FC /* CardSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC468512823D8F8005540FC /* CardSearch.swift */; };
 		3ACEFA9D2720AC6D004BD739 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACEFA9C2720AC6D004BD739 /* NavigationController.swift */; };
 		3ACEFAA32721EBB7004BD739 /* AuthFromFaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */; };
@@ -161,6 +166,10 @@
 		3A6B52E9281425CC00C1D741 /* PaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCell.swift; sourceTree = "<group>"; };
 		3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_DinamicValute.swift; sourceTree = "<group>"; };
 		3A74D8592818244A004047B9 /* CardChoiceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardChoiceController.swift; sourceTree = "<group>"; };
+		3A7CA4A22841401500989411 /* CheckCredit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCredit.swift; sourceTree = "<group>"; };
+		3A7CA4A42841427200989411 /* CreditOfferController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditOfferController.swift; sourceTree = "<group>"; };
+		3A7CA4A628419AC200989411 /* CalculationCreditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationCreditController.swift; sourceTree = "<group>"; };
+		3A7CA4A828419B3800989411 /* CalculationCreditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationCreditCell.swift; sourceTree = "<group>"; };
 		3A82E62D272B645C0054F36C /* OffersViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersViewCell.swift; sourceTree = "<group>"; };
 		3A835FD227320CD9000310EC /* ExchangeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewCell.swift; sourceTree = "<group>"; };
 		3A850CDB28356AF300AB2A43 /* InOutcomingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutcomingCell.swift; sourceTree = "<group>"; };
@@ -192,6 +201,7 @@
 		3ABDB663283BA2310004FCE8 /* AllTransactionsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransactionsOperation.swift; sourceTree = "<group>"; };
 		3ABDB665283BCAAE0004FCE8 /* CardTransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTransactionCell.swift; sourceTree = "<group>"; };
 		3ABDB667283BD07B0004FCE8 /* PayCreditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayCreditCell.swift; sourceTree = "<group>"; };
+		3ABDB66A283E62F50004FCE8 /* StartOffersCreditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartOffersCreditController.swift; sourceTree = "<group>"; };
 		3AC468512823D8F8005540FC /* CardSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSearch.swift; sourceTree = "<group>"; };
 		3ACEFA9C2720AC6D004BD739 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFromFaceID.swift; sourceTree = "<group>"; };
@@ -285,6 +295,7 @@
 		3A0FC967270A530200B6B2F6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3ABDB669283E62CE0004FCE8 /* CreditZaitsevClient */,
 				3A905B4A2830483600E92F65 /* TransferZaitsevClient */,
 				3A12C8782815C15000EE1CC2 /* TransferByCamera */,
 				3A3FAF0B282A957000A8DE39 /* TransferBetween */,
@@ -549,6 +560,17 @@
 			path = TransactionsCells;
 			sourceTree = "<group>";
 		};
+		3ABDB669283E62CE0004FCE8 /* CreditZaitsevClient */ = {
+			isa = PBXGroup;
+			children = (
+				3ABDB66A283E62F50004FCE8 /* StartOffersCreditController.swift */,
+				3A7CA4A42841427200989411 /* CreditOfferController.swift */,
+				3A7CA4A628419AC200989411 /* CalculationCreditController.swift */,
+				3A7CA4A828419B3800989411 /* CalculationCreditCell.swift */,
+			);
+			path = CreditZaitsevClient;
+			sourceTree = "<group>";
+		};
 		3AE09EB828020C7F0016E1EF /* ZaitsevBankAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,6 +592,7 @@
 				3AABE0AE280261D300EB3623 /* CardModel.swift */,
 				3AC468512823D8F8005540FC /* CardSearch.swift */,
 				3ABDB661283ADFEF0004FCE8 /* AllTransactions.swift */,
+				3A7CA4A22841401500989411 /* CheckCredit.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -705,6 +728,7 @@
 				3A36DAF427417F5000F9CE9C /* CardGenerator.swift in Sources */,
 				3A3FAF01282953C600A8DE39 /* TransactionTemplateController.swift in Sources */,
 				3A6B52EA281425CC00C1D741 /* PaymentCell.swift in Sources */,
+				3A7CA4A928419B3800989411 /* CalculationCreditCell.swift in Sources */,
 				3AB86B89270CADC7008D0823 /* Extension.swift in Sources */,
 				3AABE0AF280261D300EB3623 /* CardModel.swift in Sources */,
 				3A2BCAF62743E34000189086 /* ExchangeRateController.swift in Sources */,
@@ -730,10 +754,12 @@
 				3AE09EC328021C3A0016E1EF /* RequestResult.swift in Sources */,
 				3AF5D73927E6B9CC0095A4DC /* Regex.swift in Sources */,
 				3AD95369271DC7DA0081D50A /* LocalPassword.swift in Sources */,
+				3A7CA4A52841427200989411 /* CreditOfferController.swift in Sources */,
 				3A905B4C2830485900E92F65 /* TransferZaitsevClientController.swift in Sources */,
 				3A9C9B792739DB0C009A2D4C /* PreferenceCardAddViewCell.swift in Sources */,
 				3A6B52E82814210300C1D741 /* TransferCell.swift in Sources */,
 				3A12C87A2815CCA600EE1CC2 /* TransferCameraController.swift in Sources */,
+				3A7CA4A32841401500989411 /* CheckCredit.swift in Sources */,
 				3A30489A27139BAD0010A739 /* SafeLocalPassword.swift in Sources */,
 				3AE09EBC28020E890016E1EF /* CheckCorrectAuthData.swift in Sources */,
 				3A49B5142755701F00ECC979 /* FullCardCell.swift in Sources */,
@@ -767,9 +793,11 @@
 				3AEB8616283449A5005A71F0 /* TransactionFilterOperationCell.swift in Sources */,
 				3AB687EE272221BC002BD6EB /* HistoryController.swift in Sources */,
 				3A99391D2738B15B009B1B06 /* NewCardController.swift in Sources */,
+				3ABDB66B283E62F50004FCE8 /* StartOffersCreditController.swift in Sources */,
 				3A0787F92778851900F678DD /* API_VALUTE.swift in Sources */,
 				3AE09EBE28021A5F0016E1EF /* AccountManager.swift in Sources */,
 				3A835FD327320CD9000310EC /* ExchangeViewCell.swift in Sources */,
+				3A7CA4A728419AC200989411 /* CalculationCreditController.swift in Sources */,
 				3AB86B86270BAA62008D0823 /* RegistrationController.swift in Sources */,
 				3AEB861428344989005A71F0 /* HistoryTransactionOperationCell.swift in Sources */,
 				3A5EB0D6272D69ED0037D006 /* WalletViewCell.swift in Sources */,

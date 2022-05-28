@@ -63,6 +63,10 @@ public enum OperationPayments {
                 }
             }
         case .makeCredit:
+            controller.navigationController?.isNavigationBarHidden = false
+            let storyboardStartCredit : UIStoryboard = UIStoryboard(name: "CardViewer", bundle: nil)
+            let StartCredit = storyboardStartCredit.instantiateViewController(withIdentifier: "StartCreditOffers") as! StartOffersCreditController
+            controller.navigationController?.pushViewController(StartCredit, animated: true)
             break
         case .buyValute:
             controller.navigationController?.isNavigationBarHidden = false

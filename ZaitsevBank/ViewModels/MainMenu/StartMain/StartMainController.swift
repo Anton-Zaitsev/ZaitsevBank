@@ -97,7 +97,7 @@ class StartMainController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ru_RU")
         dateFormatter.dateFormat = "LLLL"
-        MonthlyExpenses.text! += dateFormatter.string(from: Date())
+        MonthlyExpenses.text = "17 500 ₽" + " за " + dateFormatter.string(from: Date())
         
         WalletView.layer.cornerRadius = 12
         ExchangeView.layer.cornerRadius = 12
@@ -253,18 +253,7 @@ class StartMainController: UIViewController {
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                 Task{
                     modelStartMain.dataTableExchange.removeAll()
-                    
-                    if let dataUSD = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.USD.rawValue}) {
-                        modelStartMain.dataTableExchange.append(dataUSD)
-                    }
-                    
-                    if let dataEvro = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.EUR.rawValue}) {
-                        modelStartMain.dataTableExchange.append(dataEvro)
-                    }
-                    
-                    if let dataUKR = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.UAH.rawValue}) {
-                        modelStartMain.dataTableExchange.append(dataUKR)
-                    }
+                    modelStartMain.dataTableExchange = modelStartMain.dataExchange
                     
                     DispatchQueue.main.async {
                         self.ExchangeTable.reloadData()
@@ -292,18 +281,8 @@ class StartMainController: UIViewController {
             modelStartMain.dataTableExchange.removeAll()
         }
         
-        if let dataUSD = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.USD.rawValue}) {
-            modelStartMain.dataTableExchange.append(dataUSD)
-        }
-        
-        if let dataEvro = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.EUR.rawValue}) {
-            modelStartMain.dataTableExchange.append(dataEvro)
-        }
-        
-        if let dataUKR = modelStartMain.dataExchange.first(where:{$0.typeValuteExtended == ValuteType.UAH.rawValue}) {
-            modelStartMain.dataTableExchange.append(dataUKR)
-        }
-        
+        modelStartMain.dataTableExchange = modelStartMain.dataExchange
+
         ExhangeTableValute = true
         
         DispatchQueue.main.async {

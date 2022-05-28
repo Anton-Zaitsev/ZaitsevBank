@@ -24,7 +24,7 @@ class CurrencyTransferCell: UITableViewCell {
 
     func configurated(with Transaction: AllTransactions, with typeOperation: AllTransactionsOperation) {
         NameCardFrom.text = Transaction.transactionValuteBetween!.fromCardName
-        NameCardFrom.text = Transaction.transactionValuteBetween!.toCardName
+        NameCardTo.text = Transaction.transactionValuteBetween!.toCardName
         
         let valuteA = ValuteZaitsevBank.init(rawValue: Transaction.transactionValuteBetween!.transactionValute!.valuteA)!
         

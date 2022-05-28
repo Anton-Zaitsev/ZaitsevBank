@@ -9,6 +9,53 @@ import Foundation
 
 public class TransactionManager {
     
+    public func ApplyCredit(summ: Double,year: Int, transactionCard: String) async -> Bool{
+        
+        var request : URLRequest
+        
+        if let summInt = Int(exactly: summ){
+            request = ClienZaitsevBankAPI.getRequestApplyCredit(count: String(summInt), year: String(year), transactionCard: transactionCard)
+        }
+        else {
+            let summString = String(summ).replacingOccurrences(of: ".", with: ",")
+            request = ClienZaitsevBankAPI.getRequestApplyCredit(count: summString, year: String(year), transactionCard: transactionCard)
+        }
+        
+        do {
+            let (_,responce) = try await URLSession.shared.data(for: request)
+            guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
+                return false }
+            return true
+        }
+        catch {
+            return false
+        }
+        
+    }
+    
+    public func CheckCredit(summ: Double, year: Int) async -> CreditCheck? {
+        
+        var request : URLRequest
+        if let summInt = Int(exactly: summ){
+            request = ClienZaitsevBankAPI.getRequestCheckCredit(count: String(summInt), year: String(year))
+        }
+        else {
+            let summString = String(summ).replacingOccurrences(of: ".", with: ",")
+            request = ClienZaitsevBankAPI.getRequestCheckCredit(count: summString, year: String(year))
+        }
+        do {
+            let (credit,responce) = try await URLSession.shared.data(for: request)
+            guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
+                return nil }
+            let decoder = JSONDecoder()
+            let creditCheck = try decoder.decode(CreditCheck.self, from: credit)
+            return creditCheck
+        }
+        catch {
+            return nil
+        }
+    }
+    
     public func TransferClient(TransactionSender: String, TransactionRecipient: String, summ: Double) async -> Bool{
         
         var request : URLRequest
@@ -31,6 +78,30 @@ public class TransactionManager {
             return false
         }
     }
+    
+    public func ValuteBuySale(transactionCardA: String, transactionCardB: String,Summ: Double, BuySale: Bool) async -> Bool{
+        
+        var request : URLRequest
+        
+        if let summInt = Int(exactly: Summ){
+            request = ClienZaitsevBankAPI.getRequestValuteBuySale(transactionCardA: transactionCardA, transactionCardB: transactionCardB, Summ: String(summInt), BuySale: BuySale)
+        }
+        else {
+            let summString = String(Summ).replacingOccurrences(of: ".", with: ",")
+            request = ClienZaitsevBankAPI.getRequestValuteBuySale(transactionCardA: transactionCardA, transactionCardB: transactionCardB, Summ: summString, BuySale: BuySale)
+        }
+        
+        do {
+            let (_,responce) = try await URLSession.shared.data(for: request)
+            guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
+                return false }
+            return true
+        }
+        catch {
+            return false
+        }
+    }
+    
     public func GetAllTransaction(_ dateFrom: Date? = nil, _ dateTo: Date? = nil) async -> [SortedAllTransaction]?{
         
         if (UserDefaults.standard.checkUserID()) {
@@ -58,13 +129,11 @@ public class TransactionManager {
                 let (ListTransaction,responce) = try await URLSession.shared.data(for: ClienZaitsevBankAPI.getRequestGetAllTransactiont(userID: userID, DateFrom: dataFromString, DateTo: dataToString))
                 guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
                     return nil }
-                print(String(decoding: ListTransaction, as: UTF8.self))
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategyFormatters = [DateFormatter.standardT,
-                                                           DateFormatter.standard]
+                                                          DateFormatter.standard]
                 let AllTransaction = try decoder.decode([AllTransactions].self, from: ListTransaction)
-    
-                print(AllTransaction.count)
+                
                 dateformat.dateFormat = "d MMMM, E"
                 
                 let transactionSorted = AllTransaction.reduce([String: [AllTransactions]]()) { (key, value) -> [String: [AllTransactions]] in
@@ -89,8 +158,7 @@ public class TransactionManager {
                 
                 return sortedAllTransactions
             }
-            catch (let error) {
-                print(error.localizedDescription)
+            catch {
                 return nil
             }
         }
@@ -107,16 +175,16 @@ extension JSONDecoder {
         set {
             guard let formatters = newValue else { return }
             self.dateDecodingStrategy = .custom { decoder in
-
+                
                 let container = try decoder.singleValueContainer()
                 let dateString = try container.decode(String.self)
-
+                
                 for formatter in formatters {
                     if let date = formatter.date(from: dateString) {
                         return date
                     }
                 }
-
+                
                 throw DecodingError.dataCorruptedError(in: container, debugDescription: "Не удается декодировать строку данных \(dateString)")
             }
         }
@@ -130,8 +198,8 @@ extension DateFormatter {
         return dateFormatter
     }()
     static let standard: DateFormatter = {
-            var dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-            return dateFormatter
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        return dateFormatter
     }()
 }
