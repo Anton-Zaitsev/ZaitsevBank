@@ -85,6 +85,8 @@ class CreditPayController: UIViewController,CardPickDelegate {
     
     @IBOutlet weak var ViewTable: UIView!
     
+    @IBOutlet weak var SegmentControl: UISegmentedControl!
+    
     @IBOutlet weak var CreditsTable: UITableView!
     
     @IBOutlet weak var StackErrorFind: UIStackView!
@@ -154,6 +156,7 @@ class CreditPayController: UIViewController,CardPickDelegate {
     }
     
     private func GetAllCredit() {
+        SegmentControl.isUserInteractionEnabled = false
         StackErrorFind.isHidden = true
         CreditsTable.isHidden = true
         ViewTable.backgroundColor = UIColor("#291836")
@@ -180,6 +183,7 @@ class CreditPayController: UIViewController,CardPickDelegate {
                             CreditsTable.isHidden = false
                             CreditsTable.reloadData()
                             
+                            SegmentControl.isUserInteractionEnabled = true
                             if (Credits.isEmpty == false){
                                 let indexPath = IndexPath(row: 0, section: 0)
                                 CreditsTable.scrollToRow(at: indexPath, at: .top, animated: true)
@@ -196,6 +200,7 @@ class CreditPayController: UIViewController,CardPickDelegate {
                             ViewTable.backgroundColor = UIColor("#1E1E1E")
                             LabelError.text = typeCredits ? "Не найдены платежи по кредитам, попробуйте обновить." : "Ожидающие платежи по кредитам не были найдены, попробуйте обновить."
                             StackErrorFind.isHidden = false
+                            SegmentControl.isUserInteractionEnabled = true
                         })
                     }
                 }
@@ -225,6 +230,11 @@ class CreditPayController: UIViewController,CardPickDelegate {
     }
 }
 extension CreditPayController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = .white
+    }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
