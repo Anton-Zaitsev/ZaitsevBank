@@ -147,6 +147,27 @@ public class ClienZaitsevBankAPI {
         request.httpMethod = "POST"
         return request
     }
+    
+    public static func getRequestGetListCredits(userID: String, allList: Bool = false) -> URLRequest{
+
+       let GetListCredits = allList ?  URL(string:"\(server)api/Transactions/GetListCredits?userID=\(userID)&allList=true") :
+        
+            URL(string:"\(server)api/Transactions/GetListCredits?userID=\(userID)")
+
+        var request = URLRequest(url: GetListCredits!)
+        request.httpMethod = "GET"
+        return request
+    }
+    
+    public static func getRequestAddMoneyCredit(transactionCredit: String, transactionCard: String, creditID: String) -> URLRequest {
+        let AddMoneyCredit = URL(string:"\(server)api/Transactions/AddMoneyCredit?transactionCredit=\(transactionCredit)&transactionCard=\(transactionCard)&creditID=\(creditID)")
+
+         var request = URLRequest(url: AddMoneyCredit!)
+         request.httpMethod = "POST"
+         return request
+        
+    }
+    
 }
 
 

@@ -19,8 +19,9 @@ class PayCreditCell: UITableViewCell {
         // Initialization code
     }
     func configurated(with Transaction: AllTransactions, with typeOperation: AllTransactionsOperation) {
+        let valute = ValuteZaitsevBank.RUB
         NumberCredit.text = "Договор: \(Transaction.transactionCredit!.numberDocument)"
-        CountMoney.text = "\(Transaction.transactionCredit!.countMoney.valuteToTableFormat()) \(ValuteZaitsevBank.RUB.description)"
+        CountMoney.text = "\(Transaction.transactionCredit!.countMoney.convertedToMoneyValute(valute: valute)) \(valute.description)"
         TypeTransaction.text = Transaction.nameTransaction
         let valuteNotPay = 1 - Transaction.transactionCredit!.progress
         ViewCreditFill.colors = [

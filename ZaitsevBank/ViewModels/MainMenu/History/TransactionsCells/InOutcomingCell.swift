@@ -87,7 +87,7 @@ class InOutcomingCell: UITableViewCell {
             ImageMoneyOperation.isHidden = true
             MoneyOperation.textColor = .white
             
-            MoneyOperation.text = "\(valute.electronValute ? Transaction.transactionPaymentServices!.countMoney.valuteToCurseFormat() : Transaction.transactionPaymentServices!.countMoney.valuteToTableFormat()) \(valute.description)"
+            MoneyOperation.text = "\(Transaction.transactionPaymentServices!.countMoney.convertedToMoneyValute(valute: valute)) \(valute.description)"
         }
     }
 

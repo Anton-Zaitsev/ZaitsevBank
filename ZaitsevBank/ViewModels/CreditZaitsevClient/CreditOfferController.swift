@@ -29,7 +29,7 @@ class CreditOfferController: UIViewController,CardPickDelegate {
                     else {
                         DispatchQueue.main.async {
                             self.DisableLoader(loader: loader)
-                            self.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось получить данные с сервера о пользователе")
+                            self.showAlert(withTitle: "Произошла ошибка", withMessage: "Не удалось оформить кредит")
                         }
                     }
                     
@@ -109,7 +109,7 @@ class CreditOfferController: UIViewController,CardPickDelegate {
                             DispatchQueue.main.async { [self] in
                                 StackSettingsCredit.isHidden = false
                                 Persent.text = String(creditCheck.persent).replacingOccurrences(of: ".", with: ",") + " %"
-                                Payment.text = "\(Double(creditCheck.monthlyPayment).valuteToTableFormat()) \(valuteRub.description)"
+                                Payment.text = "\(Double(creditCheck.monthlyPayment).convertedToMoney()) \(valuteRub.description)"
                             }
                         }
                         else {

@@ -1086,16 +1086,215 @@
             </objects>
             <point key="canvasLocation" x="1660.8695652173915" y="734.59821428571422"/>
         </scene>
+        <!--Credit Pay Controller-->
+        <scene sceneID="5DI-dT-oSh">
+            <objects>
+                <viewController storyboardIdentifier="PayCredit" id="80G-AZ-vRk" customClass="CreditPayController" customModule="ZaitsevBank" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gKH-dE-aGh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Платежи по кредитам" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7e-P7-jOc">
+                                <rect key="frame" x="20" y="49" width="374" height="31.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4Yf-l5-icI">
+                                <rect key="frame" x="20" y="90.5" width="374" height="32"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <segments>
+                                    <segment title="Ожидающие"/>
+                                    <segment title="Все платежи"/>
+                                </segments>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="selectedSegmentTintColor" systemColor="systemIndigoColor"/>
+                                <connections>
+                                    <action selector="ControllerCreditsTable:" destination="80G-AZ-vRk" eventType="valueChanged" id="zTp-gT-gFI"/>
+                                </connections>
+                            </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nzw-QZ-2qk">
+                                <rect key="frame" x="0.0" y="136.5" width="414" height="759.5"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mgh-Xx-XP0">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="759.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="creditPayCell" rowHeight="76" id="au2-k4-8P2" customClass="CreditPayInfoCell" customModule="ZaitsevBank" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="44.5" width="414" height="76"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="au2-k4-8P2" id="WAh-vL-AfY">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creditcard.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Zgw-a1-7eJ">
+                                                            <rect key="frame" x="6" y="16" width="45" height="44"/>
+                                                            <color key="tintColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="45" id="4jh-4E-9Uj"/>
+                                                                <constraint firstAttribute="width" secondItem="Zgw-a1-7eJ" secondAttribute="height" multiplier="1:1" id="fVp-Pb-jHY"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wWk-fB-kGr">
+                                                            <rect key="frame" x="58" y="10" width="129" height="54.5"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Оплата кредита" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5gV-3g-HpZ">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="129" height="19.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="май, 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIw-gG-1m1">
+                                                                    <rect key="frame" x="0.0" y="19.5" width="129" height="18"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ожидается оплата" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UnE-4E-Zen">
+                                                                    <rect key="frame" x="0.0" y="37.5" width="129" height="17"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="kEW-52-h98">
+                                                            <rect key="frame" x="197" y="18" width="207" height="40"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cJh-c6-EjN">
+                                                                    <rect key="frame" x="114" y="0.0" width="93" height="20"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="73 566 ₽" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4SM-Uc-mq3">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="68" height="20"/>
+                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                                            <color key="textColor" systemColor="systemGreenColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.up.forward.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="MyA-gR-1bE">
+                                                                            <rect key="frame" x="73" y="0.5" width="20" height="19"/>
+                                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            </preferredSymbolConfiguration>
+                                                                        </imageView>
+                                                                    </subviews>
+                                                                </stackView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Остаток: 4 500 000 ₽" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="3xz-Ax-xLv">
+                                                                    <rect key="frame" x="69" y="24" width="138" height="16"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Zgw-a1-7eJ" firstAttribute="top" secondItem="WAh-vL-AfY" secondAttribute="top" constant="15.5" id="0jc-l2-CMV"/>
+                                                        <constraint firstItem="kEW-52-h98" firstAttribute="leading" secondItem="wWk-fB-kGr" secondAttribute="trailing" constant="10" id="1kA-QE-9Zh"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Zgw-a1-7eJ" secondAttribute="bottom" constant="15.5" id="1r9-QJ-IT8"/>
+                                                        <constraint firstItem="wWk-fB-kGr" firstAttribute="leading" secondItem="Zgw-a1-7eJ" secondAttribute="trailing" constant="7" id="AHo-Hl-eHx"/>
+                                                        <constraint firstAttribute="trailing" secondItem="kEW-52-h98" secondAttribute="trailing" constant="10" id="Rya-BK-xE4"/>
+                                                        <constraint firstItem="Zgw-a1-7eJ" firstAttribute="leading" secondItem="WAh-vL-AfY" secondAttribute="leading" constant="6" id="Yqv-Aa-DXv"/>
+                                                        <constraint firstItem="wWk-fB-kGr" firstAttribute="top" secondItem="WAh-vL-AfY" secondAttribute="top" constant="10" id="b0g-Ay-dVT"/>
+                                                        <constraint firstItem="kEW-52-h98" firstAttribute="centerY" secondItem="WAh-vL-AfY" secondAttribute="centerY" id="uMT-C5-agB"/>
+                                                        <constraint firstAttribute="bottom" secondItem="wWk-fB-kGr" secondAttribute="bottom" constant="11.5" id="wze-5i-QRb"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <outlet property="ContentCell" destination="WAh-vL-AfY" id="Mil-tB-e4s"/>
+                                                    <outlet property="MoneyLabel" destination="4SM-Uc-mq3" id="9wv-9r-eNe"/>
+                                                    <outlet property="MonthLabel" destination="qIw-gG-1m1" id="pz4-JE-IIx"/>
+                                                    <outlet property="OperationInfo" destination="UnE-4E-Zen" id="qGZ-Xp-RGL"/>
+                                                    <outlet property="RemainsLabel" destination="3xz-Ax-xLv" id="AAC-Pi-bId"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="nXQ-uR-YDN">
+                                        <rect key="frame" x="20" y="30" width="374" height="80"/>
+                                        <subviews>
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ожидающие платежи по кредитам не были найдены, попробуйте обновить." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhT-Z3-lln">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="41"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cH-Xj-zRd">
+                                                <rect key="frame" x="0.0" y="48" width="374" height="32"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Обновить">
+                                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <color key="baseForegroundColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="UpdateButton:" destination="80G-AZ-vRk" eventType="touchUpInside" id="t1t-zk-DQ0"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TransactionGif.gif" translatesAutoresizingMaskIntoConstraints="NO" id="uep-YR-a57">
+                                        <rect key="frame" x="0.0" y="30" width="414" height="700"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="nXQ-uR-YDN" secondAttribute="trailing" constant="20" id="1yy-8D-H6O"/>
+                                    <constraint firstAttribute="trailing" secondItem="mgh-Xx-XP0" secondAttribute="trailing" id="7b0-ku-9fG"/>
+                                    <constraint firstItem="nXQ-uR-YDN" firstAttribute="top" secondItem="nzw-QZ-2qk" secondAttribute="top" constant="30" id="FbV-BE-lO3"/>
+                                    <constraint firstAttribute="bottom" secondItem="mgh-Xx-XP0" secondAttribute="bottom" id="NbP-d6-qJn"/>
+                                    <constraint firstItem="uep-YR-a57" firstAttribute="width" secondItem="nzw-QZ-2qk" secondAttribute="width" id="UGk-YR-T25"/>
+                                    <constraint firstItem="mgh-Xx-XP0" firstAttribute="top" secondItem="nzw-QZ-2qk" secondAttribute="top" id="XU6-hb-HvC"/>
+                                    <constraint firstItem="uep-YR-a57" firstAttribute="centerY" secondItem="nzw-QZ-2qk" secondAttribute="centerY" id="aub-xy-DQb"/>
+                                    <constraint firstItem="mgh-Xx-XP0" firstAttribute="leading" secondItem="nzw-QZ-2qk" secondAttribute="leading" id="mlQ-bK-H2t"/>
+                                    <constraint firstItem="nXQ-uR-YDN" firstAttribute="leading" secondItem="nzw-QZ-2qk" secondAttribute="leading" constant="20" id="sv3-Vb-Keb"/>
+                                    <constraint firstItem="uep-YR-a57" firstAttribute="centerX" secondItem="nzw-QZ-2qk" secondAttribute="centerX" id="yd6-Y5-8JR"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="93N-bx-Kei"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="q7e-P7-jOc" secondAttribute="trailing" constant="20" id="56Y-vA-hy3"/>
+                            <constraint firstAttribute="bottom" secondItem="nzw-QZ-2qk" secondAttribute="bottom" id="9lL-Gy-eup"/>
+                            <constraint firstItem="93N-bx-Kei" firstAttribute="trailing" secondItem="4Yf-l5-icI" secondAttribute="trailing" constant="20" id="COB-Wg-1zW"/>
+                            <constraint firstItem="nzw-QZ-2qk" firstAttribute="leading" secondItem="93N-bx-Kei" secondAttribute="leading" id="HWD-21-FPW"/>
+                            <constraint firstItem="nzw-QZ-2qk" firstAttribute="trailing" secondItem="93N-bx-Kei" secondAttribute="trailing" id="Nyh-oL-GV3"/>
+                            <constraint firstItem="4Yf-l5-icI" firstAttribute="top" secondItem="q7e-P7-jOc" secondAttribute="bottom" constant="10" id="VEG-XL-sE0"/>
+                            <constraint firstItem="q7e-P7-jOc" firstAttribute="top" secondItem="93N-bx-Kei" secondAttribute="top" constant="5" id="aKC-JB-auS"/>
+                            <constraint firstItem="q7e-P7-jOc" firstAttribute="leading" secondItem="93N-bx-Kei" secondAttribute="leading" constant="20" id="tFx-kT-oDj"/>
+                            <constraint firstItem="nzw-QZ-2qk" firstAttribute="top" secondItem="4Yf-l5-icI" secondAttribute="bottom" constant="15" id="uGk-M4-728"/>
+                            <constraint firstItem="4Yf-l5-icI" firstAttribute="leading" secondItem="93N-bx-Kei" secondAttribute="leading" constant="20" id="xp6-YN-nnh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="CreditsTable" destination="mgh-Xx-XP0" id="ih4-cz-0he"/>
+                        <outlet property="LabelError" destination="DhT-Z3-lln" id="CtI-Wd-yKO"/>
+                        <outlet property="LoaderCredits" destination="uep-YR-a57" id="Evf-Z3-ZxY"/>
+                        <outlet property="StackErrorFind" destination="nXQ-uR-YDN" id="loL-ws-rJC"/>
+                        <outlet property="ViewTable" destination="nzw-QZ-2qk" id="aZY-Vc-oSr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7mf-ou-3Yz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2460.8695652173915" y="734.59821428571422"/>
+        </scene>
     </scenes>
     <color key="tintColor" systemColor="tintColor"/>
     <resources>
         <image name="BacroundCardTypeDefault" width="893" height="552"/>
         <image name="CreditOffers" width="1587" height="970"/>
         <image name="LogoZaitsevBank" width="819" height="701"/>
+        <image name="TransactionGif.gif" width="1000" height="700"/>
         <image name="arrow.left.arrow.right.circle" catalog="system" width="128" height="121"/>
+        <image name="arrow.up.forward.circle" catalog="system" width="128" height="121"/>
         <image name="calendar.badge.clock.rtl" catalog="system" width="128" height="108"/>
         <image name="chart.bar.doc.horizontal" catalog="system" width="115" height="128"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="creditcard.circle.fill" catalog="system" width="128" height="121"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="key.icloud.fill" catalog="system" width="128" height="88"/>
         <image name="masterCardLogo" width="3565" height="2132"/>
@@ -1108,6 +1307,9 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

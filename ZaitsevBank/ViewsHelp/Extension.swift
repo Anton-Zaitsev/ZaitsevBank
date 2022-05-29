@@ -113,7 +113,6 @@ extension UIImageView {
         gifImageView.animationImages = images
         return gifImageView
     }
-    
 }
 
 

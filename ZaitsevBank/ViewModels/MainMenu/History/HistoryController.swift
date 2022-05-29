@@ -15,6 +15,25 @@ class HistoryController: UIViewController {
     
     private var transaction: [SortedAllTransaction] = []
     
+    
+    private lazy var imagesGif : [UIImage]? = {
+        guard let path = Bundle.main.path(forResource: "TransactionGif", ofType: "gif") else {
+            print("Gif does not exist at that path")
+            return nil
+        }
+        let url = URL(fileURLWithPath: path)
+        guard let gifData = try? Data(contentsOf: url),
+              let source =  CGImageSourceCreateWithData(gifData as CFData, nil) else { return nil  }
+        var images = [UIImage]()
+        let imageCount = CGImageSourceGetCount(source)
+        for i in 0 ..< imageCount {
+            if let image = CGImageSourceCreateImageAtIndex(source, i, nil) {
+                images.append(UIImage(cgImage: image))
+            }
+        }
+        return images
+    }()
+    
     private lazy var gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.type = .axial
@@ -25,6 +44,10 @@ class HistoryController: UIViewController {
         gradient.locations = [0, 0.25]
         return gradient
     }()
+    @IBOutlet weak var LoaderTransaction: UIImageView!
+    
+    
+    @IBOutlet weak var LabelNotTransaction: UIStackView!
     
     @IBOutlet weak var HistroryOperation: UICollectionView!
     
@@ -40,6 +63,13 @@ class HistoryController: UIViewController {
         gradient.frame = view.bounds
         view.layer.insertSublayer(gradient, at: 0)
         
+        LoaderTransaction.clipsToBounds = true
+        LoaderTransaction.isHidden = false
+        LabelNotTransaction.isHidden = true
+        FilterCollection.isHidden = true
+        TransactionTable.isHidden = true
+        ViewTransaction.backgroundColor = UIColor("#291836")
+        
         ViewTransaction.roundTopCorners(radius: 20)
         
         HistroryOperation.delegate = self
@@ -52,26 +82,91 @@ class HistoryController: UIViewController {
         TransactionTable.delegate = self
         TransactionTable.dataSource = self
         TransactionTable.backgroundColor = .clear
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshTransaction), for: .valueChanged)
+        TransactionTable.refreshControl = refreshControl
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true;
-        let loader = EnableLoader()
+        if transaction.isEmpty {
+            updateTransaction()
+        }
+    }
+    @objc private func refreshTransaction(refreshControl: UIRefreshControl) {
+        
         DispatchQueue.global(qos: .utility).async{ [self] in
             Task(priority: .high) {
                 if let allTransaction = await transactionManager.GetAllTransaction(){
                     transaction = allTransaction
-                    print(transaction.count)
-                    DispatchQueue.main.async {[self] in
-                        DisableLoader(loader: loader)
+                    DispatchQueue.main.async { [self] in
                         TransactionTable.reloadData()
+                        refreshControl.endRefreshing()
                     }
                 }
                 else {
-                    DispatchQueue.main.async {[self] in
-                        DisableLoader(loader: loader)
-                        print("Не удача")
+                    DispatchQueue.main.async{ [self] in
+                        refreshControl.endRefreshing()
+                        LabelNotTransaction.isHidden = false
+                    }
+                }
+            }
+        }
+    }
+    @IBAction func UpdateButton(_ sender: Any) {
+        updateTransaction()
+    }
+    
+    private func updateTransaction() {
+        
+        LabelNotTransaction.isHidden = true
+        FilterCollection.isHidden = true
+        TransactionTable.isHidden = true
+        
+        ViewTransaction.backgroundColor = UIColor("#291836")
+        
+        LoaderTransaction.isHidden = false
+        if (imagesGif != nil){
+            LoaderTransaction.animationImages = imagesGif
+            LoaderTransaction.startAnimating()
+        }
+        else {
+            LoaderTransaction.image = UIImage(named: "TransactionGif.gif")
+        }
+        DispatchQueue.global(qos: .utility).async{ [self] in
+            Task(priority: .high) {
+                if let allTransaction = await transactionManager.GetAllTransaction(){
+                    transaction = allTransaction
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        
+                        UIView.animate(withDuration: 0.55,
+                                       animations: { [self] in
+                            LoaderTransaction.stopAnimating()
+                            LoaderTransaction.isHidden = true
+                            ViewTransaction.backgroundColor = UIColor("#1E1E1E")
+                            FilterCollection.isHidden = false
+                            TransactionTable.isHidden = false
+                            TransactionTable.reloadData()
+                            
+                            if (transaction.isEmpty == false){
+                                let indexPath = IndexPath(row: 0, section: 0)
+                                TransactionTable.scrollToRow(at: indexPath, at: .top, animated: true)
+                            }
+                        })
+                    }
+                }
+                else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                        UIView.animate(withDuration: 0.55,
+                                       animations: { [self] in
+                        LoaderTransaction.stopAnimating()
+                        LoaderTransaction.isHidden = true
+                        ViewTransaction.backgroundColor = UIColor("#1E1E1E")
+                        LabelNotTransaction.isHidden = false
+                        })
                     }
                 }
             }

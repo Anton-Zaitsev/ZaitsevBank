@@ -801,10 +801,10 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Bl-Tl-uTk">
-                                <rect key="frame" x="110" y="204" width="194.5" height="88"/>
+                                <rect key="frame" x="20" y="204" width="374" height="88"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CS5-UU-d31">
-                                        <rect key="frame" x="0.0" y="0.0" width="194.5" height="59.5"/>
+                                        <rect key="frame" x="90" y="0.0" width="194.5" height="59.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Перевод доставлен" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0P-Eg-Vra">
                                                 <rect key="frame" x="0.0" y="0.0" width="194.5" height="24"/>
@@ -812,7 +812,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200 ₽ " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hc2-4U-KdH">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200 ₽ " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="Hc2-4U-KdH">
                                                 <rect key="frame" x="62.5" y="32" width="69.5" height="27.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -821,7 +821,7 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Владимир М.В." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPj-rg-mDU">
-                                        <rect key="frame" x="34" y="67.5" width="126" height="20.5"/>
+                                        <rect key="frame" x="124" y="67.5" width="126" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -840,6 +840,8 @@
                             <constraint firstItem="OhT-3F-SKf" firstAttribute="top" secondItem="3Bl-Tl-uTk" secondAttribute="bottom" constant="50" id="V0N-Fx-lCD"/>
                             <constraint firstItem="OhT-3F-SKf" firstAttribute="leading" secondItem="fE0-EF-rUH" secondAttribute="leading" id="WR8-xk-EYq"/>
                             <constraint firstItem="3Bl-Tl-uTk" firstAttribute="top" secondItem="LR1-vF-Zp4" secondAttribute="bottom" constant="25" id="WcC-6S-Zwm"/>
+                            <constraint firstItem="fE0-EF-rUH" firstAttribute="trailing" secondItem="3Bl-Tl-uTk" secondAttribute="trailing" constant="20" id="WuO-qU-A7l"/>
+                            <constraint firstItem="3Bl-Tl-uTk" firstAttribute="leading" secondItem="fE0-EF-rUH" secondAttribute="leading" constant="20" id="jYA-vs-E0C"/>
                             <constraint firstAttribute="bottom" secondItem="OhT-3F-SKf" secondAttribute="bottom" id="lez-re-gka"/>
                             <constraint firstItem="OhT-3F-SKf" firstAttribute="trailing" secondItem="fE0-EF-rUH" secondAttribute="trailing" id="q9C-lO-iAV"/>
                             <constraint firstItem="OVs-Hv-dAp" firstAttribute="leading" secondItem="fE0-EF-rUH" secondAttribute="leading" constant="20" id="xMD-dB-7XU"/>

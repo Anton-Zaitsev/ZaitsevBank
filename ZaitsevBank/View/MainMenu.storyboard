@@ -2124,16 +2124,51 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TransactionGif.gif" translatesAutoresizingMaskIntoConstraints="NO" id="GfR-dM-NJg">
+                                        <rect key="frame" x="0.0" y="120" width="414" height="414"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="GfR-dM-NJg" secondAttribute="height" multiplier="1:1" id="duP-6s-EkC"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="ogL-5r-zNc">
+                                        <rect key="frame" x="20" y="30" width="374" height="80"/>
+                                        <subviews>
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Транзакции не были найдены, попробуйте воспользоваться сервисами банка." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIn-oU-k2L">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="41"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kh-D0-CH8">
+                                                <rect key="frame" x="0.0" y="48" width="374" height="32"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Обновить">
+                                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <color key="baseForegroundColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="UpdateButton:" destination="ZsB-Ng-h4z" eventType="touchUpInside" id="5Wr-FY-IDT"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="p6Q-eo-4Yj" secondAttribute="bottom" id="3Tu-eS-Kt1"/>
                                     <constraint firstAttribute="trailing" secondItem="p6Q-eo-4Yj" secondAttribute="trailing" id="5de-Kp-buR"/>
+                                    <constraint firstItem="ogL-5r-zNc" firstAttribute="top" secondItem="Fhq-JL-r3K" secondAttribute="top" constant="30" id="Fxm-Qm-t5l"/>
+                                    <constraint firstItem="ogL-5r-zNc" firstAttribute="leading" secondItem="Fhq-JL-r3K" secondAttribute="leading" constant="20" id="Yvz-Ia-CNn"/>
                                     <constraint firstItem="POD-Rc-lm8" firstAttribute="top" secondItem="Fhq-JL-r3K" secondAttribute="top" constant="20" id="elK-qg-XDA"/>
+                                    <constraint firstItem="GfR-dM-NJg" firstAttribute="width" secondItem="Fhq-JL-r3K" secondAttribute="width" id="fcO-jF-4p6"/>
+                                    <constraint firstItem="GfR-dM-NJg" firstAttribute="centerX" secondItem="Fhq-JL-r3K" secondAttribute="centerX" id="pk0-c7-kb4"/>
                                     <constraint firstItem="p6Q-eo-4Yj" firstAttribute="leading" secondItem="Fhq-JL-r3K" secondAttribute="leading" id="pz1-DG-WKN"/>
                                     <constraint firstItem="p6Q-eo-4Yj" firstAttribute="top" secondItem="POD-Rc-lm8" secondAttribute="bottom" constant="8" symbolic="YES" id="rqI-HY-Zoc"/>
+                                    <constraint firstAttribute="trailing" secondItem="ogL-5r-zNc" secondAttribute="trailing" constant="20" id="wnt-S7-5J5"/>
                                     <constraint firstItem="POD-Rc-lm8" firstAttribute="leading" secondItem="Fhq-JL-r3K" secondAttribute="leading" id="yBS-vm-8gH"/>
                                     <constraint firstAttribute="trailing" secondItem="POD-Rc-lm8" secondAttribute="trailing" id="z5f-ac-hk2"/>
+                                    <constraint firstItem="GfR-dM-NJg" firstAttribute="centerY" secondItem="Fhq-JL-r3K" secondAttribute="centerY" id="z82-lj-jcM"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2157,6 +2192,8 @@
                     <connections>
                         <outlet property="FilterCollection" destination="POD-Rc-lm8" id="PCL-mV-hpI"/>
                         <outlet property="HistroryOperation" destination="Z8a-g2-8E0" id="hpD-TL-hmN"/>
+                        <outlet property="LabelNotTransaction" destination="ogL-5r-zNc" id="9Jj-Js-tXu"/>
+                        <outlet property="LoaderTransaction" destination="GfR-dM-NJg" id="IPj-bT-eJE"/>
                         <outlet property="TransactionTable" destination="p6Q-eo-4Yj" id="mpW-pu-DEU"/>
                         <outlet property="ViewTransaction" destination="Fhq-JL-r3K" id="Ee7-Fq-S4l"/>
                     </connections>
@@ -2188,6 +2225,7 @@
         <image name="LogoZaitsevBank" width="819" height="701"/>
         <image name="OutgoingIcon" width="105" height="105"/>
         <image name="PayCredit" width="106" height="107"/>
+        <image name="TransactionGif.gif" width="1000" height="700"/>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="arrow.left.arrow.right" catalog="system" width="119" height="128"/>
         <image name="arrow.triangle.2.circlepath" catalog="system" width="128" height="101"/>

@@ -9,6 +9,18 @@ import Foundation
 
 public class TransactionManager {
     
+    public func AddMoneyCredit(transactionCredit: String, transactionCard: String, creditID: String) async -> Bool{
+        let request : URLRequest = ClienZaitsevBankAPI.getRequestAddMoneyCredit(transactionCredit: transactionCredit, transactionCard: transactionCard, creditID: creditID)
+        do {
+            let (_,responce) = try await URLSession.shared.data(for: request)
+            guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
+                return false }
+            return true
+        }
+        catch {
+            return false
+        }
+    }
     public func ApplyCredit(summ: Double,year: Int, transactionCard: String) async -> Bool{
         
         var request : URLRequest
@@ -52,6 +64,62 @@ public class TransactionManager {
             return creditCheck
         }
         catch {
+            return nil
+        }
+    }
+    
+    public func GetListCredits(allList: Bool = false) async -> [SortedAllCreditList]? {
+        if (UserDefaults.standard.checkUserID()) {
+            
+            let userID = UserDefaults.standard.isUserID()
+            let request : URLRequest = ClienZaitsevBankAPI.getRequestGetListCredits(userID: userID,allList: allList)
+            
+            do {
+                let (ListCredit,responce) = try await URLSession.shared.data(for: request)
+                guard (responce as? HTTPURLResponse)?.statusCode == 200 else {
+                    return nil }
+                
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategyFormatters = [DateFormatter.standardF,DateFormatter.standardT,
+                                                          DateFormatter.standard]
+                let AllCreditList = try decoder.decode([CreditPay].self, from: ListCredit)
+                
+                let dateformat = DateFormatter()
+                dateformat.dateFormat = "d MMMM yyyy"
+                
+                let creditSorted = AllCreditList.reduce([SettingsCredit: [CreditPaysTransaction]]()) { (key, value) -> [SettingsCredit: [CreditPaysTransaction]] in
+                    var key = key
+                    let dataOffers = dateformat.string(from: value.dateCreditOffers)
+                    let dataEnd = dateformat.string(from: value.dateCreditEnd)
+                    let nameKey = "№ \(value.numberDocument) от \(dataOffers) г. до \(dataEnd) г."
+                    
+                    let settingsCredit : SettingsCredit = SettingsCredit(nameCredit: nameKey, dateCredit: value.dateCreditOffers,creditID: value.idCredit)
+                    
+                    var array = key[settingsCredit]
+                    
+                    if array == nil {
+                        array = []
+                    }
+                    array = value.creditPaysTransaction
+                    key[settingsCredit] = array!.sorted(by: { $0.datePay < $1.datePay })
+                    
+                    return key
+                }
+                var sortedAllCredits : [SortedAllCreditList] = []
+                
+                for transaction in creditSorted{
+                    sortedAllCredits.append(SortedAllCreditList(SettingsCredit: transaction.key, credits: transaction.value))
+                }
+                sortedAllCredits = sortedAllCredits.sorted(by: { $0.SettingsCredit.dateCredit < $1.SettingsCredit.dateCredit })
+                
+                return sortedAllCredits
+            }
+            catch {
+                return nil
+            }
+            
+        }
+        else {
             return nil
         }
     }
@@ -195,6 +263,11 @@ extension DateFormatter {
     static let standardT: DateFormatter = {
         var dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS"
+        return dateFormatter
+    }()
+    static let standardF: DateFormatter = {
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return dateFormatter
     }()
     static let standard: DateFormatter = {
