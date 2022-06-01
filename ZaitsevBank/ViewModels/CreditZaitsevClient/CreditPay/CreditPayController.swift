@@ -140,12 +140,15 @@ class CreditPayController: UIViewController,CardPickDelegate {
                 if let allCredits = await transactionManager.GetListCredits(allList: typeCredits){
                     Credits = allCredits
                     DispatchQueue.main.async { [self] in
+                        StackErrorFind.isHidden = true
                         CreditsTable.reloadData()
                         refreshControl.endRefreshing()
                     }
                 }
                 else {
                     DispatchQueue.main.async{ [self] in
+                        Credits.removeAll()
+                        CreditsTable.reloadData()
                         refreshControl.endRefreshing()
                         LabelError.text = typeCredits ? "Не найдены платежи по кредитам, попробуйте обновить." : "Ожидающие платежи по кредитам не были найдены, попробуйте обновить."
                         StackErrorFind.isHidden = false

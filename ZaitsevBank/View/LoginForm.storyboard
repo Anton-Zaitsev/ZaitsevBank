@@ -357,7 +357,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="continue" textContentType="email"/>
                                         <connections>
-                                            <action selector="PasswordChanged:" destination="Y6W-OH-hqX" eventType="editingChanged" id="XMG-GI-Hu3"/>
+                                            <action selector="LoginChanged:" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="hkg-lX-0gv"/>
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o70-FV-KV2">
@@ -419,7 +419,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="continue" secureTextEntry="YES" textContentType="password"/>
                                         <connections>
-                                            <action selector="LoginChanged:" destination="Y6W-OH-hqX" eventType="editingChanged" id="rOP-uO-7aC"/>
+                                            <action selector="PasswordChanged:" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="ytA-s2-cmN"/>
                                         </connections>
                                     </textField>
                                 </subviews>

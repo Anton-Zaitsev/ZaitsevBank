@@ -24,10 +24,12 @@ public extension Double {
     }
     
     func convertedToMoney() -> String {
+        let roundingString = String(format: "%.2f", self)
+        let roundedDouble = Double(roundingString)!
         let fmt = NumberFormatter()
         fmt.numberStyle = .decimal
         fmt.locale = Locale(identifier: "fr_FR")
-        return fmt.string(from: self as NSNumber) ?? self.valuteToTableFormat()
+        return fmt.string(from: roundedDouble as NSNumber) ?? roundedDouble.valuteToTableFormat()
     }
     func valuteToTableFormat() -> String {
         if let converted = Int(exactly: self) {

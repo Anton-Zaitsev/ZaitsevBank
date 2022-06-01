@@ -59,7 +59,6 @@ public class AccountManager {
         do {
             let (user,responce)  = try await URLSession.shared.data(for: request)
             if let code = (responce as? HTTPURLResponse)?.statusCode {
-                
                 if let requestResult =  RequestResult.init(rawValue: code){
                     switch requestResult{
                     case .OK :

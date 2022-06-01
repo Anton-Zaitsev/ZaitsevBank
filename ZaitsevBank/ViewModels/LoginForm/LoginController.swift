@@ -64,6 +64,9 @@ class LoginController: UIViewController, LocalPasswordDelegate {
     
     @IBAction func SignClick(_ sender: Any){
         
+        LoginTextField.resignFirstResponder()
+        PasswordTextField.resignFirstResponder()
+        
         let loader = EnableLoader()
         DispatchQueue.global(qos: .utility).async{ [self] in
             
@@ -98,12 +101,7 @@ class LoginController: UIViewController, LocalPasswordDelegate {
         loginModel.Password = PasswordTextField.text ?? ""
         BorderFramePassword.backgroundColor = CheckCorrectAuthData.checkPassword(pass: loginModel.Password) ? UIColor.green : UIColor.red
     }
-    
-    @IBAction func TapClearKeyboard(_ sender: Any) {
-        LoginTextField.resignFirstResponder()
-        PasswordTextField.resignFirstResponder()
-    }
-    
+        
     func SigninFromPassword() {
         animateOut()
         

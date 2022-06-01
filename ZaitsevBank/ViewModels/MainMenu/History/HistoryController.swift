@@ -103,12 +103,15 @@ class HistoryController: UIViewController {
                 if let allTransaction = await transactionManager.GetAllTransaction(){
                     transaction = allTransaction
                     DispatchQueue.main.async { [self] in
+                        LabelNotTransaction.isHidden = true
                         TransactionTable.reloadData()
                         refreshControl.endRefreshing()
                     }
                 }
                 else {
                     DispatchQueue.main.async{ [self] in
+                        transaction.removeAll()
+                        TransactionTable.reloadData()
                         refreshControl.endRefreshing()
                         LabelNotTransaction.isHidden = false
                     }

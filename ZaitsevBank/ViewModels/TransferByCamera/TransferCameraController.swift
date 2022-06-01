@@ -143,7 +143,7 @@ class TransferCameraController: UIViewController,CardChoiseDelegate {
     @IBAction func TransferContinue(_ sender: Any) {
         if let cardRecipient = FilterCardID {
             if let cardSender = PayCardID {
-                if let summ = Double((TextFieldSumm.text ?? "").replacingOccurrences(of: ",", with: ".")) {
+                if let summ = (TextFieldSumm.text ?? "").convertDouble() {
                     let loaderView = EnableLoader()
                     DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                         Task{
