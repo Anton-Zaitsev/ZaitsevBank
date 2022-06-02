@@ -12,8 +12,10 @@ import UIKit
 class StartMainController: UIViewController {
     
     private let modelStartMain : StartMenu = StartMenu()
+    
     private let accountManager : AccountManager = AccountManager()
     private let cardManager : CardsManager = CardsManager()
+    private let financeManager : FinanceManager = FinanceManager()
     
     private var ExhangeTableValute = true
     
@@ -69,7 +71,7 @@ class StartMainController: UIViewController {
         LabelFullAddCard.textColor = #colorLiteral(red: 0, green: 0.6389579177, blue: 0, alpha: 1)
         AllExchange.textColor = #colorLiteral(red: 0, green: 0.6389579177, blue: 0, alpha: 1)
     }
-        
+    
     private func GetView() {
         
         gradient.frame = view.bounds
@@ -81,23 +83,14 @@ class StartMainController: UIViewController {
         
         CollectionOffers.delegate = self
         CollectionOffers.dataSource = self
- 
-        IndicatorMonthlyExpenses.colors = [
-            UIColor(red: 1.0, green: 31.0/255.0, blue: 73.0/255.0, alpha: 1.0), // red
-            UIColor(red:1.0, green: 138.0/255.0, blue: 0.0, alpha:1.0), // orange
-            UIColor(red: 122.0/255.0, green: 108.0/255.0, blue: 1.0, alpha: 1.0), // purple
-            UIColor(red: 0.0, green: 100.0/255.0, blue: 1.0, alpha: 1.0), // dark blue
-            UIColor(red: 100.0/255.0, green: 241.0/255.0, blue: 183.0/255.0, alpha: 1.0), // green
-            UIColor(red: 0.0, green: 222.0/255.0, blue: 1.0, alpha: 1.0) // blue
-        ]
-        IndicatorMonthlyExpenses.values = [0.15, 0.1, 0.35, 0.15, 0.1, 0.15]
         
         
         ViewMonthlyExpenses.layer.cornerRadius = 6
+        
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ru_RU")
         dateFormatter.dateFormat = "LLLL"
-        MonthlyExpenses.text = "17 500 ₽" + " за " + dateFormatter.string(from: Date())
+        MonthlyExpenses.text = "Нет трат" + " за " + dateFormatter.string(from: Date())
         
         WalletView.layer.cornerRadius = 12
         ExchangeView.layer.cornerRadius = 12
@@ -142,6 +135,9 @@ class StartMainController: UIViewController {
                             await self.getDataUserTable()
                         }
                         group.addTask {
+                            await self.getFinanceMonth()
+                        }
+                        group.addTask {
                             await self.getValuteExchange()
                         }
                         group.addTask {
@@ -156,6 +152,7 @@ class StartMainController: UIViewController {
             DisableLoader(loader: loaderView)
         }
         var count = 0
+        var countFinance = 0
         
         Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [self] (_) in
             if (modelStartMain.dataValute.count > 0){
@@ -173,6 +170,22 @@ class StartMainController: UIViewController {
             }
             else {
                 LabelValute.text = "Добро пожаловать в Zaitsev Банк"
+            }
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        dateFormatter.dateFormat = "LLLL"
+        
+        Timer.scheduledTimer(withTimeInterval: 8, repeats: true) { [self] (_) in
+            if (modelStartMain.financeMonth.count > 0){
+                MonthlyExpenses.fadeTransition(0.4)
+                MonthlyExpenses.text = modelStartMain.financeMonth[countFinance].title + " за " + dateFormatter.string(from: Date())
+                
+                IndicatorMonthlyExpenses.colors = modelStartMain.financeMonth[countFinance].categoryColor
+                IndicatorMonthlyExpenses.values = modelStartMain.financeMonth[countFinance].category
+                
+                countFinance = countFinance < modelStartMain.financeMonth.count - 1 ? countFinance + 1 : 0
             }
         }
     }
@@ -197,6 +210,9 @@ class StartMainController: UIViewController {
                 await withTaskGroup(of: Void.self) { group in
                     group.addTask {
                         await self.getDataUserTable()
+                    }
+                    group.addTask {
+                        await self.getFinanceMonth()
                     }
                     group.addTask {
                         await self.getValuteExchange()
@@ -282,7 +298,7 @@ class StartMainController: UIViewController {
         }
         
         modelStartMain.dataTableExchange = modelStartMain.dataExchange
-
+        
         ExhangeTableValute = true
         
         DispatchQueue.main.async {
@@ -299,6 +315,23 @@ class StartMainController: UIViewController {
         modelStartMain.cardUser = await cardManager.GetAllCards()
         DispatchQueue.main.async {
             self.WalletTable.reloadData()
+        }
+    }
+    
+    private func getFinanceMonth() async{
+        modelStartMain.financeMonth = await financeManager.GetFinanceMonth()
+        if (modelStartMain.financeMonth.count > 0){
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "ru_RU")
+            dateFormatter.dateFormat = "LLLL"
+            
+            DispatchQueue.main.async { [self] in
+                MonthlyExpenses.fadeTransition(0.4)
+                MonthlyExpenses.text = modelStartMain.financeMonth.first!.title + " за " + dateFormatter.string(from: Date())
+                
+                IndicatorMonthlyExpenses.colors = modelStartMain.financeMonth.first!.categoryColor
+                IndicatorMonthlyExpenses.values = modelStartMain.financeMonth.first!.category
+            }
         }
     }
     

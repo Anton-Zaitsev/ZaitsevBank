@@ -168,6 +168,13 @@ public class ClienZaitsevBankAPI {
         
     }
     
+    public static func getRequestGetFinanceMonth(userID: String) -> URLRequest {
+        let GetFinanceMonth = URL(string:"\(server)api/Finance/GetFinanceMonth?userID=\(userID)")
+         var request = URLRequest(url: GetFinanceMonth!)
+         request.httpMethod = "GET"
+         return request
+        
+    }
 }
 
 

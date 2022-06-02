@@ -26,6 +26,8 @@ public class StartMenu {
     public var dataValute : [ValuteMainLabel] = []
     
     public var cardUser : [Cards] = []
+    
+    public var financeMonth : [ExpensesMonth] = []
 }
 
 public struct ValuteMainLabel {
