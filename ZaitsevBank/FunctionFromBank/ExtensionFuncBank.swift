@@ -14,12 +14,21 @@ extension StringProtocol {
 }
 
 public extension Double {
+    
+    func convertedFinance(valute: ValuteZaitsevBank) -> String {
+        let fmt = NumberFormatter()
+        fmt.numberStyle = .decimal
+        fmt.locale = Locale(identifier: "de_DE")
+        let convert = fmt.string(from: self as NSNumber)
+        return convert == nil ? (valute.electronValute ? self.valuteToCurseFormat() : self.valuteToTableFormat()) :
+        convert!.replacingOccurrences(of: ".", with: " ")
+    }
+    
     func convertedToMoneyValute(valute: ValuteZaitsevBank) -> String {
         let fmt = NumberFormatter()
         fmt.numberStyle = .decimal
         fmt.locale = Locale(identifier: "fr_FR")
         let convert = fmt.string(from: self as NSNumber)
-        
         return convert ?? (valute.electronValute ? self.valuteToCurseFormat() : self.valuteToTableFormat())
     }
     

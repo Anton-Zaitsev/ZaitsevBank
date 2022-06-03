@@ -25,7 +25,7 @@ public class FinanceManager {
                 
                 for finace in financeMonth {
                     let valuteType = ValuteZaitsevBank.init(rawValue: finace.valuteType)!
-                    let valueMonth = "\(finace.summ.convertedToMoneyValute(valute: valuteType)) \(valuteType.description)"
+                    let valueMonth = finace.summ.convertedFinance(valute: valuteType) + " " + valuteType.description
                     var arrayCategory : [CGFloat] = []
                     arrayCategory.append(finace.transfers)
                     arrayCategory.append(finace.buyValute)

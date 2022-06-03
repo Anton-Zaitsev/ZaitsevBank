@@ -28,6 +28,11 @@ class NewCardController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false;
+    }
+    
     @IBAction private func AcceptCard(_ sender: Any) {
         let ParametrsAddCardController = storyboard?.instantiateViewController(withIdentifier: "ParametrsCardMenu") as! ParametrsAddCardViewController
         ParametrsAddCardController.CARDDATA = modelDataCard.dataCard[getScrollIndexItem()]

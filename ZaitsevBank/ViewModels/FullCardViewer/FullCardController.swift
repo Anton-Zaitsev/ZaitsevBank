@@ -26,6 +26,11 @@ class FullCardController: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false;
+    }
+    
     
     @objc func autoScroll() {
         let totalCount = cardFull.count-1
