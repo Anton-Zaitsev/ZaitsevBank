@@ -48,8 +48,8 @@ class CardPickController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let loader = self.EnableLoader(CGRect(x: 0, y: UIScreen.main.bounds.height / 1.5, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2 ))
         if(cardUser.isEmpty){
+            let loader = EnableLoader(CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2))
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
                 Task{
                     cardUser = await CardsManager().GetCardsBuySale(TypeValute: valuteSymbol, BuySale: buySaleToogle!)

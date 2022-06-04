@@ -78,7 +78,7 @@ extension UIViewController {
         let viewLoader = UIView(frame: screen)
         viewLoader.backgroundColor = .black
         viewLoader.layer.opacity = 0.5
-        guard let LoaderView = UIImageView.loadGifLoading() else { return viewLoader }
+        guard let LoaderView = UIImageView.loadGifLoading(CustomView) else { return viewLoader }
         view.addSubview(viewLoader)
         view.addSubview(LoaderView)
         self.view.addSubview(view)
@@ -89,7 +89,7 @@ extension UIViewController {
 }
 
 extension UIImageView {
-    static func loadGifLoading() -> UIImageView? {
+    static func loadGifLoading(_ CustomView: CGRect) -> UIImageView? {
         guard let path = Bundle.main.path(forResource: "Loading", ofType: "gif") else {
             print("Gif does not exist at that path")
             return nil
@@ -104,8 +104,8 @@ extension UIImageView {
                 images.append(UIImage(cgImage: image))
             }
         }
-        let screen = UIScreen.main.bounds
-        let imageWidth:CGFloat = 150
+        let screen = CustomView
+        let imageWidth:CGFloat = 100
         let gifImageView = UIImageView()
         gifImageView.contentMode = .scaleAspectFill
         gifImageView.frame = CGRect.init(x: (screen.width/2)-imageWidth/2, y: (screen.height/2)-imageWidth/2, width: imageWidth, height: imageWidth)
