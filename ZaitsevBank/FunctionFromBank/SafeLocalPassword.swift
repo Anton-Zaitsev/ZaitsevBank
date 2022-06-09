@@ -10,7 +10,6 @@ import CoreData
 
 public class SafeLocalPassword {
     
-    
     public static func FeatchCountData(database: NSPersistentContainer) -> Bool {
         
         let context: NSManagedObjectContext = {

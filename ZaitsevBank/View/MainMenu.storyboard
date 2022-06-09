@@ -50,6 +50,9 @@
                                             <imageReference key="image" image="person.fill" catalog="system" symbolScale="large"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="Exit:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="mX6-0f-MpH"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -231,6 +231,16 @@ class StartMainController: UIViewController {
         }
     }
     
+    @IBAction func Exit(_ sender: Any) {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [self] in
+            Task{
+                accountManager.ExitUser()
+                DispatchQueue.main.async {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+            }
+        }
+    }
     @IBAction func NewCardPlus(_ sender: Any) {
         AddNewCardFunction(OwnerNameFamily: "\(modelStartMain.DataUser.firstName) \(modelStartMain.DataUser.lastName)")
     }

@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftyJSON
+import UIKit
+import CoreData
 
 public class AccountManager {
     
@@ -112,4 +114,24 @@ public class AccountManager {
         else {return nil}
     }
     
+    public func ExitUser () {
+        let defaults = UserDefaults.standard
+            let dictionary = defaults.dictionaryRepresentation()
+            dictionary.keys.forEach { key in
+                defaults.removeObject(forKey: key)
+        }
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.ContainerLocalData.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AutoLoginSet")
+        fetchRequest.returnsObjectsAsFaults = false
+
+        do {
+            let arrUsrObj = try managedContext.fetch(fetchRequest)
+            for usrObj in arrUsrObj as! [NSManagedObject] {
+                managedContext.delete(usrObj)
+            }
+           try managedContext.save() //don't forget
+        } catch _ as NSError { }
+    }
 }
