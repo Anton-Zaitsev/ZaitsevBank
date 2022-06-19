@@ -29,26 +29,14 @@ class RegistrationController: UIViewController {
                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Придумайте пароль",
                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
         LoginTextField.delegate = self
         PasswordTextField.delegate = self
     }
     
-    @objc private func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if (view.frame.origin.y == 0){
-                view.frame.origin.y -= keyboardSize.height / 6
-                navigationController?.setNavigationBarHidden(true, animated: false)
-            }
-        }
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false;
     }
-    
-    @objc private func keyboardWillHide(notification: NSNotification) {
-            view.frame.origin.y = 0
-    }
-    
     
     @IBAction func ClickGoCheck(_ sender: Any) {
         navigationController?.setNavigationBarHidden(false, animated: true)

@@ -14,7 +14,7 @@ public class LoginModel {
     
     public var Name : String = ""
     public var Family: String = ""
-    public var FamilyName: String = ""
+    public var FamilyName: String?
     
     public var Phone : String = ""
     public var Year : String = ""

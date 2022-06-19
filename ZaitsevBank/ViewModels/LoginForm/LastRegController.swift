@@ -45,6 +45,10 @@ class LastRegController: UIViewController, LocalPasswordDelegate {
         GetView()
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false;
+    }
     private func GetView() {
         MainLabel.text = "Последний шаг\n к новому аккаунту"
         MainLabel.numberOfLines = 0
