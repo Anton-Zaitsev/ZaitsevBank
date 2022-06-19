@@ -1,16 +1,17 @@
 //
-//  TransferCell.swift
+//  AllOperationCell.swift
 //  ZaitsevBank
 //
-//  Created by Антон Зайцев on 23.04.2022.
+//  Created by Антон Зайцев on 19.06.2022.
 //
 
 import UIKit
 
-class TransferCell: UITableViewCell {
+class AllOperationCell: UITableViewCell {
 
-    @IBOutlet weak var TitleCell: UILabel!
     @IBOutlet weak var ImageCell: UIImageView!
+    
+    @IBOutlet weak var TitleCell: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

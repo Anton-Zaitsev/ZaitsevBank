@@ -14,23 +14,37 @@ public struct HistoryOperationPayments {
     public let iconOperation : UIImage
     public let nameOperation : String
 }
+
+public struct HistoryOperationPaymentsList{
+    public let name: String
+    public let listOperation : [HistoryOperationPayments]
+}
+
 public class HistoryPayment{
     
+    public var OperationAll : [HistoryOperationPaymentsList] = []
+    
     public var HistoryOperationHeader : [HistoryOperationPayments] = []
-    public var OperationTransfer : [HistoryOperationPayments] = []
-    public var OperationPayment : [HistoryOperationPayments] = []
     
     init() {
         HistoryOperationHeader = getHistory()
         
+        var OperationTransfer = [HistoryOperationPayments]()
         OperationTransfer.append(HistoryOperationPayments.init(typeOperation: OperationPayments.toClientZaitsevBank, iconOperation: UIImage(named: "LogoZaitsevBank")!, nameOperation: "Клиенту ZaitsevBank"))
         OperationTransfer.append(HistoryOperationPayments.init(typeOperation: OperationPayments.betweenYour, iconOperation: UIImage(systemName: "arrow.up.arrow.down")!, nameOperation: "Между своими"))
         OperationTransfer.append(HistoryOperationPayments.init(typeOperation: OperationPayments.transferFromCamera, iconOperation: UIImage(systemName: "camera.shutter.button")!, nameOperation: "Перевод по сканеру карты"))
         OperationTransfer.append(HistoryOperationPayments.init(typeOperation: OperationPayments.makeCredit, iconOperation: UIImage(systemName: "creditcard")!, nameOperation: "Оформить кредит"))
         
+        var OperationPayment = [HistoryOperationPayments]()
         OperationPayment.append(HistoryOperationPayments.init(typeOperation: OperationPayments.buyValute, iconOperation: UIImage(systemName: "dollarsign.circle")!, nameOperation: "Купить валюту"))
         OperationPayment.append(HistoryOperationPayments.init(typeOperation: OperationPayments.saleValute, iconOperation: UIImage(systemName: "eurosign.circle")!, nameOperation: "Продать валюту"))
         OperationPayment.append(HistoryOperationPayments.init(typeOperation: OperationPayments.creditPayment, iconOperation: UIImage(systemName: "building.columns")!, nameOperation: "Оплатить кредит"))
+        
+        OperationAll.append(HistoryOperationPaymentsList(name: "Перевести", listOperation: OperationTransfer))
+        OperationAll.append(HistoryOperationPaymentsList(name: "Оплатить", listOperation: OperationPayment))
+        
+        OperationPayment.removeAll()
+        OperationTransfer.removeAll()
     }
     
     private func getHistory() -> [HistoryOperationPayments] {

@@ -50,8 +50,6 @@
 		3A62E9F228061DAE00173BD8 /* MenuBuyPayValuteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A62E9F128061DAE00173BD8 /* MenuBuyPayValuteController.swift */; };
 		3A6B52E0281346B400C1D741 /* HistroryOperationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B52DF281346B400C1D741 /* HistroryOperationCell.swift */; };
 		3A6B52E628141F3E00C1D741 /* HistoryOperationPayments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B52E528141F3E00C1D741 /* HistoryOperationPayments.swift */; };
-		3A6B52E82814210300C1D741 /* TransferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B52E72814210300C1D741 /* TransferCell.swift */; };
-		3A6B52EA281425CC00C1D741 /* PaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6B52E9281425CC00C1D741 /* PaymentCell.swift */; };
 		3A6D957C2751CAE90064B11F /* API_DinamicValute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */; };
 		3A74D85A2818244A004047B9 /* CardChoiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A74D8592818244A004047B9 /* CardChoiceController.swift */; };
 		3A7CA4A32841401500989411 /* CheckCredit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7CA4A22841401500989411 /* CheckCredit.swift */; };
@@ -103,6 +101,7 @@
 		3ACEFAA32721EBB7004BD739 /* AuthFromFaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */; };
 		3AD3A69F2835899F009F8F41 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 3AD3A69E2835899F009F8F41 /* SWXMLHash */; };
 		3AD3A6A128358A10009F8F41 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A6A028358A10009F8F41 /* LineView.swift */; };
+		3AD7B22E285F488300365D2E /* AllOperationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD7B22D285F488300365D2E /* AllOperationCell.swift */; };
 		3AD95367271DC7AB0081D50A /* LocalPassword.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AD95366271DC7AB0081D50A /* LocalPassword.xib */; };
 		3AD95369271DC7DA0081D50A /* LocalPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD95368271DC7DA0081D50A /* LocalPassword.swift */; };
 		3AE09EBA28020CB80016E1EF /* ClientZaitsevBankAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE09EB928020CB80016E1EF /* ClientZaitsevBankAPI.swift */; };
@@ -167,8 +166,6 @@
 		3A62E9F128061DAE00173BD8 /* MenuBuyPayValuteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBuyPayValuteController.swift; sourceTree = "<group>"; };
 		3A6B52DF281346B400C1D741 /* HistroryOperationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistroryOperationCell.swift; sourceTree = "<group>"; };
 		3A6B52E528141F3E00C1D741 /* HistoryOperationPayments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOperationPayments.swift; sourceTree = "<group>"; };
-		3A6B52E72814210300C1D741 /* TransferCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferCell.swift; sourceTree = "<group>"; };
-		3A6B52E9281425CC00C1D741 /* PaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCell.swift; sourceTree = "<group>"; };
 		3A6D957B2751CAE90064B11F /* API_DinamicValute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_DinamicValute.swift; sourceTree = "<group>"; };
 		3A74D8592818244A004047B9 /* CardChoiceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardChoiceController.swift; sourceTree = "<group>"; };
 		3A7CA4A22841401500989411 /* CheckCredit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCredit.swift; sourceTree = "<group>"; };
@@ -218,6 +215,7 @@
 		3ACEFA9C2720AC6D004BD739 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFromFaceID.swift; sourceTree = "<group>"; };
 		3AD3A6A028358A10009F8F41 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		3AD7B22D285F488300365D2E /* AllOperationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllOperationCell.swift; sourceTree = "<group>"; };
 		3AD95366271DC7AB0081D50A /* LocalPassword.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocalPassword.xib; sourceTree = "<group>"; };
 		3AD95368271DC7DA0081D50A /* LocalPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPassword.swift; sourceTree = "<group>"; };
 		3AE09EB928020CB80016E1EF /* ClientZaitsevBankAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientZaitsevBankAPI.swift; sourceTree = "<group>"; };
@@ -469,8 +467,7 @@
 			children = (
 				3AB687EB272220B6002BD6EB /* PaymentsController.swift */,
 				3A6B52DF281346B400C1D741 /* HistroryOperationCell.swift */,
-				3A6B52E72814210300C1D741 /* TransferCell.swift */,
-				3A6B52E9281425CC00C1D741 /* PaymentCell.swift */,
+				3AD7B22D285F488300365D2E /* AllOperationCell.swift */,
 			);
 			path = Payments;
 			sourceTree = "<group>";
@@ -755,7 +752,6 @@
 				3A0862E027382776000C5407 /* ValuteStructures.swift in Sources */,
 				3A36DAF427417F5000F9CE9C /* CardGenerator.swift in Sources */,
 				3A3FAF01282953C600A8DE39 /* TransactionTemplateController.swift in Sources */,
-				3A6B52EA281425CC00C1D741 /* PaymentCell.swift in Sources */,
 				3A7CA4A928419B3800989411 /* CalculationCreditCell.swift in Sources */,
 				3AB86B89270CADC7008D0823 /* Extension.swift in Sources */,
 				3AABE0AF280261D300EB3623 /* CardModel.swift in Sources */,
@@ -785,7 +781,6 @@
 				3A7CA4A52841427200989411 /* CreditOfferController.swift in Sources */,
 				3A905B4C2830485900E92F65 /* TransferZaitsevClientController.swift in Sources */,
 				3A9C9B792739DB0C009A2D4C /* PreferenceCardAddViewCell.swift in Sources */,
-				3A6B52E82814210300C1D741 /* TransferCell.swift in Sources */,
 				3A12C87A2815CCA600EE1CC2 /* TransferCameraController.swift in Sources */,
 				3A7CA4A32841401500989411 /* CheckCredit.swift in Sources */,
 				3A30489A27139BAD0010A739 /* SafeLocalPassword.swift in Sources */,
@@ -796,6 +791,7 @@
 				3A62E9F228061DAE00173BD8 /* MenuBuyPayValuteController.swift in Sources */,
 				3AB687EA272218B2002BD6EB /* NavigationTabBarMain.swift in Sources */,
 				3A2EDDAE2830531B00F47577 /* TransferContactsModel.swift in Sources */,
+				3AD7B22E285F488300365D2E /* AllOperationCell.swift in Sources */,
 				3A7CA4B828494AD100989411 /* FinanceManager.swift in Sources */,
 				3AB687EC272220B6002BD6EB /* PaymentsController.swift in Sources */,
 				3A12C8772815A60200EE1CC2 /* OperationPayments.swift in Sources */,

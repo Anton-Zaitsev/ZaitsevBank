@@ -14,9 +14,7 @@ class PaymentsController: UIViewController {
     
     @IBOutlet weak var HistroryCollection: UICollectionView!
     
-    @IBOutlet weak var TransferTable: UITableView!
-    
-    @IBOutlet weak var PaymentTable: UITableView!
+    @IBOutlet weak var OperationAll: UITableView!
     
     private let historyPayments = HistoryPayment()
     
@@ -42,11 +40,10 @@ class PaymentsController: UIViewController {
         HistroryCollection.delegate = self
         HistroryCollection.dataSource = self
         
-        TransferTable.delegate = self
-        TransferTable.dataSource = self
+        OperationAll.delegate = self
+        OperationAll.dataSource = self
         
-        PaymentTable.delegate = self
-        PaymentTable.dataSource = self
+        OperationAll.separatorInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 15, right: 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,56 +109,46 @@ extension PaymentsController: UICollectionViewDelegateFlowLayout, UICollectionVi
         return cell
     }
 }
+
 extension PaymentsController: UITableViewDelegate, UITableViewDataSource {
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return historyPayments.OperationAll.count
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        switch tableView{
-        case TransferTable :
-            return historyPayments.OperationTransfer.count
-        case PaymentTable :
-            return historyPayments.OperationPayment.count
-        default:
-            return 0
-        }
+        return historyPayments.OperationAll[section].listOperation.count
+    }
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = UIColor("#1E1E1E")
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 21)
+        header.textLabel?.textColor = .white
+        header.textLabel?.textAlignment = .left
+    }
+
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return historyPayments.OperationAll[section].name
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell = UITableViewCell()
-        
-        switch tableView {
-        case TransferTable:
-            if let TransferCell = tableView.dequeueReusableCell(withIdentifier: "transferCell", for: indexPath) as? TransferCell {
-                TransferCell.configurated(with: historyPayments.OperationTransfer[indexPath.row])
-                cell = TransferCell
-            }
-            return cell
-        case PaymentTable:
-            if let PaymentsCell = tableView.dequeueReusableCell(withIdentifier: "paymentCell", for: indexPath) as? PaymentCell {
-                PaymentsCell.configurated(with: historyPayments.OperationPayment[indexPath.row])
-                cell = PaymentsCell
-            }
-            return cell
-        default:
-            return cell
+        if let AllOperationCell = tableView.dequeueReusableCell(withIdentifier: "allOperationCell", for: indexPath) as? AllOperationCell {
+            AllOperationCell.configurated(with: historyPayments.OperationAll[indexPath.section].listOperation[indexPath.row])
+            cell = AllOperationCell
         }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
-        switch tableView{
-        case TransferTable :
-            historyPayments.OperationTransfer[indexPath.row].typeOperation.OperationPerform(self)
-            break
-        case PaymentTable :
-            historyPayments.OperationPayment[indexPath.row].typeOperation.OperationPerform(self)
-            break
-        default: return
-        }
-        
+        historyPayments.OperationAll[indexPath.section].listOperation[indexPath.row].typeOperation.OperationPerform(self)
     }
     
 }
+
 
