@@ -102,6 +102,7 @@
 		3AD3A69F2835899F009F8F41 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 3AD3A69E2835899F009F8F41 /* SWXMLHash */; };
 		3AD3A6A128358A10009F8F41 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3A6A028358A10009F8F41 /* LineView.swift */; };
 		3AD7B22E285F488300365D2E /* AllOperationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD7B22D285F488300365D2E /* AllOperationCell.swift */; };
+		3AD7B231285F640300365D2E /* LoginAccount.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3AD7B230285F640300365D2E /* LoginAccount.gif */; };
 		3AD95367271DC7AB0081D50A /* LocalPassword.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AD95366271DC7AB0081D50A /* LocalPassword.xib */; };
 		3AD95369271DC7DA0081D50A /* LocalPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD95368271DC7DA0081D50A /* LocalPassword.swift */; };
 		3AE09EBA28020CB80016E1EF /* ClientZaitsevBankAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE09EB928020CB80016E1EF /* ClientZaitsevBankAPI.swift */; };
@@ -216,6 +217,7 @@
 		3ACEFAA22721EBB7004BD739 /* AuthFromFaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFromFaceID.swift; sourceTree = "<group>"; };
 		3AD3A6A028358A10009F8F41 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		3AD7B22D285F488300365D2E /* AllOperationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllOperationCell.swift; sourceTree = "<group>"; };
+		3AD7B230285F640300365D2E /* LoginAccount.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = LoginAccount.gif; sourceTree = "<group>"; };
 		3AD95366271DC7AB0081D50A /* LocalPassword.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocalPassword.xib; sourceTree = "<group>"; };
 		3AD95368271DC7DA0081D50A /* LocalPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPassword.swift; sourceTree = "<group>"; };
 		3AE09EB928020CB80016E1EF /* ClientZaitsevBankAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientZaitsevBankAPI.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 		3A0FC943270A52B600B6B2F6 = {
 			isa = PBXGroup;
 			children = (
+				3AD7B22F285F63F800365D2E /* Presentation */,
 				3A0FC94E270A52B600B6B2F6 /* ZaitsevBank */,
 				3A0FC94D270A52B600B6B2F6 /* Products */,
 			);
@@ -591,6 +594,14 @@
 			path = CreditZaitsevClient;
 			sourceTree = "<group>";
 		};
+		3AD7B22F285F63F800365D2E /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				3AD7B230285F640300365D2E /* LoginAccount.gif */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		3AE09EB828020C7F0016E1EF /* ZaitsevBankAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -721,6 +732,7 @@
 				3A3700D427530DC700387894 /* CardViewer.storyboard in Resources */,
 				3A07798F27122CF30026BCAD /* MainMenu.storyboard in Resources */,
 				3A7CA4AB284276EB00989411 /* TransactionGif.gif in Resources */,
+				3AD7B231285F640300365D2E /* LoginAccount.gif in Resources */,
 				3AD95367271DC7AB0081D50A /* LocalPassword.xib in Resources */,
 				3A3FAF0A28298D4300A8DE39 /* MorgenTest.mp3 in Resources */,
 				3A92E238284BA96C00A5A84E /* Loading.gif in Resources */,
