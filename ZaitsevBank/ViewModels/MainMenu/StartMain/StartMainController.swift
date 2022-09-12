@@ -236,7 +236,7 @@ class StartMainController: UIViewController {
             Task{
                 accountManager.ExitUser()
                 DispatchQueue.main.async {
-                    self.navigationController?.popToRootViewController(animated: true)
+                   _ = self.navigationController?.popToRootViewController(animated: true)
                 }
             }
         }

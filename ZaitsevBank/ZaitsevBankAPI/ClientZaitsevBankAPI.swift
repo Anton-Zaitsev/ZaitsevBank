@@ -52,8 +52,8 @@ public class ClienZaitsevBankAPI {
     }
     
     public static func getRequestGetAllCards(userID: String, _ filterCardTransaction: String? = nil) -> URLRequest {
-        if let filter = filterCardTransaction {
-            let GetUserData = URL(string: "\(server)api/Card/GetAllCards?userID=\(userID)&filterCard=\(filter)")
+        if let filterCardTransaction {
+            let GetUserData = URL(string: "\(server)api/Card/GetAllCards?userID=\(userID)&filterCard=\(filterCardTransaction)")
             var request = URLRequest(url: GetUserData!)
             request.httpMethod = "GET"
             return request

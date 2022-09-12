@@ -132,7 +132,7 @@ class TransferZaitsevClientController: UIViewController {
                     else {
                         DispatchQueue.main.async { [self] in
                             DisableLoader(loader: loader)
-                            SearchBar.becomeFirstResponder()
+                            _ =  SearchBar.becomeFirstResponder()
                             showAlert(withTitle: "Произошла ошибка", withMessage: cardManager.Error)
                         }
                     }
@@ -343,7 +343,7 @@ extension TransferZaitsevClientController: UITableViewDelegate, UITableViewDataS
                 else {
                     DispatchQueue.main.async { [self] in
                         DisableLoader(loader: loader)
-                        SearchBar.becomeFirstResponder()
+                        _ = SearchBar.becomeFirstResponder()
                         showAlert(withTitle: "Произошла ошибка", withMessage: cardManager.Error)
                     }
                 }
